@@ -72,3 +72,56 @@ resource "intersight_macpool_pool" "macpool_pool1" {
 #     moid = var.organization 
 #     }
 # }
+
+
+resource "intersight_fcpool_pool" "wwnnpool_pool1" {
+  name = "${var.policy_prefix}-pool-wwnn-1"
+  description = var.description
+  assignment_order = "sequential"
+  pool_purpose = "WWNN"
+  dynamic id_blocks {
+    for_each = formatlist("%X", range(0,10))
+    content {
+      from  = "20:00:25:B5:${var.pod_id}:${mac_blocks.value}0:01"
+      #from        = "20:00:25:B5:FE:10:00:01"
+      size        =  1000
+    }  
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid = var.organization 
+    }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+
+# resource "intersight_fcpool_pool" "wwnnpool-pool-1" {
+#   name = "${var.policy_prefix}-wwnn-pool"
+#   description = var.description
+#   assignment_order = "sequential"
+#   pool_purpose = "WWNN"
+#   id_blocks {
+#     #from        = "20:00:00:CA:FE:00:00:01"
+#     from        = var.wwnn-block
+#     size        =  255
+#     }
+#   organization {
+#     object_type = "organization.Organization"
+#     moid = var.organization 
+#     }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
+
+

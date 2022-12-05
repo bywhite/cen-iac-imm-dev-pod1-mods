@@ -3,44 +3,6 @@
 #    - MAC pool for vNICs
 #    - WWNN, WWPN-A and WWPN-B FC pools
 
-# Create a sequential IP pool for IMC access. Change the from and size to what you would like
-#          moved to its own pools module
-# resource "intersight_ippool_pool" "ippool_pool1" {
-#   name = "${var.policy_prefix}-ip-pool"
-#   description = var.description
-#   assignment_order = "sequential"
-#   ip_v4_blocks {
-#     from = "1.1.1.101"
-#     size = "99"
-#   }
-#   ip_v4_config {
-#     object_type = "ippool.IpV4Config"
-#     gateway = "1.1.1.1"
-#     netmask = "255.255.255.0"
-#     primary_dns = "8.8.8.8"
-#     }
-#   organization {
-#       object_type = "organization.Organization"
-#       moid = var.organization
-#       }
-# }
-
-# Create a sequential MAC pool for vNICs. Change the from and size to what you would like
-
-# resource "intersight_macpool_pool" "macpool_pool1" {
-#   name = "${var.policy_prefix}-mac-pool"
-#   description = var.description
-#   assignment_order = "sequential"
-#   mac_blocks {
-#     object_type = "macpool.Block"
-#     from        = var.mac-block
-#     size          = "255"
-#     }
-#   organization {
-#     object_type = "organization.Organization"
-#     moid = var.organization 
-#     }
-# }
 
 # Create a sequential WWNN and two WWPN (A and B fabirc) pool for vHBAs. Change the from and size to what you would like
 #
