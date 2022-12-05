@@ -82,7 +82,7 @@ resource "intersight_fcpool_pool" "wwnnpool_pool1" {
   dynamic id_blocks {
     for_each = formatlist("%X", range(0,10))
     content {
-      from  = "20:00:25:B5:${var.pod_id}:${mac_blocks.value}0:01"
+      from  = "20:00:25:B5:${var.pod_id}:${id_blocks.value}0:01"
       #from        = "20:00:25:B5:FE:10:00:01"
       size        =  1000
     }  
