@@ -101,7 +101,10 @@ variable "imc_admin_password" {
   description = "password for the local user policy for IMC"
   default     = "Cha@ng3Me"
 }
-
+variable "imc_ip_pool_moid" {
+  type = string
+  description = "moid of IP_Pool to be assigned to IMC Access Policy"
+}
 
 # =============================================================================
 # IPs
