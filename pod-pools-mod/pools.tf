@@ -39,3 +39,19 @@ resource "intersight_ippool_pool" "ippool_pool" {
       moid = var.organization
       }
 }
+
+
+resource "intersight_macpool_pool" "macpool_pool1" {
+  name = "${var.policy_prefix}-pool-mac-1"
+  description = var.description
+  assignment_order = "sequential"
+  mac_blocks {
+    object_type = "macpool.Block"
+    from        = "00:25:B5:${var.pod_id}:00:01"
+    size          = "1000"
+    }
+  organization {
+    object_type = "organization.Organization"
+    moid = var.organization 
+    }
+}
