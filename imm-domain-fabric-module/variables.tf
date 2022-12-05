@@ -6,25 +6,12 @@ variable "organization" {
   type        = string
   description = "moid for organization in which to create the policies"
 }
-#variable "vnic_mac_pool" {
-#  type        = string
-#  description = "moid of MAC pool for use with vnics"
-#}
-#variable "imc_access_pool" {
-#  type        = string
-#  description = "moid of IP pool for IMC access"
-#}
 
 variable "mac_pool_moid" {
   type         = string
   description = "MAC Pool MOID"
 } 
 
-variable "mac-block" {
-  type         = string
-  description  = "beginning MAC block of size 255"
-  default      = "00:CA:FE:00:00:01"
-}
 
 variable "wwnn-block" {
   type         = string
