@@ -6,6 +6,7 @@
 # Create a sequential IP pool for IMC access.
 
 resource "intersight_ippool_pool" "ippool_pool" {
+  # moid read by: = intersight_ippool_pool.ippool_pool.moid
   name = "${var.policy_prefix}-pool-ip-1"
   description = var.description
   assignment_order = "sequential"
