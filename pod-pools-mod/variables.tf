@@ -62,8 +62,3 @@ variable "ip_primary_dns" {
     default     = ""
 }
 
-variable "ip_alternate_dns" {
-    type  = string
-    description = "IP Pool Alternate DNS IP Address of the block"
-    default     = ""
-}

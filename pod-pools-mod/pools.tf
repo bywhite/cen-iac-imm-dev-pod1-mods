@@ -32,8 +32,6 @@ resource "intersight_ippool_pool" "ippool_pool" {
     primary_dns    = var.ip_primary_dns
     #primary_dns   = "8.8.8.8"
     
-    alternate_dns  = var.ip_alternate_dns
-    #alternate_dns = "8.8.4.4"
     }
 
   organization {
