@@ -3,9 +3,8 @@
 # IP Pool Outputs
 #__________________________________________________________
 
-output "ip_pools" {
+output "ip_pool_moid" {
   description = "moid of the IP Pools."
-  value = var.ip_pools != {} ? { for v in sort(
-    keys(intersight_ippool_pool.ip_pools) ) : v => intersight_ippool_pool.ip_pools[v].moid } : {}
+  value = intersight_ippool_pool.ippool_pool.moid
 }
 
