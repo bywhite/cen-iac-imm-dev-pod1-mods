@@ -152,3 +152,30 @@ resource "intersight_fcpool_pool" "wwpnpool_poolB" {
   }
 }
  
+
+resource "intersight_uuidpool_pool" "uuidpool_pool1" {
+  name             = "${var.policy_prefix}-pool-uuid-1"
+  description      = var.description
+  assignment_order = "sequential"
+  prefix           = "1728E8C7-7B40-47E9"
+  dynamic uuid_suffix_blocks {
+    for_each = formatlist("%X", range(0,2))
+    content {
+      from  = "23${var.pod_id}0${id_blocks.value}-000000000000"
+      #from        = "xx0y-zzzzzzzzzzzz"
+      size        =  1000
+    }  
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid = var.organization 
+    }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+ 

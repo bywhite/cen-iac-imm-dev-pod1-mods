@@ -27,3 +27,8 @@ output "wwpn_pool_b_moid" {
   description = "moid of the WWWPN-B pool"
   value = intersight_fcpool_pool.wwpnpool_poolB.moid
 }
+
+output "uuid_pool_moid" {
+  description = "moid of the UUID pool"
+  value = intersight_uuidpool_pool.uuidpool_pool1.moid
+}
