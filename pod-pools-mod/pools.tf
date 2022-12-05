@@ -100,28 +100,55 @@ resource "intersight_fcpool_pool" "wwnnpool_pool1" {
   }
 }
 
+resource "intersight_fcpool_pool" "wwpnpool_poolA" {
+  name = "${var.policy_prefix}-pool-wwpn-a-1"
+  description = var.description
+  assignment_order = "sequential"
+  pool_purpose = "WWPN"
+  dynamic id_blocks {
+    for_each = formatlist("%X", range(0,10))
+    content {
+      from  = "20:00:25:B5:${var.pod_id}:${id_blocks.value}A:00:01"
+      #from        = "20:00:25:B5:FE:1A:00:01"
+      size        =  1000
+    }  
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid = var.organization 
+    }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
 
-# resource "intersight_fcpool_pool" "wwnnpool-pool-1" {
-#   name = "${var.policy_prefix}-wwnn-pool"
-#   description = var.description
-#   assignment_order = "sequential"
-#   pool_purpose = "WWNN"
-#   id_blocks {
-#     #from        = "20:00:00:CA:FE:00:00:01"
-#     from        = var.wwnn-block
-#     size        =  255
-#     }
-#   organization {
-#     object_type = "organization.Organization"
-#     moid = var.organization 
-#     }
-#   dynamic "tags" {
-#     for_each = var.tags
-#     content {
-#       key   = tags.value.key
-#       value = tags.value.value
-#     }
-#   }
-# }
-
-
+resource "intersight_fcpool_pool" "wwpnpool_poolB" {
+  name = "${var.policy_prefix}-pool-wwpn-b-1"
+  description = var.description
+  assignment_order = "sequential"
+  pool_purpose = "WWPN"
+  dynamic id_blocks {
+    for_each = formatlist("%X", range(0,10))
+    content {
+      from  = "20:00:25:B5:${var.pod_id}:${id_blocks.value}B:00:01"
+      #from        = "20:00:25:B5:FE:1B:00:01"
+      size        =  1000
+    }  
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid = var.organization 
+    }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+ 

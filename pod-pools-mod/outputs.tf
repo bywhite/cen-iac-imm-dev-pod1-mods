@@ -17,3 +17,13 @@ output "wwnn_pool_moid" {
   description = "moid of the WWNN Pool"
   value = intersight_fcpool_pool.wwnnpool_pool1.moid
 }
+
+output "wwpn_pool_a_moid" {
+  description = "moid of the WWWPN-A pool"
+  value = intersight_fcpool_pool.wwpnpool_poolA.moid
+}
+
+output "wwpn_pool_b_moid" {
+  description = "moid of the WWWPN-B pool"
+  value = intersight_fcpool_pool.wwpnpool_poolB.moid
+}
