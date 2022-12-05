@@ -27,20 +27,20 @@
 
 # Create a sequential MAC pool for vNICs. Change the from and size to what you would like
 
-resource "intersight_macpool_pool" "macpool_pool1" {
-  name = "${var.policy_prefix}-mac-pool"
-  description = var.description
-  assignment_order = "sequential"
-  mac_blocks {
-    object_type = "macpool.Block"
-    from        = var.mac-block
-    size          = "255"
-    }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization 
-    }
-}
+# resource "intersight_macpool_pool" "macpool_pool1" {
+#   name = "${var.policy_prefix}-mac-pool"
+#   description = var.description
+#   assignment_order = "sequential"
+#   mac_blocks {
+#     object_type = "macpool.Block"
+#     from        = var.mac-block
+#     size          = "255"
+#     }
+#   organization {
+#     object_type = "organization.Organization"
+#     moid = var.organization 
+#     }
+# }
 
 # Create a sequential WWNN and two WWPN (A and B fabirc) pool for vHBAs. Change the from and size to what you would like
 #

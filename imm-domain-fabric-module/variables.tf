@@ -15,6 +15,11 @@ variable "organization" {
 #  description = "moid of IP pool for IMC access"
 #}
 
+variable "mac_pool_moid" {
+  type         = string
+  description = "MAC Pool MOID"
+} 
+
 variable "mac-block" {
   type         = string
   description  = "beginning MAC block of size 255"
