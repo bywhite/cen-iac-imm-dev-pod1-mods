@@ -7,29 +7,24 @@ variable "organization" {
   description = "moid for organization in which to create the policies"
 }
 
-variable "mac_pool_moid" {
-  type         = string
-  description = "MAC Pool MOID"
-} 
 
+# variable "wwnn-block" {
+#   type         = string
+#   description  = "beginning WWNN block of size 255"
+#   default      = "20:00:00:CA:FE:00:00:01"
+# }
 
-variable "wwnn-block" {
-  type         = string
-  description  = "beginning WWNN block of size 255"
-  default      = "20:00:00:CA:FE:00:00:01"
-}
+# variable "wwpn-a-block" {
+#   type         = string
+#   description  = "beginning WWPN-A block of size 255"
+#   default      = "20:00:00:CA:FE:0A:00:01"
+# }
 
-variable "wwpn-a-block" {
-  type         = string
-  description  = "beginning WWPN-A block of size 255"
-  default      = "20:00:00:CA:FE:0A:00:01"
-}
-
-variable "wwpn-b-block" {
-  type         = string
-  description  = "beginning WWPN-B block of size 255"
-  default      = "20:00:00:CA:FE:0B:00:01"
-}
+# variable "wwpn-b-block" {
+#   type         = string
+#   description  = "beginning WWPN-B block of size 255"
+#   default      = "20:00:00:CA:FE:0B:00:01"
+# }
 
 # =============================================================================
 # Naming and tagging
@@ -93,10 +88,36 @@ variable "imc_admin_password" {
   description = "password for the local user policy for IMC"
   default     = "Cha@ng3Me"
 }
+
+# =============================================================================
+# Pools 
+# -----------------------------------------------------------------------------
+
+variable "mac_pool_moid" {
+  type         = string
+  description = "MAC Pool MOID"
+} 
+
 variable "imc_ip_pool_moid" {
   type = string
   description = "moid of IP_Pool to be assigned to IMC Access Policy"
 }
+
+variable "wwnn_pool_moid" {
+  type = string
+  description = "moid of WWNN Pool"
+}
+
+variable "wwpn_pool_a_moid" {
+  type = string
+  description = "moid of WWPN A fabric Pool"
+}
+
+variable "wwpn_pool_b_moid" {
+  type = string
+  description = "moid of WWPN B fabric Pool"
+}
+
 
 # =============================================================================
 # IPs
