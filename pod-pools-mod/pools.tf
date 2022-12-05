@@ -161,7 +161,7 @@ resource "intersight_uuidpool_pool" "uuidpool_pool1" {
   dynamic uuid_suffix_blocks {
     for_each = formatlist("%X", range(0,2))
     content {
-      from  = "23${var.pod_id}0${id_blocks.value}-000000000000"
+      from  = "23${var.pod_id}0${uuid_suffix_blocks.value}-000000000000"
       #from        = "xx0y-zzzzzzzzzzzz"
       size        =  1000
     }  
