@@ -1,4 +1,4 @@
-# This builds the FI port policy for a set of 6454 FIs
+# This builds the FI port policy for 6536 and 6432 FIs
 #
 # The port policy is the parent for port mode and role
 
@@ -27,6 +27,35 @@ resource "intersight_fabric_port_policy" "fabric_port_policy1" {
     }
   }
 }
+
+### NEW #### 6536 ####
+resource "intersight_fabric_port_policy" "fi6536_port_policy1" {
+  name         = "${var.policy_prefix}-fi6536-port-policy"
+  description  = var.description
+  device_model = "UCS-FI-6536"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  # assign this policy to the domain profile being created
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+    object_type = "fabric.SwitchProfile"
+  }
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+    object_type = "fabric.SwitchProfile"
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+
 
 # set the first four ports to be FC
 resource "intersight_fabric_port_mode" "fabric_port_mode1" {

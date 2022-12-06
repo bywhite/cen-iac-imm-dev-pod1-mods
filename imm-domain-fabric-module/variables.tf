@@ -90,6 +90,22 @@ variable "imc_admin_password" {
 }
 
 # =============================================================================
+# Chassis Access - IMC
+# -----------------------------------------------------------------------------
+
+variable "chassis_imc_access_vlan" {
+  type        = number
+  description = "ID of VLAN for Chassis In-Band IMC access"
+}
+
+variable "chassis_imc_ip_pool_moid" {
+  type = string
+  description = "moid of Chassis IP_Pool to be assigned to IMC Access Policy"
+}
+
+
+
+# =============================================================================
 # Pools 
 # -----------------------------------------------------------------------------
 

@@ -68,3 +68,14 @@ variable "pod_id" {
     description = "Starting MAC Address of Block of 1000 for MAC Pool"
     default     = ""
 }
+
+# =============================================================================
+# Chassis IP Block resource values
+# -----------------------------------------------------------------------------
+
+
+  # chassis_ip_size     = "150"
+  # chassis_ip_start = "10.10.2.11"
+  # chassis_ip_gateway  = "10.10.2.1"
+  # chassis_ip_netmask  = "255.255.255.0"
+  # chassis_ip_primary_dns = "8.8.8.8"
