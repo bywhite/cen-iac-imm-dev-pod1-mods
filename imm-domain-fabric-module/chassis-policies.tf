@@ -2,7 +2,7 @@
 
 
 resource "intersight_access_policy" "chassis_9508_access1" {
-  name        = "${var.policy_prefix}-chassis-9508-imc-access-policy-1"
+  name        = "${var.policy_prefix}-imc-access-chassis-policy-1"
   description = var.description
   inband_vlan = var.chassis_imc_access_vlan
   inband_ip_pool {
