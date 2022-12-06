@@ -13,7 +13,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_boot_precision_policy" "boot_precision1" {
-  name                     = "${var.policy_prefix}-boot-order"
+  name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
   description              = var.description
   configured_boot_mode     = "Uefi"
   enforce_uefi_secure_boot = false
@@ -81,7 +81,7 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
 resource "intersight_ntp_policy" "ntp1" {
   description = var.description
   enabled     = true
-  name        = "${var.policy_prefix}-ntp"
+  name        = "${var.policy_prefix}-ntp-policy-1"
   timezone    = var.ntp_timezone
   ntp_servers = var.ntp_servers
   organization {
@@ -157,7 +157,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
   enable_ipv4dns_from_dhcp = false
   enable_ipv6              = false
   enable_ipv6dns_from_dhcp = false
-  name                     = "${var.policy_prefix}-dns"
+  name                     = "${var.policy_prefix}-dns-policy-1"
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
@@ -196,7 +196,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
-  name               = "${var.policy_prefix}-multicast"
+  name               = "${var.policy_prefix}-multicast-policy-1"
   description        = var.description
   querier_ip_address = ""
   querier_state      = "Disabled"
@@ -220,7 +220,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_kvm_policy" "kvmpolicy1" {
-  name                      = "${var.policy_prefix}-kvm-enabled"
+  name                      = "${var.policy_prefix}-kvm-enabled-policy-1"
   description               = var.description
   enable_local_server_video = true
   enable_video_encryption   = true
@@ -245,7 +245,7 @@ resource "intersight_kvm_policy" "kvmpolicy1" {
 # -----------------------------------------------------------------------------
 /**
 resource "intersight_vmedia_policy" "vmedia1" {
-  name          = "${var.policy_prefix}-vmedia-ubuntu"
+  name          = "${var.policy_prefix}-vmedia-ubuntu-policy-1"
   description   = var.description
   enabled       = true
   encryption    = false
@@ -283,7 +283,7 @@ resource "intersight_vmedia_policy" "vmedia1" {
 **/
 /**
 resource "intersight_vmedia_policy" "vmedia2" {
-  name          = "${var.policy_prefix}-vmedia-enabled"
+  name          = "${var.policy_prefix}-vmedia-enabled-policy-1"
   description   = var.description
   enabled       = true
   encryption    = true
@@ -308,7 +308,7 @@ resource "intersight_vmedia_policy" "vmedia2" {
 
 # this will create the default System QoS policy with zero customization
 resource "intersight_fabric_system_qos_policy" "qos1" {
-  name        = "${var.policy_prefix}-system-qos"
+  name        = "${var.policy_prefix}-system-qos-policy-1"
   description = var.description
 
   organization {
@@ -348,7 +348,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_access_policy" "access1" {
-  name        = "${var.policy_prefix}-imc-access"
+  name        = "${var.policy_prefix}-imc-access-policy-1"
   description = var.description
   inband_vlan = var.imc_access_vlan
   inband_ip_pool {
@@ -374,7 +374,7 @@ resource "intersight_access_policy" "access1" {
 # -----------------------------------------------------------------------------
 #
 #resource "intersight_sol_policy" "sol1" {
-#  name        = "${var.policy_prefix}-sol-off"
+#  name        = "${var.policy_prefix}-sol-off-policy-1"
 #  description = var.description
 #  enabled     = false
 #  baud_rate   = 9600

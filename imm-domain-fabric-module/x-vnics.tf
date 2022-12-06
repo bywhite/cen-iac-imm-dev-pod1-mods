@@ -1,7 +1,7 @@
 
 # https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_eth_network_group_policy
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy1" {
-  name        = "${var.policy_prefix}-eth-network-group"
+  name        = "${var.policy_prefix}-eth-network-group-policy-1"
   description = var.description
   vlan_settings {
     native_vlan   = var.vnic_native_vlan
@@ -21,7 +21,7 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
 
 # https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_eth_network_control_policy
 resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_control_policy1" {
-  name        = "${var.policy_prefix}-eth-network-control"
+  name        = "${var.policy_prefix}-eth-network-control-policy-1"
   description = var.description
   cdp_enabled = true
   forge_mac   = "allow"
@@ -45,7 +45,7 @@ resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_cont
 }
 
 resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
-  name           = "${var.policy_prefix}-vnic-eth-qos"
+  name           = "${var.policy_prefix}-vnic-eth-qos-policy-1"
   description    = var.description
   mtu            = 1500
   rate_limit     = 0
@@ -67,7 +67,7 @@ resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
 
 # this policy is actually quite complex but we are taking all the defaults
 resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
-  name        = "${var.policy_prefix}-vnic-eth-adapter"
+  name        = "${var.policy_prefix}-vnic-eth-adapter-policy-1"
   description = var.description
   organization {
     moid = var.organization
@@ -87,7 +87,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_vnic_lan_connectivity_policy" "vnic_lan1" {
-  name                = "${var.policy_prefix}-lan-connectivity"
+  name                = "${var.policy_prefix}-lan-connectivity-policy-1"
   description         = var.description
   iqn_allocation_type = "None"
   placement_mode      = "auto"
