@@ -41,6 +41,7 @@ resource "intersight_power_policy" "chassis_9508_power1" {
   dynamic_rebalancing = "Enabled"
   extended_power_capacity = "Enabled"
   allocated_budget = 0
+  redundancy_mode = "Grid"
 
   organization {
     moid        = var.organization
