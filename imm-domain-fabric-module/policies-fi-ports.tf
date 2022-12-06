@@ -2,8 +2,8 @@
 #
 # The port policy is the parent for port mode and role
 
-resource "intersight_fabric_port_policy" "fabric_port_policy1" {
-  name         = "${var.policy_prefix}-6454-port"
+resource "intersight_fabric_port_policy" "fi6454_port_policy1" {
+  name         = "${var.policy_prefix}-6454-port-policy-1"
   description  = var.description
   device_model = "UCS-FI-6454"
   organization {
@@ -12,11 +12,11 @@ resource "intersight_fabric_port_policy" "fabric_port_policy1" {
   }
   # assign this policy to the domain profile being created
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_a.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_b.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
   dynamic "tags" {
@@ -30,7 +30,7 @@ resource "intersight_fabric_port_policy" "fabric_port_policy1" {
 
 ### NEW #### 6536 ####
 resource "intersight_fabric_port_policy" "fi6536_port_policy1" {
-  name         = "${var.policy_prefix}-fi6536-port-policy"
+  name         = "${var.policy_prefix}-fi6536-port-policy-1"
   description  = var.description
   device_model = "UCS-FI-6536"
   organization {
@@ -58,7 +58,7 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy1" {
 
 
 # set the first four ports to be FC
-resource "intersight_fabric_port_mode" "fabric_port_mode1" {
+resource "intersight_fabric_port_mode" "fi6454_port_mode1" {
   count = (var.fc_port_count_6454 > 0) ? 1 : 0
 
   custom_mode   = "FibreChannel"
@@ -66,7 +66,7 @@ resource "intersight_fabric_port_mode" "fabric_port_mode1" {
   port_id_start = 1
   slot_id       = 1
   port_policy {
-    moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+    moid = intersight_fabric_port_policy.fi6454_port_policy1.moid
   }
   dynamic "tags" {
     for_each = var.tags
@@ -78,14 +78,14 @@ resource "intersight_fabric_port_mode" "fabric_port_mode1" {
 }
 
 # configure server ports
-resource "intersight_fabric_server_role" "fabric_server_role1" {
+resource "intersight_fabric_server_role" "fi6454_server_role1" {
   for_each = var.server_ports_6454
 
   aggregate_port_id = 0
   port_id           = each.value
   slot_id           = 1
   port_policy {
-    moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+    moid = intersight_fabric_port_policy.fi6454_port_policy1.moid
   }
   dynamic "tags" {
     for_each = var.tags
@@ -97,7 +97,7 @@ resource "intersight_fabric_server_role" "fabric_server_role1" {
 }
 
 # configure uplink port channel
-resource "intersight_fabric_uplink_pc_role" "fabric_uplink_pc_role1" {
+resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role1" {
   pc_id = 100
   dynamic "ports" {
     for_each = var.port_channel_6454
@@ -109,7 +109,7 @@ resource "intersight_fabric_uplink_pc_role" "fabric_uplink_pc_role1" {
   }
   admin_speed = "Auto"
   port_policy {
-    moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+    moid = intersight_fabric_port_policy.fi6454_port_policy1.moid
   }
   dynamic "tags" {
     for_each = var.tags

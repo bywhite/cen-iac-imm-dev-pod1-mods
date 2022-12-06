@@ -90,11 +90,11 @@ resource "intersight_ntp_policy" "ntp1" {
   }
   # assign this policy to the domain profiles being created
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_a.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_b.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
 
@@ -164,11 +164,11 @@ resource "intersight_networkconfig_policy" "connectivity1" {
   }
   # assign this policy to the domain profile being created
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_a.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_b.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
 
@@ -317,11 +317,11 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
   }
   # assign this policy to the domain profile being created
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_a.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_b.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
 

@@ -41,7 +41,7 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile1" {
 # Switches (A and B)
 # -----------------------------------------------------------------------------
 
-resource "intersight_fabric_switch_profile" "fabric_switch_profile_a" {
+resource "intersight_fabric_switch_profile" "fi6454_switch_profile_a" {
   action      = "No-op"
   description = var.description
   name        = "${var.policy_prefix}-domain-profile-A"
@@ -62,7 +62,7 @@ resource "intersight_fabric_switch_profile" "fabric_switch_profile_a" {
   #   object_type = "fabric.EthNetworkPolicy"
   # }
   # policy_bucket {
-  #   moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+  #   moid = intersight_fabric_port_policy.fi6454_port_policy1.moid
   #   object_type = "fabric.PortPolicy"
   # }
   # policy_bucket {
@@ -70,7 +70,7 @@ resource "intersight_fabric_switch_profile" "fabric_switch_profile_a" {
   #   object_type = "ntp.Policy"
   # }
 }
-resource "intersight_fabric_switch_profile" "fabric_switch_profile_b" {
+resource "intersight_fabric_switch_profile" "fi6454_switch_profile_b" {
   action      = "No-op"
   description = var.description
   name        = "${var.policy_prefix}-domain-profile-B"
@@ -91,7 +91,7 @@ resource "intersight_fabric_switch_profile" "fabric_switch_profile_b" {
   #   object_type = "fabric.EthNetworkPolicy"
   # }
   # policy_bucket {
-  #   moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+  #   moid = intersight_fabric_port_policy.fi6454_port_policy1.moid
   #   object_type = "fabric.PortPolicy"
   # }
   # policy_bucket {

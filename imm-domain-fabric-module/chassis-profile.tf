@@ -1,8 +1,8 @@
 #  Chassis Profile Creation
 
-resource "intersight_chassis_profile" "chassis_profile1" {
-  name            = "chassis_profile1"
-  description     = "chassis profile"
+resource "intersight_chassis_profile" "chassis_9508_profile1" {
+  name            = "${var.policy_prefix}-chassis-9508-profile-1"
+  description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
   action          = "Validate"

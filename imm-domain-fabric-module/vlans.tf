@@ -2,18 +2,18 @@
 # VLAN Policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy1" {
-  name        = "${var.policy_prefix}-vlan-policy"
+  name        = "${var.policy_prefix}-vlan-policy-1"
   description = var.description
   organization {
     moid = var.organization
   }
   # assign this policy to the domain profile being created
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_a.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fabric_switch_profile_b.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
 
