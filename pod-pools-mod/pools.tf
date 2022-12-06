@@ -19,7 +19,6 @@ resource "intersight_ippool_pool" "ippool_pool" {
     size  = var.ip_size
     #size = "200"
   }
-
   # dynamic ip_v4_blocks {
   #   for_each = formatlist("%X", range(0,4))
   #   content {
@@ -27,7 +26,6 @@ resource "intersight_ippool_pool" "ippool_pool" {
   #     size          = "240"
   #   } 
   # }
-
   ip_v4_config {
     object_type = "ippool.IpV4Config"
     
@@ -52,7 +50,7 @@ resource "intersight_ippool_pool" "ippool_pool" {
 
 resource "intersight_ippool_pool" "ippool_pool_chassis" {
   # moid read by: = intersight_ippool_pool.ippool_pool.moid
-  name = "${var.policy_prefix}-pool-ip-imc-chassis-1"
+  name = "${var.policy_prefix}-pool-ip-chassis-imc-1"
   description = var.description
   assignment_order = "sequential"
 
