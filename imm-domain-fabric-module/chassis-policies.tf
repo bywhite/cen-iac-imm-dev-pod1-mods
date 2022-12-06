@@ -30,7 +30,6 @@ resource "intersight_access_policy" "chassis_9508_access1" {
 }
 
 
-# Need Thermal Policy for 9508
 # Need to Consume an SNMP policy
 
 resource "intersight_power_policy" "chassis_9508_power1" {
