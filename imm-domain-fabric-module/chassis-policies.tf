@@ -14,6 +14,12 @@ resource "intersight_access_policy" "chassis_9508_access1" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
+    # assign this policy to the chassis profile being created
+  profiles {
+    moid        = intersight_chassis_profile.chassis_9508_profile1.moid
+    object_type = "chassis.Profile"
+  }
+  
   dynamic "tags" {
     for_each = var.tags
     content {
