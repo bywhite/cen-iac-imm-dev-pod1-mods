@@ -20,6 +20,14 @@ resource "intersight_ippool_pool" "ippool_pool" {
     #size = "200"
   }
 
+  # dynamic ip_v4_blocks {
+  #   for_each = formatlist("%X", range(0,4))
+  #   content {
+  #     from = "10.10.${ip_v4_blocks.value}.11"
+  #     size          = "240"
+  #   } 
+  # }
+
   ip_v4_config {
     object_type = "ippool.IpV4Config"
     
@@ -30,6 +38,43 @@ resource "intersight_ippool_pool" "ippool_pool" {
     #netmask       = "255.255.255.0"
     
     primary_dns    = var.ip_primary_dns
+    #primary_dns   = "8.8.8.8"
+    
+    }
+
+  organization {
+      object_type = "organization.Organization"
+      moid = var.organization
+      }
+}
+
+# Create a sequential IP pool for IMC access.
+
+resource "intersight_ippool_pool" "ippool_pool_chassis" {
+  # moid read by: = intersight_ippool_pool.ippool_pool.moid
+  name = "${var.policy_prefix}-pool-ip-imc-chassis-1"
+  description = var.description
+  assignment_order = "sequential"
+
+  ip_v4_blocks {
+    
+    from  = var.chassis_ip_start
+    #from = "10.10.2.11"
+
+    size  = var.chassis_ip_size
+    #size = "150"
+  }
+
+  ip_v4_config {
+    object_type = "ippool.IpV4Config"
+    
+    gateway        = var.chassis_ip_gateway
+    #gateway       = "10.10.2.1"
+    
+    netmask        = var.chassis_ip_netmask
+    #netmask       = "255.255.255.0"
+    
+    primary_dns    = var.chassis_ip_primary_dns
     #primary_dns   = "8.8.8.8"
     
     }

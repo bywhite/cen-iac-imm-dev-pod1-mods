@@ -73,9 +73,39 @@ variable "pod_id" {
 # Chassis IP Block resource values
 # -----------------------------------------------------------------------------
 
+variable "chassis_ip_start" {
+    type  = string
+    description = "IP Pool Starting IP Address of the block"
+    default     = ""
+}
 
-  # chassis_ip_size     = "150"
-  # chassis_ip_start = "10.10.2.11"
-  # chassis_ip_gateway  = "10.10.2.1"
-  # chassis_ip_netmask  = "255.255.255.0"
-  # chassis_ip_primary_dns = "8.8.8.8"
+variable "chassis_ip_size" {
+    type  = string
+    description = "Number of IP Addresses in the block"
+    default     = ""
+}
+
+variable "chassis_ip_gateway" {
+    type  = string
+    description = "IP Pool gateway IP Address of the block"
+    default     = ""
+}
+
+variable "chassis_ip_netmask" {
+    type  = string
+    description = "IP Pool netmask of the block"
+    default     = ""
+}
+
+variable "chassis_ip_primary_dns" {
+    type  = string
+    description = "IP Pool Primary DNS IP Address of the block"
+    default     = ""
+}
+
+
+variable "chassis_pod_id" {
+    type  = string
+    description = "Starting MAC Address of Block of 1000 for MAC Pool"
+    default     = ""
+}

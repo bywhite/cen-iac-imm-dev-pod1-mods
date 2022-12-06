@@ -8,6 +8,11 @@ output "ip_pool_moid" {
   value = intersight_ippool_pool.ippool_pool.moid
 }
 
+output "ip_pool_chassis_moid" {
+  description = "moid of the IP Pool for Chassis IMC Access Policy"
+  value       = intersight_ippool_pool.ippool_pool_chassis.moid
+}
+
 output "mac_pool_moid" {
   description = "moid of the MAC Pool."
   value = intersight_macpool_pool.macpool_pool1.moid
