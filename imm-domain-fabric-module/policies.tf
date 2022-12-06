@@ -7,6 +7,7 @@
 #    - Virtual Media
 #    - System QoS
 #    - IMC Access
+#   - SNMP
 
 # =============================================================================
 # Boot Precision (boot order) Policy
@@ -342,6 +343,49 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     }
   }
 }
+
+
+resource "intersight_snmp_policy" "snmp1" {
+  name        = "${var.policy_prefix}-snmp-policy-1"
+  description              = var.description
+  enabled                 = true
+  snmp_port               = 161
+  access_community_string = "anythingbutpublic"
+  community_access        = "Disabled"
+  trap_community          = "TrapCommunity"
+  sys_contact             = "Lance"
+  sys_location            = "Lance's house"
+  engine_id               = "vvb"
+  snmp_users {
+    name         = "snmpuser"
+    privacy_type = "AES"
+    auth_password    = var.imc_admin_password
+    privacy_password = var.imc_admin_password
+    security_level = "AuthPriv"
+    auth_type      = "SHA"
+    object_type    = "snmp.User"
+  }
+  snmp_traps {
+    destination = "10.10.10.254"
+    enabled     = false
+    port        = 660
+    type        = "Trap"
+    user        = "snmpuser"
+    nr_version  = "V3"
+    object_type = "snmp.Trap"
+  }
+  profiles {
+    moid        = intersight_chassis_profile.chassis_9508_profile1.moid
+    object_type = "chassis.Profile"
+  }
+  
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+
+
 
 # =============================================================================
 # IMC Access

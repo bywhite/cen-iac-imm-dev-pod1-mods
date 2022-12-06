@@ -30,14 +30,17 @@ resource "intersight_access_policy" "chassis_9508_access1" {
 }
 
 
-# Need to Consume an SNMP policy
+# Optional SNMP policy can be tied to chassis policy bucket
+# creating in main policies.tf file
+
 
 resource "intersight_power_policy" "chassis_9508_power1" {
   name        = "${var.policy_prefix}-chassis-power-policy-1"
   description              = var.description
   power_save_mode = "Enabled"
   dynamic_rebalancing = "Enabled"
-  extended_power_capacity = "Disabled"
+  extended_power_capacity = "Enabled"
+  allocated_budget = 0
 
   organization {
     moid        = var.organization
