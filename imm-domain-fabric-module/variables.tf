@@ -110,7 +110,7 @@ variable "uplink_vlans_6536" {
   description = "map of vlan names and IDs to be used on FI uplinks"
   default     = []
 }
-variable "vnic_native_vlan" {
+variable "vnic_native_vlan_6536" {
   type        = number
   description = "native VLAN for vnic profiles"
   default     = []
