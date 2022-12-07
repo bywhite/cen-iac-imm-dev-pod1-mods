@@ -35,6 +35,15 @@ variable "policy_prefix" {
   description = "prefix for all policies created"
   default     = "tf"
 }
+
+### domain_instances are NOT USED when creating 1 domain per module call, to increases customization
+# variable "domain_instances" {
+#   type        = list(string)
+#   description = "list of domain instances to be created [vmw-1,lnx-1,bml-1,vmw-2]"
+#   default     = ["vmw-1"]
+#   # Each domain-instance is concatenated with the policy_prefix to Name the domain
+# }
+
 variable "description" {
   type        = string
   description = "description field for all policies"
@@ -48,30 +57,63 @@ variable "tags" {
 
 
 # =============================================================================
-# Fabric Interconnect ports and VLANs
+# Fabric Interconnect 6454 ports and VLANs
 # -----------------------------------------------------------------------------
 
 variable "server_ports_6454" {
   type        = set(string)
   description = "list of port numbers to be assigned to server ports"
+  default     = []
 }
 variable "port_channel_6454" {
   type        = set(string)
   description = "list of port numbers to be assigned to uplink port channel"
+  default     = []
 }
 variable "fc_port_count_6454" {
   type        = number
-  description = "number of ports to assign to FC starting at port 1"
-  default     = 0
+  description = "number of ports to assign to FC starting at port 35"
+  default     = []
 }
 variable "uplink_vlans_6454" {
   type        = map(number)
   description = "map of vlan names and IDs to be used on FI uplinks"
+  default     = []
 }
 variable "vnic_native_vlan" {
   type        = number
   description = "native VLAN for vnic profiles"
-  default     = 1
+  default     = []
+}
+
+# =============================================================================
+# Fabric Interconnect 6536 ports and VLANs
+# -----------------------------------------------------------------------------
+
+variable "server_ports_6536" {
+  type        = set(string)
+  description = "list of port numbers to be assigned to server ports"
+  default     = []
+}
+variable "port_channel_6536" {
+  type        = set(string)
+  description = "list of port numbers to be assigned to uplink port channel"
+  default     = []
+}
+variable "fc_port_count_6536" {
+  type        = number
+  description = "number of ports to assign to FC starting at port 35"
+  default     = []
+}
+variable "uplink_vlans_6536" {
+  type        = map(number)
+  description = "map of vlan names and IDs to be used on FI uplinks"
+  default     = []
+}
+variable "vnic_native_vlan" {
+  type        = number
+  description = "native VLAN for vnic profiles"
+  default     = []
 }
 
 

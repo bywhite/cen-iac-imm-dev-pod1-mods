@@ -23,7 +23,7 @@ resource "intersight_chassis_profile" "chassis_9508_profile1" {
 # Thermal Policy optional:  Fan Control Mode: Balanced
 
 
-
+#  Policy Bucket EXAMPLE from Rest API from Chassis/Profiles "GET /api/v1/chassis/Profiles"
 #      "PolicyBucket": [
         # {
         #   "ClassId": "mo.MoRef",
