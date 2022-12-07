@@ -76,35 +76,6 @@ variable "uplink_vlans_6454" {
   type        = map(number)
   description = "map of vlan names and IDs to be used on FI uplinks"
 }
-variable "vnic_native_vlan" {
-  type        = number
-  description = "native VLAN for vnic profiles"
-}
-
-# =============================================================================
-# Fabric Interconnect 6536 ports and VLANs
-# -----------------------------------------------------------------------------
-
-variable "server_ports_6536" {
-  type        = set(string)
-  description = "list of port numbers to be assigned to server ports"
-}
-variable "port_channel_6536" {
-  type        = set(string)
-  description = "list of port numbers to be assigned to uplink port channel"
-}
-variable "fc_port_count_6536" {
-  type        = number
-  description = "number of ports to assign to FC starting at port 35"
-}
-variable "uplink_vlans_6536" {
-  type        = map(number)
-  description = "map of vlan names and IDs to be used on FI uplinks"
-}
-variable "vnic_native_vlan_6536" {
-  type        = number
-  description = "native VLAN for vnic profiles"
-}
 
 
 # =============================================================================
@@ -189,3 +160,12 @@ variable "dns_alternate" {
   description = "IP address of secondary (alternate) DNS server"
   default     = ""
 }
+
+
+###############################################################################
+# Server Related Variables no longer needed - separating Server creation in other module
+
+# variable "vnic_native_vlan" {
+#   type        = number
+#   description = "native VLAN for vnic profiles"
+# }
