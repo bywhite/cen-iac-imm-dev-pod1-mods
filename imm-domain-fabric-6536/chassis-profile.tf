@@ -17,8 +17,8 @@ resource "intersight_chassis_profile" "chassis_9508_profile1" {
   }
 
 # IMC Access Policy Required:  In-Band VLAN-ID, IP-Pool
-# Chassis Power Policy recommended: 
-#        Power Save Mode, Dynamic Power Rebalancing, Extended Power, Power Allocation:0
+# Chassis Power Policy: 
+#    Recommend: Power Save Mode, Dynamic Power Rebalancing, Extended Power, Power Allocation:0
 # SNMP Policy optional
 # Thermal Policy optional:  Fan Control Mode: Balanced
 

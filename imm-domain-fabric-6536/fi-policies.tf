@@ -1,79 +1,9 @@
 # This file creates the following policies:
-#    - boot order
 #    - ntp
 #    - network connectivity (dns)
-#    - multicast
-#    - Virtual KVM (enable KVM)
-#    - Virtual Media
 #    - System QoS
 #    - IMC Access
-#   - SNMP
-
-# =============================================================================
-# Boot Precision (boot order) Policy
-# -----------------------------------------------------------------------------
-
-resource "intersight_boot_precision_policy" "boot_precision1" {
-  name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
-  description              = var.description
-  configured_boot_mode     = "Uefi"
-  enforce_uefi_secure_boot = false
-#  boot_devices {
-#    enabled     = true
-#    name        = "KVM_DVD"
-#    object_type = "boot.VirtualMedia"
-#    additional_properties = jsonencode({
-#      Subtype = "kvm-mapped-dvd"
-#    })
-#  }
-#  boot_devices {
-#    enabled     = true
-#    name        = "IMC_DVD"
-#    object_type = "boot.VirtualMedia"
-#    additional_properties = jsonencode({
-#      Subtype = "cimc-mapped-dvd"
-#    })
-#  }
-  boot_devices {
-    enabled     = true
-    name        = "LocalDisk"
-    object_type = "boot.LocalDisk"
-  }
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-
-
-# =============================================================================
-# Device Connector Policy (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_deviceconnector_policy" "dc1" {
-#  description     = var.description
-#  lockout_enabled = true
-#  name            = "${var.policy_prefix}-device-connector"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
-
+#    - SNMP
 
 # =============================================================================
 # NTP Policy
@@ -89,17 +19,8 @@ resource "intersight_ntp_policy" "ntp1" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  # assign this policy to the domain profiles being created
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
-    object_type = "fabric.SwitchProfile"
-  }
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
-    object_type = "fabric.SwitchProfile"
-  }
+  # assign this policy to the domain profiles being created instead of policy buckets
 
-### NEW #### 6536 ####
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -117,28 +38,6 @@ resource "intersight_ntp_policy" "ntp1" {
     }
   }
 }
-
-
-# =============================================================================
-# IPMI over LAN (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_ipmioverlan_policy" "ipmi2" {
-#  description = var.description
-#  enabled     = false
-#  name        = "${var.policy_prefix}-ipmi-disabled"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
 
 
 # =============================================================================
@@ -163,17 +62,8 @@ resource "intersight_networkconfig_policy" "connectivity1" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  # assign this policy to the domain profile being created
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
-    object_type = "fabric.SwitchProfile"
-  }
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
-    object_type = "fabric.SwitchProfile"
-  }
+  # assign this policy to the domain profile being created instead of policy buckets
 
-### NEW #### 6536 ####
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -193,121 +83,11 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 }
 
 # =============================================================================
-# Multicast
-# -----------------------------------------------------------------------------
-
-resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
-  name               = "${var.policy_prefix}-multicast-policy-1"
-  description        = var.description
-  querier_ip_address = ""
-  querier_state      = "Disabled"
-  snooping_state     = "Enabled"
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-
-
-# =============================================================================
-# Virtual KVM Policy
-# -----------------------------------------------------------------------------
-
-resource "intersight_kvm_policy" "kvmpolicy1" {
-  name                      = "${var.policy_prefix}-kvm-enabled-policy-1"
-  description               = var.description
-  enable_local_server_video = true
-  enable_video_encryption   = true
-  enabled                   = true
-  maximum_sessions          = 4
-  organization {
-    moid = var.organization
-  }
-  remote_port = 2068
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-
-
-# =============================================================================
-# Virtual Media Policy
-# -----------------------------------------------------------------------------
-/**
-resource "intersight_vmedia_policy" "vmedia1" {
-  name          = "${var.policy_prefix}-vmedia-ubuntu-policy-1"
-  description   = var.description
-  enabled       = true
-  encryption    = false
-  low_power_usb = true
-  mappings = [{
-    additional_properties   = ""
-    authentication_protocol = "none"
-    class_id                = "vmedia.Mapping"
-    device_type             = "cdd"
-    file_location           = "infra-chx.auslab.cisco.com/software/linux/ubuntu-18.04.5-server-amd64.iso"
-    host_name               = "infra-chx.auslab.cisco.com"
-    is_password_set         = false
-    mount_options           = "RO"
-    mount_protocol          = "nfs"
-    object_type             = "vmedia.Mapping"
-    password                = ""
-    remote_file             = "ubuntu-18.04.5-server-amd64.iso"
-    remote_path             = "/iso/software/linux"
-    sanitized_file_location = "infra-chx.auslab.cisco.com/software/linux/ubuntu-18.04.5-server-amd64.iso"
-    username                = ""
-    volume_name             = "IMC_DVD"
-  }]
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-**/
-/**
-resource "intersight_vmedia_policy" "vmedia2" {
-  name          = "${var.policy_prefix}-vmedia-enabled-policy-1"
-  description   = var.description
-  enabled       = true
-  encryption    = true
-  low_power_usb = true
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-**/
-
-# =============================================================================
 # System Qos Policy
 # -----------------------------------------------------------------------------
 
-# this will create the default System QoS policy with zero customization
+# This will create the default System QoS policy with zero customization
+# Needs customization for vNics to change from best effort with MTU 1500 to MTU 9216 and higher priority
 resource "intersight_fabric_system_qos_policy" "qos1" {
   name        = "${var.policy_prefix}-system-qos-policy-1"
   description = var.description
@@ -316,16 +96,38 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  # assign this policy to the domain profile being created
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
-    object_type = "fabric.SwitchProfile"
-  }
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
-    object_type = "fabric.SwitchProfile"
+  
+  classes {
+    admin_state        = "Enabled"
+    bandwidth_percent  = 20
+    cos                = 1
+    class_id           = "fabric.QosClass"
+    mtu                = 1500
+    multicast_optimize = false
+    name               = "Bronze"
+    packet_drop        = true
+    class_id           = "fabric.QosClass"
+    object_type        = "fabric.QosClass"
+    weight             = 7       
   }
 
+
+  classes {
+    admin_state        = "Enabled"
+    bandwidth_percent  = 23
+    weight             = 8
+    cos                = 2
+    class_id           = "fabric.QosClass"
+    mtu                = 9216
+    multicast_optimize = false
+    name               = "Silver"
+    packet_drop        = true
+    class_id           = "fabric.QosClass"
+    object_type        = "fabric.QosClass"    
+  }
+  
+
+  # assign this policy to the domain profile being created
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -436,3 +238,93 @@ resource "intersight_access_policy" "access1" {
 #    }
 #  }
 #}
+
+
+# =============================================================================
+# IPMI over LAN (optional)
+# -----------------------------------------------------------------------------
+#
+#resource "intersight_ipmioverlan_policy" "ipmi2" {
+#  description = var.description
+#  enabled     = false
+#  name        = "${var.policy_prefix}-ipmi-disabled"
+#  organization {
+#    moid        = var.organization
+#    object_type = "organization.Organization"
+#  }
+#  dynamic "tags" {
+#    for_each = var.tags
+#    content {
+#      key   = tags.value.key
+#      value = tags.value.value
+#    }
+#  }
+#}
+
+
+# # =============================================================================
+# # Boot Precision (boot order) Policy
+# # -----------------------------------------------------------------------------
+
+# resource "intersight_boot_precision_policy" "boot_precision1" {
+#   name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
+#   description              = var.description
+#   configured_boot_mode     = "Uefi"
+#   enforce_uefi_secure_boot = false
+# #  boot_devices {
+# #    enabled     = true
+# #    name        = "KVM_DVD"
+# #    object_type = "boot.VirtualMedia"
+# #    additional_properties = jsonencode({
+# #      Subtype = "kvm-mapped-dvd"
+# #    })
+# #  }
+# #  boot_devices {
+# #    enabled     = true
+# #    name        = "IMC_DVD"
+# #    object_type = "boot.VirtualMedia"
+# #    additional_properties = jsonencode({
+# #      Subtype = "cimc-mapped-dvd"
+# #    })
+# #  }
+#   boot_devices {
+#     enabled     = true
+#     name        = "LocalDisk"
+#     object_type = "boot.LocalDisk"
+#   }
+#   organization {
+#     moid        = var.organization
+#     object_type = "organization.Organization"
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
+
+
+# =============================================================================
+# Device Connector Policy (optional)
+# -----------------------------------------------------------------------------
+#
+#resource "intersight_deviceconnector_policy" "dc1" {
+#  description     = var.description
+#  lockout_enabled = true
+#  name            = "${var.policy_prefix}-device-connector"
+#  organization {
+#    moid        = var.organization
+#    object_type = "organization.Organization"
+#  }
+#  dynamic "tags" {
+#    for_each = var.tags
+#    content {
+#      key   = tags.value.key
+#      value = tags.value.value
+#    }
+#  }
+#}
+
+
