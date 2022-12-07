@@ -63,27 +63,22 @@ variable "tags" {
 variable "server_ports_6454" {
   type        = set(string)
   description = "list of port numbers to be assigned to server ports"
-  default     = []
 }
 variable "port_channel_6454" {
   type        = set(string)
   description = "list of port numbers to be assigned to uplink port channel"
-  default     = []
 }
 variable "fc_port_count_6454" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
-  default     = []
 }
 variable "uplink_vlans_6454" {
   type        = map(number)
   description = "map of vlan names and IDs to be used on FI uplinks"
-  default     = []
 }
 variable "vnic_native_vlan" {
   type        = number
   description = "native VLAN for vnic profiles"
-  default     = []
 }
 
 # =============================================================================
@@ -93,27 +88,22 @@ variable "vnic_native_vlan" {
 variable "server_ports_6536" {
   type        = set(string)
   description = "list of port numbers to be assigned to server ports"
-  default     = []
 }
 variable "port_channel_6536" {
   type        = set(string)
   description = "list of port numbers to be assigned to uplink port channel"
-  default     = []
 }
 variable "fc_port_count_6536" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
-  default     = []
 }
 variable "uplink_vlans_6536" {
   type        = map(number)
   description = "map of vlan names and IDs to be used on FI uplinks"
-  default     = []
 }
 variable "vnic_native_vlan_6536" {
   type        = number
   description = "native VLAN for vnic profiles"
-  default     = []
 }
 
 
