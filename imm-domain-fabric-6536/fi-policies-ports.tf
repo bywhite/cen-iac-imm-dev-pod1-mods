@@ -68,7 +68,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
-    port_policy {
+  port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
   dynamic "tags" {
@@ -118,7 +118,7 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
-    port_policy {
+  port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
   dynamic "tags" {

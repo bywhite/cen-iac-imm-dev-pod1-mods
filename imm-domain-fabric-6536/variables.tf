@@ -108,18 +108,18 @@ variable "vnic_native_vlan_6536" {
 
 
 # =============================================================================
-# IMC
+# IMC for Servers
 # -----------------------------------------------------------------------------
 
-variable "imc_access_vlan" {
-  type        = number
-  description = "ID of VLAN for IMC access"
-}
-variable "imc_admin_password" {
-  type        = string
-  description = "password for the local user policy for IMC"
-  default     = "Cha@ng3Me"
-}
+# variable "imc_access_vlan" {
+#   type        = number
+#   description = "ID of VLAN for IMC access"
+# }
+# variable "imc_admin_password" {
+#   type        = string
+#   description = "password for the local user policy for IMC"
+#   default     = "Cha@ng3Me"
+# }
 
 # =============================================================================
 # Chassis Access - IMC
@@ -138,37 +138,37 @@ variable "chassis_imc_ip_pool_moid" {
 
 
 # =============================================================================
-# Pools 
+# Pools for Server Configs
 # -----------------------------------------------------------------------------
 
-variable "mac_pool_moid" {
-  type         = string
-  description = "MAC Pool MOID"
-} 
+# variable "mac_pool_moid" {
+#   type         = string
+#   description = "MAC Pool MOID"
+# } 
 
-variable "imc_ip_pool_moid" {
-  type = string
-  description = "moid of IP_Pool to be assigned to IMC Access Policy"
-}
+# variable "imc_ip_pool_moid" {
+#   type = string
+#   description = "moid of IP_Pool to be assigned to IMC Access Policy"
+# }
 
-variable "wwnn_pool_moid" {
-  type = string
-  description = "moid of WWNN Pool"
-}
+# variable "wwnn_pool_moid" {
+#   type = string
+#   description = "moid of WWNN Pool"
+# }
 
-variable "wwpn_pool_a_moid" {
-  type = string
-  description = "moid of WWPN A fabric Pool"
-}
+# variable "wwpn_pool_a_moid" {
+#   type = string
+#   description = "moid of WWPN A fabric Pool"
+# }
 
-variable "wwpn_pool_b_moid" {
-  type = string
-  description = "moid of WWPN B fabric Pool"
-}
+# variable "wwpn_pool_b_moid" {
+#   type = string
+#   description = "moid of WWPN B fabric Pool"
+# }
 
 
 # =============================================================================
-# IPs
+# NTP and DNS server IP's
 # -----------------------------------------------------------------------------
 
 variable "ntp_servers" {

@@ -1,14 +1,42 @@
 # This file creates the following policies:
-#    - ntp
-#    - network connectivity (dns)
+#    - fabric switch control
+#    - NTP
+#    - network connectivity (DNS)
 #    - System QoS
-#    - IMC Access
 #    - SNMP
+
+
+resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy1" {
+  name        = "${var.policy_prefix}-switch-control-policy-1"
+  description = var.description
+  mac_aging_settings {
+    mac_aging_option = "Default"
+    mac_aging_time   = 14500
+    object_type      = "fabric.MacAgingSettings"
+  }
+  vlan_port_optimization_enabled = true
+  ethernet_switching_mode = "end-host"
+  fc_switching_mode = "end-host"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+    object_type = "fabric.SwitchProfile"
+  }
+    profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+    object_type = "fabric.SwitchProfile"
+  }
+
+}
+
 
 # =============================================================================
 # NTP Policy
 # -----------------------------------------------------------------------------
-
 resource "intersight_ntp_policy" "ntp1" {
   description = var.description
   enabled     = true
@@ -20,7 +48,6 @@ resource "intersight_ntp_policy" "ntp1" {
     object_type = "organization.Organization"
   }
   # assign this policy to the domain profiles being created instead of policy buckets
-
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -29,7 +56,6 @@ resource "intersight_ntp_policy" "ntp1" {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -97,7 +123,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  
 
   classes {
     admin_state        = "Enabled"
@@ -111,7 +136,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-
   classes {
     admin_state        = "Enabled"
     bandwidth_percent  = 20
@@ -124,8 +148,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"  
   }
-
-
   classes {
     admin_state        = "Enabled"
     bandwidth_percent  = 23
@@ -138,7 +160,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-  
   # Class of Service 3 is used for FibreChannel (fcoe)
   classes {
     admin_state        = "Enabled"
@@ -152,8 +173,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-  
-
   classes {
     admin_state        = "Enabled"
     bandwidth_percent  = 26
@@ -166,7 +185,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-  
   classes {
     admin_state        = "Disabled"
     bandwidth_percent  = 0
@@ -180,7 +198,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     object_type        = "fabric.QosClass"    
   }
   
-
   # assign this policy to the domain profile being created
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
@@ -209,8 +226,8 @@ resource "intersight_snmp_policy" "snmp1" {
   access_community_string = "anythingbutpublic"
   community_access        = "Disabled"
   trap_community          = "TrapCommunity"
-  sys_contact             = "Lance"
-  sys_location            = "Lance's house"
+  sys_contact             = "The SysAdmin"
+  sys_location            = "The Data Center"
   engine_id               = "vvb"
   snmp_users {
     name         = "snmpuser"
@@ -240,145 +257,5 @@ resource "intersight_snmp_policy" "snmp1" {
     moid        = var.organization
   }
 }
-
-
-
-# =============================================================================
-# IMC Access
-# -----------------------------------------------------------------------------
-
-resource "intersight_access_policy" "access1" {
-  name        = "${var.policy_prefix}-imc-access-policy-1"
-  description = var.description
-  inband_vlan = var.imc_access_vlan
-  inband_ip_pool {
-    object_type  = "ippool.Pool"
-    #moid        = intersight_ippool_pool.ippool_pool1.moid
-    moid         = var.imc_ip_pool_moid
-  }
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-
-# =============================================================================
-# Serial Over LAN (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_sol_policy" "sol1" {
-#  name        = "${var.policy_prefix}-sol-off-policy-1"
-#  description = var.description
-#  enabled     = false
-#  baud_rate   = 9600
-#  com_port    = "com1"
-#  ssh_port    = 1096
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
-
-
-# =============================================================================
-# IPMI over LAN (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_ipmioverlan_policy" "ipmi2" {
-#  description = var.description
-#  enabled     = false
-#  name        = "${var.policy_prefix}-ipmi-disabled"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
-
-
-# # =============================================================================
-# # Boot Precision (boot order) Policy
-# # -----------------------------------------------------------------------------
-
-# resource "intersight_boot_precision_policy" "boot_precision1" {
-#   name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
-#   description              = var.description
-#   configured_boot_mode     = "Uefi"
-#   enforce_uefi_secure_boot = false
-# #  boot_devices {
-# #    enabled     = true
-# #    name        = "KVM_DVD"
-# #    object_type = "boot.VirtualMedia"
-# #    additional_properties = jsonencode({
-# #      Subtype = "kvm-mapped-dvd"
-# #    })
-# #  }
-# #  boot_devices {
-# #    enabled     = true
-# #    name        = "IMC_DVD"
-# #    object_type = "boot.VirtualMedia"
-# #    additional_properties = jsonencode({
-# #      Subtype = "cimc-mapped-dvd"
-# #    })
-# #  }
-#   boot_devices {
-#     enabled     = true
-#     name        = "LocalDisk"
-#     object_type = "boot.LocalDisk"
-#   }
-#   organization {
-#     moid        = var.organization
-#     object_type = "organization.Organization"
-#   }
-#   dynamic "tags" {
-#     for_each = var.tags
-#     content {
-#       key   = tags.value.key
-#       value = tags.value.value
-#     }
-#   }
-# }
-
-
-# =============================================================================
-# Device Connector Policy (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_deviceconnector_policy" "dc1" {
-#  description     = var.description
-#  lockout_enabled = true
-#  name            = "${var.policy_prefix}-device-connector"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
 
 
