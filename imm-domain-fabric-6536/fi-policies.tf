@@ -101,7 +101,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     admin_state        = "Enabled"
     bandwidth_percent  = 20
     cos                = 1
-    class_id           = "fabric.QosClass"
     mtu                = 1500
     multicast_optimize = false
     name               = "Bronze"
@@ -117,7 +116,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     bandwidth_percent  = 23
     weight             = 8
     cos                = 2
-    class_id           = "fabric.QosClass"
     mtu                = 9216
     multicast_optimize = false
     name               = "Silver"
