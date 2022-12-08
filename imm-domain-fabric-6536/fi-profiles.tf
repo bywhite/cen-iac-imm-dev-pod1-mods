@@ -25,7 +25,6 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
     moid        = var.organization
   }
 
-  switch_profiles_count = 2
   switch_profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
