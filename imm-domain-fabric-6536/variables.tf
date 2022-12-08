@@ -50,6 +50,10 @@ variable "uplink_vlans_6536" {
   type        = map(number)
   description = "map of vlan names and IDs to be used on FI uplinks"
 }
+variable "allowed_vlans_6536" {
+  type        = string
+  description = "comma separated vlans and/or vlan ranges"
+}
 
 # =============================================================================
 # Fabric Interconnect 6536 ports and VSANs

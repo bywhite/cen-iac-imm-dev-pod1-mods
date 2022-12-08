@@ -249,9 +249,9 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
     object_type = "fabric.PortPolicy"
   }
 
-  # eth_network_group_policy {
-  #   moid        =  
-  # }
+  eth_network_group_policy {
+    moid        = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_a.moid 
+  }
 
   # flow_control_policy {
   #   moid        =  
@@ -300,6 +300,22 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_b" {
       value = tags.value.value
     }
   }
+
+  eth_network_group_policy {
+    moid        = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_b.moid
+   }
+  # flow_control_policy {
+  #   moid        =  
+  # }
+
+  # link_aggregation_policy {
+  #   moid        =  
+  # }
+
+  # link_control_policy {
+  #   moid        =  
+  # }
+
 }
 
 # Configure FC uplink Port Channel for FI-A
@@ -351,6 +367,47 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   }
 }
 
+resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
+  name        = "${var.policy_prefix}-FI-A-Eth_Network_Group_Policy1"
+  description = "VLAN Group listing allowed on Uplinks"
+  vlan_settings {
+    native_vlan   = 1
+    allowed_vlans = var.allowed_vlans_6536
+    object_type   = "fabric.VlanSettings"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
+  name        = "${var.policy_prefix}-FI-B-Eth_Network_Group_Policy1"
+  description = "VLAN Group listing allowed on Uplinks"
+  vlan_settings {
+    native_vlan   = 1
+    allowed_vlans = var.allowed_vlans_6536
+    object_type   = "fabric.VlanSettings"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
 
 # -----------------------------------------------------------------------------
 # END OF   6536 Switch Port Policies
