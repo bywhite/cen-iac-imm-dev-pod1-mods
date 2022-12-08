@@ -50,9 +50,9 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   description = var.description
   name        = "${var.policy_prefix}-Switch-Profile-A"
   type        = "instance"
-  # switch_cluster_profile {
-  #   moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
-  # }
+  switch_cluster_profile {
+    moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
+  }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -68,9 +68,9 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   description = var.description
   name        = "${var.policy_prefix}-Switch-Profile-B"
   type        = "instance"
-  # switch_cluster_profile {
-  #   moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
-  # }
+  switch_cluster_profile {
+    moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
+  }
   dynamic "tags" {
     for_each = var.tags
     content {
