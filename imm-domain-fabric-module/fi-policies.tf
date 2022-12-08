@@ -187,31 +187,31 @@ resource "intersight_snmp_policy" "snmp1" {
 
 
 
-# =============================================================================
-# IMC Access
-# -----------------------------------------------------------------------------
+# # =============================================================================
+# # IMC Access
+# # -----------------------------------------------------------------------------
 
-resource "intersight_access_policy" "access1" {
-  name        = "${var.policy_prefix}-imc-access-policy-1"
-  description = var.description
-  inband_vlan = var.imc_access_vlan
-  inband_ip_pool {
-    object_type  = "ippool.Pool"
-    #moid        = intersight_ippool_pool.ippool_pool1.moid
-    moid         = var.imc_ip_pool_moid
-  }
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
+# resource "intersight_access_policy" "access1" {
+#   name        = "${var.policy_prefix}-imc-access-policy-1"
+#   description = var.description
+#   inband_vlan = var.imc_access_vlan
+#   inband_ip_pool {
+#     object_type  = "ippool.Pool"
+#     #moid        = intersight_ippool_pool.ippool_pool1.moid
+#     moid         = var.imc_ip_pool_moid
+#   }
+#   organization {
+#     moid        = var.organization
+#     object_type = "organization.Organization"
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
 
 # =============================================================================
 # VLAN Policy for Ethernet Uplink

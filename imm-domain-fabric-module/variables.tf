@@ -52,18 +52,18 @@ variable "uplink_vlans_6454" {
 
 
 # =============================================================================
-# IMC
+# Server - IMC
 # -----------------------------------------------------------------------------
 
-variable "imc_access_vlan" {
-  type        = number
-  description = "ID of VLAN for IMC access"
-}
-variable "imc_admin_password" {
-  type        = string
-  description = "password for the local user policy for IMC"
-  default     = "Ch@ng3Me"
-}
+# variable "imc_access_vlan" {
+#   type        = number
+#   description = "ID of VLAN for IMC access"
+# }
+# variable "imc_admin_password" {
+#   type        = string
+#   description = "password for the local user policy for IMC"
+#   default     = "Ch@ng3Me"
+# }
 
 # =============================================================================
 # Chassis Access - IMC
