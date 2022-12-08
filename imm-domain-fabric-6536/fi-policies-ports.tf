@@ -54,15 +54,12 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy_b" {
 }
 
 
-# set the last two ports to be FC
+# set the last two ports to be FC on FI-A
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
- #count = (var.fc_port_count_6536 > 0) ? 1 : 0
-
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode    = "BreakoutFibreChannel32G"
   port_id_end    = 35
   port_id_start = 35
-  #port_id_start  = "${36 - var.fc_port_count_6536 + 1}"
   slot_id        = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
@@ -77,13 +74,10 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
   }
 }
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
- #count = (var.fc_port_count_6536 > 0) ? 1 : 0
-
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode    = "BreakoutFibreChannel32G"
   port_id_end    = 36
   port_id_start = 36
-  #port_id_start  = "${36 - var.fc_port_count_6536 + 1}"
   slot_id        = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
@@ -99,22 +93,16 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
 }
 
 
-
-
-# set the last two ports to be FC
+# set the last two ports to be FC on FI-B
 resource "intersight_fabric_port_mode" "fi6536_port_mode_b-35" {
- # count = (var.fc_port_count_6536 > 0) ? 1 : 0
-
-  #custom_mode   = "BreakoutFibreChannel16G"
+ #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode   = "BreakoutFibreChannel32G"
   port_id_end   = 35
   port_id_start = 35
-  #port_id_start   = "${36 - var.fc_port_count_6536 + 1}"
   slot_id       = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -123,19 +111,16 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-35" {
     }
   }
 }
-resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
- # count = (var.fc_port_count_6536 > 0) ? 1 : 0
 
+resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode   = "BreakoutFibreChannel32G"
   port_id_end   = 36
   port_id_start = 36
-  #port_id_start   = "${36 - var.fc_port_count_6536 + 1}"
   slot_id       = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -146,18 +131,14 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
 }
  
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
- # count = (var.fc_port_count_6536 > 0) ? 1 : 0
-
   #custom_mode   = "BreakoutEthernet25G"
   custom_mode   = "BreakoutEthernet10G"
   port_id_end   = 1
   port_id_start = 1
-  #port_id_start   = "${36 - var.fc_port_count_6536 + 1}"
   slot_id       = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -165,20 +146,18 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
       value = tags.value.value
     }
   }
-}
- resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
- # count = (var.fc_port_count_6536 > 0) ? 1 : 0
 
+}
+
+ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
   #custom_mode   = "BreakoutEthernet25G"
   custom_mode   = "BreakoutEthernet10G"
   port_id_end   = 1
   port_id_start = 1
-  #port_id_start   = "${36 - var.fc_port_count_6536 + 1}"
   slot_id       = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -188,9 +167,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
   }
 }
  
-
-
-
+ 
 # assign server role to designated ports on FI-A  port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   for_each = var.server_ports_6536
@@ -322,12 +299,6 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
-  # ports {
-  #     aggregate_port_id = 36
-  #     port_id           = 1
-  #     slot_id           = 1
-    
-  # }
   dynamic "ports" {
     for_each = var.fc_port_channel_6536
     content {
