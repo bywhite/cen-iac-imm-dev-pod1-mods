@@ -51,6 +51,15 @@ variable "uplink_vlans_6536" {
   description = "map of vlan names and IDs to be used on FI uplinks"
 }
 
+# =============================================================================
+# Fabric Interconnect 6536 ports and VSANs
+# -----------------------------------------------------------------------------
+
+variable "fc_port_channel_6536" {
+  type        = list (map(number))
+  default     = []
+}
+
 
 # =============================================================================
 # Chassis Access - IMC

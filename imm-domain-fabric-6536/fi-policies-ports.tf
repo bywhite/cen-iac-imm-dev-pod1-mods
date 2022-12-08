@@ -199,12 +199,21 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
-  ports {
-      aggregate_port_id = 36
-      port_id           = 1
-      slot_id           = 1
+  # ports {
+  #     aggregate_port_id = 36
+  #     port_id           = 1
+  #     slot_id           = 1
     
+  # }
+  dynamic "ports" {
+    for_each = var.fc_port_channel_6536
+    content {
+      aggregate_port_id = ports.value.aggport
+      port_id           = ports.value.port
+      slot_id           = 1
+    }
   }
+
 }
 
 # Configure FC uplink Port Channel for FI-A
@@ -217,11 +226,13 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role2" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
-  ports {
-      aggregate_port_id = 36
-      port_id           = 1
+  dynamic "ports" {
+    for_each = var.fc_port_channel_6536
+    content {
+      aggregate_port_id = ports.value.aggport
+      port_id           = ports.value.port
       slot_id           = 1
-  
+    }
   }
 }
 
