@@ -452,7 +452,6 @@ resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
   udld_settings = {
     admin_state = "Enabled"
     mode        = "normal"
-    object_type = "fabric.UdldSettings"
   }
 
   organization {
