@@ -31,7 +31,7 @@ resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy1" {
 # VLANs for the above policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_vlan" "fabric_vlan1" {
-  for_each = var.uplink_vlans_6454
+  for_each = var.uplink_vlans_6536
 
   auto_allow_on_uplinks = true
   is_native             = false

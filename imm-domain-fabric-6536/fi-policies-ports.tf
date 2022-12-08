@@ -82,7 +82,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode1" {
 
 # assign server role to designated ports on both 6536 FI pair port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role1" {
-  for_each = var.server_ports_6454
+  for_each = var.server_ports_6536
 
   aggregate_port_id = 0
   port_id           = each.value
