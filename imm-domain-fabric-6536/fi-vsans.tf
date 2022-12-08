@@ -54,7 +54,7 @@ resource "intersight_fabric_vsan" "fabric_vsan1" {
   default_zoning       = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
-  vsan_scope = "Common"
+  vsan_scope = "Uplink"
   fcoe_vlan            = 1100
   vsan_id              = 100
   fc_network_policy {
@@ -67,7 +67,7 @@ resource "intersight_fabric_vsan" "fabric_vsan2" {
   default_zoning       = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
-  vsan_scope = "Common"
+  vsan_scope = "Uplink"
   fcoe_vlan            = 1200
   vsan_id              = 200
   fc_network_policy {
