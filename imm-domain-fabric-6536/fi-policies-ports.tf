@@ -450,7 +450,7 @@ resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
   name        = "${var.policy_prefix}-FI-Link-Control-Policy"
   description = "Link Control Settings for Eth Port Channel Uplink Ports"
 
-  udld_settings = {
+  udld_settings {
     admin_state = "Enabled"
     mode        = "normal"
   }
