@@ -61,7 +61,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode1" {
   #custom_mode   = "FibreChannel"
   custom_mode    = "BreakoutFibreChannel32G"
   port_id_end    = 36
-  port_id_start = 35
+  port_id_start = 36
   #port_id_start  = "${36 - var.fc_port_count_6536 + 1}"
   slot_id        = 1
   port_policy {
@@ -84,7 +84,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode2" {
   #custom_mode   = "FibreChannel"
   custom_mode   = "BreakoutFibreChannel32G"
   port_id_end   = 36
-  port_id_start = 35
+  port_id_start = 36
   #port_id_start   = "${36 - var.fc_port_count_6536 + 1}"
   slot_id       = 1
   port_policy {
