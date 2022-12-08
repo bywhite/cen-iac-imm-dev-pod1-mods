@@ -212,7 +212,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role2" {
   admin_speed   = "Auto"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
-  vsan_id      = 100
+  vsan_id      = 200
   pc_id = 35
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
