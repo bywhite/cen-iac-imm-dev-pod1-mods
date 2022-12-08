@@ -217,6 +217,33 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
   }
 }
 
+# =============================================================================
+# Multicast
+# -----------------------------------------------------------------------------
+
+resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
+  name               = "${var.policy_prefix}-multicast-policy-1"
+  description        = var.description
+  querier_ip_address = ""
+  querier_state      = "Disabled"
+  snooping_state     = "Enabled"
+  organization {
+    moid        = var.organization
+    object_type = "organization.Organization"
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+
+# =============================================================================
+# SNMP Policy
+# -----------------------------------------------------------------------------
 
 resource "intersight_snmp_policy" "snmp1" {
   name        = "${var.policy_prefix}-snmp-policy-1"
