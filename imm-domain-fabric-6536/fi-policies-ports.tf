@@ -104,7 +104,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode2" {
   }
 }
  
-# assign server role to designated ports on both 6536 FI pair port_policy
+# assign server role to designated ports on both 6536 FI  port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role1" {
   for_each = var.server_ports_6536
 
@@ -114,6 +114,22 @@ resource "intersight_fabric_server_role" "fi6536_server_role1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+# assign server role to designated ports on both 6536 FI port_policy
+resource "intersight_fabric_server_role" "fi6536_server_role2" {
+  for_each = var.server_ports_6536
+
+  aggregate_port_id = 0
+  port_id           = each.value
+  slot_id           = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
@@ -126,7 +142,7 @@ resource "intersight_fabric_server_role" "fi6536_server_role1" {
   }
 }
 
-# assign ports for Eth uplink port channel on both 6536 FI pair port_policy
+# assign ports for Eth uplink port channel on both 6536 FI  port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role1" {
   pc_id = 100
   #Port Channel ID is not seen by connected network switch
@@ -142,6 +158,28 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+# assign ports for Eth uplink port channel on both 6536 FI  port_policy
+resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role2" {
+  pc_id = 100
+  #Port Channel ID is not seen by connected network switch
+  dynamic "ports" {
+    for_each = var.port_channel_6536
+    content {
+      port_id           = ports.value
+      aggregate_port_id = 0
+      slot_id           = 1
+    }
+  }
+  admin_speed = "Auto"
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
