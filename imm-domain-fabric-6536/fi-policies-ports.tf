@@ -200,12 +200,10 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
   ports {
-
-    content {
       aggregate_port_id = 36
       port_id           = 1
       slot_id           = 1
-    }
+    
   }
 }
 
@@ -220,12 +218,10 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role2" {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
   ports {
-
-    content {
       aggregate_port_id = 36
       port_id           = 1
       slot_id           = 1
-    }
+  
   }
 }
 
