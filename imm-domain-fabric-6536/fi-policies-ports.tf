@@ -343,7 +343,9 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
       slot_id           = 1
     }
   }
-
+  depends_on = [
+    intersight_fabric_port_mode.fi6536_port_mode_a-35, intersight_fabric_port_mode.fi6536_port_mode_a-36
+  ]
 }
 
 # Configure FC uplink Port Channel for FI-A
@@ -365,6 +367,9 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
       slot_id           = 1
     }
   }
+  depends_on = [
+    intersight_fabric_port_mode.fi6536_port_mode_b-35, intersight_fabric_port_mode.fi6536_port_mode_b-36
+  ]
 }
 
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
