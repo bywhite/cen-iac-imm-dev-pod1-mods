@@ -278,6 +278,16 @@ resource "intersight_snmp_policy" "snmp1" {
     moid        = intersight_chassis_profile.chassis_9508_profile1.moid
     object_type = "chassis.Profile"
   }
+
+    # assign this policy to the domain profiles being created instead of policy buckets
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+    object_type = "fabric.SwitchProfile"
+  }
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+    object_type = "fabric.SwitchProfile"
+  }
   
   organization {
     object_type = "organization.Organization"
