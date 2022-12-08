@@ -159,8 +159,8 @@ resource "intersight_snmp_policy" "snmp1" {
   snmp_users {
     name         = "snmpuser"
     privacy_type = "AES"
-    auth_password    = var.imc_admin_password
-    privacy_password = var.imc_admin_password
+    auth_password    = var.snmp_password
+    privacy_password = var.snmp_password
     security_level = "AuthPriv"
     auth_type      = "SHA"
     object_type    = "snmp.User"
