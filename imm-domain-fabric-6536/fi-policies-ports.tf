@@ -449,10 +449,11 @@ resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
 resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
   name        = "${var.policy_prefix}-FI-Link-Control-Policy"
   description = "Link Control Settings for Eth Port Channel Uplink Ports"
-  udld_settings = {
-    admin_state = "Enabled"
+
+  udld_settings = [
+    admin_state = "Enabled",
     mode        = "normal"
-  }
+  ]
 
   organization {
     object_type = "organization.Organization"
