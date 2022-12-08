@@ -1,6 +1,4 @@
-# This builds the FI port policy for 6536 and 6432 FIs
-#
-# The port policy is the parent for port mode and role
+# This builds the FI port policy for 6536 FI's
 
 
 # =============================================================================
@@ -8,6 +6,7 @@
 # -----------------------------------------------------------------------------
 
 ### 6536 FI-A port_policy ####
+# Associated with 6 other policies
 resource "intersight_fabric_port_policy" "fi6536_port_policy_a" {
   name         = "${var.policy_prefix}-FI-A-Port-Policy"
   description  = var.description
@@ -31,6 +30,7 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy_a" {
 }
 
 ### 6536 FI-B port_policy ####
+# Associated with 6 other policies
 resource "intersight_fabric_port_policy" "fi6536_port_policy_b" {
   name         = "${var.policy_prefix}-FI-B-Port-Policy"
   description  = var.description
@@ -54,7 +54,7 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy_b" {
 }
 
 
-# set the last two ports to be FC on FI-A
+# set the last two ports to be FC on 6536 FI-A
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode    = "BreakoutFibreChannel32G"
@@ -64,7 +64,6 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -73,6 +72,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
     }
   }
 }
+
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode    = "BreakoutFibreChannel32G"
@@ -82,7 +82,6 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -92,8 +91,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
   }
 }
 
-
-# set the last two ports to be FC on FI-B
+# set the last two ports to be FC on 6536 FI-B
 resource "intersight_fabric_port_mode" "fi6536_port_mode_b-35" {
  #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode   = "BreakoutFibreChannel32G"
@@ -146,7 +144,6 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
       value = tags.value.value
     }
   }
-
 }
 
  resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
@@ -166,7 +163,6 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
     }
   }
 }
- 
  
 # assign server role to designated ports on FI-A  port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role_a" {
@@ -209,7 +205,6 @@ resource "intersight_fabric_server_role" "fi6536_server_role_b" {
 # assign ports for Eth uplink port channel on both 6536 FI  port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
   pc_id = 33
-  #Port Channel ID is not seen by connected network switch
   dynamic "ports" {
     for_each = var.port_channel_6536
     content {
@@ -225,7 +220,6 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
     moid        = intersight_fabric_port_policy.fi6536_port_policy_a.moid
     object_type = "fabric.PortPolicy"
   }
-
   eth_network_group_policy {
     moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_a.moid 
   }
@@ -238,7 +232,6 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
   link_control_policy {
     moid =  intersight_fabric_link_control_policy.fabric_link_control_policy.moid
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -384,7 +377,6 @@ resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
   priority_flow_control_mode = "auto"
   receive_direction = "Disabled"
   send_direction = "Disabled"
-
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
@@ -403,7 +395,6 @@ resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
   description = "Link Aggregation Settings for Eth Port Channel Uplink Ports"
   lacp_rate = "normal"
   suspend_individual = false
-
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
@@ -420,12 +411,10 @@ resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
 resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
   name        = "${var.policy_prefix}-FI-Link-Control-Policy"
   description = "Link Control Settings for Eth Port Channel Uplink Ports"
-
   udld_settings {
     admin_state = "Enabled"
     mode        = "normal"
   }
-
   organization {
     object_type = "organization.Organization"
     moid        = var.organization

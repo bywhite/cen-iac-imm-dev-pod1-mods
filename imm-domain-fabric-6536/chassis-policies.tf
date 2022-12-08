@@ -1,6 +1,6 @@
 # Policies consumed by Chassis Profiles
 
-
+# Assigns IP address to chassis for managment
 resource "intersight_access_policy" "chassis_9508_access" {
   name        = "${var.policy_prefix}-Chassis-IMC-Access-Policy"
   description = var.description
@@ -18,7 +18,6 @@ resource "intersight_access_policy" "chassis_9508_access" {
     moid        = intersight_chassis_profile.chassis_9508_profile.moid
     object_type = "chassis.Profile"
   }
-  
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -28,11 +27,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
   }
 }
 
-
-# Optional SNMP policy can be tied to chassis policy bucket
-# creating in main policies.tf file
-
-
+# Configure Chassis to Grid power and other power related settings
 resource "intersight_power_policy" "chassis_9508_power" {
   name        = "${var.policy_prefix}-Chassis-9508-Power-Policy"
   description              = var.description
@@ -41,18 +36,15 @@ resource "intersight_power_policy" "chassis_9508_power" {
   extended_power_capacity = "Enabled"
   allocated_budget = 0
   redundancy_mode = "Grid"
-
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-
   # assign this policy to the chassis profile being created
   profiles {
     moid        = intersight_chassis_profile.chassis_9508_profile.moid
     object_type = "chassis.Profile"
   }
-  
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -62,22 +54,20 @@ resource "intersight_power_policy" "chassis_9508_power" {
   }
 }
 
+# Set Chassis fan characteristics and influence over chassis power consumption
 resource "intersight_thermal_policy" "chassis_9508_thermal" {
   name        = "${var.policy_prefix}-Chassis-9508-Thermal-Policy"
   description              = var.description
   fan_control_mode = "Balanced"
-
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-
   # assign this policy to the chassis profile being created
   profiles {
     moid        = intersight_chassis_profile.chassis_9508_profile.moid
     object_type = "chassis.Profile"
   }
-  
   dynamic "tags" {
     for_each = var.tags
     content {

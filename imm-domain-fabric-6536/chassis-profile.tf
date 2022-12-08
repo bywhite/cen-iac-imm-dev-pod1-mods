@@ -17,40 +17,11 @@ resource "intersight_chassis_profile" "chassis_9508_profile" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-
-# IMC Access Policy Required:  In-Band VLAN-ID, IP-Pool
-# Chassis Power Policy: 
-#    Recommend: Power Save Mode, Dynamic Power Rebalancing, Extended Power, Power Allocation:0
-# SNMP Policy optional
-# Thermal Policy optional:  Fan Control Mode: Balanced
-
-
-#  Policy Bucket EXAMPLE from Rest API from Chassis/Profiles "GET /api/v1/chassis/Profiles"
-#      "PolicyBucket": [
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5b836275722d306a23e3",
-        #   "ObjectType": "access.Policy",
-        #   "link": "https://www.intersight.com/api/v1/access/Policies/638f5b836275722d306a23e3"
-        # },
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5c646275722d306a3c01",
-        #   "ObjectType": "power.Policy",
-        #   "link": "https://www.intersight.com/api/v1/power/Policies/638f5c646275722d306a3c01"
-        # },
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5de36275722d306a6177",
-        #   "ObjectType": "thermal.Policy",
-        #   "link": "https://www.intersight.com/api/v1/thermal/Policies/638f5de36275722d306a6177"
-        # },
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5f366275722d306a8b4d",
-        #   "ObjectType": "snmp.Policy",
-        #   "link": "https://www.intersight.com/api/v1/snmp/Policies/638f5f366275722d306a8b4d"
-        # }
-
-
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
 }
