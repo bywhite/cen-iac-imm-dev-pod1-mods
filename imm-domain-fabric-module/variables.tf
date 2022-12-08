@@ -1,5 +1,5 @@
 # =============================================================================
-# External references
+# External Org reference
 # -----------------------------------------------------------------------------
 
 variable "organization" {
@@ -7,24 +7,6 @@ variable "organization" {
   description = "moid for organization in which to create the policies"
 }
 
-
-# variable "wwnn-block" {
-#   type         = string
-#   description  = "beginning WWNN block of size 255"
-#   default      = "20:00:00:CA:FE:00:00:01"
-# }
-
-# variable "wwpn-a-block" {
-#   type         = string
-#   description  = "beginning WWPN-A block of size 255"
-#   default      = "20:00:00:CA:FE:0A:00:01"
-# }
-
-# variable "wwpn-b-block" {
-#   type         = string
-#   description  = "beginning WWPN-B block of size 255"
-#   default      = "20:00:00:CA:FE:0B:00:01"
-# }
 
 # =============================================================================
 # Naming and tagging
@@ -35,15 +17,6 @@ variable "policy_prefix" {
   description = "prefix for all policies created"
   default     = "tf"
 }
-
-### domain_instances are NOT USED when creating 1 domain per module call, to increases customization
-# variable "domain_instances" {
-#   type        = list(string)
-#   description = "list of domain instances to be created [vmw-1,lnx-1,bml-1,vmw-2]"
-#   default     = ["vmw-1"]
-#   # Each domain-instance is concatenated with the policy_prefix to Name the domain
-# }
-
 variable "description" {
   type        = string
   description = "description field for all policies"
@@ -89,7 +62,7 @@ variable "imc_access_vlan" {
 variable "imc_admin_password" {
   type        = string
   description = "password for the local user policy for IMC"
-  default     = "Cha@ng3Me"
+  default     = "Ch@ng3Me"
 }
 
 # =============================================================================
@@ -100,42 +73,11 @@ variable "chassis_imc_access_vlan" {
   type        = number
   description = "ID of VLAN for Chassis In-Band IMC access"
 }
-
 variable "chassis_imc_ip_pool_moid" {
   type = string
   description = "moid of Chassis IP_Pool to be assigned to IMC Access Policy"
 }
 
-
-
-# =============================================================================
-# Pools 
-# -----------------------------------------------------------------------------
-
-variable "mac_pool_moid" {
-  type         = string
-  description = "MAC Pool MOID"
-} 
-
-variable "imc_ip_pool_moid" {
-  type = string
-  description = "moid of IP_Pool to be assigned to IMC Access Policy"
-}
-
-variable "wwnn_pool_moid" {
-  type = string
-  description = "moid of WWNN Pool"
-}
-
-variable "wwpn_pool_a_moid" {
-  type = string
-  description = "moid of WWPN A fabric Pool"
-}
-
-variable "wwpn_pool_b_moid" {
-  type = string
-  description = "moid of WWPN B fabric Pool"
-}
 
 
 # =============================================================================
@@ -161,11 +103,3 @@ variable "dns_alternate" {
   default     = ""
 }
 
-
-###############################################################################
-# Server Related Variables no longer needed - separating Server creation in other module
-
-# variable "vnic_native_vlan" {
-#   type        = number
-#   description = "native VLAN for vnic profiles"
-# }

@@ -1,12 +1,5 @@
 # =============================================================================
-# IMM Cluster (Domain) and Switch Profiles for Multiple types of FI's
-# Each type of FI Domain (6536 and 6454) profiles are grouped together
-# Will need to pass a variable for a conditional to create a count of 1 for FI type
-# A variable list of the Domain hosting type Name prefix may be needed to create
-# Multiple instances with a for each statement:  [vmw-1, vmw-2]
-# each could be inserted into the name of the cluster and switch profile names
-#  Other Ideas
-#     Could Pass FI Serial Numbers to assign profiles
+# IMM Cluster (Domain) and Switch Profiles for 6454 Fabric Interconnects
 # -----------------------------------------------------------------------------
 
 
