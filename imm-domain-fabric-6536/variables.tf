@@ -89,3 +89,11 @@ variable "dns_alternate" {
   description = "IP address of secondary (alternate) DNS server"
   default     = ""
 }
+variable "snmp_password" {
+  type        = string
+  default     = "Cisco123"
+}
+variable "snmp_ip"  {
+  type        = string
+  default     = "10.10.2.22"
+}

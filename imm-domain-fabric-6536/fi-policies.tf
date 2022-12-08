@@ -232,14 +232,14 @@ resource "intersight_snmp_policy" "snmp1" {
   snmp_users {
     name         = "snmpuser"
     privacy_type = "AES"
-    auth_password    = var.imc_admin_password
-    privacy_password = var.imc_admin_password
+    auth_password    = var.snmp_password
+    privacy_password = var.snmp_password
     security_level = "AuthPriv"
     auth_type      = "SHA"
     object_type    = "snmp.User"
   }
   snmp_traps {
-    destination = "10.10.10.254"
+    destination = var.snmp_ip
     enabled     = false
     port        = 660
     type        = "Trap"
@@ -257,5 +257,4 @@ resource "intersight_snmp_policy" "snmp1" {
     moid        = var.organization
   }
 }
-
 
