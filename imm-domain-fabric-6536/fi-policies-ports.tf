@@ -189,13 +189,45 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role2" {
   }
 }
 
-# Configure FC uplink Port Channel
-# https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_fc_uplink_pc_role
-# resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
-#   admin_speed  = "Auto"
-#   fill_pattern = "Idle"
-#   vsan_id      = 10
-# }
+# Configure FC uplink Port Channel for FI-A
+resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
+  admin_speed   = "Auto"
+  fill_pattern  = "Idle"
+  #fill_pattern = "Arbff"
+  vsan_id      = 100
+  pc_id = 35
+  port_policy {
+    moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
+  }
+  ports {
+
+    content {
+      aggregate_port_id = 36
+      port_id           = 1
+      slot_id           = 1
+    }
+  }
+}
+
+# Configure FC uplink Port Channel for FI-A
+resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role2" {
+  admin_speed   = "Auto"
+  fill_pattern  = "Idle"
+  #fill_pattern = "Arbff"
+  vsan_id      = 100
+  pc_id = 35
+  port_policy {
+    moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
+  }
+  ports {
+
+    content {
+      aggregate_port_id = 36
+      port_id           = 1
+      slot_id           = 1
+    }
+  }
+}
 
 
 # -----------------------------------------------------------------------------
