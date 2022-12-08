@@ -8,7 +8,6 @@
 # -----------------------------------------------------------------------------
 
 ### 6536 FI-A port_policy ####
-# Separte port policy for separate VSAN ID's on Uplinks
 resource "intersight_fabric_port_policy" "fi6536_port_policy-a" {
   name         = "${var.policy_prefix}-fi6536-port-policy-1"
   description  = var.description
@@ -32,7 +31,6 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy-a" {
 }
 
 ### 6536 FI-B port_policy ####
-# Separte port policy for separate VSAN ID's on Uplinks
 resource "intersight_fabric_port_policy" "fi6536_port_policy-b" {
   name         = "${var.policy_prefix}-fi6536-port-policy-1"
   description  = var.description
@@ -190,6 +188,14 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role2" {
     }
   }
 }
+
+# Configure FC uplink Port Channel
+# https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_fc_uplink_pc_role
+# resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
+#   admin_speed  = "Auto"
+#   fill_pattern = "Idle"
+#   vsan_id      = 10
+# }
 
 
 # -----------------------------------------------------------------------------
