@@ -191,7 +191,7 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role2" {
 
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
-  admin_speed   = "Auto"
+  admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
   vsan_id      = 100
@@ -209,7 +209,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
 
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role2" {
-  admin_speed   = "Auto"
+  admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
   vsan_id      = 200
