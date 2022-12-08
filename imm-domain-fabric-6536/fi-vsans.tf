@@ -3,8 +3,8 @@
 # -----------------------------------------------------------------------------
 
 
-resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy1" {
-  name            = "${var.policy_prefix}-vsan-a-policy-1"
+resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
+  name            = "${var.policy_prefix}-VSAN-A-Network-Policy"
   description     = "${var.description} FC network policy"
   enable_trunking = true
   organization {
@@ -25,8 +25,22 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy1" {
   }
 }
 
-resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy2" {
-  name            = "${var.policy_prefix}-vsan-b-policy-1"
+resource "intersight_fabric_vsan" "fabric_vsan_a" {
+  name                 = "${var.policy_prefix}-VSAN-A-Policy"
+  default_zoning       = "Disabled"
+  #fc_zone_sharing_mode = "Active"
+  #fc_zone_sharing_mode = ""
+  vsan_scope = "Uplink"
+  fcoe_vlan            = 1100
+  vsan_id              = 100
+  fc_network_policy {
+    moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_a.id
+  }
+}
+
+
+resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
+  name            = "${var.policy_prefix}-VSAN-B-Network-Policy"
   description     = "${var.description} FC network policy"
   enable_trunking = true
   organization {
@@ -48,22 +62,8 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy2" {
 
 }
 
-
-resource "intersight_fabric_vsan" "fabric_vsan1" {
-  name                 = "${var.policy_prefix}-vsan-b-policy-1"
-  default_zoning       = "Disabled"
-  #fc_zone_sharing_mode = "Active"
-  #fc_zone_sharing_mode = ""
-  vsan_scope = "Uplink"
-  fcoe_vlan            = 1100
-  vsan_id              = 100
-  fc_network_policy {
-    moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy1.id
-  }
-}
-
-resource "intersight_fabric_vsan" "fabric_vsan2" {
-  name                 = "${var.policy_prefix}-vsan-b-policy-1"
+resource "intersight_fabric_vsan" "fabric_vsan_b" {
+  name                 = "${var.policy_prefix}-VSAN-B-Policy"
   default_zoning       = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
@@ -71,6 +71,6 @@ resource "intersight_fabric_vsan" "fabric_vsan2" {
   fcoe_vlan            = 1200
   vsan_id              = 200
   fc_network_policy {
-    moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy2.id
+    moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_b.id
   }
 }

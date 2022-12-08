@@ -7,7 +7,7 @@
 
 
 resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy1" {
-  name        = "${var.policy_prefix}-switch-control-policy-1"
+  name        = "${var.policy_prefix}-Switch-Control-Policy"
   description = var.description
   mac_aging_settings {
     mac_aging_option = "Default"
@@ -26,7 +26,7 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
-    profiles {
+  profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
@@ -40,7 +40,7 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
 resource "intersight_ntp_policy" "ntp1" {
   description = var.description
   enabled     = true
-  name        = "${var.policy_prefix}-ntp-policy-1"
+  name        = "${var.policy_prefix}-NTP-Policy"
   timezone    = var.ntp_timezone
   ntp_servers = var.ntp_servers
   organization {
@@ -83,7 +83,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
   enable_ipv4dns_from_dhcp = false
   enable_ipv6              = false
   enable_ipv6dns_from_dhcp = false
-  name                     = "${var.policy_prefix}-dns-policy-1"
+  name                     = "${var.policy_prefix}-DNS-Connectivity-Policy"
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
@@ -116,7 +116,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 # FlexPod: https://www.cisco.com/c/en/us/td/docs/unified_computing/ucs/UCS_CVDs/flexpod_datacenter_vmware_netappaffa.html
 # Needs customization for vNics to change from best effort with MTU 1500 to MTU 9216 and higher priority
 resource "intersight_fabric_system_qos_policy" "qos1" {
-  name        = "${var.policy_prefix}-system-qos-policy-1"
+  name        = "${var.policy_prefix}-System-QOS-Policy"
   description = var.description
 
   organization {
@@ -221,8 +221,8 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
 # Multicast
 # -----------------------------------------------------------------------------
 
-resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
-  name               = "${var.policy_prefix}-multicast-policy-1"
+resource "intersight_fabric_multicast_policy" "fabric_multicast_policy" {
+  name               = "${var.policy_prefix}-Multicast-Policy"
   description        = var.description
   querier_ip_address = ""
   querier_state      = "Disabled"
@@ -246,7 +246,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_snmp_policy" "snmp1" {
-  name        = "${var.policy_prefix}-snmp-policy-1"
+  name        = "${var.policy_prefix}-SNMP-Policy"
   description              = var.description
   enabled                 = true
   snmp_port               = 161

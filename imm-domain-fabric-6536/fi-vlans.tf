@@ -1,8 +1,8 @@
 # =============================================================================
 # VLAN Policy
 # -----------------------------------------------------------------------------
-resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy1" {
-  name        = "${var.policy_prefix}-vlan-policy-1"
+resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
+  name        = "${var.policy_prefix}-VLAN-Policy"
   description = var.description
   organization {
     moid = var.organization
@@ -30,7 +30,7 @@ resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy1" {
 # =============================================================================
 # VLANs for the above policy
 # -----------------------------------------------------------------------------
-resource "intersight_fabric_vlan" "fabric_vlan1" {
+resource "intersight_fabric_vlan" "fabric_vlans" {
   for_each = var.uplink_vlans_6536
 
   auto_allow_on_uplinks = true
@@ -38,10 +38,10 @@ resource "intersight_fabric_vlan" "fabric_vlan1" {
   name                  = each.key
   vlan_id               = each.value
   multicast_policy {
-    moid = intersight_fabric_multicast_policy.fabric_multicast_policy1.moid
+    moid = intersight_fabric_multicast_policy.fabric_multicast_policy.moid
   }
   eth_network_policy {
-    moid = intersight_fabric_eth_network_policy.fabric_eth_network_policy1.id
+    moid = intersight_fabric_eth_network_policy.fabric_eth_network_policy.id
   }
 }
 

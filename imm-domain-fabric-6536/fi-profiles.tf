@@ -16,14 +16,25 @@
 # -----------------------------------------------------------------------------
 
 ### FI 6536 DOMAIN Profile  (cluster_profile) ####
-resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile1" {
-  name        = "${var.policy_prefix}-fi6536-domain-profile-1"
+resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
+  name        = "${var.policy_prefix}-Domain-Profile"
   description = var.description
   type        = "instance"
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+
+  switch_profiles_count = 2
+  switch_profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+    object_type = "fabric.SwitchProfile"
+  }
+  switch_profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+    object_type = "fabric.SwitchProfile"
+  }
+
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -38,11 +49,11 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile1" {
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   action      = "No-op"
   description = var.description
-  name        = "${var.policy_prefix}-fi6536-a-profile-1"
+  name        = "${var.policy_prefix}-Switch-Profile-A"
   type        = "instance"
-  switch_cluster_profile {
-    moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile1.moid
-  }
+  # switch_cluster_profile {
+  #   moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
+  # }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -56,11 +67,11 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   action      = "No-op"
   description = var.description
-  name        = "${var.policy_prefix}-fi6536-b-profile-1"
+  name        = "${var.policy_prefix}-Switch-Profile-B"
   type        = "instance"
-  switch_cluster_profile {
-    moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile1.moid
-  }
+  # switch_cluster_profile {
+  #   moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
+  # }
   dynamic "tags" {
     for_each = var.tags
     content {
