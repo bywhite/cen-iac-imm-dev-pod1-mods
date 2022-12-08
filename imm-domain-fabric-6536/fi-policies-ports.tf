@@ -250,20 +250,17 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
   }
 
   eth_network_group_policy {
-    moid        = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_a.moid 
+    moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_a.moid 
   }
-
-  # flow_control_policy {
-  #   moid        =  
-  # }
-
-  # link_aggregation_policy {
-  #   moid        =  
-  # }
-
-  # link_control_policy {
-  #   moid        =  
-  # }
+  flow_control_policy {
+    moid =  intersight_fabric_flow_control_policy.fabric_flow_control_policy.moid
+  }
+  link_aggregation_policy {
+    moid = intersight_fabric_link_aggregation_policy.fabric_link_agg_policy.moid 
+  }
+  link_control_policy {
+    moid =  intersight_fabric_link_control_policy.fabric_link_control_policy.moid
+  }
 
   dynamic "tags" {
     for_each = var.tags
@@ -274,7 +271,7 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
   }
 }
 
-# assign ports for Eth uplink port channel on both 6536 FI  port_policy
+# assign ports for Eth uplink port channel on both 6536 FI port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_b" {
   pc_id = 34
   #Port Channel ID is not seen by connected network switch
@@ -300,22 +297,18 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_b" {
       value = tags.value.value
     }
   }
-
   eth_network_group_policy {
-    moid        = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_b.moid
-   }
-  # flow_control_policy {
-  #   moid        =  
-  # }
-
-  # link_aggregation_policy {
-  #   moid        =  
-  # }
-
-  # link_control_policy {
-  #   moid        =  
-  # }
-
+    moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_b.moid
+  }
+  flow_control_policy {
+    moid =  intersight_fabric_flow_control_policy.fabric_flow_control_policy.moid
+  }
+ link_aggregation_policy {
+    moid = intersight_fabric_link_aggregation_policy.fabric_link_agg_policy.moid 
+  }
+  link_control_policy {
+    moid =  intersight_fabric_link_control_policy.fabric_link_control_policy.moid
+  }
 }
 
 # Configure FC uplink Port Channel for FI-A
@@ -373,7 +366,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
 }
 
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
-  name        = "${var.policy_prefix}-FI-A-Eth_Network_Group_Policy1"
+  name        = "${var.policy_prefix}-FI-A-Eth_Network_Group-Policy"
   description = "VLAN Group listing allowed on Uplinks"
   vlan_settings {
     native_vlan   = 1
@@ -394,7 +387,7 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
 }
 
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
-  name        = "${var.policy_prefix}-FI-B-Eth_Network_Group_Policy1"
+  name        = "${var.policy_prefix}-FI-B-Eth_Network_Group-Policy"
   description = "VLAN Group listing allowed on Uplinks"
   vlan_settings {
     native_vlan   = 1
@@ -414,6 +407,66 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
   }
 }
 
+resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
+  name        = "${var.policy_prefix}-FI-Flow-Control-Policy"
+  description = "Port Flow control for Eth Port Channel Uplink Ports"
+  priority_flow_control_mode = "auto"
+  receive_direction = "Disabled"
+  send_direction = "Disabled"
+
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
+  name        = "${var.policy_prefix}-FI-Link-Agg-Policy"
+  description = "Link Aggregation Settings for Eth Port Channel Uplink Ports"
+  lacp_rate = "normal"
+  suspend_individual = false
+
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
+  name        = "${var.policy_prefix}-FI-Link-Control-Policy"
+  description = "Link Control Settings for Eth Port Channel Uplink Ports"
+  udld_settings = {
+    admin_state = "Enabled"
+    mode        = "normal"
+    object_type = "fabric.UdldSettings"
+  }
+
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
 # -----------------------------------------------------------------------------
 # END OF   6536 Switch Port Policies
 # =============================================================================
