@@ -70,6 +70,28 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-a.moid
   }
+
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+# set the last two ports to be FC
+resource "intersight_fabric_port_mode" "fi6536_port_mode2" {
+ # count = (var.fc_port_count_6536 > 0) ? 1 : 0
+
+  #custom_mode   = "FibreChannel"
+  custom_mode   = "BreakoutFibreChannel32G"
+  
+  port_id_end   = 36
+  port_id_start = 36
+  #port_id_start   = "${36 - var.fc_port_count_6536 + 1}"
+  slot_id       = 1
+
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy-b.moid
   }
@@ -81,7 +103,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode1" {
     }
   }
 }
-
+ 
 # assign server role to designated ports on both 6536 FI pair port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role1" {
   for_each = var.server_ports_6536
