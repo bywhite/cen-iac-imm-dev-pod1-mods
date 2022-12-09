@@ -267,10 +267,13 @@ resource "intersight_snmp_policy" "snmp1" {
     nr_version  = "V3"
     object_type = "snmp.Trap"
   }
-  # profiles {
-  #   moid        = intersight_chassis_profile.chassis_9508_profile[*].moid
-  #   object_type = "chassis.Profile"
-  # }
+  
+# dynamic "profiles" {
+#     for_each = range(var.chassis_9508_count)
+#     content {
+#       moid  = intersight_chassis_profile.chassis_9508_profile[profiles.value].moid
+#       object_type = "chassis.Profile"
+#     }
 
     # assign this policy to the domain profiles being created instead of policy buckets
   profiles {
