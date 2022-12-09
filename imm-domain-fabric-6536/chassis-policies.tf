@@ -1,7 +1,7 @@
 # Policies consumed by Chassis Profiles
 
 locals {
-    profiles = intersight_chassis_profile.chassis_9508_profile[*].moid
+    profiles = toset(intersight_chassis_profile.chassis_9508_profile[*].moid)
 }
 
 # Assigns IP address to chassis for managment
