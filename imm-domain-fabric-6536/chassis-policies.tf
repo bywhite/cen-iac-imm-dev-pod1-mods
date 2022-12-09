@@ -1,7 +1,7 @@
 # Policies consumed by Chassis Profiles
 
 locals {
-    profiles = toset(intersight_chassis_profile.chassis_9508_profile[*].moid)
+  chassis_profile_moids = toset(intersight_chassis_profile.chassis_9508_profile[*].moid)
 }
 
 # Assigns IP address to chassis for managment
@@ -20,7 +20,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
 
 
   dynamic "profiles" {
-    for_each = local.profiles
+    for_each = local.chassis_profile_moids
     content {
       moid        = profiles.value
       object_type = "chassis.Profile"
