@@ -3,6 +3,7 @@
 #    - NTP
 #    - network connectivity (DNS)
 #    - System QoS
+#    - Multicast
 #    - SNMP
 
 
@@ -21,7 +22,6 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
     object_type = "organization.Organization"
     moid        = var.organization
   }
-
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -30,7 +30,6 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
-
 }
 
 
@@ -73,7 +72,7 @@ resource "intersight_ntp_policy" "ntp1" {
 # IPv6 is enabled because this is the only way that the provider allows the
 # IPv6 DNS servers (primary and alternate) to be set to something. If it is not
 # set to something other than null in this resource, then terraform "apply"
-# will detect that thare changes to apply every time ("::" -> null).
+# will detect that there are changes to apply every time ("::" -> null).
 
 resource "intersight_networkconfig_policy" "connectivity1" {
   alternate_ipv4dns_server = var.dns_alternate
@@ -89,7 +88,6 @@ resource "intersight_networkconfig_policy" "connectivity1" {
     object_type = "organization.Organization"
   }
   # assign this policy to the domain profile being created instead of policy buckets
-
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -98,7 +96,6 @@ resource "intersight_networkconfig_policy" "connectivity1" {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
-  
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -118,12 +115,10 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 resource "intersight_fabric_system_qos_policy" "qos1" {
   name        = "${var.policy_prefix}-System-QOS-Policy"
   description = var.description
-
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-
   classes {
     admin_state        = "Enabled"
     bandwidth_percent  = 14
@@ -197,7 +192,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-  
   # assign this policy to the domain profile being created
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
@@ -207,7 +201,6 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
-  
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -288,7 +281,6 @@ resource "intersight_snmp_policy" "snmp1" {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
-  
   organization {
     object_type = "organization.Organization"
     moid        = var.organization

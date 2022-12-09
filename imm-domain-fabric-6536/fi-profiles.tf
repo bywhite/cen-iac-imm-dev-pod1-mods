@@ -17,7 +17,7 @@
 
 ### FI 6536 DOMAIN Profile  (cluster_profile) ####
 resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
-  name        = "${var.policy_prefix}-Domain-Profile"
+  name        = "${var.policy_prefix}-Domain"
   description = var.description
   type        = "instance"
   organization {
@@ -39,7 +39,7 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   action      = "No-op"
   description = var.description
-  name        = "${var.policy_prefix}-Switch-Profile-A"
+  name        = "${var.policy_prefix}-Switch-A"
   type        = "instance"
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
@@ -57,7 +57,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   action      = "No-op"
   description = var.description
-  name        = "${var.policy_prefix}-Switch-Profile-B"
+  name        = "${var.policy_prefix}-Switch-B"
   type        = "instance"
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid

@@ -50,13 +50,13 @@ variable "uplink_vlans_6536" {
   type        = map(number)
   description = "map of vlan names and IDs to be used on FI uplinks"
 }
-variable "allowed_vlans_6536" {
+variable "switch_vlans_6536" {
   type        = string
-  description = "comma separated vlans and/or vlan ranges"
+  description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
 }
 
 # =============================================================================
-# Fabric Interconnect 6536 ports and VSANs
+# Fabric Interconnect 6536 SAN ports and VSANs
 # -----------------------------------------------------------------------------
 
 variable "fc_port_channel_6536" {
@@ -64,10 +64,30 @@ variable "fc_port_channel_6536" {
   default     = []
 }
 
+variable "vsan_name_prefix" {
+  type        = string
+  default     = "VSAN-"
+}
+
+variable "fc_6536_vsans_a" {
+  type        = list (map(number))
+  default     = []
+}
+
+variable "fc_6536_vsans_b" {
+  type        = list (map(number))
+  default     = []
+}
 
 # =============================================================================
-# Chassis Access - IMC
+# Chassis
 # -----------------------------------------------------------------------------
+
+variable "chassis_9508_count" {
+  type        = number
+  description = "Count of 9508 X-Series Chassis to add to domain"
+  default     = 1
+}
 
 variable "chassis_imc_access_vlan" {
   type        = number
@@ -81,7 +101,7 @@ variable "chassis_imc_ip_pool_moid" {
 
 
 # =============================================================================
-# NTP and DNS server IP's
+# NTP, DNS and SNMP Settings
 # -----------------------------------------------------------------------------
 
 variable "ntp_servers" {

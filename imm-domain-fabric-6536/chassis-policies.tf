@@ -2,7 +2,7 @@
 
 # Assigns IP address to chassis for managment
 resource "intersight_access_policy" "chassis_9508_access" {
-  name        = "${var.policy_prefix}-Chassis-IMC-Access-Policy"
+  name        = "${var.policy_prefix}-Chassis-IMC-Access-1"
   description = var.description
   inband_vlan = var.chassis_imc_access_vlan
   inband_ip_pool {
@@ -29,7 +29,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
 
 # Configure Chassis to Grid power and other power related settings
 resource "intersight_power_policy" "chassis_9508_power" {
-  name        = "${var.policy_prefix}-Chassis-9508-Power-Policy"
+  name        = "${var.policy_prefix}-Chassis-9508-Power-1"
   description              = var.description
   power_save_mode = "Enabled"
   dynamic_rebalancing = "Enabled"
@@ -56,7 +56,7 @@ resource "intersight_power_policy" "chassis_9508_power" {
 
 # Set Chassis fan characteristics and influence over chassis power consumption
 resource "intersight_thermal_policy" "chassis_9508_thermal" {
-  name        = "${var.policy_prefix}-Chassis-9508-Thermal-Policy"
+  name        = "${var.policy_prefix}-Chassis-9508-Thermal-1"
   description              = var.description
   fan_control_mode = "Balanced"
   organization {
