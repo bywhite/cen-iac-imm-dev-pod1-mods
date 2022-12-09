@@ -14,7 +14,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
     object_type = "organization.Organization"
   }
 
-profiles = intersight_chassis_profile.chassis_9508_profile[*].moid
+  profiles = intersight_chassis_profile.chassis_9508_profile[*].moid
 
   dynamic "profiles" {
     for_each = var.profiles
@@ -23,7 +23,7 @@ profiles = intersight_chassis_profile.chassis_9508_profile[*].moid
       object_type = profiles.value.object_type
     }
   }
-  
+
   # dynamic "profiles" {
   #   for_each = toset(intersight_chassis_profile.chassis_9508_profile[*].moid)
   #   content {
