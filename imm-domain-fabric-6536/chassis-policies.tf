@@ -22,7 +22,8 @@ profiles = intersight_chassis_profile.chassis_9508_profile[*].moid
       moid        = profiles.value.moid
       object_type = profiles.value.object_type
     }
-
+  }
+  
   # dynamic "profiles" {
   #   for_each = toset(intersight_chassis_profile.chassis_9508_profile[*].moid)
   #   content {
