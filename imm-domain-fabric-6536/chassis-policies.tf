@@ -46,7 +46,7 @@ resource "intersight_power_policy" "chassis_9508_power" {
   dynamic "profiles" {
     for_each = range(var.chassis_9508_count)
     content {
-      moid  = intersight_chassis_profile.chassis_9508_profile[1].moid
+      moid  = intersight_chassis_profile.chassis_9508_profile[profiles.value].moid
       object_type = "chassis.Profile"
     }
   }
@@ -72,7 +72,7 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
   dynamic "profiles" {
     for_each = range(var.chassis_9508_count)
     content {
-      moid  = intersight_chassis_profile.chassis_9508_profile[1].moid
+      moid  = intersight_chassis_profile.chassis_9508_profile[profiles.value].moid
       object_type = "chassis.Profile"
     }
   }
