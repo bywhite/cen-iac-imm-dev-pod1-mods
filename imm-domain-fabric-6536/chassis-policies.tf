@@ -13,14 +13,14 @@ resource "intersight_access_policy" "chassis_9508_access" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  dynamic "profiles" {
-    for_each = local.chassis_index
-    # use profiles.value
-    content {
-      moid  = intersight_chassis_profile.chassis_9508_profile[each.key].moid
-      object_type = "chassis.Profile"
-    }
-  }
+  # dynamic "profiles" {
+  #   for_each = local.chassis_index
+  #   # use profiles.value
+  #   content {
+  #     moid  = intersight_chassis_profile.chassis_9508_profile[each.key].moid
+  #     object_type = "chassis.Profile"
+  #   }
+  # }
   dynamic "tags" {
     for_each = var.tags
     content {
