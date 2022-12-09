@@ -15,7 +15,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
   }
     # assign this policy to the chassis profile being created
   profiles {
-    moid        = intersight_chassis_profile.chassis_9508_profile.moid
+    moid        = intersight_chassis_profile.chassis_9508_profile[*].moid
     object_type = "chassis.Profile"
   }
   dynamic "tags" {
@@ -42,7 +42,7 @@ resource "intersight_power_policy" "chassis_9508_power" {
   }
   # assign this policy to the chassis profile being created
   profiles {
-    moid        = intersight_chassis_profile.chassis_9508_profile.moid
+    moid        = intersight_chassis_profile.chassis_9508_profile[*].moid
     object_type = "chassis.Profile"
   }
   dynamic "tags" {
@@ -65,7 +65,7 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
   }
   # assign this policy to the chassis profile being created
   profiles {
-    moid        = intersight_chassis_profile.chassis_9508_profile.moid
+    moid        = intersight_chassis_profile.chassis_9508_profile[*].moid
     object_type = "chassis.Profile"
   }
   dynamic "tags" {
