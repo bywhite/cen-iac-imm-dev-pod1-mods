@@ -22,8 +22,8 @@ resource "intersight_access_policy" "chassis_9508_access" {
   dynamic "profiles" {
     for_each = local.profiles
     content {
-      moid        = profiles.value.moid
-      object_type = profiles.value.object_type
+      moid        = profiles.value
+      object_type = "chassis.Profile"
     }
   }
 
