@@ -268,7 +268,7 @@ resource "intersight_snmp_policy" "snmp1" {
     object_type = "snmp.Trap"
   }
   profiles {
-    moid        = intersight_chassis_profile.chassis_9508_profile.moid
+    moid        = intersight_chassis_profile.chassis_9508_profile[*].moid
     object_type = "chassis.Profile"
   }
 
