@@ -16,23 +16,6 @@ resource "intersight_access_policy" "chassis_9508_access" {
     object_type = "organization.Organization"
   }
   
-  dynamic "profiles" {
-    for_each = local.chassis_profile_moids
-    content {
-      moid        = profiles.value
-      object_type = "chassis.Profile"
-    }
-  }
-
-#  intersight_chassis_profile.chassis_9508_profile[*].moid
-
-  # dynamic "profiles" {
-  #   for_each = intersight_chassis_profile.chassis_9508_profile[*]
-  #   content {
-  #     moid        = profiles.value.moid
-  #     object_type = "chassis.Profile"
-  #   }
-  # }
   # dynamic "profiles" {
   #   for_each = local.chassis_profile_moids
   #   content {
@@ -40,6 +23,17 @@ resource "intersight_access_policy" "chassis_9508_access" {
   #     object_type = "chassis.Profile"
   #   }
   # }
+
+#  intersight_chassis_profile.chassis_9508_profile[*].config_result[0].moid
+
+  dynamic "profiles" {
+    for_each = intersight_chassis_profile.chassis_9508_profile
+    content {
+      moid        = profiles.value.config_result[0].moid
+      object_type = "chassis.Profile"
+    }
+  }
+
 
   dynamic "tags" {
     for_each = var.tags
