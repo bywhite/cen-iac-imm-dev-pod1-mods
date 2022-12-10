@@ -1,14 +1,14 @@
 # This file creates the following policies:
 #    - fabric switch control
-#    - NTP
-#    - network connectivity (DNS)
-#    - System QoS
-#    - Multicast
-#    - Syslog
+#    - ntp
+#    - network connectivity (dns)
+#    - system qos
+#    - multicast
+#    - syslog
 
 
 resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy1" {
-  name        = "${var.policy_prefix}-Switch-Control-Policy"
+  name        = "${var.policy_prefix}-switch-control-policy"
   description = var.description
   mac_aging_settings {
     mac_aging_option = "Default"
@@ -39,7 +39,7 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
 resource "intersight_ntp_policy" "ntp1" {
   description = var.description
   enabled     = true
-  name        = "${var.policy_prefix}-NTP-Policy"
+  name        = "${var.policy_prefix}-ntp-policy"
   timezone    = var.ntp_timezone
   ntp_servers = var.ntp_servers
   organization {
@@ -82,7 +82,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
   enable_ipv4dns_from_dhcp = false
   enable_ipv6              = false
   enable_ipv6dns_from_dhcp = false
-  name                     = "${var.policy_prefix}-DNS-Connectivity-Policy"
+  name                     = "${var.policy_prefix}-dns-connectivity-policy"
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
@@ -113,7 +113,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 # FlexPod: https://www.cisco.com/c/en/us/td/docs/unified_computing/ucs/UCS_CVDs/flexpod_datacenter_vmware_netappaffa.html
 # Needs customization for vNics to change from best effort with MTU 1500 to MTU 9216 and higher priority
 resource "intersight_fabric_system_qos_policy" "qos1" {
-  name        = "${var.policy_prefix}-System-QOS-Policy"
+  name        = "${var.policy_prefix}-system-qos-policy"
   description = var.description
   organization {
     moid        = var.organization
@@ -215,7 +215,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_fabric_multicast_policy" "fabric_multicast_policy" {
-  name               = "${var.policy_prefix}-Multicast-Policy"
+  name               = "${var.policy_prefix}-multicast-policy"
   description        = var.description
   querier_ip_address = ""
   querier_state      = "Disabled"
@@ -239,7 +239,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_syslog_policy" "syslog_policy" {
-  name               = "${var.policy_prefix}-Syslog-FI-Policy"
+  name               = "${var.policy_prefix}-syslog-fi-policy"
   description        = var.description
   local_clients {
     min_severity = "warning"

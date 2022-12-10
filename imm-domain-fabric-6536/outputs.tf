@@ -20,12 +20,12 @@ output "fi6536_cluster_profile_moid" {
 }
 
 output "chassis_9508_profile_moids" {
-  description = "Chassis cluster profiles created"
+  description = "chassis cluster profiles created"
   value       = local.chassis_profile_moids
 }
 
 output "chassis_count" {
-  description = "How many chassis were made"
+  description = "how many chassis profiles were created"
   value       = var.chassis_9508_count
 }
 

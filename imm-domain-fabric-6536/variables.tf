@@ -66,7 +66,7 @@ variable "fc_port_channel_6536" {
 
 variable "vsan_name_prefix" {
   type        = string
-  default     = "VSAN-"
+  default     = "vsan-"
 }
 
 variable "fc_6536_vsans_a" {
@@ -85,35 +85,29 @@ variable "fc_6536_vsans_b" {
 
 variable "chassis_9508_count" {
   type        = number
-  description = "Count of 9508 X-Series Chassis to add to domain"
+  description = "count of 9508 X-Series chassis to add to domain"
   default     = 1
 }
 
 variable "chassis_imc_access_vlan" {
   type        = number
-  description = "ID of VLAN for Chassis In-Band IMC access"
+  description = "ID of VLAN for chassis in-band IMC access"
 }
 variable "chassis_imc_ip_pool_moid" {
   type = string
-  description = "moid of Chassis IP_Pool to be assigned to IMC Access Policy"
+  description = "moid of chassis ip_pool to be assigned to IMC access policy"
 }
-variable "profiles" {
-  default     = {}
-  description = <<-EOT
-  Map of Profiles to Assign to the Policy.
-  * moid - Managed Object Identifier for the Managed Resource.
-  * object_type - Object Type to Assign in the Profile Configuration.
-    - chassis.Profile - For UCS Chassis Profiles.
-    - server.Profile - For UCS Server Profiles.
-    - server.ProfileTemplate - For UCS Server Profile Templates.
-  EOT
-  type = map(object(
-    {
-      moid        = string
-      object_type = string
-    }
-  ))
-}
+# variable "profiles" {
+#   default     = {}
+#   description = "map of profiles"
+  
+#   type = map(object(
+#     {
+#       moid        = string
+#       object_type = string
+#     }
+#   ))
+# }
 
 
 # =============================================================================
@@ -144,5 +138,5 @@ variable "snmp_password" {
 }
 variable "snmp_ip"  {
   type        = string
-  default     = "10.10.2.22"
+  default     = "127.0.0.1"
 }

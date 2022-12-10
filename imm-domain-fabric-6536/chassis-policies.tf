@@ -4,7 +4,7 @@
 # Chassis IP Access Policy
 # -----------------------------------------------------------------------------
 resource "intersight_access_policy" "chassis_9508_access" {
-  name        = "${var.policy_prefix}-Chassis-IMC-Access-1"
+  name        = "${var.policy_prefix}-chassis-access-1"
   description = var.description
   inband_vlan = var.chassis_imc_access_vlan
   inband_ip_pool {
@@ -38,7 +38,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
 # Chassis Power Policy
 # -----------------------------------------------------------------------------
 resource "intersight_power_policy" "chassis_9508_power" {
-  name        = "${var.policy_prefix}-Chassis-9508-Power-1"
+  name        = "${var.policy_prefix}-chassis-9508-power-1"
   description              = var.description
   power_save_mode = "Enabled"
   dynamic_rebalancing = "Enabled"
@@ -72,7 +72,7 @@ resource "intersight_power_policy" "chassis_9508_power" {
 # Thermal Policy
 # -----------------------------------------------------------------------------
 resource "intersight_thermal_policy" "chassis_9508_thermal" {
-  name        = "${var.policy_prefix}-Chassis-9508-Thermal-1"
+  name        = "${var.policy_prefix}-chassis-9508-thermal-1"
   description              = var.description
   fan_control_mode = "Balanced"
   organization {
@@ -104,7 +104,7 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_snmp_policy" "snmp1" {
-  name        = "${var.policy_prefix}-SNMP-Policy"
+  name        = "${var.policy_prefix}-snmp-policy"
   description              = var.description
   enabled                 = true
   snmp_port               = 161

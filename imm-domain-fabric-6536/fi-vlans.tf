@@ -2,7 +2,7 @@
 # VLAN Policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
-  name        = "${var.policy_prefix}-VLAN-1"
+  name        = "${var.policy_prefix}-vlan-1"
   description = var.description
   organization {
     moid = var.organization

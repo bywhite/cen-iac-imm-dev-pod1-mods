@@ -20,7 +20,7 @@
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   action      = "No-op"
   description = var.description
-  name        = "${var.policy_prefix}-Switch-A"
+  name        = "${var.policy_prefix}-switch-a"
   type        = "instance"
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
@@ -38,7 +38,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   action      = "No-op"
   description = var.description
-  name        = "${var.policy_prefix}-Switch-B"
+  name        = "${var.policy_prefix}-switch-b"
   type        = "instance"
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid

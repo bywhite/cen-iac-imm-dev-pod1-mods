@@ -7,7 +7,7 @@
 
 ### FI 6536 DOMAIN Profile  (cluster_profile) ####
 resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
-  name        = "${var.policy_prefix}-Domain"
+  name        = "${var.policy_prefix}-domain"
   description = var.description
   type        = "instance"
   organization {

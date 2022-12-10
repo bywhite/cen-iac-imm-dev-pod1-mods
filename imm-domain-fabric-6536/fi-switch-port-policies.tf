@@ -8,7 +8,7 @@
 ### 6536 FI-A port_policy ####
 # Associated with 6 other policies
 resource "intersight_fabric_port_policy" "fi6536_port_policy_a" {
-  name         = "${var.policy_prefix}-FI-A-Ports"
+  name         = "${var.policy_prefix}-fi-a-ports"
   description  = var.description
   device_model = "UCS-FI-6536"
   organization {
@@ -32,7 +32,7 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy_a" {
 ### 6536 FI-B port_policy ####
 # Associated with 6 other policies
 resource "intersight_fabric_port_policy" "fi6536_port_policy_b" {
-  name         = "${var.policy_prefix}-FI-B-Ports"
+  name         = "${var.policy_prefix}-fi-b-ports"
   description  = var.description
   device_model = "UCS-FI-6536"
   organization {
@@ -330,7 +330,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
 }
 
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
-  name        = "${var.policy_prefix}-FI-A-Eth_Network_Group-1"
+  name        = "${var.policy_prefix}-fi-a-eth_network_group-1"
   description = "VLAN Group listing allowed on Uplinks"
   vlan_settings {
     native_vlan   = 1
@@ -351,7 +351,7 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
 }
 
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
-  name        = "${var.policy_prefix}-FI-B-Eth_Network_Group-1"
+  name        = "${var.policy_prefix}-fi-b-eth_network_group-1"
   description = "VLAN Group listing allowed on Uplinks"
   vlan_settings {
     native_vlan   = 1
@@ -372,7 +372,7 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
 }
 
 resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
-  name        = "${var.policy_prefix}-FI-Flow-Control-1"
+  name        = "${var.policy_prefix}-fo-flow-control-1"
   description = "Port Flow control for Eth Port Channel Uplink Ports"
   priority_flow_control_mode = "auto"
   receive_direction = "Disabled"
@@ -391,7 +391,7 @@ resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
 }
 
 resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
-  name        = "${var.policy_prefix}-FI-Link-Agg-1"
+  name        = "${var.policy_prefix}-fi-link-agg-1"
   description = "Link Aggregation Settings for Eth Port Channel Uplink Ports"
   lacp_rate = "normal"
   suspend_individual = false
@@ -409,7 +409,7 @@ resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
 }
 
 resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
-  name        = "${var.policy_prefix}-FI-Link-Control-1"
+  name        = "${var.policy_prefix}-fi-link-control-1"
   description = "Link Control Settings for Eth Port Channel Uplink Ports"
   udld_settings {
     admin_state = "Enabled"

@@ -4,7 +4,7 @@
 
 
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
-  name            = "${var.policy_prefix}-VSAN-A-Network-1"
+  name            = "${var.policy_prefix}-vsan-a-network-1"
   description     = "${var.description} FC network policy"
   enable_trunking = true
   organization {
@@ -26,7 +26,7 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
 }
 
 resource "intersight_fabric_vsan" "fabric_vsan_a" {
-  name                 = "${var.policy_prefix}-VSAN-A-1"
+  name                 = "${var.policy_prefix}-vsan-a-1"
   default_zoning       = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
@@ -42,7 +42,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
 
 
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
-  name            = "${var.policy_prefix}-VSAN-B-Network-1"
+  name            = "${var.policy_prefix}-vsan-b-network-1"
   description     = "${var.description} FC network policy"
   enable_trunking = true
   organization {
@@ -65,7 +65,7 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
 }
 
 resource "intersight_fabric_vsan" "fabric_vsan_b" {
-  name                 = "${var.policy_prefix}-VSAN-B-1"
+  name                 = "${var.policy_prefix}-vsan-b-1"
   default_zoning       = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
