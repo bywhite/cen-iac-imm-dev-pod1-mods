@@ -192,7 +192,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-  # assign this policy to the domain profile being created
+  # assign this policy to the switch profiles being created
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -267,15 +267,13 @@ resource "intersight_snmp_policy" "snmp1" {
     nr_version  = "V3"
     object_type = "snmp.Trap"
   }
-  
-# dynamic "profiles" {
-#     for_each = range(var.chassis_9508_count)
-#     content {
-#       moid  = intersight_chassis_profile.chassis_9508_profile[profiles.value].moid
-#       object_type = "chassis.Profile"
-#     }
-
-    # assign this policy to the domain profiles being created instead of policy buckets
+  dynamic "profiles" {
+    for_each = local.chassis_profile_moids
+    content {
+      moid        = profiles.value
+      object_type = "chassis.Profile"
+    }
+  }
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
@@ -288,6 +286,9 @@ resource "intersight_snmp_policy" "snmp1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+    depends_on = [
+    intersight_chassis_profile.chassis_9508_profile
+  ]
 }
 
 # =============================================================================
