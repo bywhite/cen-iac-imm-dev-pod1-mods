@@ -23,3 +23,8 @@ output "chassis_9508_profile_moids" {
   description = "Chassis cluster profiles created"
   value       = local.chassis_profile_moids
 }
+
+output "chassis_count" {
+  description = "How many chassis were made"
+  value       = var.chassis_9508_count
+}
