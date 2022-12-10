@@ -6,7 +6,7 @@
 
 output "fi6536_cluster_domain_name" {
   description = "name of domain cluster profile created"
-  value       = "${var.policy_prefix}-Domain"
+  value       = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.name
 }
 
 output "fi6536_cluster_profile_name" {
