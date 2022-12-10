@@ -33,12 +33,18 @@ resource "intersight_fabric_vlan" "fabric_vlans" {
   auto_allow_on_uplinks = true
   is_native             = false
   name = length(regexall("^[0-9]{4}$", each.value)) > 0 ? join(
-    "-vl", [var.vlan_prefix, each.value]) : length(
+  #   "-vl", [var.vlan_prefix, each.value]) : length(
+  #   regexall("^[0-9]{3}$", each.value)) > 0 ? join(
+  #   "-vl0", [var.vlan_prefix, each.value]) : length(
+  #   regexall("^[0-9]{2}$", each.value)) > 0 ? join(
+  #   "-vl00", [var.vlan_prefix, each.value]) : join(
+  # "-vl000", [var.vlan_prefix, each.value])
+    "-", [var.vlan_prefix, each.value]) : length(
     regexall("^[0-9]{3}$", each.value)) > 0 ? join(
-    "-vl0", [var.vlan_prefix, each.value]) : length(
+    "-", [var.vlan_prefix, each.value]) : length(
     regexall("^[0-9]{2}$", each.value)) > 0 ? join(
-    "-vl00", [var.vlan_prefix, each.value]) : join(
-  "-vl000", [var.vlan_prefix, each.value])
+    "-", [var.vlan_prefix, each.value]) : join(
+  "-", [var.vlan_prefix, each.value])
   vlan_id = each.value
   eth_network_policy {
     moid = intersight_fabric_eth_network_policy.fabric_eth_network_policy.id
