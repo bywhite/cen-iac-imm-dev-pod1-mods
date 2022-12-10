@@ -28,3 +28,8 @@ output "chassis_count" {
   description = "How many chassis were made"
   value       = var.chassis_9508_count
 }
+
+output "chassis_index" {
+  description = "array or list of indexes of chassis"
+  value       = local.chassis_index
+}
