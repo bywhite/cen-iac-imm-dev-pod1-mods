@@ -3,8 +3,14 @@
 # Domain and Chassis Outputs
 #__________________________________________________________
 
+
+output "fi6536_cluster_domain_name" {
+  description = "name of domain cluster profile created"
+  value       = "${var.policy_prefix}-Domain"
+}
+
 output "fi6536_cluster_profile_name" {
-  description = "mname of domain cluster profile created"
+  description = "name of domain cluster profile created"
   value       = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.name
 }
 
