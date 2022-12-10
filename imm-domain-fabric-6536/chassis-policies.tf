@@ -26,13 +26,13 @@ resource "intersight_access_policy" "chassis_9508_access" {
 
 #  intersight_chassis_profile.chassis_9508_profile[*].config_result[0].moid
 
-  dynamic "profiles" {
-    for_each = local.chassis_index_set
-    content {
-      moid        = local.chassis_profile_moids[profiles.value]
-      object_type = "chassis.Profile"
-    }
-  }
+  # dynamic "profiles" {
+  #   for_each = local.chassis_index_set
+  #   content {
+  #     moid        = local.chassis_profile_moids[profiles.value]
+  #     object_type = "chassis.Profile"
+  #   }
+  # }
 
 
   dynamic "tags" {
