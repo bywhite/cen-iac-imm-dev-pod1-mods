@@ -4,7 +4,10 @@ locals {
   chassis_profile_moids = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].id]
   # chassis_profile_moids = intersight_chassis_profile.chassis_9508_profile[2].id
 
-
+  # Create a list of Chassis Profile moids
+  chassis_profile_names = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].name]
+ 
+ 
   # Create a list of chassis indexes Example of five chassis: [0,1,2,3,4]
   chassis_index_numbers  = range(var.chassis_9508_count)
 
