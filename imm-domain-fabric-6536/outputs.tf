@@ -21,7 +21,7 @@ output "fi6536_cluster_profile_moid" {
 
 output "chassis_9508_profile_moids" {
   description = "Chassis cluster profiles created"
-  value       = "Pick a number, any number" #local.chassis_profile_moids
+  value       = local.chassis_profile_moids
 }
 
 output "chassis_count" {
