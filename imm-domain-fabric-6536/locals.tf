@@ -4,6 +4,9 @@ locals {
   chassis_profile_moids = "${intersight_chassis_profile.chassis_9508_profile[*].moid}"
   
   # Create a list of chassis indexes Example of five chassis: [0,1,2,3,4]
-  chassis_index = range(var.chassis_9508_count)
+  chassis_index         = range(var.chassis_9508_count)
+
+  # Convert the numbers to strings
+  chassis_index_set     = toset([for v in local.chassis_index : tostring(v)])
 
 }
