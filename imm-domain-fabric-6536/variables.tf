@@ -57,7 +57,7 @@ variable "switch_vlans_6536" {
 variable "vlan_prefix" {
   type        = string
   description = "prepended to vlan-id    EX:   vlan-123"
-  default = "vlan-"
+  default = "vlan"
 }
 
 # =============================================================================
