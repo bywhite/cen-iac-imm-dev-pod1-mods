@@ -4,7 +4,8 @@ resource "intersight_chassis_profile" "chassis_9508_profile" {
   count = var.chassis_9508_count
 # count = (var.chassis_9508_count > 0) ? var.chassis_9508_count : 0
 
-  name            = "${var.policy_prefix}-Chassis-9508-${var.chassis_9508_count}"
+  name            = "${var.policy_prefix}-Chassis-9508-${count.index}"
+  # name            = "${var.policy_prefix}-Chassis-9508-${var.chassis_9508_count}"
   description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
