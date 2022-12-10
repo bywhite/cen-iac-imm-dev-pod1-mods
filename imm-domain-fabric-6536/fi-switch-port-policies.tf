@@ -71,6 +71,9 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_fabric_port_mode.fi6536_port_mode_a-36
+  ]
 }
 
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
@@ -108,6 +111,9 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-35" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_fabric_port_mode.fi6536_port_mode_b-36
+  ]
 }
 
 resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
