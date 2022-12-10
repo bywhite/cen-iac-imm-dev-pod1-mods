@@ -13,7 +13,7 @@ output "fi6536_cluster_profile_moid" {
   value       = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
 }
 
-output "chassis_9508_profiles" {
+output "chassis_9508_profile_moids" {
   description = "Chassis cluster profiles created"
-  value       = intersight_chassis_profile.chassis_9508_profile
+  value       = local.chassis_profile_moids
 }
