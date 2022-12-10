@@ -22,7 +22,6 @@ resource "intersight_access_policy" "chassis_9508_access" {
       object_type = "chassis.Profile"
     }
   }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -30,6 +29,9 @@ resource "intersight_access_policy" "chassis_9508_access" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_chassis_profile.chassis_9508_profile
+  ]
 }
 
 # Configure Chassis to Grid power and other power related settings
@@ -59,6 +61,9 @@ resource "intersight_power_policy" "chassis_9508_power" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_chassis_profile.chassis_9508_profile
+  ]
 }
 
 # Set Chassis fan characteristics and influence over chassis power consumption
@@ -84,4 +89,7 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_chassis_profile.chassis_9508_profile
+  ]
 }
