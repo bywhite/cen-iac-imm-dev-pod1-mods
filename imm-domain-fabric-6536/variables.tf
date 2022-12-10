@@ -54,6 +54,11 @@ variable "switch_vlans_6536" {
   type        = string
   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
 }
+variable "vlan_prefix" {
+  type        = string
+  description = "prepended to vlan-id    EX:   vlan-123"
+  default = "vlan-"
+}
 
 # =============================================================================
 # Fabric Interconnect 6536 SAN ports and VSANs

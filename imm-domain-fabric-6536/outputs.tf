@@ -38,3 +38,8 @@ output "chassis_index" {
   description = "array or list of indexes of chassis"
   value       = local.chassis_index_set
 }
+
+output "fabric_vlan_list_moid" {
+  description = "Fabric VLAN moid for fabric Name:IP pairs"
+  value       = { for v in sort(keys(intersight_fabric_vlan.fabric_vlans)) : v => intersight_fabric_vlan.fabric_vlans[v].moid }
+}
