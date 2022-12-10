@@ -15,7 +15,6 @@ resource "intersight_access_policy" "chassis_9508_access" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  
   dynamic "profiles" {
     for_each = local.chassis_profile_moids
     content {
@@ -23,18 +22,6 @@ resource "intersight_access_policy" "chassis_9508_access" {
       object_type = "chassis.Profile"
     }
   }
-
-#  intersight_chassis_profile.chassis_9508_profile[*].config_result[0].moid
-
-  # dynamic "profiles" {
-  #   for_each = local.chassis_index_set
-  #   content {
-  #     moid        = local.chassis_profile_moids[profiles.value]
-  #     object_type = "chassis.Profile"
-  #   }
-  # }
-
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -62,13 +49,13 @@ resource "intersight_power_policy" "chassis_9508_power" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  # dynamic "profiles" {
-  #   for_each = local.chassis_profile_moids
-  #   content {
-  #     moid        = profiles.value
-  #     object_type = "chassis.Profile"
-  #   }
-  # }
+  dynamic "profiles" {
+    for_each = local.chassis_profile_moids
+    content {
+      moid        = profiles.value
+      object_type = "chassis.Profile"
+    }
+  }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -92,13 +79,13 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  # dynamic "profiles" {
-  #   for_each = local.chassis_profile_moids
-  #   content {
-  #     moid        = profiles.value
-  #     object_type = "chassis.Profile"
-  #   }
-  # }
+  dynamic "profiles" {
+    for_each = local.chassis_profile_moids
+    content {
+      moid        = profiles.value
+      object_type = "chassis.Profile"
+    }
+  }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -145,13 +132,13 @@ resource "intersight_snmp_policy" "snmp1" {
     nr_version  = "V3"
     object_type = "snmp.Trap"
   }
-  # dynamic "profiles" {
-  #   for_each = local.chassis_profile_moids
-  #   content {
-  #     moid        = profiles.value
-  #     object_type = "chassis.Profile"
-  #   }
-  # }
+  dynamic "profiles" {
+    for_each = local.chassis_profile_moids
+    content {
+      moid        = profiles.value
+      object_type = "chassis.Profile"
+    }
+  }
   profiles {
     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
