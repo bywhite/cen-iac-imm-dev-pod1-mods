@@ -31,5 +31,5 @@ output "chassis_count" {
 
 output "chassis_index" {
   description = "array or list of indexes of chassis"
-  value       = local.chassis_index
+  value       = local.chassis_index_set
 }
