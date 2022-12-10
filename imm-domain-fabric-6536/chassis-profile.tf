@@ -1,10 +1,11 @@
 #  Chassis Profile Creation
 
 resource "intersight_chassis_profile" "chassis_9508_profile" {
-  count = var.chassis_9508_count
+  for_each       = local.chassis_index
 # count = (var.chassis_9508_count > 0) ? var.chassis_9508_count : 0
 
-  name            = "${var.policy_prefix}-Chassis-9508-${count.index}"
+  name            = "${var.policy_prefix}-Chassis-9508-${each.value}"
+  # name            = "${var.policy_prefix}-Chassis-9508-${count.index}"
   # name            = "${var.policy_prefix}-Chassis-9508-${var.chassis_9508_count}"
   description     = "9508 chassis profile"
   type            = "instance"
