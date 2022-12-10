@@ -46,10 +46,10 @@ variable "fc_port_count_6536" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
 }
-variable "uplink_vlans_6536" {
-  type        = map(number)
-  description = "map of vlan names and IDs to be used on FI uplinks"
-}
+# variable "uplink_vlans_6536" {
+#   type        = map(number)
+#   description = "map of vlan names and IDs to be used on FI uplinks"
+# }
 variable "switch_vlans_6536" {
   type        = string
   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
