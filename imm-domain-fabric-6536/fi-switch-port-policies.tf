@@ -135,7 +135,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
 }
  
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
-  count = (var.eth_breakout_count > 0) ? 1 : 0
+  count = (var.eth_breakout_count > 0) ? var.eth_breakout_count : 0
   custom_mode   = "BreakoutEthernet25G"
   #custom_mode   = "BreakoutEthernet10G"
   port_id_end   = 1
@@ -154,7 +154,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
 }
 
  resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
-  count = (var.eth_breakout_count > 0) ? 1 : 0
+  count = (var.eth_breakout_count > 0) ? var.eth_breakout_count : 0
   custom_mode   = "BreakoutEthernet25G"
   #custom_mode   = "BreakoutEthernet10G"
   port_id_end   = 1
