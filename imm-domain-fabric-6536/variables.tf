@@ -45,8 +45,13 @@ variable "port_channel_6536" {
 
 variable "eth_breakout_count" {
   type        = number
-  description = "The number of physical ethernet ports to convert to 25G Breakours, starting at port 1"
+  description = "The number of physical ethernet ports to convert to 25G Breakouts, starting at port 1"
   default     = 0
+}
+variable "eth_breakout_start" {
+  type        = number
+  description = "The starting physical ethernet port number to use as 4x ethernet breakouts"
+  default     = 1
 }
 
 variable "fc_port_count_6536" {
