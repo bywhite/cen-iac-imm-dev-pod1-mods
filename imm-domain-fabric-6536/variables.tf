@@ -40,8 +40,15 @@ variable "server_ports_6536" {
 }
 variable "port_channel_6536" {
   type        = set(string)
-  description = "list of port numbers to be assigned to uplink port channel"
+  description = "list of ethernet port numbers to be assigned to uplink port channel"
 }
+
+variable "eth_breakout_count" {
+  type        = number
+  description = "The number of physical ethernet ports to convert to 25G Breakours, starting at port 1"
+  default     = 0
+}
+
 variable "fc_port_count_6536" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
