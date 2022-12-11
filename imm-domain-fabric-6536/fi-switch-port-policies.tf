@@ -135,11 +135,12 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
 }
  
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
-  count = (var.eth_breakout_count > 0) ? var.eth_breakout_count : 0
+  # count = (var.eth_breakout_count > 0) ? var.eth_breakout_count : 0
+  count = var.eth_breakout_count
   custom_mode   = "BreakoutEthernet25G"
   #custom_mode   = "BreakoutEthernet10G"
-  port_id_end   = 1
-  port_id_start = 1
+  port_id_end   = count.index + 1
+  port_id_start = count.index + 1
   slot_id       = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
@@ -154,7 +155,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
 }
 
  resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
-  count = (var.eth_breakout_count > 0) ? var.eth_breakout_count : 0
+  count = var.eth_breakout_count
   custom_mode   = "BreakoutEthernet25G"
   #custom_mode   = "BreakoutEthernet10G"
   port_id_end   = 1
