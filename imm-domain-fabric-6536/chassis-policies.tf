@@ -38,7 +38,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
 # Chassis Power Policy
 # -----------------------------------------------------------------------------
 resource "intersight_power_policy" "chassis_9508_power" {
-  name        = "${var.policy_prefix}-chassis-9508-power-1"
+  name        = "${var.policy_prefix}-chassis-power-1"
   description              = var.description
   power_save_mode = "Enabled"
   dynamic_rebalancing = "Enabled"
@@ -72,7 +72,7 @@ resource "intersight_power_policy" "chassis_9508_power" {
 # Thermal Policy
 # -----------------------------------------------------------------------------
 resource "intersight_thermal_policy" "chassis_9508_thermal" {
-  name        = "${var.policy_prefix}-chassis-9508-thermal-1"
+  name        = "${var.policy_prefix}-chassis-thermal-1"
   description              = var.description
   fan_control_mode = "Balanced"
   organization {

@@ -2,7 +2,7 @@
 
 resource "intersight_chassis_profile" "chassis_9508_profile" {
   for_each       = local.chassis_index_set
-  name            = "${var.policy_prefix}-chassis-9508-${each.value}"
+  name            = "${var.policy_prefix}-chassis-${each.value}"
   description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
