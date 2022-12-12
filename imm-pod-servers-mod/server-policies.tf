@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_fabric_multicast_policy" "fabric_multicast_policy_1" {
-  name               = "${var.policy_prefix}-multicast-policy-1"
+  name               = "${var.server_policy_prefix}-multicast-policy-1"
   description        = var.description
   querier_ip_address = ""
   querier_state      = "Disabled"
@@ -30,7 +30,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy_1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_kvm_policy" "kvmpolicy_1" {
-  name                      = "${var.policy_prefix}-kvm-enabled-policy-1"
+  name                      = "${var.server_policy_prefix}-kvm-enabled-policy-1"
   description               = var.description
   enable_local_server_video = true
   enable_video_encryption   = true
@@ -55,7 +55,7 @@ resource "intersight_kvm_policy" "kvmpolicy_1" {
 # -----------------------------------------------------------------------------
 /**
 resource "intersight_vmedia_policy" "vmedia1" {
-  name          = "${var.policy_prefix}-vmedia-ubuntu-policy-1"
+  name          = "${var.server_policy_prefix}-vmedia-ubuntu-policy-1"
   description   = var.description
   enabled       = true
   encryption    = false
@@ -93,7 +93,7 @@ resource "intersight_vmedia_policy" "vmedia1" {
 **/
 /**
 resource "intersight_vmedia_policy" "vmedia2" {
-  name          = "${var.policy_prefix}-vmedia-enabled-policy-1"
+  name          = "${var.server_policy_prefix}-vmedia-enabled-policy-1"
   description   = var.description
   enabled       = true
   encryption    = true
@@ -117,7 +117,7 @@ resource "intersight_vmedia_policy" "vmedia2" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_access_policy" "access_1" {
-  name        = "${var.policy_prefix}-imc-access-policy-1"
+  name        = "${var.server_policy_prefix}-imc-access-policy-1"
   description = var.description
   inband_vlan = var.imc_access_vlan
   inband_ip_pool {
@@ -143,7 +143,7 @@ resource "intersight_access_policy" "access_1" {
 # -----------------------------------------------------------------------------
 
 # resource "intersight_sol_policy" "sol1" {
-#  name        = "${var.policy_prefix}-sol-off-policy-1"
+#  name        = "${var.server_policy_prefix}-sol-off-policy-1"
 #  description = var.description
 #  enabled     = false
 #  baud_rate   = 9600
@@ -170,7 +170,7 @@ resource "intersight_access_policy" "access_1" {
 # resource "intersight_ipmioverlan_policy" "ipmi1" {
 #  description = var.description
 #  enabled     = false
-#  name        = "${var.policy_prefix}-ipmi-disabled"
+#  name        = "${var.server_policy_prefix}-ipmi-disabled"
 #  organization {
 #    moid        = var.organization
 #    object_type = "organization.Organization"
@@ -190,7 +190,7 @@ resource "intersight_access_policy" "access_1" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_boot_precision_policy" "boot_precision_1" {
-  name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
+  name                     = "${var.server_policy_prefix}-vmw-boot-order-policy-1"
   description              = var.description
   configured_boot_mode     = "Uefi"
   enforce_uefi_secure_boot = false
@@ -267,7 +267,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 resource "intersight_deviceconnector_policy" "deviceconnector1" {
  description     = var.description
  lockout_enabled = true
- name            = "${var.policy_prefix}-device-connector"
+ name            = "${var.server_policy_prefix}-device-connector"
  organization {
    moid        = var.organization
    object_type = "organization.Organization"
