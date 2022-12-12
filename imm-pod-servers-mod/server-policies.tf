@@ -235,7 +235,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     enabled     = true
     name        = "M2-RAID"
     object_type = "boot.LocalDisk"
-    slot        = "MSTOR-RAID"
+    #slot        = "MSTOR-RAID"
   }
   #   boot_devices {
   #   enabled     = true
