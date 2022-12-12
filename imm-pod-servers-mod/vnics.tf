@@ -5,7 +5,7 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
   description = var.description
   vlan_settings {
     # native_vlan   = var.vnic_native_vlan
-    native_vlan   = ""
+    native_vlan   = null
     allowed_vlans = "42,1000"
     # allowed_vlans = join(",", values(var.uplink_vlans_6454))
   }
