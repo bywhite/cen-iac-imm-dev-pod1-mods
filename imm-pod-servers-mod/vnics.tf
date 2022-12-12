@@ -4,8 +4,10 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
   name        = "${var.policy_prefix}-eth-network-group"
   description = var.description
   vlan_settings {
-    native_vlan   = var.vnic_native_vlan
-    allowed_vlans = join(",", values(var.uplink_vlans_6454))
+    # native_vlan   = var.vnic_native_vlan
+    native_vlan   = ""
+    allowed_vlans = "42,1000"
+    # allowed_vlans = join(",", values(var.uplink_vlans_6454))
   }
   organization {
     moid = var.organization
@@ -27,8 +29,8 @@ resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_cont
   forge_mac   = "allow"
   lldp_settings {
     object_type      = "fabric.LldpSettings"
-    receive_enabled  = false
-    transmit_enabled = false
+    receive_enabled  = true
+    transmit_enabled = true
   }
   mac_registration_mode = "allVlans"
   uplink_fail_action    = "linkDown"

@@ -36,7 +36,7 @@ resource "intersight_fabric_vlan" "fabric_vlan1" {
   name                  = each.key
   vlan_id               = each.value
   multicast_policy {
-    moid = intersight_fabric_multicast_policy.fabric_multicast_policy1.moid
+    moid = intersight_fabric_multicast_policy.fabric_multicast_policy_1.moid
   }
   eth_network_policy {
     moid = intersight_fabric_eth_network_policy.fabric_eth_network_policy1.id

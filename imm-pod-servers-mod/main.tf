@@ -36,7 +36,7 @@ resource "intersight_server_profile_template" "server_template_1" {
 #    object_type = "ipmioverlan.Policy"
 #  }
   policy_bucket {
-    moid = intersight_kvm_policy.kvmpolicy-1.moid
+    moid = intersight_kvm_policy.kvmpolicy_1.moid
     object_type = "kvm.Policy"
   }
 #  policy_bucket {

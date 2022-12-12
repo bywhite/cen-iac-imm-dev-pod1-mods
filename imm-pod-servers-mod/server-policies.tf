@@ -5,7 +5,7 @@
 # Multicast
 # -----------------------------------------------------------------------------
 
-resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
+resource "intersight_fabric_multicast_policy" "fabric_multicast_policy_1" {
   name               = "${var.policy_prefix}-multicast-policy-1"
   description        = var.description
   querier_ip_address = ""
@@ -29,7 +29,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
 # Virtual KVM Policy
 # -----------------------------------------------------------------------------
 
-resource "intersight_kvm_policy" "kvmpolicy-1" {
+resource "intersight_kvm_policy" "kvmpolicy_1" {
   name                      = "${var.policy_prefix}-kvm-enabled-policy-1"
   description               = var.description
   enable_local_server_video = true
@@ -138,29 +138,29 @@ resource "intersight_access_policy" "access_1" {
   }
 }
 
-=============================================================================
-Serial Over LAN (optional)
------------------------------------------------------------------------------
+# =============================================================================
+# Serial Over LAN (optional)
+# -----------------------------------------------------------------------------
 
-resource "intersight_sol_policy" "sol1" {
- name        = "${var.policy_prefix}-sol-off-policy-1"
- description = var.description
- enabled     = false
- baud_rate   = 9600
- com_port    = "com1"
- ssh_port    = 1096
- organization {
-   moid        = var.organization
-   object_type = "organization.Organization"
- }
- dynamic "tags" {
-   for_each = var.tags
-   content {
-     key   = tags.value.key
-     value = tags.value.value
-   }
- }
-}
+# resource "intersight_sol_policy" "sol1" {
+#  name        = "${var.policy_prefix}-sol-off-policy-1"
+#  description = var.description
+#  enabled     = false
+#  baud_rate   = 9600
+#  com_port    = "com1"
+#  ssh_port    = 1096
+#  organization {
+#    moid        = var.organization
+#    object_type = "organization.Organization"
+#  }
+#  dynamic "tags" {
+#    for_each = var.tags
+#    content {
+#      key   = tags.value.key
+#      value = tags.value.value
+#    }
+#  }
+# }
 
 
 # =============================================================================
@@ -204,6 +204,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
    enabled     = true
    name        = "KVM_DVD"
    object_type = "boot.VirtualMedia"
+   subtype = "kvm-mapped-dvd"
   #  additional_properties = jsonencode({
   #    Subtype = "kvm-mapped-dvd"
   #  })
@@ -217,6 +218,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 #      Subtype = "cimc-mapped-dvd"
 #    })
 #  }
+
  boot_devices {
    enabled         = true
    name            = "PXE-eth0"
