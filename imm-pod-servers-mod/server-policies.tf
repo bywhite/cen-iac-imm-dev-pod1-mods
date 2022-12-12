@@ -116,7 +116,7 @@ resource "intersight_vmedia_policy" "vmedia2" {
 # IMC Access
 # -----------------------------------------------------------------------------
 
-resource "intersight_access_policy" "access1" {
+resource "intersight_access_policy" "access_1" {
   name        = "${var.policy_prefix}-imc-access-policy-1"
   description = var.description
   inband_vlan = var.imc_access_vlan
@@ -163,30 +163,30 @@ resource "intersight_sol_policy" "sol1" {
 }
 
 
-=============================================================================
-IPMI over LAN (optional)   Used by Server Profile Template
------------------------------------------------------------------------------
+# =============================================================================
+# IPMI over LAN (optional)   Used by Server Profile Template
+# -----------------------------------------------------------------------------
 
-resource "intersight_ipmioverlan_policy" "ipmi1" {
- description = var.description
- enabled     = false
- name        = "${var.policy_prefix}-ipmi-disabled"
- organization {
-   moid        = var.organization
-   object_type = "organization.Organization"
- }
- dynamic "tags" {
-   for_each = var.tags
-   content {
-     key   = tags.value.key
-     value = tags.value.value
-   }
- }
-}
+# resource "intersight_ipmioverlan_policy" "ipmi1" {
+#  description = var.description
+#  enabled     = false
+#  name        = "${var.policy_prefix}-ipmi-disabled"
+#  organization {
+#    moid        = var.organization
+#    object_type = "organization.Organization"
+#  }
+#  dynamic "tags" {
+#    for_each = var.tags
+#    content {
+#      key   = tags.value.key
+#      value = tags.value.value
+#    }
+#  }
+# }
 
 
 # =============================================================================
-# Boot Precision (boot order) Policy
+# Boot Precision - Creates "Boot Order Policy"
 # -----------------------------------------------------------------------------
 
 resource "intersight_boot_precision_policy" "boot_precision_1" {
@@ -194,14 +194,21 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   description              = var.description
   configured_boot_mode     = "Uefi"
   enforce_uefi_secure_boot = false
-#  boot_devices {
-#    enabled     = true
-#    name        = "KVM_DVD"
-#    object_type = "boot.VirtualMedia"
-#    additional_properties = jsonencode({
-#      Subtype = "kvm-mapped-dvd"
-#    })
-#  }
+  organization {
+    moid        = var.organization
+    object_type = "organization.Organization"
+  }
+
+
+ boot_devices {
+   enabled     = true
+   name        = "KVM_DVD"
+   object_type = "boot.VirtualMedia"
+  #  additional_properties = jsonencode({
+  #    Subtype = "kvm-mapped-dvd"
+  #  })
+ }
+
 #  boot_devices {
 #    enabled     = true
 #    name        = "IMC_DVD"
@@ -210,15 +217,37 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 #      Subtype = "cimc-mapped-dvd"
 #    })
 #  }
+ boot_devices {
+   enabled         = true
+   name            = "PXE-eth0"
+   object_type     = "boot.pxe"
+   interfacesource = "name"
+   interfacename   = "eth0"
+   iptype          = "IPv4"
+   slot            = "MLOM"
+   #port           = "-1"
+   #MacAddress     = ""
+ }
   boot_devices {
     enabled     = true
-    name        = "LocalDisk"
+    name        = "M2-RAID"
     object_type = "boot.LocalDisk"
+    slot        = "MSTOR-RAID"
   }
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
+  #   boot_devices {
+  #   enabled     = true
+  #   name        = "LocalDisk"
+  #   object_type = "boot.LocalDisk"
+  # }
+
+  # dynamic "profiles" {
+  #   for_each = var.profiles
+  #   content {
+  #     moid        = profiles.value.moid
+  #     object_type = profiles.value.object_type
+  #   }
+  # }
+
   dynamic "tags" {
     for_each = var.tags
     content {

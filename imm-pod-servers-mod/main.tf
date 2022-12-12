@@ -11,7 +11,7 @@
 
 resource "intersight_server_profile_template" "server_template_1" {
   description     = var.description
-  name            = "${var.policy_prefix}-template"
+  name            = "${var.server_policy_prefix}-template"
   target_platform = "FIAttached"
   organization {
     object_type = "organization.Organization"
@@ -44,7 +44,7 @@ resource "intersight_server_profile_template" "server_template_1" {
 #    object_type = "vmedia.Policy"
 #  }
   policy_bucket {
-    moid = intersight_access_policy.access1.moid
+    moid = intersight_access_policy.access_1.moid
     object_type = "access.Policy"
   }
 #  policy_bucket {
@@ -56,7 +56,7 @@ resource "intersight_server_profile_template" "server_template_1" {
 #    object_type = "sol.Policy"
 #  }
   policy_bucket {
-    moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.moid
+    moid = intersight_vnic_lan_connectivity_policy.vnic_lan_1.moid
     object_type = "vnic.LanConnectivityPolicy"
   }
 }

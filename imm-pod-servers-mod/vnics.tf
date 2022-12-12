@@ -86,7 +86,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 # LAN Connectivity
 # -----------------------------------------------------------------------------
 
-resource "intersight_vnic_lan_connectivity_policy" "vnic_lan1" {
+resource "intersight_vnic_lan_connectivity_policy" "vnic_lan_1" {
   name                = "${var.policy_prefix}-lan-connectivity"
   description         = var.description
   iqn_allocation_type = "None"
@@ -137,7 +137,7 @@ resource "intersight_vnic_eth_if" "eth0" {
     num_vmqs            = 4
   }
   lan_connectivity_policy {
-    moid        = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid        = intersight_vnic_lan_connectivity_policy.vnic_lan_1.id
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_adapter_policy {
@@ -189,7 +189,7 @@ resource "intersight_vnic_eth_if" "eth1" {
     num_vmqs            = 4
   }
   lan_connectivity_policy {
-    moid        = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid        = intersight_vnic_lan_connectivity_policy.vnic_lan_1.id
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_adapter_policy {
