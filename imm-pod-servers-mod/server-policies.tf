@@ -260,9 +260,9 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 }
 
 
-=============================================================================
-Device Connector Policy (optional)
------------------------------------------------------------------------------
+# =============================================================================
+# Device Connector Policy (optional)
+# -----------------------------------------------------------------------------
 
 resource "intersight_deviceconnector_policy" "deviceconnector1" {
  description     = var.description
