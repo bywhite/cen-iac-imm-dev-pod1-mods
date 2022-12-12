@@ -92,7 +92,7 @@ variable "server_nic_vlans" {
 # IMC
 # -----------------------------------------------------------------------------
 
-variable "server_imc_access_vlan" {
+variable "imc_access_vlan" {
   type        = number
   description = "ID of VLAN for IMC access"
 }
