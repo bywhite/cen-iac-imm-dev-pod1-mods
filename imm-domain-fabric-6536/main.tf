@@ -1,8 +1,6 @@
-
-
-
 # =============================================================================
-# 6536 Cluster (Domain) Profile Creation
+# This Module creates a 6536 Cluster (Domain) Profile, switch profiles,
+# the requested number of chassis, and their required supporting policies.
 # -----------------------------------------------------------------------------
 
 ### FI 6536 DOMAIN Profile  (cluster_profile) ####

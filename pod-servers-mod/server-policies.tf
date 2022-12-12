@@ -29,7 +29,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
 # Virtual KVM Policy
 # -----------------------------------------------------------------------------
 
-resource "intersight_kvm_policy" "kvmpolicy1" {
+resource "intersight_kvm_policy" "kvmpolicy-1" {
   name                      = "${var.policy_prefix}-kvm-enabled-policy-1"
   description               = var.description
   enable_local_server_video = true
@@ -138,116 +138,116 @@ resource "intersight_access_policy" "access1" {
   }
 }
 
-# =============================================================================
-# Serial Over LAN (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_sol_policy" "sol1" {
-#  name        = "${var.policy_prefix}-sol-off-policy-1"
-#  description = var.description
-#  enabled     = false
-#  baud_rate   = 9600
-#  com_port    = "com1"
-#  ssh_port    = 1096
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
+=============================================================================
+Serial Over LAN (optional)
+-----------------------------------------------------------------------------
+
+resource "intersight_sol_policy" "sol1" {
+ name        = "${var.policy_prefix}-sol-off-policy-1"
+ description = var.description
+ enabled     = false
+ baud_rate   = 9600
+ com_port    = "com1"
+ ssh_port    = 1096
+ organization {
+   moid        = var.organization
+   object_type = "organization.Organization"
+ }
+ dynamic "tags" {
+   for_each = var.tags
+   content {
+     key   = tags.value.key
+     value = tags.value.value
+   }
+ }
+}
+
+
+=============================================================================
+IPMI over LAN (optional)   Used by Server Profile Template
+-----------------------------------------------------------------------------
+
+resource "intersight_ipmioverlan_policy" "ipmi1" {
+ description = var.description
+ enabled     = false
+ name        = "${var.policy_prefix}-ipmi-disabled"
+ organization {
+   moid        = var.organization
+   object_type = "organization.Organization"
+ }
+ dynamic "tags" {
+   for_each = var.tags
+   content {
+     key   = tags.value.key
+     value = tags.value.value
+   }
+ }
+}
 
 
 # =============================================================================
-# IPMI over LAN (optional)
+# Boot Precision (boot order) Policy
 # -----------------------------------------------------------------------------
-#
-#resource "intersight_ipmioverlan_policy" "ipmi2" {
-#  description = var.description
-#  enabled     = false
-#  name        = "${var.policy_prefix}-ipmi-disabled"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
+
+resource "intersight_boot_precision_policy" "boot_precision_1" {
+  name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
+  description              = var.description
+  configured_boot_mode     = "Uefi"
+  enforce_uefi_secure_boot = false
+#  boot_devices {
+#    enabled     = true
+#    name        = "KVM_DVD"
+#    object_type = "boot.VirtualMedia"
+#    additional_properties = jsonencode({
+#      Subtype = "kvm-mapped-dvd"
+#    })
 #  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
+#  boot_devices {
+#    enabled     = true
+#    name        = "IMC_DVD"
+#    object_type = "boot.VirtualMedia"
+#    additional_properties = jsonencode({
+#      Subtype = "cimc-mapped-dvd"
+#    })
 #  }
-#}
+  boot_devices {
+    enabled     = true
+    name        = "LocalDisk"
+    object_type = "boot.LocalDisk"
+  }
+  organization {
+    moid        = var.organization
+    object_type = "organization.Organization"
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
 
 
-# # =============================================================================
-# # Boot Precision (boot order) Policy
-# # -----------------------------------------------------------------------------
+=============================================================================
+Device Connector Policy (optional)
+-----------------------------------------------------------------------------
 
-# resource "intersight_boot_precision_policy" "boot_precision1" {
-#   name                     = "${var.policy_prefix}-vmw-boot-order-policy-1"
-#   description              = var.description
-#   configured_boot_mode     = "Uefi"
-#   enforce_uefi_secure_boot = false
-# #  boot_devices {
-# #    enabled     = true
-# #    name        = "KVM_DVD"
-# #    object_type = "boot.VirtualMedia"
-# #    additional_properties = jsonencode({
-# #      Subtype = "kvm-mapped-dvd"
-# #    })
-# #  }
-# #  boot_devices {
-# #    enabled     = true
-# #    name        = "IMC_DVD"
-# #    object_type = "boot.VirtualMedia"
-# #    additional_properties = jsonencode({
-# #      Subtype = "cimc-mapped-dvd"
-# #    })
-# #  }
-#   boot_devices {
-#     enabled     = true
-#     name        = "LocalDisk"
-#     object_type = "boot.LocalDisk"
-#   }
-#   organization {
-#     moid        = var.organization
-#     object_type = "organization.Organization"
-#   }
-#   dynamic "tags" {
-#     for_each = var.tags
-#     content {
-#       key   = tags.value.key
-#       value = tags.value.value
-#     }
-#   }
-# }
-
-
-# =============================================================================
-# Device Connector Policy (optional)
-# -----------------------------------------------------------------------------
-#
-#resource "intersight_deviceconnector_policy" "dc1" {
-#  description     = var.description
-#  lockout_enabled = true
-#  name            = "${var.policy_prefix}-device-connector"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-#}
+resource "intersight_deviceconnector_policy" "deviceconnector1" {
+ description     = var.description
+ lockout_enabled = true
+ name            = "${var.policy_prefix}-device-connector"
+ organization {
+   moid        = var.organization
+   object_type = "organization.Organization"
+ }
+ dynamic "tags" {
+   for_each = var.tags
+   content {
+     key   = tags.value.key
+     value = tags.value.value
+   }
+ }
+}
 
 

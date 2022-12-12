@@ -1,3 +1,7 @@
+# =============================================================================
+# The purpose of this module is to create a Server Profile Template
+# The primary output is the MOID of the created server profile template
+# -----------------------------------------------------------------------------
 
 
 
@@ -5,7 +9,7 @@
 # Server Profile template
 # -----------------------------------------------------------------------------
 
-resource "intersight_server_profile_template" "template1" {
+resource "intersight_server_profile_template" "server_template_1" {
   description     = var.description
   name            = "${var.policy_prefix}-template"
   target_platform = "FIAttached"
@@ -24,15 +28,15 @@ resource "intersight_server_profile_template" "template1" {
   # the following policy_bucket statements map different policies to this
   # template -- the object_type shows the policy type
   policy_bucket {
-    moid        = intersight_boot_precision_policy.boot_precision1.moid
+    moid        = intersight_boot_precision_policy.boot_precision_1.moid
     object_type = "boot.PrecisionPolicy"
   }
 #  policy_bucket {
-#    moid = intersight_ipmioverlan_policy.ipmi2.moid
+#    moid = intersight_ipmioverlan_policy.ipmi1.moid
 #    object_type = "ipmioverlan.Policy"
 #  }
   policy_bucket {
-    moid = intersight_kvm_policy.kvmpolicy1.moid
+    moid = intersight_kvm_policy.kvmpolicy-1.moid
     object_type = "kvm.Policy"
   }
 #  policy_bucket {

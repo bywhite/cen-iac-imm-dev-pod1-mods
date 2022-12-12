@@ -4,7 +4,7 @@
 #__________________________________________________________
 
 output "ip_pool_moid" {
-  description = "moid of the IP Pool."
+  description = "moid of the Server IP Pool."
   value = intersight_ippool_pool.ippool_pool.moid
 }
 
