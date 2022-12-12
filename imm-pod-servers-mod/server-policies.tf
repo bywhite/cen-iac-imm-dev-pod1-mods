@@ -209,14 +209,14 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     })
  }
 
-#  boot_devices {
-#    enabled     = true
-#    name        = "IMC_DVD"
-#    object_type = "boot.VirtualMedia"
-#    additional_properties = jsonencode({
-#      Subtype = "cimc-mapped-dvd"
-#    })
-#  }
+ boot_devices {
+   enabled     = true
+   name        = "IMC_DVD"
+   object_type = "boot.VirtualMedia"
+   additional_properties = jsonencode({
+     Subtype = "cimc-mapped-dvd"
+   })
+ }
 
 #  boot_devices {
 #    enabled         = true
