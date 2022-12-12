@@ -200,15 +200,14 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   }
 
 
-#  boot_devices {
-#    enabled     = true
-#    name        = "KVM_DVD"
-#    object_type = "boot.VirtualMedia"
-#    subtype = "kvm-mapped-dvd"
-#   #  additional_properties = jsonencode({
-#   #    Subtype = "kvm-mapped-dvd"
-#   #  })
-#  }
+ boot_devices {
+   enabled     = true
+   name        = "KVM_DVD"
+   object_type = "boot.VirtualMedia"
+    additional_properties = jsonencode({
+      Subtype = "kvm-mapped-dvd"
+    })
+ }
 
 #  boot_devices {
 #    enabled     = true

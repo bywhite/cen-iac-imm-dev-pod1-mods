@@ -68,6 +68,8 @@ resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
 }
 
 # this policy is actually quite complex but we are taking all the defaults
+# Adapter can be tuned for VMware vs Windows Bare Metal vs other (EX: tx-offload)
+# could add conditional for creation based on nic_optimized_for = "vmw"
 resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
   name        = "${var.server_policy_prefix}-vnic-eth-adapter"
   description = var.description
