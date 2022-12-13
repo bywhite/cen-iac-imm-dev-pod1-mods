@@ -117,8 +117,18 @@ variable "server_imc_admin_password" {
 }
 
 # =============================================================================
-# 
+# SNMP
 # -----------------------------------------------------------------------------
+
+variable "snmp_password" {
+  type        = string
+  default     = "Cisco123"
+}
+variable "snmp_ip"  {
+  type        = string
+  default     = "127.0.0.1"
+}
+
 
 # variable "ntp_servers" {
 #   type        = list(string)
