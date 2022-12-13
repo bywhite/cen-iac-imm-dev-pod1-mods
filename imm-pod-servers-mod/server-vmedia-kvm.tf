@@ -34,6 +34,9 @@ resource "intersight_vmedia_policy" "vmedia_1" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_server_profile_template.server_template_1
+  ]
 }
 
 

@@ -40,6 +40,6 @@ resource "intersight_power_policy" "server_power_x" {
     }
   }
   depends_on = [
-    # server profiles created
+    intersight_server_profile_template.server_template_1
   ]
 }
