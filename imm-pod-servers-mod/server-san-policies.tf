@@ -71,7 +71,6 @@ resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
   burst               = 10240
   rate_limit          = 0
   cos                 = 3
-  priority            = "FC"
   max_data_field_size = 2112
   organization {
     object_type = "organization.Organization"
