@@ -229,7 +229,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
       iptype          = "IPv4"
       slot            = "MLOM"
       port           = "-1"
-      MacAddress     = ""
+      #MacAddress     = ""
    })
 }
 
