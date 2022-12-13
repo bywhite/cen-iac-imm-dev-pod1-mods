@@ -27,4 +27,11 @@ locals {
   # flattened_vlan_list = flatten(local.vlan_lists)
   # vlan_list_set       = toset(local.flattened_vlan_list)
 
+
+
+# need a set of the moids spawned by the template
+# server_profile_moids = ""
+
+
+
 }
