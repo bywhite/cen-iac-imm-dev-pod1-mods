@@ -14,11 +14,12 @@ resource "intersight_server_profile_template" "server_template_1" {
   name            = "${var.server_policy_prefix}-template"
   action          = "No-op"
   target_platform = "FIAttached"
-  # uuid_address_type = "POOL"
-  # uuid_pool = {
-  #   object_type = "uuidpool.Pool"
+  uuid_address_type = "POOL"
+  uuid_pool = {
+    object_type = "uuidpool.Pool"
   #   moid        = var.server_uuid_pool_moid
-  # }
+    moid        = "6397aadd6962752d302041c7"
+   }
 
   organization {
     object_type = "organization.Organization"
