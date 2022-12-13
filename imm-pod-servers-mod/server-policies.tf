@@ -233,8 +233,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 #       #MacAddress     = ""
 #    }
 #   )
-
- }
+# }
 
   boot_devices {
     enabled     = true
