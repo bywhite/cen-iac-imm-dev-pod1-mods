@@ -16,25 +16,24 @@ resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
   name                = "${var.server_policy_prefix}-san-connectivity"
   description         = var.description
   target_platform = "FIAttached"
-  placement_mode = "Auto"
-  
+  placement_mode = "auto"
   wwnn_address_type = "POOL"
   wwnn_pool {
     moid = var.wwnn_pool_moid
     object_type = "fcpool.Pool"
   }
-
-
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-
 #   profiles {
 #     moid        = var.profile
 #     object_type = "server.Profile"
 #   }
 }
+
+
+
 
         #   fc_zone_policies             = []
         #   fibre_channel_adapter_policy = "**REQUIRED**"
