@@ -1,6 +1,7 @@
 # =============================================================================
-# Server BIOS Policies for FI-Attached server template
+#  Server Storage Related  Policies
+#  - Storage Policy
+#  - SD Policy
+#  - 
 # -----------------------------------------------------------------------------
-
-
 

@@ -1,6 +1,6 @@
 # =============================================================================
-# Server BIOS Policies for FI-Attached server template
+#  Server Monitoring Related Policies
+#  - SNMP Policy
+#  - Syslog Policy
 # -----------------------------------------------------------------------------
-
-
 

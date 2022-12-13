@@ -1,6 +1,6 @@
 # =============================================================================
-# Server BIOS Policies for FI-Attached server template
+# Power Related Server Policies
+#  - Power Policy
+#  - 
+#  - 
 # -----------------------------------------------------------------------------
-
-
-

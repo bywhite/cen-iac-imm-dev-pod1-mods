@@ -1,22 +1,9 @@
 # =============================================================================
-# VLAN Policy
+# VLAN Related Server Policies
+#  - VLAN Policy
+#  - 
 # -----------------------------------------------------------------------------
-resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy1" {
-  name        = "${var.server_policy_prefix}-vlan-policy"
-  description = var.description
-  organization {
-    moid = var.organization
-  }
-  # assign this policy to the domain profile being created
 
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
 
 # =============================================================================
 # VLANs for the above policy

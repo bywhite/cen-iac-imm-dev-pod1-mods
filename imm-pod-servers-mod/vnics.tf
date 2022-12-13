@@ -1,50 +1,11 @@
+# =============================================================================
+# vNic Related Server Policies
+#  - QoS Policy
+#  - Eth Adapter Policy (adapter tuning)
+#  - vNic Eth Interface Policy
+# -----------------------------------------------------------------------------
 
-# https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_eth_network_group_policy
-resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy1" {
-  name        = "${var.server_policy_prefix}-eth-network-group"
-  description = var.description
-  vlan_settings {
-    # native_vlan   = var.vnic_native_vlan
-    native_vlan   = null
-    allowed_vlans = "42,1000"
-    # allowed_vlans = join(",", values(var.uplink_vlans_6454))
-  }
-  organization {
-    moid = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
 
-# https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_eth_network_control_policy
-resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_control_policy1" {
-  name        = "${var.server_policy_prefix}-eth-network-control"
-  description = var.description
-  cdp_enabled = true
-  forge_mac   = "allow"
-  lldp_settings {
-    object_type      = "fabric.LldpSettings"
-    receive_enabled  = true
-    transmit_enabled = true
-  }
-  mac_registration_mode = "allVlans"
-  uplink_fail_action    = "linkDown"
-  organization {
-    moid = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
 
 resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
   name           = "${var.server_policy_prefix}-vnic-eth-qos"
@@ -86,33 +47,13 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 }
 
 
-# =============================================================================
-# LAN Connectivity
-# -----------------------------------------------------------------------------
-
-resource "intersight_vnic_lan_connectivity_policy" "vnic_lan_1" {
-  name                = "${var.server_policy_prefix}-lan-connectivity"
-  description         = var.description
-  iqn_allocation_type = "None"
-  placement_mode      = "auto"
-  target_platform     = "FIAttached"
-  organization {
-    object_type = "organization.Organization"
-    moid        = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
 
 # =============================================================================
 # vNICs
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_eth_if" "eth0" {
+  # Will need to iterate through various settings for_each eth[*]
+  # count: int_name, switch_id(A/B), vnic_lan_moid[*], adapter_pol_moid[*], qos_moid[*], net_grp_moid[*], ncp_moid  
   name             = "eth0"
   order            = 0
   failover_enabled = false
@@ -127,7 +68,7 @@ resource "intersight_vnic_eth_if" "eth0" {
     uplink    = 0
   }
   cdn {
-    value     = "eth0"
+    value     = "eth0"    #Same as vNIC Name
     nr_source = "vnic"
   }
   usnic_settings {
@@ -140,20 +81,20 @@ resource "intersight_vnic_eth_if" "eth0" {
     num_interrupts      = 16
     num_vmqs            = 4
   }
-  lan_connectivity_policy {
+  lan_connectivity_policy {   # Groups eth[*] interfaces together and sets FI-attached
     moid        = intersight_vnic_lan_connectivity_policy.vnic_lan_1.id
     object_type = "vnic.LanConnectivityPolicy"
   }
-  eth_adapter_policy {
+  eth_adapter_policy {        # Provides for adapter tuning to workload
     moid = intersight_vnic_eth_adapter_policy.v_eth_adapter1.id
   }
-  eth_qos_policy {
+  eth_qos_policy {            # Unique per eth[*] - Sets Class of Service and MTU
     moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
   }
-  fabric_eth_network_group_policy {
+  fabric_eth_network_group_policy {   # Unique per eth[*] - Sets VLAN list (2,4,7,1000-1011)
     moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1.moid
   }
-  fabric_eth_network_control_policy {
+  fabric_eth_network_control_policy {  # Sets CDP LLDP and link down behavior 
     moid = intersight_fabric_eth_network_control_policy.fabric_eth_network_control_policy1.moid
   }
   dynamic "tags" {
@@ -164,6 +105,9 @@ resource "intersight_vnic_eth_if" "eth0" {
     }
   }
 }
+
+
+
 resource "intersight_vnic_eth_if" "eth1" {
   name             = "eth1"
   order            = 0

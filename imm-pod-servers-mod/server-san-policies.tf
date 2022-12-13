@@ -1,6 +1,9 @@
 # =============================================================================
-# Server BIOS Policies for FI-Attached server template
+#  Server SAN Related  Policies
+#  - SAN Connectivity Policy
+#  - 
+#  - 
+#  - 
+#  - 
+#  - 
 # -----------------------------------------------------------------------------
-
-
-
