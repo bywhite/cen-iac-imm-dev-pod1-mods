@@ -60,6 +60,11 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_snmp_policy.snmp1.moid
     object_type = "snmp.Policy"
   }
+  policy_bucket {
+    moid = intersight_syslog_policy.syslog_policy.moid
+    object_type = "syslog.Policy"
+  }
+
 #  policy_bucket {
 #    moid = intersight_iam_end_point_user_policy.user_policy1.moid
 #    object_type = "iam.EndPointUserPolicy"
@@ -74,6 +79,7 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
 
   depends_on = [
-    intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.snmp1
+    intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.snmp1,
+    intersight_syslog_policy.syslog_policy
   ]
 }

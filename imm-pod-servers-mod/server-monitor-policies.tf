@@ -51,3 +51,41 @@ resource "intersight_snmp_policy" "snmp1" {
 #     
 #   ]
 }
+
+
+
+# =============================================================================
+# Syslog
+# -----------------------------------------------------------------------------
+
+resource "intersight_syslog_policy" "syslog_policy" {
+  name               = "${var.server_policy_prefix}-syslog-server-policy"
+  description        = var.description
+  local_clients {
+    min_severity = "warning"
+    object_type = "syslog.LocalFileLoggingClient"
+  }
+  remote_clients {
+    enabled      = false
+    hostname     = "10.22.22.22"
+    port         = 514
+    protocol     = "udp"
+    min_severity = "warning"
+    object_type  = "syslog.RemoteLoggingClient"
+  }
+#   profiles {
+#     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+#     object_type = "fabric.SwitchProfile"
+#   }
+  organization {
+    moid        = var.organization
+    object_type = "organization.Organization"
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
