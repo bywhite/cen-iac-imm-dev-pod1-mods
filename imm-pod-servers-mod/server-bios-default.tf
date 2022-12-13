@@ -165,7 +165,6 @@ resource "intersight_bios_policy" "bios_default_policy" {
       onboard_scu_storage_sw_stack          = "platform-default"
       onboard10gbit_lom                     = "platform-default"
       operation_mode                        = "platform-default"
-      organization                          = "default"
       os_boot_watchdog_timer                = "platform-default"
       os_boot_watchdog_timer_policy         = "platform-default"
       os_boot_watchdog_timer_timeout        = "platform-default"
