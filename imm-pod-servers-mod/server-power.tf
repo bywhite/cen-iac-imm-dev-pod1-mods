@@ -1,8 +1,6 @@
 # =============================================================================
 # Power Related Server Policies
 #  - Power Policy
-#  - 
-#  - 
 # -----------------------------------------------------------------------------
 
 # =============================================================================
@@ -15,23 +13,10 @@ resource "intersight_power_policy" "server_power_x" {
   power_priority = "Medium"
   power_profiling = "Enabled"
   power_restore_state = "LastState"
-  
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-#   dynamic "profiles" {
-#     for_each = local.server_profile_moids
-#     content {
-#       moid        = profiles.value
-#       object_type = "server.Profile"
-#     }
-#   }
-  # profiles {
-  #   moid    = intersight_server_profile_template.server_template_1.moid
-  #   object_type = "server.ProfileTemplate"
-  # }
-
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -39,7 +24,4 @@ resource "intersight_power_policy" "server_power_x" {
       value = tags.value.value
     }
   }
-  # depends_on = [
-  #   intersight_server_profile_template.server_template_1
-  # ]
 }
