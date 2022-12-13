@@ -10,6 +10,27 @@
 # =============================================================================
 # Virtual Media Policy
 # -----------------------------------------------------------------------------
+
+resource "intersight_vmedia_policy" "vmedia_1" {
+  name          = "${var.server_policy_prefix}-vmedia-enabled"
+  description   = var.description
+  enabled       = true
+  encryption    = true
+  low_power_usb = true
+  organization {
+    moid        = var.organization
+    object_type = "organization.Organization"
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+
 /**
 resource "intersight_vmedia_policy" "vmedia1" {
   name          = "${var.server_policy_prefix}-vmedia-ubuntu-policy-1"
@@ -48,26 +69,6 @@ resource "intersight_vmedia_policy" "vmedia1" {
   }
 }
 **/
-/**
-resource "intersight_vmedia_policy" "vmedia2" {
-  name          = "${var.server_policy_prefix}-vmedia-enabled-policy-1"
-  description   = var.description
-  enabled       = true
-  encryption    = true
-  low_power_usb = true
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
-**/
 
 
 # =============================================================================
@@ -75,7 +76,7 @@ resource "intersight_vmedia_policy" "vmedia2" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_kvm_policy" "kvmpolicy_1" {
-  name                      = "${var.server_policy_prefix}-kvm-enabled-policy-1"
+  name                      = "${var.server_policy_prefix}-kvm-enabled"
   description               = var.description
   enable_local_server_video = true
   enable_video_encryption   = true
