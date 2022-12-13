@@ -19,6 +19,5 @@ resource "intersight_storage_storage_policy" "server_storage_policy1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-  global_hot_spares = "3"
   
 }
