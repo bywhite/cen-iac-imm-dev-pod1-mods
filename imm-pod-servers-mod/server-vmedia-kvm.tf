@@ -22,10 +22,10 @@ resource "intersight_vmedia_policy" "vmedia_1" {
     object_type = "organization.Organization"
   }
   
-  profiles {
-    moid    = intersight_server_profile_template.server_template_1.moid
-    object_type = "server.ProfileTemplate"
-  }
+  # profiles {
+  #   moid    = intersight_server_profile_template.server_template_1.moid
+  #   object_type = "server.ProfileTemplate"
+  # }
 
   dynamic "tags" {
     for_each = var.tags

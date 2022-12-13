@@ -42,10 +42,12 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_kvm_policy.kvmpolicy_1.moid
     object_type = "kvm.Policy"
   }
- policy_bucket {
-   moid = intersight_vmedia_policy.vmedia_1.moid
-   object_type = "vmedia.Policy"
- }
+
+  policy_bucket {
+    moid = intersight_vmedia_policy.vmedia_1.moid
+    object_type = "vmedia.Policy"
+  }
+  
   policy_bucket {
     moid = intersight_access_policy.access_1.moid
     object_type = "access.Policy"
