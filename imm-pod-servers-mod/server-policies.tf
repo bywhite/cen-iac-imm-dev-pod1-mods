@@ -219,20 +219,20 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
    })
  }
 
- boot_devices {
-   enabled         = true
-   name            = "PXE-eth0"
-   object_type     = "boot.pxe"
-  additional_properties = jsonencode(
-    {
-      interfacesource = "name"
-      interfacename   = "eth0"
-      iptype          = "IPv4"
-      slot            = "MLOM"
-      #port           = "-1"
-      #MacAddress     = ""
-   }
-  )
+#  boot_devices {
+#    enabled         = true
+#    name            = "PXE-eth0"
+#    object_type     = "boot.pxe"
+#   additional_properties = jsonencode(
+#     {
+#       interfacesource = "name"
+#       interfacename   = "eth0"
+#       iptype          = "IPv4"
+#       slot            = "MLOM"
+#       #port           = "-1"
+#       #MacAddress     = ""
+#    }
+#   )
 
  }
 
@@ -241,8 +241,8 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     name        = "M2-RAID"
     object_type = "boot.LocalDisk"
        additional_properties = jsonencode({
-     Subtype = "cimc-mapped-dvd"
-     slot        = "MSTOR-RAID"
+        Subtype = "cimc-mapped-dvd"
+        slot        = "MSTOR-RAID"
    })
 
   }
