@@ -240,7 +240,6 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     name        = "M2-RAID"
     object_type = "boot.LocalDisk"
        additional_properties = jsonencode({
-        Subtype = "cimc-mapped-dvd"
         slot        = "MSTOR-RAID"
    })
 
