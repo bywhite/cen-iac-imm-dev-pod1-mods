@@ -86,13 +86,13 @@ resource "intersight_server_profile_template" "server_template_1" {
     object_type = "storage.StoragePolicy"
   }
   policy_bucket {
-    moid = intersight_bios_policy.bios_policy1.moid
+    moid = intersight_bios_policy.bios_default_policy.moid
     object_type = "bios.Policy"
   }
 
   depends_on = [
     intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.snmp1,
     intersight_syslog_policy.syslog_policy, intersight_iam_end_point_user_policy.imc_user1,
-    intersight_storage_storage_policy.server_storage_policy1, intersight_bios_policy.bios_policy1
+    intersight_storage_storage_policy.server_storage_policy1, intersight_bios_policy.bios_default_policy
   ]
 }
