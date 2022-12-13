@@ -34,9 +34,9 @@ resource "intersight_vmedia_policy" "vmedia_1" {
       value = tags.value.value
     }
   }
-  depends_on = [
-    intersight_server_profile_template.server_template_1
-  ]
+  # depends_on = [
+  #   intersight_server_profile_template.server_template_1
+  # ]
 }
 
 
@@ -94,6 +94,7 @@ resource "intersight_kvm_policy" "kvmpolicy_1" {
   organization {
     moid = var.organization
   }
+  #attached under policy template policy bucket
   remote_port = 2068
   dynamic "tags" {
     for_each = var.tags
