@@ -243,33 +243,33 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   }
 
 
-    boot_devices {
-    enabled     = true
-    name        = "LocalDisk"
-    object_type = "boot.LocalDisk"
-  }
+  # boot_devices {
+  #   enabled     = true
+  #   name        = "LocalDisk"
+  #   object_type = "boot.LocalDisk"
+  # }
 
 
-  boot_devices {
-    enabled     = true
-    name        = "interfacename"
-    object_type = "boot.San"
-      additional_properties = jsonencode({
-        Bootloader = {
-            ClassId     = "boot.Bootloader"
-            Description = "rhel",
-            Name        = "bootx64.efi",
-            ObjectType  = "boot.Bootloader"
-            Path        = "\\EFI\\BOOT\\BOOTx64.EFI"
-          }
-        InterfaceName = "fc0"
-        Lun           = 0
-        Slot          = "MLOM"
-        Wwpn          = "20:00:00:25:B5:00:01:ff"
-      })
-  }
+  # boot_devices {
+  #   enabled     = true
+  #   name        = "interfacename"
+  #   object_type = "boot.San"
+  #     additional_properties = jsonencode({
+  #       Bootloader = {
+  #           ClassId     = "boot.Bootloader"
+  #           Description = "rhel",
+  #           Name        = "bootx64.efi",
+  #           ObjectType  = "boot.Bootloader"
+  #           Path        = "\\EFI\\BOOT\\BOOTx64.EFI"
+  #         }
+  #       InterfaceName = "fc0"
+  #       Lun           = 0
+  #       Slot          = "MLOM"
+  #       Wwpn          = "20:00:00:25:B5:00:01:ff"
+  #     })
+  # }
 
-## example from tf-int-imm module
+## example from tf-int-imm module by Tyson >> Needs translation and legacy mode used
 # module "boot_legacy_san" {
 #   depends_on = [
 #     data.intersight_organization_organization.org_moid
