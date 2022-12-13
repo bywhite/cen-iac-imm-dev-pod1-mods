@@ -219,17 +219,22 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
    })
  }
 
-#  boot_devices {
-#    enabled         = true
-#    name            = "PXE-eth0"
-#    object_type     = "boot.pxe"
-#    interfacesource = "name"
-#    interfacename   = "eth0"
-#    iptype          = "IPv4"
-#    slot            = "MLOM"
-#    #port           = "-1"
-#    #MacAddress     = ""
-#  }
+ boot_devices {
+   enabled         = true
+   name            = "PXE-eth0"
+   object_type     = "boot.pxe"
+  additional_properties = jsonencode(
+    {
+      interfacesource = "name"
+      interfacename   = "eth0"
+      iptype          = "IPv4"
+      slot            = "MLOM"
+      #port           = "-1"
+      #MacAddress     = ""
+   }
+  )
+
+ }
 
   boot_devices {
     enabled     = true
