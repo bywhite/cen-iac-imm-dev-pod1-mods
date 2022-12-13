@@ -85,6 +85,6 @@ resource "intersight_server_profile_template" "server_template_1" {
 
   depends_on = [
     intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.snmp1,
-    intersight_syslog_policy.syslog_policy
+    intersight_syslog_policy.syslog_policy, intersight_iam_end_point_user_policy.imc_user1
   ]
 }
