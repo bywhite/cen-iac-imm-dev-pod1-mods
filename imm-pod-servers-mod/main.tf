@@ -34,10 +34,10 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid        = intersight_boot_precision_policy.boot_precision_1.moid
     object_type = "boot.PrecisionPolicy"
   }
-#  policy_bucket {
-#    moid = intersight_ipmioverlan_policy.ipmi1.moid
-#    object_type = "ipmioverlan.Policy"
-#  }
+ policy_bucket {
+   moid = intersight_ipmioverlan_policy.ipmi1.moid
+   object_type = "ipmioverlan.Policy"
+ }
   policy_bucket {
     moid = intersight_kvm_policy.kvmpolicy_1.moid
     object_type = "kvm.Policy"

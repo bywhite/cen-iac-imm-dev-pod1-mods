@@ -65,22 +65,22 @@ resource "intersight_sol_policy" "sol1" {
 # IPMI over LAN (optional)   Used by Server Profile Template
 # -----------------------------------------------------------------------------
 
-# resource "intersight_ipmioverlan_policy" "ipmi1" {
-#  description = var.description
-#  enabled     = false
-#  name        = "${var.server_policy_prefix}-ipmi-disabled"
-#  organization {
-#    moid        = var.organization
-#    object_type = "organization.Organization"
-#  }
-#  dynamic "tags" {
-#    for_each = var.tags
-#    content {
-#      key   = tags.value.key
-#      value = tags.value.value
-#    }
-#  }
-# }
+resource "intersight_ipmioverlan_policy" "ipmi1" {
+ description = var.description
+ enabled     = false
+ name        = "${var.server_policy_prefix}-ipmi-disabled"
+ organization {
+   moid        = var.organization
+   object_type = "organization.Organization"
+ }
+ dynamic "tags" {
+   for_each = var.tags
+   content {
+     key   = tags.value.key
+     value = tags.value.value
+   }
+ }
+}
 
 
 # =============================================================================
