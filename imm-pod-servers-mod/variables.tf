@@ -57,7 +57,7 @@ variable "wwpn_pool_b_moid" {
   description = "moid of WWPN B fabric Pool"
 }
 
-variable "uuid_pool_moid" {
+variable "server_uuid_pool_moid" {
   type = string
   description = "moid of UUID Pool"
 }

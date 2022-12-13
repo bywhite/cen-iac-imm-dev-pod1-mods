@@ -16,10 +16,9 @@ resource "intersight_server_profile_template" "server_template_1" {
   target_platform = "FIAttached"
   uuid_address_type = "POOL"
   uuid_pool = {
-    moid        = var.uuid_pool_moid
-    # object_type = "uuidpool.Pool"
+    moid        = var.server_uuid_pool_moid
+    object_type = "uuidpool.Pool"
   }
-
 
   organization {
     object_type = "organization.Organization"
