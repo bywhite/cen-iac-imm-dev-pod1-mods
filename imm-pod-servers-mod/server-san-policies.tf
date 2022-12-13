@@ -30,10 +30,10 @@ resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
     moid        = var.organization
   }
 
-  profiles {
-    moid        = var.profile
-    object_type = "server.Profile"
-  }
+#   profiles {
+#     moid        = var.profile
+#     object_type = "server.Profile"
+#   }
 }
 
         #   fc_zone_policies             = []
