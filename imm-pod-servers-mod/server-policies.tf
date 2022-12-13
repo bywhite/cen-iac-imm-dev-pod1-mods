@@ -249,38 +249,25 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     object_type = "boot.LocalDisk"
   }
 
-## example from tf-int-imm module
-#   module "boot_uefi_san" {
-#   source      = "terraform-cisco-modules/imm/intersight//modules/boot_order_policies"
-#   boot_secure = true
-#   description = "UEFI SAN Boot Example."
-#   name        = "example_uefi_san"
-#   org_moid    = local.org_moid
-#   profiles    = []
-#   tags        = var.tags
-#   boot_devices = [
-#     {
-#       additional_properties = jsonencode(
-#         {
-#           Bootloader = {
-#             ClassId     = "boot.Bootloader"
-#             Description = "rhel",
-#             Name        = "bootx64.efi",
-#             ObjectType  = "boot.Bootloader"
-#             Path        = "\\EFI\\BOOT\\BOOTx64.EFI"
-#           },
-#           InterfaceName = "vHBA-A",
-#           Lun           = 0,
-#           Slot          = "MLOM",
-#           Wwpn          = "20:00:00:25:B5:00:01:ff"
-#         }
-#       )
-#       enabled     = true,
-#       name        = "interfacename",
-#       object_type = "boot.San",
-#     },
-#   ]
-# }
+
+  boot_devices {
+    enabled     = true
+    name        = "interfacename"
+    object_type = "boot.San"
+      additional_properties = jsonencode({
+        Bootloader = {
+            ClassId     = "boot.Bootloader"
+            Description = "rhel",
+            Name        = "bootx64.efi",
+            ObjectType  = "boot.Bootloader"
+            Path        = "\\EFI\\BOOT\\BOOTx64.EFI"
+          }
+        InterfaceName = "fc0"
+        Lun           = 0
+        Slot          = "MLOM"
+        Wwpn          = "20:00:00:25:B5:00:01:ff"
+      })
+  }
 
 ## example from tf-int-imm module
 # module "boot_legacy_san" {
