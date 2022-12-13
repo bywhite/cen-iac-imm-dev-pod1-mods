@@ -8,8 +8,9 @@
 # =============================================================================
 # Server Power Policy
 # -----------------------------------------------------------------------------
-resource "intersight_power_policy" "server_power_x_vmw" {
-  name        = "${var.policy_prefix}-server-power-vmw"
+resource "intersight_power_policy" "server_power_x" {
+ #may need variables for power_priority  and use var in name "med"
+  name        = "${var.policy_prefix}-server-power-medium"
   description              = var.description
   power_priority = "Medium"
   power_profiling = "Enabled"
