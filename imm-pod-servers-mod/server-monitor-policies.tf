@@ -37,13 +37,7 @@ resource "intersight_snmp_policy" "snmp1" {
     nr_version  = "V3"
     object_type = "snmp.Trap"
   }
-  dynamic "profiles" {
-    for_each = local.chassis_profile_moids
-    content {
-      moid        = profiles.value
-      object_type = "chassis.Profile"
-    }
-  }
+
 #   profiles {
 #     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
 #     object_type = "fabric.SwitchProfile"
