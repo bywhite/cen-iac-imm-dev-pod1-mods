@@ -187,6 +187,7 @@ resource "intersight_access_policy" "access_1" {
 
 # =============================================================================
 # Boot Precision - Creates "Boot Order Policy"
+# Examples: https://github.com/terraform-cisco-modules/terraform-intersight-imm/blob/master/examples/policies/boot_order_policies.tf
 # -----------------------------------------------------------------------------
 
 resource "intersight_boot_precision_policy" "boot_precision_1" {
@@ -234,21 +235,81 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     enabled     = true
     name        = "M2-RAID"
     object_type = "boot.LocalDisk"
-    #slot        = "MSTOR-RAID"
+       additional_properties = jsonencode({
+     Subtype = "cimc-mapped-dvd"
+     slot        = "MSTOR-RAID"
+   })
+
   }
+
+
   #   boot_devices {
   #   enabled     = true
   #   name        = "LocalDisk"
   #   object_type = "boot.LocalDisk"
   # }
 
-  # dynamic "profiles" {
-  #   for_each = var.profiles
-  #   content {
-  #     moid        = profiles.value.moid
-  #     object_type = profiles.value.object_type
-  #   }
-  # }
+## example from tf-int-imm module
+#   module "boot_uefi_san" {
+#   source      = "terraform-cisco-modules/imm/intersight//modules/boot_order_policies"
+#   boot_secure = true
+#   description = "UEFI SAN Boot Example."
+#   name        = "example_uefi_san"
+#   org_moid    = local.org_moid
+#   profiles    = []
+#   tags        = var.tags
+#   boot_devices = [
+#     {
+#       additional_properties = jsonencode(
+#         {
+#           Bootloader = {
+#             ClassId     = "boot.Bootloader"
+#             Description = "rhel",
+#             Name        = "bootx64.efi",
+#             ObjectType  = "boot.Bootloader"
+#             Path        = "\\EFI\\BOOT\\BOOTx64.EFI"
+#           },
+#           InterfaceName = "vHBA-A",
+#           Lun           = 0,
+#           Slot          = "MLOM",
+#           Wwpn          = "20:00:00:25:B5:00:01:ff"
+#         }
+#       )
+#       enabled     = true,
+#       name        = "interfacename",
+#       object_type = "boot.San",
+#     },
+#   ]
+# }
+
+## example from tf-int-imm module
+# module "boot_legacy_san" {
+#   depends_on = [
+#     data.intersight_organization_organization.org_moid
+#   ]
+#   source      = "terraform-cisco-modules/imm/intersight//modules/boot_order_policies"
+#   boot_mode   = "Legacy"
+#   description = "Legacy SAN Boot Example."
+#   name        = "example_legacy_san"
+#   org_moid    = local.org_moid
+#   profiles    = []
+#   tags        = var.tags
+#   boot_devices = [
+#     {
+#       additional_properties = jsonencode(
+#         {
+#           InterfaceName = "vHBA-A",
+#           Lun           = 0,
+#           Slot          = "MLOM",
+#           Wwpn          = "20:00:00:25:B5:00:01:ff"
+#         }
+#       )
+#       enabled     = true,
+#       name        = "SAN_A_Boot",
+#       object_type = "boot.San",
+#     },
+#   ]
+# }
 
   dynamic "tags" {
     for_each = var.tags
