@@ -60,10 +60,10 @@ resource "intersight_server_profile_template" "server_template_1" {
 #    moid = intersight_iam_end_point_user_policy.user_policy1.moid
 #    object_type = "iam.EndPointUserPolicy"
 #  }
-#  policy_bucket {
-#    moid = intersight_sol_policy.sol1.moid
-#    object_type = "sol.Policy"
-#  }
+ policy_bucket {
+   moid = intersight_sol_policy.sol1.moid
+   object_type = "sol.Policy"
+ }
   policy_bucket {
     moid = intersight_vnic_lan_connectivity_policy.vnic_lan_1.moid
     object_type = "vnic.LanConnectivityPolicy"
