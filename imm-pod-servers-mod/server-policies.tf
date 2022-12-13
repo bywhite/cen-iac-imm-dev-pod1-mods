@@ -200,7 +200,6 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     object_type = "organization.Organization"
   }
 
-
  boot_devices {
    enabled     = true
    name        = "KVM_DVD"
@@ -244,11 +243,11 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   }
 
 
-  #   boot_devices {
-  #   enabled     = true
-  #   name        = "LocalDisk"
-  #   object_type = "boot.LocalDisk"
-  # }
+    boot_devices {
+    enabled     = true
+    name        = "LocalDisk"
+    object_type = "boot.LocalDisk"
+  }
 
 ## example from tf-int-imm module
 #   module "boot_uefi_san" {
