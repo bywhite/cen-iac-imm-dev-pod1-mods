@@ -83,24 +83,6 @@ resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_cont
   }
 }
 
-# # =============================================================================
-# # Eth Network Policy     -Not used by Server Template
-# # -----------------------------------------------------------------------------
-# resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy1" {
-#   name        = "${var.server_policy_prefix}-vlan-policy"
-#   description = var.description
-#   organization {
-#     moid = var.organization
-#   }
-
-#   dynamic "tags" {
-#     for_each = var.tags
-#     content {
-#       key   = tags.value.key
-#       value = tags.value.value
-#     }
-#   }
-# }
 
 # =============================================================================
 #  Network Group Policy (VLANs)            -tied to each vNIC policy Ex: eth0
