@@ -222,7 +222,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
  boot_devices {
    enabled         = true
    name            = "PXE-eth0"
-   object_type     = "boot.pxe"
+   object_type     = "boot.Pxe"
    additional_properties = jsonencode({
       interfacesource = "name"
       interfacename   = "eth0"
