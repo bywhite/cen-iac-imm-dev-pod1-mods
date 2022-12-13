@@ -15,7 +15,6 @@ resource "intersight_power_policy" "server_power_x" {
   power_priority = "Medium"
   power_profiling = "Enabled"
   power_restore_state = "LastState"
-  power_save_mode = "Enabled"
   
   organization {
     moid        = var.organization
