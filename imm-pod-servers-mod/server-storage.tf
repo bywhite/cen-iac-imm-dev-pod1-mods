@@ -22,8 +22,3 @@ resource "intersight_storage_storage_policy" "server_storage_policy1" {
   global_hot_spares = "3"
   
 }
-
-variable "organization" {
-   type = string
-   description = "<value for organization>"
- }
