@@ -73,12 +73,12 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
     io_retry_timeout  = 5
     link_down_timeout = 30000
     port_down_timeout = 10000
-    object_type =     = "vnic.FcErrorRecoverySettings"
+    object_type       = "vnic.FcErrorRecoverySettings"
   }
   flogi_settings {
     retries     = 8
     timeout     = 4000
-    object_type = "vnic.Flogi_Settings"
+    object_type = "vnic.FlogiSettings"
   }
   interrupt_settings {
     mode        = "MSIx"
