@@ -1,10 +1,10 @@
 # =============================================================================
 #  Server SAN Related  Policies
 #  - SAN Connectivity Policy
-#  - 
-#  - 
-#  - 
-#  - 
+#  - FC Adapter Policy
+#  - Network Policy
+#  - FC QoS Policy
+#  - FC Interface
 #  - 
 # -----------------------------------------------------------------------------
 
@@ -52,9 +52,57 @@ resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
         #   wwpn_static_address          = ""
 
 # =============================================================================
-# FC Adapter Policy
+# FC Adapter Policy      HBA Adapter Settings  ## These values need updating
 # -----------------------------------------------------------------------------
+resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
+  name                = "${var.server_policy_prefix}-fc-adapter-1"
+  description         = var.description
+  error_detection_timeout     = 2000
 
+  io_throttle_count           = 256
+  lun_count                   = 1024
+  lun_queue_depth             = 254
+  resource_allocation_timeout = 10000
+  organization {
+    moid        = var.org_moid
+    object_type = "organization.Organization"
+  }
+  error_recovery_settings {
+    enabled           = false
+    io_retry_count    = 30
+    io_retry_timeout  = 5
+    link_down_timeout = 30000
+    port_down_timeout = 10000
+    object_type =     = "vnic.FcErrorRecoverySettings"
+  }
+  flogi_settings {
+    retries     = 8
+    timeout     = 4000
+    object_type = "vnic.Flogi_Settings"
+  }
+  interrupt_settings {
+    mode        = "MSIx"
+    object_type = "vnic.FcInterruptSettings"
+  }
+  plogi_settings {
+    retries     = 8
+    timeout     = 20000
+    object_type = "vnic.PlogiSettings"
+  }
+  rx_queue_settings {
+    ring_size   = 128
+    object_type = "vnic.FcQueueSettings"
+  }
+  tx_queue_settings {
+    ring_size   = 128
+    object_type = "vnic.FcQueueSettings"
+  }
+  scsi_queue_settings {
+    nr_count    = 8
+    ring_size   = 152
+    object_type = "vnic.ScsiQueueSettings"
+  }
+}
 
 
 # =============================================================================
