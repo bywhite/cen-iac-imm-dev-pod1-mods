@@ -1,11 +1,11 @@
 # =============================================================================
 #  Server SAN Related  Policies
 #  - SAN Connectivity Policy
+#  - HBA Instances (fc0, fc1, fc2, fc3)
 #  - FC Adapter Policy
 #  - Network Policy
 #  - FC QoS Policy
 #  - FC Interface
-#  - 
 # -----------------------------------------------------------------------------
 
 # =============================================================================
@@ -26,17 +26,16 @@ resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+#   Add all vHBA Profiles (FC Interfaces) to SAN Connectivity Policy or vice-versa
 #   profiles {
 #     moid        = var.profile
 #     object_type = "server.Profile"
 #   }
 }
 
-
-
-# =============================================================================
-# FC Adapter Policy      HBA Adapter Settings  ## These values need updating
-# -----------------------------------------------------------------------------
+# ===============================================================================
+# vnic FC Adapter Policy      HBA Adapter Settings  ## These values need updating
+# -------------------------------------------------------------------------------
 resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
   name                = "${var.server_policy_prefix}-fc-adapter-1"
   description         = var.description
@@ -88,7 +87,7 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 
 
 # =============================================================================
-# FC Network Policy
+# vnic FC Network Policy
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_fc_network_policy" "v_fc_network_a1" {
   name                = "${var.server_policy_prefix}-fc-network-a1"
@@ -117,7 +116,7 @@ resource "intersight_vnic_fc_network_policy" "v_fc_network_b1" {
 }
 
 # =============================================================================
-# FC QoS Policy
+# vnic FC QoS Policy
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
   name                = "${var.server_policy_prefix}-fc-qos1"
@@ -133,65 +132,84 @@ resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
 }
 
 # =============================================================================
-# FC Interface
+# vnic FC Interface objects  fc0  and fc1
 # -----------------------------------------------------------------------------
 
+resource "intersight_vnic_fc_if" "fc0" {
+  name                = "${var.server_policy_prefix}-fc0"
+  description         = var.description
+  order = 2
+  placement {
+    id          = "1"
+    auto_slot_id = false
+    pci_link    = 0
+    auto_pci_link = false
+    uplink      = 0
+    switch_id   = "A"
+    object_type = "vnic.PlacementSettings"
+  }
+  persistent_bindings = true
+  wwpn_address_type = "POOL"
+  wwpn_pool {
+    moid = var.wwpn_pool_b_moid
+    object_type = "fcpool.Pool"
+  }
+  san_connectivity_policy {
+    moid        = intersight_vnic_san_connectivity_policy.vnic_san_con_1.moid
+    object_type = "vnic.SanConnectivityPolicy"
+  }
+  fc_network_policy {
+    moid        = intersight_vnic_fc_network_policy.v_fc_network_b1.moid
+    object_type = "vnic.FcNetworkPolicy"
+  }
+  fc_adapter_policy {
+    moid        = intersight_vnic_fc_adapter_policy.fc_adapter.moid
+    object_type = "vnic.FcAdapterPolicy"
+  }
+  fc_qos_policy {
+    moid        = intersight_vnic_fc_qos_policy.v_fc_qos1.moid
+    object_type = "vnic.FcQosPolicy"
+  }
+}
 
-# resource "intersight_vnic_fc_if" "vhbas" {
-#   depends_on = [
-#     local.org_moid,
-#     intersight_fabric_fc_zone_policy.fc_zone_policies,
-#     intersight_vnic_fc_adapter_policy.fibre_channel_adapter_policies,
-#     intersight_vnic_fc_network_policy.fibre_channel_network_policies,
-#     intersight_vnic_fc_qos_policy.fibre_channel_qos_policies,
-#     intersight_vnic_san_connectivity_policy.san_connectivity_policies
-#   ]
-#   for_each            = local.vhbas
-#   name                = each.value.name
-#   order               = each.value.placement_pci_order
-#   persistent_bindings = each.value.persistent_lun_bindings
-#   static_wwpn_address = each.value.wwpn_allocation_type == "STATIC" ? each.value.wwpn_static_address : ""
-#   type                = each.value.vhba_type
-#   wwpn_address_type   = each.value.wwpn_allocation_type
-#   fc_adapter_policy {
-#     moid = intersight_vnic_fc_adapter_policy.fibre_channel_adapter_policies[
-#       each.value.fibre_channel_adapter_policy
-#     ].moid
-#   }
-#   fc_network_policy {
-#     moid = intersight_vnic_fc_network_policy.fibre_channel_network_policies[
-#       each.value.fibre_channel_network_policy
-#     ].moid
-#   }
-#   fc_qos_policy {
-#     moid = intersight_vnic_fc_qos_policy.fibre_channel_qos_policies[
-#       each.value.fibre_channel_qos_policy
-#     ].moid
-#   }
-#   san_connectivity_policy {
-#     moid = intersight_vnic_san_connectivity_policy.san_connectivity_policies[
-#       each.value.san_connectivity_policy
-#     ].moid
-#   }
-#   placement {
-#     id        = each.value.placement_slot_id
-#     pci_link  = each.value.placement_pci_link
-#     switch_id = each.value.placement_switch_id
-#     uplink    = each.value.placement_uplink_port
-#   }
-#   dynamic "fc_zone_policies" {
-#     for_each = toset(each.value.fc_zone_policies)
-#     content {
-#       moid = intersight_fabric_fc_zone_policy.fc_zone_policies[fc_zone_policies.value].moid
-#     }
-#   }
-#   dynamic "wwpn_pool" {
-#     for_each = each.value.wwpn_allocation_type == "POOL" ? [local.wwpn_pools[each.value.wwpn_pool]] : []
-#     content {
-#       moid = wwpn_pool.value
-#     }
-#   }
-# }
+resource "intersight_vnic_fc_if" "fc1" {
+  name                = "${var.server_policy_prefix}-fc1"
+  description         = var.description
+  order = 3
+  placement {
+    id          = "1"
+    auto_slot_id = false
+    pci_link    = 0
+    auto_pci_link = false
+    uplink      = 0
+    switch_id   = "B"
+    object_type = "vnic.PlacementSettings"
+  }
+  persistent_bindings = true
+  wwpn_address_type = "POOL"
+  wwpn_pool {
+    moid = var.wwpn_pool_b_moid
+    object_type = "fcpool.Pool"
+  }
+  san_connectivity_policy {
+    moid        = intersight_vnic_san_connectivity_policy.vnic_san_con_1.moid
+    object_type = "vnic.SanConnectivityPolicy"
+  }
+  fc_network_policy {
+    moid        = intersight_vnic_fc_network_policy.v_fc_network_b1.moid
+    object_type = "vnic.FcNetworkPolicy"
+  }
+  fc_adapter_policy {
+    moid        = intersight_vnic_fc_adapter_policy.fc_adapter.moid
+    object_type = "vnic.FcAdapterPolicy"
+  }
+  fc_qos_policy {
+    moid        = intersight_vnic_fc_qos_policy.v_fc_qos1.moid
+    object_type = "vnic.FcQosPolicy"
+  }
+}
+
+
 
 # NOTES
         #   fc_zone_policies             = []
