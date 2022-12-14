@@ -91,16 +91,13 @@ resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_cont
 # https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_eth_network_group_policy
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy1" {
   for_each = var.vnic_vlan_sets
- # each.key and each.value  Ex: each.key = "eth0" each.value = "10,12,1000-1011"
- # Could use for_each to iterate through eth[0] vlans, eth[1] vlans
+# each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"]
 
-
-  name        = "${var.server_policy_prefix}-eth-network-group"
+  name        = "${var.server_policy_prefix}-${each.value["vnic_name"]}-network-group"
   description = var.description
   vlan_settings {
-    # native_vlan   = var.vnic_native_vlan
-    native_vlan   = null
-    allowed_vlans = "42,1000"
+    native_vlan   = each.value["native_vlan"]
+    allowed_vlans = each.value["vlan_range"]
     # allowed_vlans = join(",", values(var.uplink_vlans_6454))
   }
   organization {

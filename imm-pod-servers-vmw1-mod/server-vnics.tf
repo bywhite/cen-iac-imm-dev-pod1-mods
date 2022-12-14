@@ -92,7 +92,7 @@ resource "intersight_vnic_eth_if" "eth0" {
     moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
   }
   fabric_eth_network_group_policy {   # Unique per eth[*] - Sets VLAN list (2,4,7,1000-1011)
-    moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1.moid
+  #  moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1.moid
   }
   fabric_eth_network_control_policy {  # Sets CDP LLDP and link down behavior 
     moid = intersight_fabric_eth_network_control_policy.fabric_eth_network_control_policy1.moid
@@ -147,7 +147,7 @@ resource "intersight_vnic_eth_if" "eth1" {
     moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
   }
   fabric_eth_network_group_policy {
-    moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1.moid
+  #  moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1.moid
   }
   fabric_eth_network_control_policy {
     moid = intersight_fabric_eth_network_control_policy.fabric_eth_network_control_policy1.moid
