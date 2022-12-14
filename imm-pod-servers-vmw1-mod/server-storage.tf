@@ -8,7 +8,7 @@
 resource "intersight_storage_storage_policy" "server_storage_policy1" {
   name                     = "${var.server_policy_prefix}-storage-policy-1"
   description              = var.description
-  
+
   m2_virtual_drive {
     enable      = true
     controller_slot = "MSTOR-RAID-1"
@@ -17,9 +17,10 @@ resource "intersight_storage_storage_policy" "server_storage_policy1" {
 
   # use_jbod_for_vd_creation = false
   # unused_disks_state       = "NoChange"
-  # organization {
-  #   object_type = "organization.Organization"
-  #   moid        = var.organization
-  # }
+  
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
   
 }
