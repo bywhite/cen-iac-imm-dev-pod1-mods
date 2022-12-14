@@ -13,9 +13,9 @@ output "server_profile_template_moid" {
   value       = intersight_server_profile_template.server_template_1.moid
 }
 
-output "server_interfaces"
+output "server_interfaces" {
   description = "List of created interfaces"
   value       = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1
-
+}
 
 # Optionally output list of Server Profile Names and MOIDs created
