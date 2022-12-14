@@ -8,9 +8,9 @@ resource "intersight_server_profile" "server_list" {
   count = var.server_count
   name        = "${var.server_policy_prefix}-server-${count.index + 1}"
   description              = var.description
-  action = "No-op"
+  # action = "No-op"
   server_assignment_mode = "None"  #options: "POOL" "Static"
-  target_platform = "FIAttached"
+  # target_platform = "FIAttached"
   type = "instance"
   uuid_address_type = "POOL"
 
