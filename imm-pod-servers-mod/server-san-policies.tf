@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 
 # =============================================================================
-# SAN Connectivity   "vnic.SanConnectivityPolicy"
+# SAN Connectivity   object: "vnic.SanConnectivityPolicy"
 # -----------------------------------------------------------------------------
 
 resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
@@ -33,23 +33,6 @@ resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
 }
 
 
-
-
-        #   fc_zone_policies             = []
-        #   fibre_channel_adapter_policy = "**REQUIRED**"
-        #   fibre_channel_network_policy = "**REQUIRED**"
-        #   fibre_channel_qos_policy     = "**REQUIRED**"
-        #   name                         = "vhba"
-        #   persistent_lun_bindings      = false
-        #   placement_pci_link           = 0
-        #   placement_pci_order          = 0
-        #   placement_slot_id            = "MLOM"
-        #   placement_switch_id          = "None"
-        #   placement_uplink_port        = 0
-        #   vhba_type                    = "fc-initiator"
-        #   wwpn_allocation_type         = "POOL"
-        #   wwpn_pool                    = ""
-        #   wwpn_static_address          = ""
 
 # =============================================================================
 # FC Adapter Policy      HBA Adapter Settings  ## These values need updating
@@ -107,7 +90,31 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 # =============================================================================
 # FC Network Policy
 # -----------------------------------------------------------------------------
+resource "intersight_vnic_fc_network_policy" "v_fc_network_a1" {
+  name                = "${var.server_policy_prefix}-fc-network-a1"
+  description         = var.description
+  vsan_settings {
+    id          = 100
+    object_type = "vnic.VsanSettings"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
 
+}
+resource "intersight_vnic_fc_network_policy" "v_fc_network_b1" {
+  name                = "${var.server_policy_prefix}-fc-network-b1"
+  description         = var.description
+  vsan_settings {
+    id          = 200
+    object_type = "vnic.VsanSettings"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
 
 # =============================================================================
 # FC QoS Policy
@@ -185,3 +192,20 @@ resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
 #     }
 #   }
 # }
+
+# NOTES
+        #   fc_zone_policies             = []
+        #   fibre_channel_adapter_policy = "**REQUIRED**"
+        #   fibre_channel_network_policy = "**REQUIRED**"
+        #   fibre_channel_qos_policy     = "**REQUIRED**"
+        #   name                         = "vhba"
+        #   persistent_lun_bindings      = false
+        #   placement_pci_link           = 0
+        #   placement_pci_order          = 0
+        #   placement_slot_id            = "MLOM"
+        #   placement_switch_id          = "None"
+        #   placement_uplink_port        = 0
+        #   vhba_type                    = "fc-initiator"
+        #   wwpn_allocation_type         = "POOL"
+        #   wwpn_pool                    = ""
+        #   wwpn_static_address          = ""
