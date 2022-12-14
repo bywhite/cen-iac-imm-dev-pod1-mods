@@ -137,7 +137,6 @@ resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
 
 resource "intersight_vnic_fc_if" "fc0" {
   name                = "${var.server_policy_prefix}-fc0"
-  description         = var.description
   order = 2
   placement {
     id          = "1"
@@ -174,7 +173,6 @@ resource "intersight_vnic_fc_if" "fc0" {
 
 resource "intersight_vnic_fc_if" "fc1" {
   name                = "${var.server_policy_prefix}-fc1"
-  description         = var.description
   order = 3
   placement {
     id          = "1"
