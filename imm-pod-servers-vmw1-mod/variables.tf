@@ -85,22 +85,44 @@ variable "server_count" {
 #   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
 # }
 
-variable "server_nic_vlans" {
-  type        = list(map(string))
-  description = "list of mapped port-names and VLAN-IDs for server template"
-  # Used by Network Connectivity Policy and Eth-Network-Group Policy
-  # includes "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
-  # Pairs to indicate vnic_name and its vlan ID
-  # "eth0" : "42", "eth1" : "42", "eth2" : "55,58,60-72,1000-1022"
-  ### OR ###
-  # default   = [
-  #   { "eth0" : "42", "native" : "42" },
-  #   { "eth1" : "42", "native" : "42" },
-  #   { "eth2" : "50,55,1000-1011", "native" : "" },
-  #   { "eth3" : "50,55,1000-1011", "native" : "" }
-  # ]
-}
+# variable "server_nic_vlans" {
+#   type        = list(map(string))
+#   description = "list of mapped port-names and VLAN-IDs for server template"
+#   # Used by Network Connectivity Policy and Eth-Network-Group Policy
+#   # includes "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
+#   # Pairs to indicate vnic_name and its vlan ID
+#   # "eth0" : "42", "eth1" : "42", "eth2" : "55,58,60-72,1000-1022"
+#   ### OR ###
+#   # default   = [
+#   #   { "eth0" : "42", "native" : "42" },
+#   #   { "eth1" : "42", "native" : "42" },
+#   #   { "eth2" : "50,55,1000-1011", "native" : "" },
+#   #   { "eth3" : "50,55,1000-1011", "native" : "" }
+#   # ]
+# }
 
+
+variable "vnic_vlan_sets" {
+  type       = map(object({
+    vnic_name    = string
+    native_vlan  = string
+    vlan_range   = string
+  }))
+  description = "Map of vNic interfaces paired with their vlan range"
+  default = {
+    "eth0"  = {
+      vnic_name  = "eth0"
+      native_vlan = 44
+      vlan_range  = "44, 50, 1000-1011"
+    }
+    "eth1"  = {
+      vnic_name   = "eth1"
+      native_vlan = "44"
+      vlan_range  = "44, 50, 1000-1011"
+    }
+  }
+}
+# for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
 
 # =============================================================================
 # IMC
