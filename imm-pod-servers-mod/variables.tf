@@ -62,7 +62,7 @@ variable "server_uuid_pool_moid" {
   description = "moid of UUID Pool"
 }
 
-variable "uuid_pool_name" {
+variable "server_uuid_pool_name" {
   type = string
   description = "name of UUID Pool"
 }
