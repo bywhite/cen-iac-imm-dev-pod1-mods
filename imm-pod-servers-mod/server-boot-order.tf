@@ -11,7 +11,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_boot_precision_policy" "boot_precision_1" {
-  name                     = "${var.server_policy_prefix}-vmw-boot-order-policy-1"
+  name                     = "${var.server_policy_prefix}-boot-order-policy-1"
   description              = var.description
   configured_boot_mode     = "Uefi"
   enforce_uefi_secure_boot = false
