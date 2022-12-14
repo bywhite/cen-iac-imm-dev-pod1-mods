@@ -117,7 +117,7 @@ variable "server_imc_admin_password" {
 }
 
 # =============================================================================
-# SNMP
+# SNMP & Syslog
 # -----------------------------------------------------------------------------
 
 variable "snmp_password" {
@@ -129,6 +129,10 @@ variable "snmp_ip"  {
   default     = "127.0.0.1"
 }
 
+variable "syslog_remote_ip"  {
+  type        = string
+  default     = "127.0.0.1"
+}
 
 # variable "ntp_servers" {
 #   type        = list(string)
