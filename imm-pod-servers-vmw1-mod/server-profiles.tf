@@ -5,7 +5,6 @@
 
 
 resource "intersight_server_profile" "server_list" {
-  # Will add Count to create multiple instances and use index to change server names
   count = var.server_count
   name        = "${var.server_policy_prefix}-server-${count.index + 1}"
   description              = var.description
@@ -45,13 +44,6 @@ resource "intersight_server_profile" "server_list" {
 #     }
 #   }
 
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
 
   depends_on = [
     intersight_server_profile_template.server_template_1
