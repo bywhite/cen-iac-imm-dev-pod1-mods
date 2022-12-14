@@ -113,12 +113,12 @@ variable "vnic_vlan_sets" {
     "eth0"  = {
       vnic_name  = "eth0"
       native_vlan = 44
-      vlan_range  = "44, 50, 1000-1011"
+      vlan_range  = "44,50,1000-1011"
     }
     "eth1"  = {
       vnic_name   = "eth1"
       native_vlan = "44"
-      vlan_range  = "44, 50, 1000-1011"
+      vlan_range  = "44,50,1000-1011"
     }
   }
 }
