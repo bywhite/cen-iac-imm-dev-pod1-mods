@@ -52,14 +52,14 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     })
   }
 
-  boot_devices {
-    enabled     = true
-    name        = "M2-RAID"
-    object_type = "boot.LocalDisk"
-       additional_properties = jsonencode({
-        slot        = "MSTOR-RAID"
-    })
-  }
+  # boot_devices {
+  #   enabled     = true
+  #   name        = "M2-RAID"
+  #   object_type = "boot.LocalDisk"
+  #      additional_properties = jsonencode({
+  #       slot        = "MSTOR-RAID"
+  #   })
+  # }
 
   # boot_devices {
   #   enabled     = true
