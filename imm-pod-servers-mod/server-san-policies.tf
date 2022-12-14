@@ -63,7 +63,7 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
   lun_queue_depth             = 254
   resource_allocation_timeout = 10000
   organization {
-    moid        = var.org_moid
+    moid        = var.organization
     object_type = "organization.Organization"
   }
   error_recovery_settings {
