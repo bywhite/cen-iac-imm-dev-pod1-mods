@@ -58,7 +58,6 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
   name                = "${var.server_policy_prefix}-fc-adapter-1"
   description         = var.description
   error_detection_timeout     = 2000
-
   io_throttle_count           = 256
   lun_count                   = 1024
   lun_queue_depth             = 254
@@ -69,10 +68,10 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
   }
   error_recovery_settings {
     enabled           = false
-    io_retry_count    = 30
-    io_retry_timeout  = 5
-    link_down_timeout = 30000
-    port_down_timeout = 10000
+    io_retry_count    = 255
+    io_retry_timeout  = 50
+    link_down_timeout = 240000
+    port_down_timeout = 240000
     object_type       = "vnic.FcErrorRecoverySettings"
   }
   flogi_settings {
