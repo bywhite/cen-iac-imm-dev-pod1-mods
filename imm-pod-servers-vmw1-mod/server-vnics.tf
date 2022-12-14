@@ -53,7 +53,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_eth_if" "eth0" {
   for_each = var.vnic_vlan_sets
-# each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"]
+# each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"] each.value["switch_id"]
 
   # other: int_name, switch_id(A/B), vnic_lan_moid[*], adapter_pol_moid[*], qos_moid[*], net_grp_moid[*], ncp_moid  
   name             = "${var.server_policy_prefix}-${each.value["vnic_name"]}"
@@ -66,7 +66,7 @@ resource "intersight_vnic_eth_if" "eth0" {
   placement {
     id        = ""
     pci_link  = 0
-    switch_id = "A"
+    switch_id = each.value["switch_id"]
     uplink    = 0
   }
   cdn {

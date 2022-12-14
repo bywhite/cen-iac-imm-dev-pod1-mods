@@ -86,12 +86,12 @@ resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_cont
 
 # =============================================================================
 #  Network Group Policy (VLANs)            -tied to each vNIC policy Ex: eth0
-#  Used by "intersight_vnic_eth_if" resource to create "eth0" and "eth1"  
+#  Used by "intersight_vnic_eth_if" resource to create "eth0", "eth1", etc
 # -----------------------------------------------------------------------------
 # https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/fabric_eth_network_group_policy
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy1" {
   for_each = var.vnic_vlan_sets
-# each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"]
+# each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"]  each.value["switch_id"]
 
   name        = "${var.server_policy_prefix}-${each.value["vnic_name"]}-network-group"
   description = var.description
