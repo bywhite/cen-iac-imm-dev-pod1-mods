@@ -54,7 +54,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 resource "intersight_vnic_eth_if" "eth0" {
   # Will need to iterate through various settings for_each eth[*]
   # count: int_name, switch_id(A/B), vnic_lan_moid[*], adapter_pol_moid[*], qos_moid[*], net_grp_moid[*], ncp_moid  
-  name             = "eth0"
+  name             = "${var.server_policy_prefix}-eth0"
   order            = 0
   failover_enabled = false
   mac_address_type = "POOL"
@@ -109,7 +109,7 @@ resource "intersight_vnic_eth_if" "eth0" {
 
 
 resource "intersight_vnic_eth_if" "eth1" {
-  name             = "eth1"
+  name             = "${var.server_policy_prefix}-eth1"
   order            = 0
   failover_enabled = false
   mac_address_type = "POOL"
