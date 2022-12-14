@@ -6,14 +6,14 @@
 
 resource "intersight_server_profile" "server_list" {
   # Will add Count to create multiple instances and use index to change server names
-  name        = "${var.server_policy_prefix}-server-1"
+  count = var.server_count
+  name        = "${var.server_policy_prefix}-server-${count.index + 1}"
   description              = var.description
   action = "No-op"
   server_assignment_mode = "None"  #options: "POOL" "Static"
   target_platform = "FIAttached"
   type = "instance"
   uuid_address_type = "POOL"
-  wait_for_completion = 
 
   src_template {
       moid = intersight_server_profile_template.server_template_1.moid
