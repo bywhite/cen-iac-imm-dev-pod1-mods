@@ -6,7 +6,7 @@ resource "intersight_chassis_profile" "chassis_9508_profile" {
   description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
-  action          = "No-op"
+  #action          = "No-op"
   #action         = "Validate"
   #iom_profiles    = {  }
   config_context {
