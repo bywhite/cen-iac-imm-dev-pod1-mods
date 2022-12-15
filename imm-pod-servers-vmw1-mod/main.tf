@@ -1,6 +1,8 @@
 # =============================================================================
 # The purpose of this module is to create a Server Profile Template
-# The primary output is the MOID of the created server profile template
+# The primary outputs are servers based on a server profile template
+#  The servers/template are tied to a server_resource_pool 1:1
+#  As physical servers are added to the pool, the servers are associated
 # -----------------------------------------------------------------------------
 
 
