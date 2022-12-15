@@ -210,22 +210,3 @@ resource "intersight_vnic_fc_if" "fc1" {
     intersight_vnic_san_connectivity_policy.vnic_san_con_1
   ]
 }
-
-
-
-# NOTES
-        #   fc_zone_policies             = []
-        #   fibre_channel_adapter_policy = "**REQUIRED**"
-        #   fibre_channel_network_policy = "**REQUIRED**"
-        #   fibre_channel_qos_policy     = "**REQUIRED**"
-        #   name                         = "vhba"
-        #   persistent_lun_bindings      = false
-        #   placement_pci_link           = 0
-        #   placement_pci_order          = 0
-        #   placement_slot_id            = "MLOM"
-        #   placement_switch_id          = "None"
-        #   placement_uplink_port        = 0
-        #   vhba_type                    = "fc-initiator"
-        #   wwpn_allocation_type         = "POOL"
-        #   wwpn_pool                    = ""
-        #   wwpn_static_address          = ""
