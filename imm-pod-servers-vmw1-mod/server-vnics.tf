@@ -70,7 +70,7 @@ resource "intersight_vnic_eth_if" "eth0" {
     # uplink    = 0                          #rack servers only
   }
   cdn {
-    value     = each.value["vnic_name"]    #Same as vNIC Name
+    value     = "${var.server_policy_prefix}-${each.value["vnic_name"]}"  #each.value["vnic_name"]
     nr_source = "vnic"
   }
   usnic_settings {
