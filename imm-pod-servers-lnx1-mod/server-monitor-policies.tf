@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_snmp_policy" "snmp1" {
-  name        = "${var.server_policy_prefix}-snmp-policy"
+  name        = "${var.server_policy_prefix}-snmp-server-policy"
   description              = var.description
   enabled                 = true
   snmp_port               = 161
