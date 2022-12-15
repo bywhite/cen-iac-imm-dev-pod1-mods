@@ -8,7 +8,7 @@
 # SNMP Policy
 # -----------------------------------------------------------------------------
 
-resource "intersight_snmp_policy" "snmp1" {
+resource "intersight_snmp_policy" "server_snmp" {
   name        = "${var.server_policy_prefix}-snmp-server-policy"
   description              = var.description
   enabled                 = true

@@ -7,22 +7,18 @@
 resource "intersight_server_profile" "server_list" {
   # Will add Count to create multiple instances and use index to change server names
   count = var.server_count
-  name        = "${var.server_policy_prefix}-server-${count.index + 1}"
-  description              = var.description
-  action = "No-op"
-  server_assignment_mode = "None"  #options: "POOL" "Static"
-  target_platform = "FIAttached"
+
+  name                   = "${var.server_policy_prefix}-server-${count.index + 1}"
+  # description          = var.description        # Set by template
+  # action               = "No-op"                # Set by template
+  server_assignment_mode = "None"                 #options: "POOL" "Static" "None"
+  # target_platform      = "FIAttached"           # Set by template
   type = "instance"
-  uuid_address_type = "POOL"
+
 
   src_template {
       moid = intersight_server_profile_template.server_template_1.moid
       object_type = "server.ProfileTemplate"
-    }
-
-  uuid_pool {
-      moid        = var.server_uuid_pool_moid
-      object_type = "uuidpool.Pool"
     }
 
   organization {
@@ -45,13 +41,13 @@ resource "intersight_server_profile" "server_list" {
 #     }
 #   }
 
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
+  # dynamic "tags" {
+  #   for_each = var.tags
+  #   content {
+  #     key   = tags.value.key
+  #     value = tags.value.value
+  #   }
+  # }
 
   depends_on = [
     intersight_server_profile_template.server_template_1

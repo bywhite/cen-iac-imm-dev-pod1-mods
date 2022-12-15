@@ -26,6 +26,12 @@ resource "intersight_server_profile_template" "server_template_1" {
       value = tags.value.value
     }
   }
+ 
+   uuid_address_type = "POOL"
+  uuid_pool {
+      moid        = var.server_uuid_pool_moid
+      object_type = "uuidpool.Pool"
+    }
 
   # the following policy_bucket statements map different policies to this
   # template -- the object_type shows the policy type
@@ -56,7 +62,7 @@ resource "intersight_server_profile_template" "server_template_1" {
     object_type = "access.Policy"
   }
   policy_bucket {
-    moid = intersight_snmp_policy.snmp1.moid
+    moid = intersight_snmp_policy.server_nmp.moid
     object_type = "snmp.Policy"
   }
   policy_bucket {
@@ -76,6 +82,9 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_vnic_lan_connectivity_policy.vnic_lan_1.moid
     object_type = "vnic.LanConnectivityPolicy"
   }
+
+#  Need to add in vn_san_con moid policy bucket
+
   # IMC User Policy  
   policy_bucket {
     moid = intersight_iam_end_point_user_policy.imc_user1.moid
@@ -91,7 +100,7 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
 
   depends_on = [
-    intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.snmp1,
+    intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.server_snmp,
     intersight_syslog_policy.syslog_policy, intersight_iam_end_point_user_policy.imc_user1,
     intersight_storage_storage_policy.server_storage_policy1, intersight_bios_policy.bios_default_policy
   ]
