@@ -182,7 +182,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
   }
   classes {
     admin_state        = "Disabled"
-    # bandwidth_percent  = 0
+    # bandwidth_percent  = 0      # Optional
     weight             = 10
     cos                = 5
     mtu                = 9216
