@@ -8,9 +8,9 @@ resource "intersight_server_profile" "server_list" {
   count = var.server_count
   name        = "${var.server_policy_prefix}-server-${count.index + 1}"
   description              = var.description
-  # action = "No-op"
-  server_assignment_mode = "None"  #options: "POOL" "Static"
-  # target_platform = "FIAttached"
+  action = "No-op"
+  # server_assignment_mode = "None"  #options: "POOL" "Static"
+  target_platform = "FIAttached"
   type = "instance"
   uuid_address_type = "POOL"
 
@@ -29,20 +29,20 @@ resource "intersight_server_profile" "server_list" {
     object_type = "organization.Organization"
   }
 
-#   dynamic "associated_server_pool" {
-#     for_each = var.associated_server_pool
-#     content {
-#       moid        = assigned_server.value.moid
-#       object_type = "resourcepool.Pool"
-#     }
-#   }
-#   dynamic "assigned_server" {
-#     for_each = var.assigned_server
-#     content {
-#       moid        = assigned_server.value.moid
-#       object_type = assigned_server.value.object_type
-#     }
-#   }
+  # dynamic "associated_server_pool" {
+  #   for_each = var.associated_server_pool
+  #   content {
+  #     moid        = assigned_server.value.moid
+  #     object_type = "resourcepool.Pool"
+  #   }
+  # }
+  # dynamic "assigned_server" {
+  #   for_each = var.assigned_server
+  #   content {
+  #     moid        = assigned_server.value.moid
+  #     object_type = assigned_server.value.object_type
+  #   }
+  # }
 
 
   depends_on = [
