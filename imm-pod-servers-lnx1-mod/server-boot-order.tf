@@ -47,8 +47,8 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
       interfacename   = "eth0"  # use if interfacesource is "name"
       iptype          = "IPv4"
       slot            = "MLOM"
-      port           = "-1"    # use if interfacesource is "port"
-      MacAddress     = ""      # use if interfacesource is "mac"
+      # port           = "-1"    # use only if interfacesource is "port"
+      # MacAddress     = ""      # use only if interfacesource is "mac"
     })
   }
 
