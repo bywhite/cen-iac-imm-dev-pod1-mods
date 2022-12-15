@@ -66,7 +66,7 @@ resource "intersight_vnic_eth_if" "eth0" {
   placement {
     id        = ""
     pci_link  = 0
-    switch_id = "A"   #each.value["switch_id"]
+    switch_id = each.value["switch_id"]
     uplink    = 0
   }
   cdn {
