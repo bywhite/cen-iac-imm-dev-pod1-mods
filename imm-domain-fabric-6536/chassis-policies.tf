@@ -104,7 +104,7 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_snmp_policy" "snmp1" {
-  name        = "${var.policy_prefix}-snmp-policy"
+  name        = "${var.policy_prefix}-chassis-snmp-policy"
   description              = var.description
   enabled                 = true
   snmp_port               = 161
