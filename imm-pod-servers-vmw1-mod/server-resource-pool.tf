@@ -5,7 +5,7 @@
 
 resource "intersight_resourcepool_pool" "resource_pool" {
   assignment_order = "sequential"
-  name        = "${var.server_policy_prefix}-pool"
+  name        = "${var.server_policy_prefix}-srv-pool"
   description              = var.description
   pool_type        = "Static"
   resource_pool_parameters = [
