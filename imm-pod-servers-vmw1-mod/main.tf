@@ -56,7 +56,7 @@ resource "intersight_server_profile_template" "server_template_1" {
     object_type = "access.Policy"
   }
   policy_bucket {
-    moid = intersight_snmp_policy.snmp1.moid
+    moid = intersight_snmp_policy.server_snmp.moid
     object_type = "snmp.Policy"
   }
   policy_bucket {
@@ -81,7 +81,7 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid        = intersight_vnic_san_connectivity_policy.vnic_san_con_1.moid
     object_type = "vnic.SanConnectivityPolicy"
   }
-
+  
   # IMC User Policy  
   policy_bucket {
     moid = intersight_iam_end_point_user_policy.imc_user1.moid
@@ -98,7 +98,7 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
 
   depends_on = [
-    intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.snmp1,
+    intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.server_snmp,
     intersight_syslog_policy.syslog_policy, intersight_iam_end_point_user_policy.imc_user1,
     intersight_bios_policy.bios_default_policy, intersight_vnic_san_connectivity_policy.vnic_san_con_1
     # intersight_storage_storage_policy.server_storage_policy1,
