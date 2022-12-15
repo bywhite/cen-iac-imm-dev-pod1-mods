@@ -56,7 +56,7 @@ resource "intersight_vnic_eth_if" "eth_if" {
 # each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"] each.value["switch_id"]
 
   # other: int_name, switch_id(A/B), vnic_lan_moid[*], adapter_pol_moid[*], qos_moid[*], net_grp_moid[*], ncp_moid  
-  name             = "${var.server_policy_prefix}-${each.value["vnic_name"]}"
+  name             = each.value["vnic_name"]   # was "${var.server_policy_prefix}-${each.value["vnic_name"]}"
   order            = 0
   failover_enabled = false
   mac_address_type = "POOL"
@@ -70,7 +70,7 @@ resource "intersight_vnic_eth_if" "eth_if" {
     # uplink    = 0                          #rack servers only
   }
   cdn {
-    value     = "${var.server_policy_prefix}-${each.value["vnic_name"]}"  #each.value["vnic_name"]
+    value     = each.value["vnic_name"]    # was "${var.server_policy_prefix}-${each.value["vnic_name"]}"
     nr_source = "vnic"
   }
   usnic_settings {
