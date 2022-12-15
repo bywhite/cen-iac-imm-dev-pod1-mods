@@ -51,7 +51,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 # =============================================================================
 # vNICs
 # -----------------------------------------------------------------------------
-resource "intersight_vnic_eth_if" "eth0" {
+resource "intersight_vnic_eth_if" "eth_if" {
   for_each = var.vnic_vlan_sets
 # each.value["vnic_name"]  each.value["native_vlan"]  each.value["vlan_range"] each.value["switch_id"]
 
