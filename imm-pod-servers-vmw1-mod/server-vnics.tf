@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 
-
+# Need Pod wide adapter QoS settings and pass in qos_moid for each adapter (need to set pod wide Domain CoS to match)
 resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
   name           = "${var.server_policy_prefix}-vnic-eth-qos"
   description    = var.description
