@@ -132,7 +132,7 @@ resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
 }
 
 # =============================================================================
-# vnic FC Interface objects  fc0  and fc1
+# vnic FC Interface objects  fc0  and fc1 
 # -----------------------------------------------------------------------------
 
 resource "intersight_vnic_fc_if" "fc0" {
@@ -169,6 +169,10 @@ resource "intersight_vnic_fc_if" "fc0" {
     moid        = intersight_vnic_fc_qos_policy.v_fc_qos1.moid
     object_type = "vnic.FcQosPolicy"
   }
+
+  depends_on = [
+    intersight_vnic_san_connectivity_policy.vnic_san_con_1
+  ]
 }
 
 resource "intersight_vnic_fc_if" "fc1" {
@@ -205,6 +209,10 @@ resource "intersight_vnic_fc_if" "fc1" {
     moid        = intersight_vnic_fc_qos_policy.v_fc_qos1.moid
     object_type = "vnic.FcQosPolicy"
   }
+
+  depends_on = [
+    intersight_vnic_san_connectivity_policy.vnic_san_con_1
+  ]
 }
 
 
