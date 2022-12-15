@@ -27,6 +27,12 @@ resource "intersight_server_profile_template" "server_template_1" {
     }
   }
 
+  uuid_address_type = "POOL"
+  uuid_pool {
+      moid        = var.server_uuid_pool_moid
+      object_type = "uuidpool.Pool"
+    }
+
   # the following policy_bucket statements map different policies to this
   # template -- the object_type shows the policy type
   policy_bucket {

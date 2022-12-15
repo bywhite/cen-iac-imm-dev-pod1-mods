@@ -13,16 +13,16 @@
 #   server_assignment_mode = "None"  #options: "POOL" "Static"
 #   target_platform = "FIAttached"
 #   type = "instance"
-#   uuid_address_type = "POOL"
+
+# #   uuid_address_type = "POOL"
+# #   uuid_pool {
+# #       moid        = var.server_uuid_pool_moid
+# #       object_type = "uuidpool.Pool"
+# #     }
 
 #   src_template {
 #       moid = intersight_server_profile_template.server_template_1.moid
 #       object_type = "server.ProfileTemplate"
-#     }
-
-#   uuid_pool {
-#       moid        = var.server_uuid_pool_moid
-#       object_type = "uuidpool.Pool"
 #     }
 
 #   organization {
