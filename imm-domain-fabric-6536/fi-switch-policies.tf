@@ -158,7 +158,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
   # Class of Service 3 is used for FibreChannel (fcoe)
   classes {
     admin_state        = "Enabled"
-    bandwidth_percent  = 17
+    bandwidth_percent  = 14
     weight             = 5
     cos                = 3
     mtu                = 2240
@@ -170,7 +170,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
   }
   classes {
     admin_state        = "Enabled"
-    bandwidth_percent  = 26
+    bandwidth_percent  = 29
     weight             = 9
     cos                = 4
     mtu                = 9216
