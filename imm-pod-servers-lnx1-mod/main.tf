@@ -62,7 +62,7 @@ resource "intersight_server_profile_template" "server_template_1" {
     object_type = "access.Policy"
   }
   policy_bucket {
-    moid = intersight_snmp_policy.server_nmp.moid
+    moid = intersight_snmp_policy.server_snmp.moid
     object_type = "snmp.Policy"
   }
   policy_bucket {
