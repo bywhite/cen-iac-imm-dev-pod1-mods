@@ -64,10 +64,10 @@ resource "intersight_vnic_eth_if" "eth0" {
     moid = var.mac_pool_moid
   }
   placement {
-    id        = ""
-    pci_link  = 0
+    id        = "MLOM"                       # MLOM is same as slot 1 Range is (1-15) and MLOM
+    pci_link  = 0                            # Ignored value for all but VIC1380
     switch_id = each.value["switch_id"]
-    uplink    = 0
+    # uplink    = 0                          #rack servers only
   }
   cdn {
     value     = each.value["vnic_name"]    #Same as vNIC Name
