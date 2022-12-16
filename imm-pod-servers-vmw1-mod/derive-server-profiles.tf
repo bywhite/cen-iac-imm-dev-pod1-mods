@@ -18,7 +18,7 @@ resource "intersight_bulk_mo_cloner" "example" {
   targets {
     object_type = "server.Profile"
     additional_properties = jsonencode({
-      Name = format("Derived-%s", each.key)
+      Name = format("${var.server_policy_prefix}-derived-server-%s", each.key)
     })
   }
 
