@@ -11,8 +11,7 @@ resource "intersight_bulk_mo_cloner" "example" {
   for_each = toset(formatlist("%s", range(1, 1 + 1)))
 
   sources {
-    object_type = intersight_server_profile_template.server_template_1.moid.object_type
-    # object_type = "server.ProfileTemplate"
+    object_type = "server.ProfileTemplate"
     moid        = intersight_server_profile_template.server_template_1.moid
   }
 
