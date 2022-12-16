@@ -22,7 +22,7 @@ resource "intersight_bulk_mo_merger" "merge-server-config" {
   targets {
     object_type = "server.Profile"
    # moid        = intersight_server_profile.server_profile_list[count.index].moid
-    moid       = intersight_server_profile.server_profile_list[4].moid
+    moid       = intersight_server_profile.server_profile_list[3].moid
   }
 
   merge_action = "Merge"
