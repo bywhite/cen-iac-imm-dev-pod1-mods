@@ -17,6 +17,13 @@ resource "intersight_power_policy" "server_power_x" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
+  profiles {
+      moid = intersight_server_profile_template.server_template_1.moid
+      object_type = "server.ProfileTemplate"
+  }
+
+  # # Using this as a work-around to trigger an update to the server profile template
+
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -24,4 +31,8 @@ resource "intersight_power_policy" "server_power_x" {
       value = tags.value.value
     }
   }
+
+  depends_on = [
+    intersight_server_profile.server_profile_list
+  ]
 }
