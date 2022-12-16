@@ -20,7 +20,7 @@ resource "intersight_bulk_mo_merger" "merge-server-config" {
 
   targets {
     object_type = "server.Profile"
-    moid        = intersight_server_profile_template.server_template_1
+    moid        = intersight_server_profile.server_profile_list[*].moid
   }
 
   merge_action = "Merge"
