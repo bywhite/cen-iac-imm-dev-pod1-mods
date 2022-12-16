@@ -7,6 +7,7 @@
 # such resources due to these limitations.
 
 resource "intersight_bulk_mo_merger" "merge-server-config" {
+  for_each = intersight_server_profile.server_profile_list
 
   organization {
     moid        = var.organization
@@ -20,7 +21,8 @@ resource "intersight_bulk_mo_merger" "merge-server-config" {
 
   targets {
     object_type = "server.Profile"
-    moid        = intersight_server_profile.server_profile_list[1].moid
+    moid        = each.value.moid
+   # moid        = intersight_server_profile.server_profile_list[1].moid
   }
 
   merge_action = "Merge"
