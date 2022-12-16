@@ -8,7 +8,7 @@
 
 resource "intersight_bulk_mo_cloner" "example" {
   # this will derive five profiles due to the way the range function works...
-  for_each = toset(formatlist("%s", range(1, 1 + 1)))
+  for_each = toset(formatlist("%s", range(1, 0 + 1)))
 
   sources {
     object_type = "server.ProfileTemplate"
