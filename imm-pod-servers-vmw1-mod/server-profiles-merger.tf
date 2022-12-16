@@ -6,9 +6,12 @@
 # Care must be taken if making changes to code or variables that will result in the deletion of
 # such resources due to these limitations.
 
-resource "intersight_bulk_mo_cloner" "example" {
-  # this will derive five profiles due to the way the range function works...
-  for_each = toset(formatlist("%s", range(1, 2 + 1)))
+resource "intersight_bulk_mo_merger" "merge-server-config" {
+
+  organization {
+    moid        = var.organization
+    object_type = "organization.Organization"
+  }
 
   sources {
     object_type = "server.ProfileTemplate"
@@ -17,13 +20,23 @@ resource "intersight_bulk_mo_cloner" "example" {
 
   targets {
     object_type = "server.Profile"
-    additional_properties = jsonencode({
-      Name = format("${var.server_policy_prefix}-derived-server-%s", each.key)
-    })
+    moid        = intersight_server_profile_template.server_template_1
   }
+
+  merge_action = "Merge"
+
+  # target_config {
+  #  jsonencode({
+      # Target Configurations to be merged into target
+  #  })
+  #}
 
   lifecycle {
     ignore_changes = all # This is required for this resource type
   }
+
+  depends_on = [
+    intersight_server_profile_template.server_template_1
+  ]
 
 }
