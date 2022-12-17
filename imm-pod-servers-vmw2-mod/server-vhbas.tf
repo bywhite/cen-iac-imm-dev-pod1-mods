@@ -102,7 +102,7 @@ resource "intersight_vnic_fc_if" "fc0" {
     object_type = "vnic.SanConnectivityPolicy"
   }
   fc_network_policy {
-    moid        = intersight_vnic_fc_network_policy.v_fc_network_b1.moid
+    moid        = intersight_vnic_fc_network_policy.v_fc_network_a1.moid
     object_type = "vnic.FcNetworkPolicy"
   }
   fc_adapter_policy {
