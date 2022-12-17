@@ -81,7 +81,7 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_fc_if" "fc0" {
   name            = "fc0"
-  order           = 2
+  order           = 4
   placement {
     id            = "1"
     auto_slot_id  = false
@@ -117,7 +117,7 @@ resource "intersight_vnic_fc_if" "fc0" {
 
 resource "intersight_vnic_fc_if" "fc1" {
   name            = "fc1"
-  order           = 3
+  order           = 5
   placement {
     id            = "1"
     auto_slot_id  = false
