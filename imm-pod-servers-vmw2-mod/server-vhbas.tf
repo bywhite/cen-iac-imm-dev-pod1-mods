@@ -81,7 +81,7 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_fc_if" "fc0" {
   name            = "fc0"
-  order           = 4
+  order           = 4   # PCI Link order must be unique across all vNic's and vHBA's
   placement {
     id            = "1"
     auto_slot_id  = false
