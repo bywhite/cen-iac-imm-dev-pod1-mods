@@ -116,22 +116,22 @@ variable "vhba_vsan_sets" {
   type       = map(object({
     vhba_name = string
     vsan_id   = number
-    pci_order = number
     switch_id = string
+    pci_order = number
   }))
   description = "Map of vNic interfaces paired with their vlan range"
   default = {
     "fc0"  = {
       vhba_name = "fc0"
       vsan_id   = 100
-      pci_order = 2
       switch_id = "A"
+      pci_order = 2
     }
     "fc1"  = {
       vvhba_name = "fc1"
       vsan_id    = 200
-      pci_order  = 3
       switch_id   = "B"
+      pci_order  = 3
     }
   }
 }

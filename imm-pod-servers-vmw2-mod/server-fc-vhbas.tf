@@ -9,6 +9,7 @@
 # =============================================================================
 # vnic FC QoS Policy
 # -----------------------------------------------------------------------------
+# To be replaced by a Pod-wide object moid
 resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
   name                = "${var.server_policy_prefix}-fc-qos1"
   description         = var.description
@@ -24,7 +25,8 @@ resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
 
 
 # ===============================================================================
-# vnic FC Adapter Policy      HBA Adapter Settings  ## These values need updating
+# vnic FC Adapter Policy      HBA Adapter Settings  
+## These values need updating based on Storage Platform, OS & workload
 # -------------------------------------------------------------------------------
 resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
   name                = "${var.server_policy_prefix}-fc-adapter-1"

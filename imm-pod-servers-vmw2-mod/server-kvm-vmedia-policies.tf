@@ -1,10 +1,35 @@
 # =============================================================================
 # vMedia Related Server Policies
-#  - vMedia Policy
 #  - KVM Policy
-#  - 
+#  - vMedia Policy
 # -----------------------------------------------------------------------------
 
+
+
+# =============================================================================
+# KVM Policy
+# -----------------------------------------------------------------------------
+
+resource "intersight_kvm_policy" "kvmpolicy_1" {
+  name                      = "${var.server_policy_prefix}-kvm-enabled"
+  description               = var.description
+  enable_local_server_video = true
+  enable_video_encryption   = true
+  enabled                   = true
+  maximum_sessions          = 4
+  organization {
+    moid = var.organization
+  }
+  #attached under policy template policy bucket
+  remote_port = 2068
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
 
 
 # =============================================================================
@@ -78,29 +103,3 @@ resource "intersight_vmedia_policy" "vmedia1" {
   }
 }
 **/
-
-
-# =============================================================================
-# KVM Policy
-# -----------------------------------------------------------------------------
-
-resource "intersight_kvm_policy" "kvmpolicy_1" {
-  name                      = "${var.server_policy_prefix}-kvm-enabled"
-  description               = var.description
-  enable_local_server_video = true
-  enable_video_encryption   = true
-  enabled                   = true
-  maximum_sessions          = 4
-  organization {
-    moid = var.organization
-  }
-  #attached under policy template policy bucket
-  remote_port = 2068
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
