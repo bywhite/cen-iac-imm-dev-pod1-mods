@@ -82,7 +82,7 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 # vnic FC Interface objects  fc0  and fc1
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_fc_if" "fc_if" {     # Was fc0
-  for_each var.vhba_vsan_sets  
+  for_each = var.vhba_vsan_sets  
   # each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   each.value["pci_order"]
   name            = each.value["vhba_name"]
   order           = each.value["pci_order"]   # PCI Link order must be unique across all vNic's and vHBA's
