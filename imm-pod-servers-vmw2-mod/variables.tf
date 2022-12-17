@@ -83,27 +83,60 @@ variable "server_count" {
 variable "vnic_vlan_sets" {
   type       = map(object({
     vnic_name    = string
-    native_vlan  = string
+    native_vlan  = number
     vlan_range   = string
     switch_id    = string
+    pci_order    = number
   }))
   description = "Map of vNic interfaces paired with their vlan range"
   default = {
     "eth0"  = {
-      vnic_name  = "eth0"
+      vnic_name   = "eth0"
       native_vlan = 44
       vlan_range  = "44,50,1000-1011"
       switch_id   = "A"
+      pci_order   = 0
     }
     "eth1"  = {
       vnic_name   = "eth1"
-      native_vlan = "44"
+      native_vlan = 44
       vlan_range  = "44,50,1000-1011"
+      switch_id   = "B"
+      pci_order   =  1
+    }
+  }
+}
+# for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
+
+# =============================================================================
+# Server VLANs per Nic Adapter
+# -----------------------------------------------------------------------------
+
+variable "vhba_vsan_sets" {
+  type       = map(object({
+    vhba_name = string
+    vsan_id   = number
+    pci_order = number
+    switch_id = string
+  }))
+  description = "Map of vNic interfaces paired with their vlan range"
+  default = {
+    "fc0"  = {
+      vhba_name = "fc0"
+      vsan_id   = 100
+      pci_order = 2
+      switch_id = "A"
+    }
+    "fc1"  = {
+      vvhba_name = "fc1"
+      vsan_id    = 200
+      pci_order  = 3
       switch_id   = "B"
     }
   }
 }
 # for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
+
 
 # =============================================================================
 # IMC

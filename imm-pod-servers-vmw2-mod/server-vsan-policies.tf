@@ -1,11 +1,7 @@
 # =============================================================================
 #  Server SAN Related  Policies
 #  - SAN Connectivity Policy
-#  - HBA Instances (fc0, fc1, fc2, fc3)
-#  - FC Adapter Policy
-#  - Network Policy
-#  - FC QoS Policy
-#  - FC Interface
+#  - FC Network Policy (VSAN per HBA)
 # -----------------------------------------------------------------------------
 
 # =============================================================================
