@@ -57,7 +57,7 @@ resource "intersight_vnic_eth_if" "eth_if" {
 
   # other: int_name, switch_id(A/B), vnic_lan_moid[*], adapter_pol_moid[*], qos_moid[*], net_grp_moid[*], ncp_moid  
   name             = each.value["vnic_name"]   # was "${var.server_policy_prefix}-${each.value["vnic_name"]}"
-  order            = 0
+  order            = each.value["pci_order"]   # must be unique across all vNic and vHBA
   failover_enabled = false
   mac_address_type = "POOL"
   mac_pool {
