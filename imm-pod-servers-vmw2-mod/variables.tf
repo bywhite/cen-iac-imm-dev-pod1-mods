@@ -113,11 +113,12 @@ variable "vnic_vlan_sets" {
 # -----------------------------------------------------------------------------
 
 variable "vhba_vsan_sets" {
-  type       = map(object({
-    vhba_name = string
-    vsan_id   = number
-    switch_id = string
-    pci_order = number
+  type             = map(object({
+    vhba_name      = string
+    vsan_id        = number
+    switch_id      = string
+    wwpn_pool_moid = string
+    pci_order      = number
   }))
   description = "Map of vNic interfaces paired with their vlan range"
   default = {
@@ -125,18 +126,20 @@ variable "vhba_vsan_sets" {
       vhba_name = "fc0"
       vsan_id   = 100
       switch_id = "A"
+      wwpn_pool_moid = var.wwpn_pool_a_moid
       pci_order = 2
     }
     "fc1"  = {
       vvhba_name = "fc1"
       vsan_id    = 200
       switch_id   = "B"
+      wwpn_pool_moid = var.wwpn_pool_a_moid
       pci_order  = 3
     }
   }
 }
-# for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
-
+# for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   
+#                              each.value["pci_order"]  each.value["wwpn_pool_moid"]
 
 # =============================================================================
 # IMC
