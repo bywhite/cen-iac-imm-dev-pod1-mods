@@ -122,22 +122,6 @@ variable "vhba_vsan_sets" {
   }))
   description = "Map of vNic interfaces paired with their vlan range"
   default = null
-  # default = {
-  #   "fc0"  = {
-  #     vhba_name = "fc0"
-  #     vsan_id   = 100
-  #     switch_id = "A"
-  #     wwpn_pool_moid = null
-  #     pci_order = 2
-  #   }
-  #   "fc1"  = {
-  #     vvhba_name = "fc1"
-  #     vsan_id    = 200
-  #     switch_id   = "B"
-  #     wwpn_pool_moid = null
-  #     pci_order  = 3
-  #   }
-  # }
 }
 # for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   
 #                              each.value["pci_order"]  each.value["wwpn_pool_moid"]
