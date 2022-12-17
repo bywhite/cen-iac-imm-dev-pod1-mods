@@ -126,14 +126,14 @@ variable "vhba_vsan_sets" {
       vhba_name = "fc0"
       vsan_id   = 100
       switch_id = "A"
-      wwpn_pool_moid = var.wwpn_pool_a_moid
+      wwpn_pool_moid = null
       pci_order = 2
     }
     "fc1"  = {
       vvhba_name = "fc1"
       vsan_id    = 200
       switch_id   = "B"
-      wwpn_pool_moid = var.wwpn_pool_a_moid
+      wwpn_pool_moid = null
       pci_order  = 3
     }
   }
