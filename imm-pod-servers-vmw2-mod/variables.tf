@@ -121,7 +121,7 @@ variable "vhba_vsan_sets" {
     pci_order      = number
   }))
   description = "Map of vNic interfaces paired with their vlan range"
-  default = []
+  default = null
   # default = {
   #   "fc0"  = {
   #     vhba_name = "fc0"
