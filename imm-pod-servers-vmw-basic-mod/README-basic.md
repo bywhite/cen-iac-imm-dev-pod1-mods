@@ -2,14 +2,11 @@
 # Creating servers in Intersight using Terraform Cloud for Business
 
 This module uses the server.profile to derive Server profiles by cloning the server template
-# Primary Problem - you can't run the Merge against existing objects that are associated with a template
+# Primary Problem - Template policies are not set in server profiles - unless tempate is manually re-updated
 # Other problem with merger 
-    - If you create 2, then change to 1, then try to go back to 2 ... It will error w/ duplicate object exists
-    - Server profiles sometimes lose their template instantiated properties when adjusting counts
+    - 
 #  Advantage of Merger is:
-    The derived server.profile's have all Policies associated, as in Profile Template and has Identities assigned
-    Works correctly the first time - does not work subsequently when adjusting server count +/-
-    Removing server.profile in code removes them in Intersight - unlike clone which does not. (still based on initial server profiles)
+    + Removing server profile in code removes them in Intersight - unlike clone which does not.
 
 Module Location:
 https://github.com/bywhite/cen-iac-imm-dev-pod1-mods/imm-pod-servers-vmw-cloner-mod
