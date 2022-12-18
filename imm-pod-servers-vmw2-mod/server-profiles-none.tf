@@ -10,27 +10,27 @@
 # such resources due to these limitations.
 # -----------------------------------------------------------------------------
 
-resource "intersight_bulk_mo_cloner" "server_profile_clones" {
-  # this will derive five profiles due to the way the range function works...
-  for_each = toset(formatlist("%s", range(1, var.server_count + 1)))
+# resource "intersight_bulk_mo_cloner" "server_profile_clones" {
+#   # this will derive five profiles due to the way the range function works...
+#   for_each = toset(formatlist("%s", range(1, var.server_count + 1)))
 
-  sources {
-    object_type = "server.ProfileTemplate"
-    moid        = intersight_server_profile_template.server_template_1.moid
-  }
+#   sources {
+#     object_type = "server.ProfileTemplate"
+#     moid        = intersight_server_profile_template.server_template_1.moid
+#   }
 
-  targets {
-    object_type = "server.Profile"
-    additional_properties = jsonencode({
-      Name = format("${var.server_policy_prefix}-server-%s", each.key)
-    })
-  }
+#   targets {
+#     object_type = "server.Profile"
+#     additional_properties = jsonencode({
+#       Name = format("${var.server_policy_prefix}-server-%s", each.key)
+#     })
+#   }
 
-  lifecycle {
-    ignore_changes = all # This is required for this resource type
-  }
+#   lifecycle {
+#     ignore_changes = all # This is required for this resource type
+#   }
 
-}
+# }
 
 
 

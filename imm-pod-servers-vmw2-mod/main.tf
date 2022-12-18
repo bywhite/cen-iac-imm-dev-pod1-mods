@@ -1,8 +1,8 @@
 # =============================================================================
 # The purpose of this module is to create a Server Profile Template
-# The primary outputs are servers based on a server profile template
-#  The servers/template are tied to a server_resource_pool 1:1
-#  As physical servers are added to the pool, the servers are associated
+# Server Profiles must be created elsewhere - GUI or Ansible
+#  The template is tied to a server_resource_pool 1:1
+#  As profiles are created, they will consume physical servers from pool
 # -----------------------------------------------------------------------------
 
 
@@ -105,6 +105,11 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_bios_policy.bios_default_policy.moid
     object_type = "bios.Policy"
   }
+
+  # policy_bucket {
+  #   moid = intersight_resourcepool_pool.resource_pool.moid
+  #   object_type = "resourcepool.Pool"    #Not sure on object type
+  # }
 
   depends_on = [
     intersight_vmedia_policy.vmedia_1, intersight_power_policy.server_power_x, intersight_snmp_policy.server_snmp,
