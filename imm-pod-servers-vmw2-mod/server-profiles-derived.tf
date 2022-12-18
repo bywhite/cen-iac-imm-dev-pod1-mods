@@ -10,7 +10,7 @@
 # such resources due to these limitations.
 # -----------------------------------------------------------------------------
 
-resource "intersight_bulk_mo_cloner" "example" {
+resource "intersight_bulk_mo_cloner" "server_profile_clones" {
   # this will derive five profiles due to the way the range function works...
   for_each = toset(formatlist("%s", range(1, var.server_count + 1)))
 
