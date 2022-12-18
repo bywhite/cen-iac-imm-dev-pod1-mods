@@ -269,4 +269,9 @@ resource "intersight_bios_policy" "bios_policy1" {
   serial_port_aenable                   = "disabled"
   tpm_control                           = "disabled"
   txt_support                           = "disabled"
+
+depends_on = [
+  intersight_server_profile_template.server_template_1
+]
+
 }
