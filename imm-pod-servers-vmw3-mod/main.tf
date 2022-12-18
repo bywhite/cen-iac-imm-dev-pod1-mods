@@ -11,32 +11,59 @@
 # Server Profile template
 # -----------------------------------------------------------------------------
 
-resource "intersight_server_profile_template" "server_template_1" {
+resource "intersight_server_profile" "server_list" {
+    # Will add Count to create multiple instances and use index to change server names
+  count = var.server_count
+
+  name              = "${var.server_policy_prefix}-server-${count.index + 1}"
   description     = var.description
-  name            = "${var.server_policy_prefix}-t1"
-  action          = "No-op"
+
+  type = "instance"
+  # action          = "No-op"
   target_platform = "FIAttached"
-
-  organization {
-    object_type = "organization.Organization"
-    moid        = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-
   uuid_address_type = "POOL"
+
   uuid_pool {
       moid        = var.server_uuid_pool_moid
       object_type = "uuidpool.Pool"
     }
 
-  # the following policy_bucket statements map different policies to this
-  # template -- the object_type shows the policy type
+  server_assignment_mode = "None"                 #options: "POOL" "Static" "None"
+#  
+#   dynamic "associated_server_pool" {    # Also server_pool object available
+#     for_each = var.associated_server_pool
+#     content {
+#       moid        = assigned_server.value.moid
+#       object_type = "resourcepool.Pool"
+#     }
+#   }
+
+#   dynamic "assigned_server" {
+#     for_each = var.assigned_server
+#     content {
+#       moid        = assigned_server.value.moid
+#       object_type = assigned_server.value.object_type
+#     }
+#   }
+
+
+  # the following policy_bucket statements map policies to this profile
+  
+  # No local storage used for this VMware AutoDeploy configuration
+  # policy_bucket {
+  #   moid = intersight_storage_storage_policy.server_storage_policy1.moid
+  #   object_type = "storage.StoragePolicy"
+  # }
+
+  #   policy_bucket { # Certificate Management
+  #     moid        = ""
+  #     object_type = ""
+  #   }
+  
+  policy_bucket {
+    moid = intersight_bios_policy.bios_default_policy.moid
+    object_type = "bios.Policy"
+  }
   policy_bucket {
     moid        = intersight_boot_precision_policy.boot_precision_1.moid
     object_type = "boot.PrecisionPolicy"
@@ -49,7 +76,12 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_kvm_policy.kvmpolicy_1.moid
     object_type = "kvm.Policy"
   }
-
+  
+  # IMC User Policy  
+  policy_bucket {
+    moid = intersight_iam_end_point_user_policy.imc_user1.moid
+    object_type = "iam.EndPointUserPolicy"
+  }
   policy_bucket {
     moid = intersight_vmedia_policy.vmedia_1.moid
     object_type = "vmedia.Policy"
@@ -58,7 +90,6 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_power_policy.server_power_x.moid
     object_type = "power.Policy"
   }
-
   policy_bucket {
     moid = intersight_access_policy.access_1.moid
     object_type = "access.Policy"
@@ -71,11 +102,6 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_syslog_policy.syslog_policy.moid
     object_type = "syslog.Policy"
   }
-
-#  policy_bucket {
-#    moid = intersight_iam_end_point_user_policy.user_policy1.moid
-#    object_type = "iam.EndPointUserPolicy"
-#  }
  policy_bucket {
    moid = intersight_sol_policy.sol1.moid
    object_type = "sol.Policy"
@@ -84,26 +110,21 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_vnic_lan_connectivity_policy.vnic_lan_1.moid
     object_type = "vnic.LanConnectivityPolicy"
   }
-
   policy_bucket {
     moid        = intersight_vnic_san_connectivity_policy.vnic_san_con_1.moid
     object_type = "vnic.SanConnectivityPolicy"
   }
-  
-  # IMC User Policy  
-  policy_bucket {
-    moid = intersight_iam_end_point_user_policy.imc_user1.moid
-    object_type = "iam.EndPointUserPolicy"
+
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
   }
-  # No local storage used for this VMware AutoDeploy configuration
-  # policy_bucket {
-  #   moid = intersight_storage_storage_policy.server_storage_policy1.moid
-  #   object_type = "storage.StoragePolicy"
-  # }
-  
-  policy_bucket {
-    moid = intersight_bios_policy.bios_default_policy.moid
-    object_type = "bios.Policy"
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
   }
 
   depends_on = [
