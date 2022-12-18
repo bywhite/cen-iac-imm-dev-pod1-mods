@@ -113,7 +113,7 @@ variable "vnic_vlan_sets" {
 # -----------------------------------------------------------------------------
 
 variable "vhba_vsan_sets" {
-  type             = map(object({
+  type       = map(object({
     vhba_name      = string
     vsan_id        = number
     switch_id      = string
@@ -121,7 +121,6 @@ variable "vhba_vsan_sets" {
     pci_order      = number
   }))
   description = "Map of vNic interfaces paired with their vlan range"
-  default = null
 }
 # for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   
 #                              each.value["pci_order"]  each.value["wwpn_pool_moid"]
