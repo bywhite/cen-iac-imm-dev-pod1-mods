@@ -23,3 +23,18 @@ Error - duplicate (already exists error when re-running apply - should have no e
 │   on .terraform/modules/server_template_vmw_merger/imm-pod-servers-vmw-merger-mod/server-profiles.tf line 84, in resource "intersight_server_profile" "server_profile_list":
 │   84: resource "intersight_server_profile" "server_profile_list" {
 │ 
+
+-------------------- increasing number of servers from 2 to 3  ----------------------
+│ Error: error occurred while updating ServerProfile: 403 Forbidden Response from endpoint: {"code":"InvalidRequest","message":"Cannot edit a server profile attached to a profile template","messageId":"gershwin_cannot_edit_derived_sp","messageParams":{},"traceId":"T_MEl8WnmiMP7gApQIR-BnjideK02S9ohZAy0rqJ_W9njhsxiBC-oA=="}
+│ 
+│   with module.server_template_vmw_basic.intersight_server_profile.server_profile_list[0],
+│   on .terraform/modules/server_template_vmw_basic/imm-pod-servers-vmw-basic-mod/server-profiles.tf line 7, in resource "intersight_server_profile" "server_profile_list":
+│    7: resource "intersight_server_profile" "server_profile_list" {
+│ 
+╵
+╷
+│ Error: error occurred while updating ServerProfile: 403 Forbidden Response from endpoint: {"code":"InvalidRequest","message":"Cannot edit a server profile attached to a profile template","messageId":"gershwin_cannot_edit_derived_sp","messageParams":{},"traceId":"UzXmqycMnYTwFTlToZznSb_0TlTk3OED_vQsBHASaVUwyYtUOhcemQ=="}
+│ 
+│   with module.server_template_vmw_basic.intersight_server_profile.server_profile_list[1],
+│   on .terraform/modules/server_template_vmw_basic/imm-pod-servers-vmw-basic-mod/server-profiles.tf line 7, in resource "intersight_server_profile" "server_profile_list":
+│    7: resource "intersight_server_profile" "server_profile_list" {
