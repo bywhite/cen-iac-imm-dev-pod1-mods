@@ -10,6 +10,11 @@ resource "intersight_bios_policy" "bios_policy1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+  profiles {
+      moid = intersight_server_profile_template.server_template_1.moid
+      object_type = "server.ProfileTemplate"
+    }
+
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -271,7 +276,7 @@ resource "intersight_bios_policy" "bios_policy1" {
   txt_support                           = "disabled"
 
 depends_on = [
-  intersight_server_profile_template.server_template_1
+  intersight_server_profile_template.server_template_1, intersight_server_profile.server_profile_list
 ]
 
 }
