@@ -108,7 +108,7 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
 # Local User Policies
 # -----------------------------------------------------------------------------
 
-## Standard Local User Policy for all users
+## Standard Local User Policy for all local IMC users
 resource "intersight_iam_end_point_user_policy" "user_policy_1"  {
   description     = var.description
   name            = "${var.server_policy_prefix}-imc-user-policy1"
@@ -170,7 +170,8 @@ resource "intersight_iam_end_point_user_role" "admin" {
     moid = intersight_iam_end_point_user_policy.user_policy_1.moid
   }
   end_point_role {
-    moid = data.intersight_iam_end_point_role.imc_admin.results[0].moid
+    # moid = data.intersight_iam_end_point_role.imc_admin.results[0].moid
+    moid = local.local_user_admin_moid
   }
   dynamic "tags" {
     for_each = var.tags
@@ -179,6 +180,9 @@ resource "intersight_iam_end_point_user_role" "admin" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_iam_end_point_user.admin, intersight_iam_end_point_user_policy.user_policy_1
+  ]
 }
 
 ## Example Read Only user
@@ -226,7 +230,8 @@ resource "intersight_iam_end_point_user_role" "ro_user1" {
     moid = intersight_iam_end_point_user_policy.user_policy_1.moid
   }
   end_point_role {
-    moid = data.intersight_iam_end_point_role.imc_readonly.results[0].moid
+    moid = local.local_user_ro_moid
+    #moid = data.intersight_iam_end_point_role.imc_readonly.results[0].moid
   }
  dynamic "tags" {
    for_each = var.tags

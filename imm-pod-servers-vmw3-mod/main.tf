@@ -8,7 +8,7 @@
 
 
 # =============================================================================
-# Server Profile template
+# Server Profiles Only - No Template
 # -----------------------------------------------------------------------------
 
 resource "intersight_server_profile" "server_list" {
