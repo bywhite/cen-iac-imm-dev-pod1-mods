@@ -104,7 +104,12 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
 #  }
 # }
 
-resource "intersight_iam_end_point_user_policy" "imc_user1"  {
+# =============================================================================
+# Local User Policies
+# -----------------------------------------------------------------------------
+
+## Standard Local User Policy for all users
+resource "intersight_iam_end_point_user_policy" "user_policy_1"  {
   description     = var.description
   name            = "${var.server_policy_prefix}-imc-user-policy1"
   password_properties {
@@ -116,10 +121,6 @@ resource "intersight_iam_end_point_user_policy" "imc_user1"  {
     grace_period             = 0
     object_type              = "iam.EndPointPasswordProperties"
   }
-  # end_point_user_roles {
-  #   object_type  = "iam.EndPointUserRole"
-  #   moid         = intersight_iam_end_point_user_role.
-  # }
  organization {
    moid        = var.organization
    object_type = "organization.Organization"
@@ -131,5 +132,105 @@ resource "intersight_iam_end_point_user_policy" "imc_user1"  {
      value = tags.value.value
    }
  }
+}
 
+##  Admin user
+# This resource is a user that will be added to the policy.
+resource "intersight_iam_end_point_user" "admin" {
+  name = "admin"
+  organization {
+    moid = local.organization
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+# This data source retrieves a system built-in role that we want to assign to the admin user.
+data "intersight_iam_end_point_role" "imc_admin" {
+  name      = "admin"
+  role_type = "endpoint-admin"
+  type      = "IMC"
+}
+
+# This resource adds the user to the policy using the role we retrieved.
+# Notably, the password is set in this resource and NOT in the user resource above.
+resource "intersight_iam_end_point_user_role" "admin" {
+  enabled  = true
+  password = var.server_imc_admin_password
+  end_point_user {
+    moid = intersight_iam_end_point_user.admin.moid
+  }
+  end_point_user_policy {
+    moid = intersight_iam_end_point_user_policy.user_policy_1.moid
+  }
+  end_point_role {
+    moid = data.intersight_iam_end_point_role.imc_admin.results[0].moid
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+## Example Read Only user
+# This resource is a user that will be added to the policy.
+resource "intersight_iam_end_point_user" "ro_user1" {
+  name = "ro_user1"
+
+  organization {
+    moid = local.organization
+  }
+ dynamic "tags" {
+   for_each = var.tags
+   content {
+     key   = tags.value.key
+     value = tags.value.value
+   }
+ }
+}
+
+# This data source retrieves a system built-in role that we want to assign to the user.
+data "intersight_iam_end_point_role" "imc_readonly" {
+  name      = "readonly"
+  role_type = "endpoint-readonly"
+  type      = "IMC"
+}
+
+# This user gets a random password that can be reset later
+resource "random_password" "example_password" {
+  length  = 16
+  special = false
+}
+
+# This resource adds the user to the policy using the role we retrieved.
+# Notably, the password is set in this resource and NOT in the user resource above.
+resource "intersight_iam_end_point_user_role" "ro_user1" {
+  enabled  = true
+  password = var.server_imc_admin_password
+  # Alternatively, we could assign a random passwrod to be changed later
+  # password = random_password.example_password.result
+  end_point_user {
+    moid = intersight_iam_end_point_user.ro_user1.moid
+  }
+  end_point_user_policy {
+    moid = intersight_iam_end_point_user_policy.user_policy_1.moid
+  }
+  end_point_role {
+    moid = data.intersight_iam_end_point_role.imc_readonly.results[0].moid
+  }
+ dynamic "tags" {
+   for_each = var.tags
+   content {
+     key   = tags.value.key
+     value = tags.value.value
+   }
+ }
 }
