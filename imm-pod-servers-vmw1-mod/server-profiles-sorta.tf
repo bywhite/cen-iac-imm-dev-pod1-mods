@@ -15,10 +15,10 @@ resource "intersight_server_profile" "server_profile_list" {
   type = "instance"
   wait_for_completion = true
 
-  src_template {
-      moid = intersight_server_profile_template.server_template_1.moid
-      object_type = "server.ProfileTemplate"
-    }
+  # src_template {
+  #     moid = intersight_server_profile_template.server_template_1.moid
+  #     object_type = "server.ProfileTemplate"
+  #   }
 
   organization {
     moid        = var.organization
@@ -49,8 +49,9 @@ resource "intersight_server_profile" "server_profile_list" {
 #     }
 #   }
 
-  depends_on = [
-    intersight_server_profile_template.server_template_1
-  ]
+# Initially we will create the Server Profiles separate from the Template
+  # depends_on = [
+  #   intersight_server_profile_template.server_template_1
+  # ]
 }
 
