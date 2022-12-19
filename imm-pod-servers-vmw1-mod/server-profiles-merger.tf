@@ -1,4 +1,3 @@
-
 # This resource has significant limitations, but it does work.
 # It can be used to create profiles that are attached to templates, but it cannot delete them.
 # Terraform will delete them from the state but also warn that they cannot be deleted from Intersight.
