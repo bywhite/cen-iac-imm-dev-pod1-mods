@@ -11,9 +11,8 @@ resource "intersight_server_profile" "server_profile_list" {
   # description          = var.description  # Set by template
   # action               = "No-op"          # May not be needed **** / Set by template
   server_assignment_mode = "None"           # options: "POOL" "Static"
-  # target_platform      = "FIAttached"     # Set by Template
+  target_platform      = "FIAttached"     # Required by Template to attach properly
   type = "instance"
-
 
   src_template {
       moid = intersight_server_profile_template.server_template_1.moid
