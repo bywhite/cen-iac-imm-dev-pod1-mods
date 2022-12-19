@@ -46,10 +46,10 @@ resource "intersight_bulk_mo_merger" "merge-set-template" {
     object_type = "organization.Organization"
   }
 
-#   sources {
-#     object_type = "server.ProfileTemplate"
-#     moid        = intersight_server_profile_template.server_template_1.moid
-#   }
+  sources {
+    object_type = "server.ProfileTemplate"
+    moid        = intersight_server_profile_template.server_template_1.moid
+  }
 
   target_config {
     		{"SrcTemplate": {
@@ -71,7 +71,7 @@ resource "intersight_bulk_mo_merger" "merge-set-template" {
   }
 
   depends_on = [
-    
+    intersight_bulk_mo_merger.merge-template-config
   ]
 
 }
