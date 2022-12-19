@@ -53,8 +53,8 @@ resource "intersight_bulk_mo_merger" "merge-set-template" {
 
   target_config {
     		SrcTemplate {
-		        "Moid": "639c98e777696e2d31fd5c25",
-		        "ObjectType": "server.ProfileTemplate"
+		        Moid: "639c98e777696e2d31fd5c25",
+		        ObjectType: "server.ProfileTemplate"
             }
   }
 
