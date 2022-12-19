@@ -1,5 +1,5 @@
 # # =============================================================================
-# # Server Profiles from locally defined server template
+# # Server Profiles from locally defined server template - but not bound to it
 # # -----------------------------------------------------------------------------
 # # Reference: https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/bios_policy
 
@@ -14,16 +14,14 @@ resource "intersight_server_profile" "server_profile_list" {
   target_platform      = "FIAttached"     # Required by Template to attach properly
   type = "instance"
   wait_for_completion = true
-
-  # src_template {
-  #     moid = intersight_server_profile_template.server_template_1.moid
-  #     object_type = "server.ProfileTemplate"
-  #   }
-
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
   }
+#   src_template {
+#     moid = intersight_server_profile_template.server_template_1.moid
+#     object_type = "server.ProfileTemplate"
+#   }
 
 #   dynamic "associated_server_pool" {
 #     for_each = var.associated_server_pool
