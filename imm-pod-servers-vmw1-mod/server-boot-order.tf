@@ -44,7 +44,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     object_type     = "boot.Pxe"
     additional_properties = jsonencode({
       interfacesource = "name"
-      interfacename   = "eth0"  # use if interfacesource is "name"
+      interfacename   = "eth0"
       iptype          = "IPv4"
       slot            = "MLOM"
       #port           = "-1"    # use if interfacesource is "port"
