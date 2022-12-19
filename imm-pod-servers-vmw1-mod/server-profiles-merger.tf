@@ -6,39 +6,7 @@
 # Care must be taken if making changes to code or variables that will result in the deletion of
 # such resources due to these limitations.
 
-resource "intersight_bulk_mo_merger" "merge-template-config" {
-  count = var.server_count
-
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-
-  sources {
-    object_type = "server.ProfileTemplate"
-    moid        = intersight_server_profile_template.server_template_1.moid
-  }
-
-  targets {
-    object_type = "server.Profile"
-    moid        = intersight_server_profile.server_profile_list[count.index].moid
-   # moid       = intersight_server_profile.server_profile_list[3].moid
-  }
-
-  merge_action = "Replace"
-  #  merge_action = "Merge"
-
-  lifecycle {
-    ignore_changes = all # This is required for this resource type
-  }
-
-  depends_on = [
-    intersight_server_profile_template.server_template_1, intersight_server_profile.server_profile_list
-  ]
-
-}
-
-# resource "intersight_bulk_mo_merger" "merge-set-template" {
+# resource "intersight_bulk_mo_merger" "merge-template-config" {
 #   count = var.server_count
 
 #   organization {
@@ -46,35 +14,25 @@ resource "intersight_bulk_mo_merger" "merge-template-config" {
 #     object_type = "organization.Organization"
 #   }
 
-# #   sources {
-# #     object_type = "server.ProfileTemplate"
-# #     moid        = intersight_server_profile_template.server_template_1.moid
-# #   }
-
-#   target_config {
-#         object_type = "server.Profile"
-#         moid        = intersight_server_profile.server_profile_list[count.index].moid
-#     	SrcTemplate {
-# 		        Moid = "639c98e777696e2d31fd5c25"
-# 		        ObjectType = "server.ProfileTemplate"
-#             }
+#   sources {
+#     object_type = "server.ProfileTemplate"
+#     moid        = intersight_server_profile_template.server_template_1.moid
 #   }
 
-# #   targets {
-# #     object_type = "server.Profile"
-# #     moid        = intersight_server_profile.server_profile_list[count.index].moid
-# #    # moid       = intersight_server_profile.server_profile_list[3].moid
-# #   }
+#   targets {
+#     object_type = "server.Profile"
+#     moid        = intersight_server_profile.server_profile_list[count.index].moid
+#    # moid       = intersight_server_profile.server_profile_list[3].moid
+#   }
 
-#   #merge_action = "Replace"
-#   merge_action = "Merge"
+#   merge_action = "Replace"
+#   #  merge_action = "Merge"
 
 #   lifecycle {
 #     ignore_changes = all # This is required for this resource type
 #   }
 
 #   depends_on = [
-#     intersight_bulk_mo_merger.merge-template-config
+#     intersight_server_profile_template.server_template_1, intersight_server_profile.server_profile_list
 #   ]
-
 # }
