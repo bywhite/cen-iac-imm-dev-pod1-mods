@@ -139,7 +139,8 @@ resource "intersight_iam_end_point_user_policy" "user_policy_1"  {
 resource "intersight_iam_end_point_user" "admin" {
   name = "admin"
   organization {
-    moid = local.organization
+    moid = var.organization
+   object_type = "organization.Organization"
   }
   dynamic "tags" {
     for_each = var.tags
@@ -186,7 +187,8 @@ resource "intersight_iam_end_point_user" "ro_user1" {
   name = "ro_user1"
 
   organization {
-    moid = local.organization
+    moid = var.organization
+   object_type = "organization.Organization"
   }
  dynamic "tags" {
    for_each = var.tags
