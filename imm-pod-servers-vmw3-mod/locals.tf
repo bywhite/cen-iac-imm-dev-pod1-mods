@@ -32,6 +32,8 @@ locals {
 # need a set of the moids spawned by the template
 # server_profile_moids = ""
 
+local_user_ro_moid    = data.intersight_iam_end_point_role.imc_readonly.results[0].moid
+local_user_admin_moid = data.intersight_iam_end_point_role.imc_admin.results[0].moid
 
 
 }
