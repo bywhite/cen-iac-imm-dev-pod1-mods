@@ -13,7 +13,7 @@ resource "intersight_server_profile" "server_profile_list" {
   server_assignment_mode = "None"           # options: "POOL" "Static"
   target_platform      = "FIAttached"     # Required by Template to attach properly
   type = "instance"
-  # wait_for_completion = true
+  wait_for_completion = true
 
   src_template {
       moid = intersight_server_profile_template.server_template_1.moid
