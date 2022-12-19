@@ -38,43 +38,43 @@ resource "intersight_bulk_mo_merger" "merge-template-config" {
 
 }
 
-resource "intersight_bulk_mo_merger" "merge-set-template" {
-  count = var.server_count
+# resource "intersight_bulk_mo_merger" "merge-set-template" {
+#   count = var.server_count
 
-  organization {
-    moid        = var.organization
-    object_type = "organization.Organization"
-  }
-
-#   sources {
-#     object_type = "server.ProfileTemplate"
-#     moid        = intersight_server_profile_template.server_template_1.moid
+#   organization {
+#     moid        = var.organization
+#     object_type = "organization.Organization"
 #   }
 
-  target_config {
-        object_type = "server.Profile"
-        moid        = intersight_server_profile.server_profile_list[count.index].moid
-    	SrcTemplate {
-		        Moid = "639c98e777696e2d31fd5c25"
-		        ObjectType = "server.ProfileTemplate"
-            }
-  }
+# #   sources {
+# #     object_type = "server.ProfileTemplate"
+# #     moid        = intersight_server_profile_template.server_template_1.moid
+# #   }
 
-#   targets {
-#     object_type = "server.Profile"
-#     moid        = intersight_server_profile.server_profile_list[count.index].moid
-#    # moid       = intersight_server_profile.server_profile_list[3].moid
+#   target_config {
+#         object_type = "server.Profile"
+#         moid        = intersight_server_profile.server_profile_list[count.index].moid
+#     	SrcTemplate {
+# 		        Moid = "639c98e777696e2d31fd5c25"
+# 		        ObjectType = "server.ProfileTemplate"
+#             }
 #   }
 
-  #merge_action = "Replace"
-  merge_action = "Merge"
+# #   targets {
+# #     object_type = "server.Profile"
+# #     moid        = intersight_server_profile.server_profile_list[count.index].moid
+# #    # moid       = intersight_server_profile.server_profile_list[3].moid
+# #   }
 
-  lifecycle {
-    ignore_changes = all # This is required for this resource type
-  }
+#   #merge_action = "Replace"
+#   merge_action = "Merge"
 
-  depends_on = [
-    intersight_bulk_mo_merger.merge-template-config
-  ]
+#   lifecycle {
+#     ignore_changes = all # This is required for this resource type
+#   }
 
-}
+#   depends_on = [
+#     intersight_bulk_mo_merger.merge-template-config
+#   ]
+
+# }
