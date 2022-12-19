@@ -108,7 +108,7 @@ resource "intersight_server_profile_template" "server_template_1" {
 
   policy_bucket {
     moid = intersight_resourcepool_pool.resource_pool.moid
-    object_type = "resourcepool.Pool"    #Not sure on object type
+    object_type = "resourcepool.Pool"
   }
 
 
