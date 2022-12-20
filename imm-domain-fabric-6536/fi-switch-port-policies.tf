@@ -158,28 +158,28 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
   ]
 }
 
-# # FI 6536 can use any port range as 4x ethernet breakout ports
-#  resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
-#   count = var.eth_breakout_count
-#   custom_mode   = "BreakoutEthernet25G"
-#   #custom_mode   = "BreakoutEthernet10G"
-#   port_id_end   = var.eth_breakout_count
-#   port_id_start = var.eth_breakout_start
-#   slot_id       = 1
-#   port_policy {
-#     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
-#   }
-#   dynamic "tags" {
-#     for_each = var.tags
-#     content {
-#       key   = tags.value.key
-#       value = tags.value.value
-#     }
-#   }
-#  depends_on = [
-#    intersight_fabric_server_role.fi6536_server_role_a, intersight_fabric_server_role.fi6536_server_role_b
-#  ]
-# }
+# FI 6536 can use any port range as 4x ethernet breakout ports
+ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
+  count = var.eth_breakout_count
+  custom_mode   = "BreakoutEthernet25G"
+  #custom_mode   = "BreakoutEthernet10G"
+  port_id_end   = var.eth_breakout_start + count.index
+  port_id_start = var.eth_breakout_start + count.index
+  slot_id       = 1
+  port_policy {
+    moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+ depends_on = [
+   intersight_fabric_server_role.fi6536_server_role_a, intersight_fabric_server_role.fi6536_server_role_b
+ ]
+}
  
 # assign server role to designated ports on FI-A  port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role_a" {
