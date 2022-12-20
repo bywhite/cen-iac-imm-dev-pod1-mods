@@ -72,7 +72,8 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
     }
   }
   depends_on = [
-    intersight_fabric_port_mode.fi6536_port_mode_a-36
+    intersight_fabric_port_mode.fi6536_port_mode_a-36, intersight_fabric_server_role.fi6536_server_role_a,
+    intersight_fabric_server_role.fi6536_server_role_b
   ]
 }
 
