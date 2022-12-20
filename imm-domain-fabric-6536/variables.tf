@@ -51,7 +51,7 @@ variable "eth_breakout_count" {
 variable "eth_breakout_start" {
   type        = number
   description = "The starting physical ethernet port number to use as 4x ethernet breakouts"
-  default     = 1
+  default     = 29
 }
 
 variable "fc_port_count_6536" {
