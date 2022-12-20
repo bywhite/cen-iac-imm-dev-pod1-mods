@@ -53,16 +53,17 @@ variable "eth_breakout_start" {
   description = "The starting physical ethernet port number to use as 4x ethernet breakouts"
   default     = 29
 }
-# variable "eth_aggr_server_ports" {
-#   type        = list (map(string))
-#   default     = null
-# }
+variable "eth_aggr_server_ports" {
+  type        = list (map(string))
+  default     = null
+}
 
 variable "eth_aggr_server_ports" {
   type       = map(object({
     aggregate_port_id = string
     port_id           = string
   }))
+  default = null
 }
 
 

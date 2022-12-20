@@ -160,7 +160,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
 
 # assign server role to designated ports on FI-A Aggregate ports
 resource "intersight_fabric_server_role" "server_role_aggr_a" {
-  for_each = var.eth_aggr_server_ports
+  for_each = var.eth_aggr_server_ports == null ? {} : var.eth_aggr_server_ports
 
   aggregate_port_id = each.value.aggregate_port_id
   port_id           = each.value.port_id
