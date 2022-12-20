@@ -78,10 +78,10 @@ resource "intersight_server_profile" "server_list" {
   }
   
   # IMC User Policy  
-  policy_bucket {
-    moid = intersight_iam_end_point_user_policy.user_policy_1.moid
-    object_type = "iam.EndPointUserPolicy"
-  }
+  # policy_bucket {
+  #   moid = intersight_iam_end_point_user_policy.user_policy_1.moid
+  #   object_type = "iam.EndPointUserPolicy"
+  # }
   policy_bucket {
     moid = intersight_vmedia_policy.vmedia_1.moid
     object_type = "vmedia.Policy"
