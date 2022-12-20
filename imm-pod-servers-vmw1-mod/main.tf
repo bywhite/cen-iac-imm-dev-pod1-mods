@@ -84,7 +84,11 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid        = intersight_vnic_san_connectivity_policy.vnic_san_con_1.moid
     object_type = "vnic.SanConnectivityPolicy"
   }
-  
+  # IMC User Policy
+  policy_bucket {
+    moid = var.user_policy_moid
+    object_type = "iam.EndPointUserPolicy"
+  }
   # IMC User Policy  
   # policy_bucket {
   #   moid = intersight_iam_end_point_user_policy.imc_user1.moid

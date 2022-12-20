@@ -76,7 +76,11 @@ resource "intersight_server_profile" "server_list" {
     moid = intersight_kvm_policy.kvmpolicy_1.moid
     object_type = "kvm.Policy"
   }
-  
+  # IMC User Policy
+  policy_bucket {
+    moid = var.user_policy_moid
+    object_type = "iam.EndPointUserPolicy"
+  }
   # IMC User Policy  
   # policy_bucket {
   #   moid = intersight_iam_end_point_user_policy.user_policy_1.moid

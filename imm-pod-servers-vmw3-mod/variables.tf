@@ -138,6 +138,10 @@ variable "server_imc_admin_password" {
   description = "password for the local user policy for IMC"
   default     = "Cisco123"
 }
+variable "user_policy_moid" {
+  type        = string
+  description = "Sets local IMC user ID's, passwords and policies"
+}
 
 # =============================================================================
 # SNMP & Syslog

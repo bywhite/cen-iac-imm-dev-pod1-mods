@@ -81,7 +81,7 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
   
   # IMC User Policy
-    policy_bucket {
+  policy_bucket {
     moid = var.user_policy_moid
     object_type = "iam.EndPointUserPolicy"
   }
