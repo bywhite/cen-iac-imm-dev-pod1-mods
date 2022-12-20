@@ -54,8 +54,8 @@ variable "eth_breakout_start" {
   default     = 29
 }
 variable "eth_aggr_server_ports" {
-  type        = list (map(number))
-  default     = []
+  type        = list (map(string))
+  default     = null
 }
 
 variable "fc_port_count_6536" {
@@ -81,7 +81,7 @@ variable "vlan_prefix" {
 # -----------------------------------------------------------------------------
 
 variable "fc_port_channel_6536" {
-  type        = list (map(string))
+  type        = list (map(number))
   default     = []
 }
 
