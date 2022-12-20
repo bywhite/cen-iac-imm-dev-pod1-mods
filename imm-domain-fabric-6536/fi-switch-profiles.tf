@@ -25,15 +25,10 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
-
   policy_bucket {
-    moid        = var.pod_qos_moid
+    moid        = intersight_fabric_system_qos_policy.qos1.moid
     object_type = "fabric.SystemQosPolicy"
   }
-  # policy_bucket {
-  #   moid        = intersight_fabric_system_qos_policy.qos1.moid
-  #   object_type = "fabric.SystemQosPolicy"
-  # }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -55,17 +50,10 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
-
   policy_bucket {
-    moid        = var.pod_qos_moid
+    moid        = intersight_fabric_system_qos_policy.qos1.moid
     object_type = "fabric.SystemQosPolicy"
   }
-  # policy_bucket {
-  #   moid        = intersight_fabric_system_qos_policy.qos1.moid
-  #   object_type = "fabric.SystemQosPolicy"
-  # }
-
-
   dynamic "tags" {
     for_each = var.tags
     content {
