@@ -71,11 +71,6 @@ resource "intersight_server_profile_template" "server_template_1" {
     moid = intersight_syslog_policy.syslog_policy.moid
     object_type = "syslog.Policy"
   }
-
-#  policy_bucket {
-#    moid = intersight_iam_end_point_user_policy.user_policy1.moid
-#    object_type = "iam.EndPointUserPolicy"
-#  }
  policy_bucket {
    moid = intersight_sol_policy.sol1.moid
    object_type = "sol.Policy"
@@ -91,10 +86,10 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
   
   # IMC User Policy  
-  policy_bucket {
-    moid = intersight_iam_end_point_user_policy.imc_user1.moid
-    object_type = "iam.EndPointUserPolicy"
-  }
+  # policy_bucket {
+  #   moid = intersight_iam_end_point_user_policy.imc_user1.moid
+  #   object_type = "iam.EndPointUserPolicy"
+  # }
   # No local storage used for this VMware AutoDeploy configuration
   # policy_bucket {
   #   moid = intersight_storage_storage_policy.server_storage_policy1.moid

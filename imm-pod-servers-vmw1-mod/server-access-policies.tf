@@ -104,32 +104,32 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
 #  }
 # }
 
-resource "intersight_iam_end_point_user_policy" "imc_user1"  {
-  description     = var.description
-  name            = "${var.server_policy_prefix}-imc-user-policy1"
-  password_properties {
-    enforce_strong_password  = false
-    enable_password_expiry   = false
-    password_expiry_duration = 90
-    password_history         = 0
-    notification_period      = 15
-    grace_period             = 0
-    object_type              = "iam.EndPointPasswordProperties"
-  }
-  # end_point_user_roles {
-  #   object_type  = "iam.EndPointUserRole"
-  #   moid         = intersight_iam_end_point_user_role.
-  # }
- organization {
-   moid        = var.organization
-   object_type = "organization.Organization"
- }
- dynamic "tags" {
-   for_each = var.tags
-   content {
-     key   = tags.value.key
-     value = tags.value.value
-   }
- }
+# resource "intersight_iam_end_point_user_policy" "imc_user1"  {
+#   description     = var.description
+#   name            = "${var.server_policy_prefix}-imc-user-policy1"
+#   password_properties {
+#     enforce_strong_password  = false
+#     enable_password_expiry   = false
+#     password_expiry_duration = 90
+#     password_history         = 0
+#     notification_period      = 15
+#     grace_period             = 0
+#     object_type              = "iam.EndPointPasswordProperties"
+#   }
+#   # end_point_user_roles {
+#   #   object_type  = "iam.EndPointUserRole"
+#   #   moid         = intersight_iam_end_point_user_role.
+#   # }
+#  organization {
+#    moid        = var.organization
+#    object_type = "organization.Organization"
+#  }
+#  dynamic "tags" {
+#    for_each = var.tags
+#    content {
+#      key   = tags.value.key
+#      value = tags.value.value
+#    }
+#  }
 
-}
+# }
