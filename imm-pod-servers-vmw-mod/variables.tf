@@ -67,14 +67,6 @@ variable "server_uuid_pool_name" {
   description = "name of UUID Pool"
 }
 
-# =============================================================================
-# Server Count
-# -----------------------------------------------------------------------------
-
-variable "server_count" {
-  type = number
-  description = "Number of Servers to create from server template"
-}
 
 # =============================================================================
 # Server VLANs per Nic Adapter
