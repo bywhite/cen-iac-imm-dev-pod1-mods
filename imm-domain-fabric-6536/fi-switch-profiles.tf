@@ -57,7 +57,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
 
 
   policy_bucket = {
-    moid        = pod_qos_moid
+    moid        = var.pod_qos_moid
     object_type = "fabric.SystemQosPolicy"
   }
   dynamic "tags" {
