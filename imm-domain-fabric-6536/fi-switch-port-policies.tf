@@ -206,7 +206,7 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
 }
 # assign server role to designated ports on FI-B Aggregate ports
 resource "intersight_fabric_server_role" "server_role_aggr_b" {
-  for_each = var.eth_aggr_server_ports
+  for_each = toset(var.eth_aggr_server_ports)
 
   aggregate_port_id = each.value.aggport
   port_id           = each.value.port
