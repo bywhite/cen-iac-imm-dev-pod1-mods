@@ -136,12 +136,12 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
  
  # FI 6536 can use any port range as 4x ethernet breakout ports
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
-  count = (var.eth_breakout_count > 0) ? 1 : 0
-  #count = var.eth_breakout_count
+  #count = (var.eth_breakout_count > 0) ? 1 : 0
+  count = var.eth_breakout_count
   custom_mode   = "BreakoutEthernet25G"
   #custom_mode   = "BreakoutEthernet10G"
-  port_id_end   = var.eth_breakout_start + var.eth_breakout_count - 1
-  port_id_start = var.eth_breakout_start
+  port_id_end   = var.eth_breakout_start + count.index
+  port_id_start = var.eth_breakout_start + count.index
   slot_id       = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
