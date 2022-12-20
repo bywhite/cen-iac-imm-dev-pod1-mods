@@ -72,8 +72,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
     }
   }
   depends_on = [
-    intersight_fabric_port_mode.fi6536_port_mode_a-36, intersight_fabric_server_role.fi6536_server_role_a,
-    intersight_fabric_server_role.fi6536_server_role_b
+    intersight_fabric_port_mode.fi6536_port_mode_a-36
   ]
 }
 
@@ -154,6 +153,9 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_fabric_server_role.fi6536_server_role_a, intersight_fabric_server_role.fi6536_server_role_b
+  ]
 }
 
 # # FI 6536 can use any port range as 4x ethernet breakout ports
@@ -174,6 +176,9 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
 #       value = tags.value.value
 #     }
 #   }
+#  depends_on = [
+#    intersight_fabric_server_role.fi6536_server_role_a, intersight_fabric_server_role.fi6536_server_role_b
+#  ]
 # }
  
 # assign server role to designated ports on FI-A  port_policy
