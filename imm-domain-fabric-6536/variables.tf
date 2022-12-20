@@ -81,7 +81,7 @@ variable "vlan_prefix" {
 # -----------------------------------------------------------------------------
 
 variable "fc_port_channel_6536" {
-  type        = list (map(number))
+  type        = list (map(string))
   default     = []
 }
 
