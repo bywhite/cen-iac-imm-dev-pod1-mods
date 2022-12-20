@@ -157,3 +157,8 @@ variable "snmp_ip"  {
   type        = string
   default     = "127.0.0.1"
 }
+
+variable "pod_qos_moid" {
+  type        = string
+  default     = null
+}
