@@ -1,8 +1,8 @@
-# =============================================================================
-# The purpose of this module is to create a Server Profile Template
-# The primary outputs are servers based on a server profile template
-#  The servers/template are tied to a server_resource_pool 1:1
-#  As physical servers are added to the pool, the servers are associated
+# # =============================================================================
+# # Main.tf defines Server Profiles - without a template
+# # Builds: Server Profiles and associated Server Resource Pool
+# # Creates: Server Profiles by "Count" ("Resource Pool" not enabled yet)
+# # This is not the recommended method - Template based is preferred
 # -----------------------------------------------------------------------------
 
 
