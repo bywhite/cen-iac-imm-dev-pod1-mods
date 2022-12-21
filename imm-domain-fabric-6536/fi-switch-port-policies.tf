@@ -158,30 +158,6 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
   ]
 }
 
-# assign server role to designated ports on FI-A Aggregate ports
-resource "intersight_fabric_server_role" "server_role_aggr_a" {
-  for_each = var.eth_aggr_server_ports == null ? {} : var.eth_aggr_server_ports
-
-  aggregate_port_id = each.value.aggregate_port_id
-  port_id           = each.value.port_id
-  slot_id           = 1
-
-  port_policy {
-    moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-  depends_on = [
-    intersight_fabric_port_mode.fi6536_port_mode_a-1
-  ]
-}
-
-
 # FI 6536 can use any port range as 4x ethernet breakout ports
  resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
   count = var.eth_breakout_count
@@ -204,9 +180,33 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
    intersight_fabric_server_role.fi6536_server_role_a, intersight_fabric_server_role.fi6536_server_role_b
  ]
 }
+
+# assign server role to designated ports on FI-A Aggregate ports
+resource "intersight_fabric_server_role" "server_role_aggr_a" {
+  for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
+
+  aggregate_port_id = each.value.aggregate_port_id
+  port_id           = each.value.port_id
+  slot_id           = 1
+
+  port_policy {
+    moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
+  }
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+  depends_on = [
+    intersight_fabric_port_mode.fi6536_port_mode_a-1
+  ]
+}
+
 # assign server role to designated ports on FI-B Aggregate ports
 resource "intersight_fabric_server_role" "server_role_aggr_b" {
-  for_each = var.eth_aggr_server_ports
+  for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
 
   aggregate_port_id = each.value.aggregate_port_id
   port_id           = each.value.port_id
