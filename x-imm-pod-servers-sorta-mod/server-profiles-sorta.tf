@@ -21,10 +21,10 @@ resource "intersight_server_profile" "server_profile_list" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-#   src_template {
-#     moid = intersight_server_profile_template.server_template_1.moid
-#     object_type = "server.ProfileTemplate"
-#   }
+  src_template {
+    moid = intersight_server_profile_template.server_template_1.moid
+    object_type = "server.ProfileTemplate"
+  }
 
 #   dynamic "associated_server_pool" {
 #     for_each = var.associated_server_pool
