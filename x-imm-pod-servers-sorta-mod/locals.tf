@@ -7,7 +7,7 @@ locals {
   # Convert the list of numbers to a set of strings
   server_index_set     = toset([for v in local.server_index_numbers : tostring(v)])
 
-  # # Create a list of Chassis Profile moids
+  # # Create a list of moids
   # server_profile_moids = [for n in local.server_index_numbers : intersight_server_profile.server_profile[n].id]
   # # chassis_profile_moids = intersight_chassis_profile.chassis_9508_profile[2].id
 
@@ -29,9 +29,8 @@ locals {
 
 
 
-# need a set of the moids spawned by the template
-# server_profile_moids = ""
+  # Convert the list of numbers to a set of server names
+  server_name_set = toset([for v in local.server_index_numbers : tostring("${var.server_policy_prefix}-server-${v + 1}")])
 
-
-
+#  new_server_set =
 }
