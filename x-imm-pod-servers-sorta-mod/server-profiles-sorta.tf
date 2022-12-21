@@ -59,7 +59,8 @@ resource "intersight_server_profile" "server_profile_list" {
 # This sets the initial values of the Server Profile to match the un-attached server profile template
 # There is currently an issue with the Terraform Provider that prohibits proper Template/Profile behavior
 resource "intersight_bulk_mo_merger" "merge-template-config" {
-  count = var.server_count
+  for_each = try(local.server_name_set)
+  # count = var.server_count
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
@@ -70,7 +71,7 @@ resource "intersight_bulk_mo_merger" "merge-template-config" {
   }
   targets {
     object_type = "server.Profile"
-    moid        = intersight_server_profile.server_profile_list[count.index].moid
+    moid        = intersight_server_profile.server_profile_list[each.value].moid
   }
   merge_action = "Replace"
   #  merge_action = "Merge"
