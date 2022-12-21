@@ -32,7 +32,7 @@ locals {
   # Convert the list of numbers to a set of server names
   server_name_set = toset([for v in local.server_index_numbers : tostring("${var.server_policy_prefix}-server-${v + 1}")])
 
-  new_server_name_set = setsubtract(local.server_name_set, toset(var.old_server_profile_names))
+  new_server_name_set = setsubtract(local.server_name_set, var.old_server_profile_names)
  # new_server_set = try(setsubtract(var.old_server_profile_names, local.server_name_set))
   
 }

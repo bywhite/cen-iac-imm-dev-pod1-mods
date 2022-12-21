@@ -76,7 +76,7 @@ variable "server_count" {
   description = "Number of Servers to create from server template"
 }
 variable "old_server_profile_names"{
-  type = map(string)
+  type = set(string)
   description = "List of existing server profiles previously created"
 }
 
