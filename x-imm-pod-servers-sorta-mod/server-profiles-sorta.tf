@@ -6,7 +6,9 @@
 
 resource "intersight_server_profile" "server_profile_list" {
   count = var.server_count
-  
+# count = (var.server_count != null) ? 1 : 0
+# for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
+
   name                   = "${var.server_policy_prefix}-server-${count.index + 1}"
   # description          = var.description  # Set by template
   # action               = "No-op"          # May not be needed **** / Set by template
