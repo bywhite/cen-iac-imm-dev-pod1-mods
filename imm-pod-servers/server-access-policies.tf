@@ -105,7 +105,7 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
 # }
 
 # # =============================================================================
-# # Local User Policies   - Now defined at Pod Level
+# # Local User Policies   - Now defined at Pod Level - passed as variable
 # # -----------------------------------------------------------------------------
 
 # ## Standard Local User Policy for all local IMC users

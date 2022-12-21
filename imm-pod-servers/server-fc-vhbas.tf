@@ -79,9 +79,9 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 
 
 # =============================================================================
-# vnic FC Interface objects  fc0  and fc1
+# vnic FC Interface objects  fc0, fc1, etc.
 # -----------------------------------------------------------------------------
-resource "intersight_vnic_fc_if" "fc_if" {     # Was fc0
+resource "intersight_vnic_fc_if" "fc_if" { 
   for_each = var.vhba_vsan_sets  
   # each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   each.value["pci_order"]
   name            = each.value["vhba_name"]
@@ -118,43 +118,3 @@ resource "intersight_vnic_fc_if" "fc_if" {     # Was fc0
     object_type = "vnic.FcQosPolicy"
   }
 }
-
-# resource "intersight_vnic_fc_if" "fc1" {
-#   name            = "fc1"
-#   order           = 5
-#   placement {
-#     id            = "1"
-#     auto_slot_id  = false
-#     pci_link      = 0
-#     auto_pci_link = false
-#     uplink        = 0
-#     switch_id     = "B"
-#     object_type   = "vnic.PlacementSettings"
-#   }
-#   persistent_bindings = true
-#   wwpn_address_type = "POOL"
-#   wwpn_pool {
-#     moid = var.wwpn_pool_b_moid
-#     object_type = "fcpool.Pool"
-#   }
-#   san_connectivity_policy {
-#     moid        = intersight_vnic_san_connectivity_policy.vnic_san_con_1.moid
-#     object_type = "vnic.SanConnectivityPolicy"
-#   }
-#   fc_network_policy {
-#     moid        = intersight_vnic_fc_network_policy.v_fc_network_b1.moid
-#     object_type = "vnic.FcNetworkPolicy"
-#   }
-#   fc_adapter_policy {
-#     moid        = intersight_vnic_fc_adapter_policy.fc_adapter.moid
-#     object_type = "vnic.FcAdapterPolicy"
-#   }
-#   fc_qos_policy {
-#     moid        = intersight_vnic_fc_qos_policy.v_fc_qos1.moid
-#     object_type = "vnic.FcQosPolicy"
-#   }
-
-#   depends_on = [
-#     intersight_vnic_san_connectivity_policy.vnic_san_con_1
-#   ]
-# }

@@ -1,12 +1,6 @@
 # =============================================================================
 # Server Precision Boot Order Policies for FI-Attached server template
-# -----------------------------------------------------------------------------
-
-
-
-
-# =============================================================================
-# Boot Precision - Creates "Boot Order Policy"
+# Creates "Boot Order Policy"
 # Examples: https://github.com/terraform-cisco-modules/terraform-intersight-imm/blob/master/examples/policies/boot_order_policies.tf
 # -----------------------------------------------------------------------------
 
@@ -52,14 +46,14 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     })
   }
 
-  # boot_devices {
-  #   enabled     = true
-  #   name        = "M2-RAID"
-  #   object_type = "boot.LocalDisk"
-  #      additional_properties = jsonencode({
-  #       slot        = "MSTOR-RAID"
-  #   })
-  # }
+  boot_devices {
+    enabled     = true
+    name        = "M2-RAID"
+    object_type = "boot.LocalDisk"
+       additional_properties = jsonencode({
+        slot        = "MSTOR-RAID"
+    })
+  }
 
   # boot_devices {
   #   enabled     = true
@@ -96,7 +90,9 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 }
 
 
-
+### Legacy Boot options follow
+# Reference: 
+# https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/boot_precision_policy
 
 ## example from tf-int-imm module by Tyson >> Needs translation and legacy mode used
 # module "boot_legacy_san" {
@@ -126,3 +122,48 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 #     },
 #   ]
 # }
+#
+## Legacy HDD boot
+#
+  # boot_devices {
+  #   enabled     = true
+  #   name        = "hdd"
+  #   object_type = "boot.LocalDisk"
+  #   additional_properties = jsonencode({
+  #     Slot = "MRAID"
+  #     Bootloader = {
+  #       Description = ""
+  #       Name        = ""
+  #       ObjectType  = "boot.Bootloader"
+  #       Path        = ""
+  #     }
+  #   })
+  # }
+#
+#
+# boot_devices {
+#     enabled     = true
+#     name        = "scu-device-hdd"
+#     object_type = "boot.LocalDisk"
+#     additional_properties = jsonencode({
+#       Slot = "MRAID"
+#       Bootloader = {
+#         Description = ""
+#         Name        = ""
+#         ObjectType  = "boot.Bootloader"
+#         Path        = ""
+#       }
+#     })
+#   }
+#
+## Legacy Boot vMedia
+#
+  # boot_devices {
+  #   enabled     = true
+  #   name        = "NIIODCIMCDVD"
+  #   object_type = "boot.VirtualMedia"
+  #   additional_properties = jsonencode({
+  #     Subtype = "cimc-mapped-dvd"
+  #   })
+  # }
+  #
