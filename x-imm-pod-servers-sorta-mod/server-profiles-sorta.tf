@@ -5,7 +5,7 @@
 
 
 resource "intersight_server_profile" "server_profile_list" {
-  for_each = try(local.new_server_name_set)
+  for_each = try(local.server_name_set)
 # count = var.server_count
 # count = (var.server_count != null) ? 1 : 0
 # for_each = local.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
@@ -21,10 +21,13 @@ resource "intersight_server_profile" "server_profile_list" {
     moid        = var.organization
     object_type = "organization.Organization"
   }
-  src_template {
-    moid = intersight_server_profile_template.server_template_1.moid
-    object_type = "server.ProfileTemplate"
-  }
+
+  # Attaching a template creates subsequent errors - profiles become Read_Only
+  #    Hence subsequent resource accesses cause errors, even though no changes.
+  # src_template {
+  #   moid = intersight_server_profile_template.server_template_1.moid
+  #   object_type = "server.ProfileTemplate"
+  # }
 
 #   dynamic "associated_server_pool" {
 #     for_each = var.associated_server_pool
@@ -59,7 +62,7 @@ resource "intersight_server_profile" "server_profile_list" {
 # This sets the initial values of the Server Profile to match the un-attached server profile template
 # There is currently an issue with the Terraform Provider that prohibits proper Template/Profile behavior
 resource "intersight_bulk_mo_merger" "merge-template-config" {
-  for_each = try(local.new_server_name_set)
+  for_each = try(local.server_name_set)
   # count = var.server_count
   organization {
     moid        = var.organization
