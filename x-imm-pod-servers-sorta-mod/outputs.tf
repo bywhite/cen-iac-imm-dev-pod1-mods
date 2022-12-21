@@ -23,3 +23,8 @@ output "server_profile_names" {
   description = "List of server profiles"
   value       = local.server_name_set
 }
+# Output list of server_profile_list Names and MOIDs created
+output "new_server_profile_names" {
+  description = "List of server profiles"
+  value       = local.new_server_name_set
+}
