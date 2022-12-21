@@ -18,12 +18,12 @@ output "server_interfaces" {
   value       = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy1
 }
 
-# Output list of server_profile_list Names and MOIDs created
+# Output list of server_profile_list Names
 output "server_profile_names" {
   description = "List of server profiles"
   value       = local.server_name_set
 }
-# Output list of server_profile_list Names and MOIDs created
+# Output list of new server_profile_list Names
 output "new_server_profile_names" {
   description = "List of server profiles"
   value       = local.new_server_name_set
