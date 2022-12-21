@@ -5,11 +5,12 @@
 
 
 resource "intersight_server_profile" "server_profile_list" {
-  count = var.server_count
+  for_each = try(local.server_name_set)
+# count = var.server_count
 # count = (var.server_count != null) ? 1 : 0
-# for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
+# for_each = local.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
 
-  name                   = "${var.server_policy_prefix}-server-${count.index + 1}"
+  name                   = each.value
   # description          = var.description  # Set by template
   # action               = "No-op"          # May not be needed **** / Set by template
   server_assignment_mode = "None"           # options: "POOL" "Static"
