@@ -71,7 +71,7 @@ resource "intersight_bulk_mo_merger" "merge-template-config" {
   }
   targets {
     object_type = "server.Profile"
-    moid        = intersight_server_profile.server_profile_list[each.value].moid
+    moid        = intersight_server_profile.server_profile_list[each.key].moid
   }
   merge_action = "Replace"
   #  merge_action = "Merge"
