@@ -30,11 +30,6 @@ variable "tags" {
 }
 
 
-variable "system_qos_moid" {
-  type         = string
-  description = "intersight fabric system qos policy moid"
-}
-
 # =============================================================================
 # Fabric Interconnect 6536 ports and VLANs
 # -----------------------------------------------------------------------------

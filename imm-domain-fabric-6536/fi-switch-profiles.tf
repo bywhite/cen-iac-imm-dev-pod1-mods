@@ -25,12 +25,6 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
-  # Policy Buckets do not currenty function properly
-  # Associating switch profile directly into qos policy definition
-  # policy_bucket {
-  #   moid        = var.system_qos_moid
-  #   object_type = "fabric.SystemQosPolicy"
-  # }
   dynamic "tags" {
     for_each = var.tags
     content {
