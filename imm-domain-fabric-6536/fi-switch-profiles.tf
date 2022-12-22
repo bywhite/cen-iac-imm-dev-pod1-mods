@@ -36,9 +36,9 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
       value = tags.value.value
     }
   }
-  # depends_on = [
-  #   intersight_fabric_system_qos_policy.qos1
-  # ]
+  depends_on = [
+    intersight_fabric_system_qos_policy.qos1
+  ]
 }
 
 ### NEW #### 6536 Switch Profile B ####
@@ -61,9 +61,9 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
       value = tags.value.value
     }
   }
-  # depends_on = [
-  #   intersight_fabric_system_qos_policy.qos1
-  # ]
+  depends_on = [
+    intersight_fabric_system_qos_policy.qos1
+  ]
 }
 
 
