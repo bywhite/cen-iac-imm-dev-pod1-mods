@@ -16,14 +16,14 @@ This policy bundle creates the following Intersight server policies:
 - Multicast
 - Virtual KVM (enable KVM)
 - Virtual Media
-- System QoS
-- IMC Access
+- System QoS (Moved to separate Module)
+- IMC Access (Moved to separate Module)
 - LAN connectivity
 - VLAN
 - Port (FI port policy)
 - Ethernet Network Group
 - Ethernet Adapter
-- Ethernet QoS
+- Ethernet QoS  (Moved to separate Module)
 
 This policy bundle creates a single Intersight server template based on the above pools and policies.
 
