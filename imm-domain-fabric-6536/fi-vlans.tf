@@ -27,11 +27,15 @@ resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
   }
 }
 
-
+# # =============================================================================
+# # Associates VLANs with the above policy   based on uplink_vlans_6536   
+# # Example values: {}"vlan-5": 5, "vlan22": 22, "vlan23: 23, "vlan24":24 }
+# # -----------------------------------------------------------------------------
 resource "intersight_fabric_vlan" "fabric_vlans" {
   for_each              = local.vlan_list_set
   auto_allow_on_uplinks = true
   is_native             = false
+  
   name = length(regexall("^[0-9]{4}$", each.value)) > 0 ? join(
   #   "-vl", [var.vlan_prefix, each.value]) : length(
   #   regexall("^[0-9]{3}$", each.value)) > 0 ? join(
@@ -45,6 +49,7 @@ resource "intersight_fabric_vlan" "fabric_vlans" {
     regexall("^[0-9]{2}$", each.value)) > 0 ? join(
     "-", [var.vlan_prefix, each.value]) : join(
   "-", [var.vlan_prefix, each.value])
+  
   vlan_id = each.value
   eth_network_policy {
     moid = intersight_fabric_eth_network_policy.fabric_eth_network_policy.id
@@ -54,10 +59,6 @@ resource "intersight_fabric_vlan" "fabric_vlans" {
   }
 }
 ### Replaced by above ###
-# # =============================================================================
-# # VLANs for the above policy   based on uplink_vlans_6536   
-# # Example values: {}"vlan-5": 5, "vlan22": 22, "vlan23: 23, "vlan24":24 }
-# # -----------------------------------------------------------------------------
 # resource "intersight_fabric_vlan" "fabric_vlans" {
 #   for_each = var.uplink_vlans_6536
 

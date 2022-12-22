@@ -25,10 +25,12 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
-  policy_bucket {
-    moid        = var.system_qos_moid
-    object_type = "fabric.SystemQosPolicy"
-  }
+  # Policy Buckets do not currenty function properly
+  # Associating switch profile directly into qos policy definition
+  # policy_bucket {
+  #   moid        = var.system_qos_moid
+  #   object_type = "fabric.SystemQosPolicy"
+  # }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -36,9 +38,6 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
       value = tags.value.value
     }
   }
-  depends_on = [
-    intersight_fabric_system_qos_policy.qos1
-  ]
 }
 
 ### NEW #### 6536 Switch Profile B ####
@@ -50,10 +49,6 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
-  policy_bucket {
-    moid        = var.system_qos_moid
-    object_type = "fabric.SystemQosPolicy"
-  }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -61,9 +56,6 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
       value = tags.value.value
     }
   }
-  depends_on = [
-    intersight_fabric_system_qos_policy.qos1
-  ]
 }
 
 

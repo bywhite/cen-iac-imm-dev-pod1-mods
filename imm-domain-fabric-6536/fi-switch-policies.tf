@@ -192,15 +192,15 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
     class_id           = "fabric.QosClass"
     object_type        = "fabric.QosClass"    
   }
-  # assign this policy to the switch profiles being created
-  # profiles {
-  #   moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
-  #   object_type = "fabric.SwitchProfile"
-  # }
-  # profiles {
-  #   moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
-  #   object_type = "fabric.SwitchProfile"
-  # }
+  # Associate this policy directly with the switch profiles
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+    object_type = "fabric.SwitchProfile"
+  }
+  profiles {
+    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+    object_type = "fabric.SwitchProfile"
+  }
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -208,6 +208,9 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
       value = tags.value.value
     }
   }
+  depends_on = [
+    intersight_fabric_switch_profile.fi6536_switch_profile_a, intersight_fabric_switch_profile.fi6536_switch_profile_b
+  ]
 }
 
 # =============================================================================
