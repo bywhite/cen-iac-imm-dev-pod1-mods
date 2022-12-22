@@ -15,7 +15,7 @@
 # Adjust QoS settings below to match your network environment settings
 # Be sure to Comment/Un-comment & change the Individual vnic_qos policies at bottom to match CoS
 resource "intersight_fabric_system_qos_policy" "system_qos1" {
-  name        = "${var.policy_prefix}-qos-policy1"
+  name        = "${var.policy_prefix}-system-qos-policy1"
   description = "Common QoS - CoS Definition for ${var.policy_prefix}"
   organization {
     moid        = var.org_id
