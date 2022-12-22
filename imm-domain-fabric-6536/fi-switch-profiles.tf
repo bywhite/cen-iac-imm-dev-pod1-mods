@@ -26,7 +26,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
   policy_bucket {
-    moid        = intersight_fabric_system_qos_policy.qos1.moid
+    moid        = var.system_qos_moid        # intersight_fabric_system_qos_policy.qos1.moid
     object_type = "fabric.SystemQosPolicy"
   }
   dynamic "tags" {
@@ -51,7 +51,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
   policy_bucket {
-    moid        = intersight_fabric_system_qos_policy.qos1.moid
+    moid        = var.system_qos_moid              # intersight_fabric_system_qos_policy.qos1.moid
     object_type = "fabric.SystemQosPolicy"
   }
   dynamic "tags" {
