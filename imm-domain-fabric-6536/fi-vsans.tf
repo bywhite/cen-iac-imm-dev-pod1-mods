@@ -52,7 +52,7 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
 
 resource "intersight_fabric_vsan" "fabric_vsan_a" {
   for_each = var.fabric_a_vsan_sets
-  name                  = "${var.policy_prefix}-a-vsan-${each.value["vsan_number"]}"
+  name                  = "${var.policy_prefix}-fi-a-vsan-${each.value["vsan_number"]}"
   default_zoning        = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
@@ -97,7 +97,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
 
 resource "intersight_fabric_vsan" "fabric_vsan_b" {
   for_each = var.fabric_b_vsan_sets
-  name                  = "${var.policy_prefix}-b-vsan-${each.value["vsan_number"]}"
+  name                  = "${var.policy_prefix}-fi-b-vsan-${each.value["vsan_number"]}"
   default_zoning        = "Disabled"
   #fc_zone_sharing_mode = "Active"
   #fc_zone_sharing_mode = ""
