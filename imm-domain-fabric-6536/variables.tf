@@ -104,6 +104,24 @@ variable "fc_6536_vsans_b" {
   default     = []
 }
 
+
+variable "fabric_a_vsan_sets" {
+  type       = map(object({
+    vsan_number  = number
+    fcoe_number  = number
+    switch_id    = string
+  }))
+  description = "Map of vSANs and FCoE VLANs for FI"
+}
+variable "fabric_b_vsan_sets" {
+  type       = map(object({
+    vsan_number  = number
+    fcoe_number  = number
+    switch_id    = string
+  }))
+  description = "Map of vSANs and FCoE VLANs for FI"
+}
+
 # =============================================================================
 # Chassis
 # -----------------------------------------------------------------------------
