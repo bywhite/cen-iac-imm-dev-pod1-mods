@@ -1,32 +1,31 @@
 # =============================================================================
 # vNic Related Server Policies
-#  - QoS Policy
 #  - Eth Adapter Policy (adapter tuning)
 #  - vNic Eth Interface Policy
 # -----------------------------------------------------------------------------
 
 
-# Need Pod wide adapter QoS settings and pass in qos_moid for each adapter (need to set pod wide Domain CoS to match)
-resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
-  name           = "${var.server_policy_prefix}-vnic-eth-qos"
-  description    = var.description
-  mtu            = 1500
-  rate_limit     = 0
-  cos            = 0
-  burst          = 1024
-  priority       = "Best Effort"
-  trust_host_cos = false
-  organization {
-    moid = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
+# Replaced local QoS policy with Pod-wide vNic QoS Policies as var input
+# resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
+#   name           = "${var.server_policy_prefix}-vnic-eth-qos"
+#   description    = var.description
+#   mtu            = 1500
+#   rate_limit     = 0
+#   cos            = 0
+#   burst          = 1024
+#   priority       = "Best Effort"
+#   trust_host_cos = false
+#   organization {
+#     moid = var.organization
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
 
 # this policy is actually quite complex but we are taking all the defaults
 # Adapter can be tuned for VMware vs Windows Bare Metal vs other (EX: tx-offload)
