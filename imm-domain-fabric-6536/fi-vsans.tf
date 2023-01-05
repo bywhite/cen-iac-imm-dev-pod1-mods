@@ -5,7 +5,7 @@
 
 
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
-  name            = "${var.policy_prefix}-vsan-a-1"
+  name            = "${var.policy_prefix}-vsan-a"
   description     = "${var.description} FC network policy"
   enable_trunking = true
   organization {
@@ -27,7 +27,7 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
 }
 
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
-  name            = "${var.policy_prefix}-vsan-b-1"
+  name            = "${var.policy_prefix}-vsan-b"
   description     = "${var.description} FC network policy"
   enable_trunking = true
   organization {
