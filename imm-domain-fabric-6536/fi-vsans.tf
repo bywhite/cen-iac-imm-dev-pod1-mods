@@ -62,6 +62,9 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
   fc_network_policy {
     moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_a.id
   }
+  depends_on = [
+    intersight_fabric_fc_network_policy.fabric_fc_network_policy_a
+  ]
 }
 
 # resource "intersight_fabric_vsan" "fabric_vsan_a_100" {
@@ -104,6 +107,9 @@ resource "intersight_fabric_vsan" "fabric_vsan_b" {
   fc_network_policy {
     moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_b.id
   }
+  depends_on = [
+    intersight_fabric_fc_network_policy.fabric_fc_network_policy_b
+  ]
 }
 
 # resource "intersight_fabric_vsan" "fabric_vsan_b_200" {
