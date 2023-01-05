@@ -82,24 +82,24 @@ variable "vnic_vlan_sets" {
     qos_moid     = string
   }))
   description = "Map of vNic interfaces paired with their vlan range"
-  default = {
-    "eth0"  = {
-      vnic_name   = "eth0"
-      native_vlan = 44
-      vlan_range  = "44,50,1000-1011"
-      switch_id   = "A"
-      pci_order   = 0
-      qos_moid    = null
-    }
-    "eth1"  = {
-      vnic_name   = "eth1"
-      native_vlan = 44
-      vlan_range  = "44,50,1000-1011"
-      switch_id   = "B"
-      pci_order   =  1
-      qos_moid    = null
-    }
-  }
+  # default = {
+  #   "eth0"  = {
+  #     vnic_name   = "eth0"
+  #     native_vlan = 44
+  #     vlan_range  = "44,50,1000-1011"
+  #     switch_id   = "A"
+  #     pci_order   = 0
+  #     qos_moid    = null
+  #   }
+  #   "eth1"  = {
+  #     vnic_name   = "eth1"
+  #     native_vlan = 44
+  #     vlan_range  = "44,50,1000-1011"
+  #     switch_id   = "B"
+  #     pci_order   =  1
+  #     qos_moid    = null
+  #   }
+  # }
 }
 # for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
 
@@ -114,11 +114,12 @@ variable "vhba_vsan_sets" {
     switch_id      = string
     wwpn_pool_moid = string
     pci_order      = number
+    qos_moid     = string
   }))
   description = "Map of vNic interfaces paired with their vlan range"
 }
 # for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   
-#                              each.value["pci_order"]  each.value["wwpn_pool_moid"]
+#                              each.value["pci_order"]  each.value["wwpn_pool_moid"] each.value["qos_moid"]
 
 # =============================================================================
 # IMC
