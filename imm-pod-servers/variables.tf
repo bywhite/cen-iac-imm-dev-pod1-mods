@@ -79,6 +79,7 @@ variable "vnic_vlan_sets" {
     vlan_range   = string
     switch_id    = string
     pci_order    = number
+    qos_moid     = string
   }))
   description = "Map of vNic interfaces paired with their vlan range"
   default = {
@@ -88,6 +89,7 @@ variable "vnic_vlan_sets" {
       vlan_range  = "44,50,1000-1011"
       switch_id   = "A"
       pci_order   = 0
+      qos_moid    = null
     }
     "eth1"  = {
       vnic_name   = "eth1"
@@ -95,6 +97,7 @@ variable "vnic_vlan_sets" {
       vlan_range  = "44,50,1000-1011"
       switch_id   = "B"
       pci_order   =  1
+      qos_moid    = null
     }
   }
 }
