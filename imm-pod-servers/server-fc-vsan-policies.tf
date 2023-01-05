@@ -45,6 +45,7 @@ resource "intersight_vnic_fc_network_policy" "v_fc_network_a1" {
   }
 
 }
+
 resource "intersight_vnic_fc_network_policy" "v_fc_network_b1" {
   name                = "${var.server_policy_prefix}-fc-network-b1"
   description         = var.description
@@ -57,3 +58,4 @@ resource "intersight_vnic_fc_network_policy" "v_fc_network_b1" {
     moid        = var.organization
   }
 }
+ 

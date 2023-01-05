@@ -89,7 +89,7 @@ variable "vnic_vlan_sets" {
   #     vlan_range  = "44,50,1000-1011"
   #     switch_id   = "A"
   #     pci_order   = 0
-  #     qos_moid    = null
+  #     qos_moid    = <whatever>
   #   }
   #   "eth1"  = {
   #     vnic_name   = "eth1"
@@ -97,7 +97,7 @@ variable "vnic_vlan_sets" {
   #     vlan_range  = "44,50,1000-1011"
   #     switch_id   = "B"
   #     pci_order   =  1
-  #     qos_moid    = null
+  #     qos_moid    = <whatever>
   #   }
   # }
 }
@@ -110,7 +110,7 @@ variable "vnic_vlan_sets" {
 variable "vhba_vsan_sets" {
   type       = map(object({
     vhba_name      = string
-    vsan_id        = number
+    vsan_moid      = string
     switch_id      = string
     wwpn_pool_moid = string
     pci_order      = number
@@ -118,7 +118,7 @@ variable "vhba_vsan_sets" {
   }))
   description = "Map of vNic interfaces paired with their vlan range"
 }
-# for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   
+# for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_moid"]  each.value["switch_id"]   
 #                              each.value["pci_order"]  each.value["wwpn_pool_moid"] each.value["qos_moid"]
 
 # =============================================================================

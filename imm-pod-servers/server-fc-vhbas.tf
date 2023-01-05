@@ -83,7 +83,7 @@ resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
 # -----------------------------------------------------------------------------
 resource "intersight_vnic_fc_if" "fc_if" { 
   for_each = var.vhba_vsan_sets  
-  # each.value["vhba_name"]  each.value["vsan_id"]  each.value["switch_id"]   each.value["pci_order"]
+  # each.value["vhba_name"]  each.value["vsan_moid"]  each.value["switch_id"]   each.value["pci_order"]
   name            = each.value["vhba_name"]
   order           = each.value["pci_order"]   # PCI Link order must be unique across all vNic's and vHBA's
   placement {
@@ -106,7 +106,8 @@ resource "intersight_vnic_fc_if" "fc_if" {
     object_type = "vnic.SanConnectivityPolicy"
   }
   fc_network_policy {
-    moid        = intersight_vnic_fc_network_policy.v_fc_network_a1.moid
+    # moid        = intersight_vnic_fc_network_policy.v_fc_network_a1.moid
+    moid        = each.value["vsan_moid"]
     object_type = "vnic.FcNetworkPolicy"
   }
   fc_adapter_policy {
