@@ -10,18 +10,18 @@
 # vnic FC QoS Policy
 # -----------------------------------------------------------------------------
 # Replaced by a Pod-wide object moid
-# resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
-#   name                = "${var.server_policy_prefix}-fc-qos1"
-#   description         = var.description
-#   burst               = 10240
-#   rate_limit          = 0
-#   cos                 = 3
-#   max_data_field_size = 2112
-#   organization {
-#     object_type = "organization.Organization"
-#     moid        = var.organization
-#   }
-# }
+resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
+  name                = "${var.server_policy_prefix}-fc-qos1"
+  description         = var.description
+  burst               = 10240
+  rate_limit          = 0
+  cos                 = 3
+  max_data_field_size = 2112
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
 
 
 # ===============================================================================
