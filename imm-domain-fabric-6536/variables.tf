@@ -66,10 +66,7 @@ variable "fc_port_count_6536" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
 }
-# variable "uplink_vlans_6536" {
-#   type        = map(number)
-#   description = "map of vlan names and IDs to be used on FI uplinks"
-# }
+
 variable "switch_vlans_6536" {
   type        = string
   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
@@ -93,16 +90,6 @@ variable "vsan_name_prefix" {
   type        = string
   default     = "vsan-"
 }
-
-# variable "fc_6536_vsans_a" {
-#   type        = list (map(number))
-#   default     = []
-# }
-
-# variable "fc_6536_vsans_b" {
-#   type        = list (map(number))
-#   default     = []
-# }
 
 
 variable "fabric_a_vsan_sets" {
@@ -140,17 +127,6 @@ variable "chassis_imc_ip_pool_moid" {
   type = string
   description = "moid of chassis ip_pool to be assigned to IMC access policy"
 }
-# variable "profiles" {
-#   default     = {}
-#   description = "map of profiles"
-  
-#   type = map(object(
-#     {
-#       moid        = string
-#       object_type = string
-#     }
-#   ))
-# }
 
 
 # =============================================================================
