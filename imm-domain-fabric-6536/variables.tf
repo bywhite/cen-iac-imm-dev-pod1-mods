@@ -94,15 +94,15 @@ variable "vsan_name_prefix" {
   default     = "vsan-"
 }
 
-variable "fc_6536_vsans_a" {
-  type        = list (map(number))
-  default     = []
-}
+# variable "fc_6536_vsans_a" {
+#   type        = list (map(number))
+#   default     = []
+# }
 
-variable "fc_6536_vsans_b" {
-  type        = list (map(number))
-  default     = []
-}
+# variable "fc_6536_vsans_b" {
+#   type        = list (map(number))
+#   default     = []
+# }
 
 
 variable "fabric_a_vsan_sets" {
