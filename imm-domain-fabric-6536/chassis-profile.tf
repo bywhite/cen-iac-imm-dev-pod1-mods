@@ -16,7 +16,7 @@ resource "intersight_chassis_profile" "chassis_9508_profile" {
   #iom_profiles    = {  }
   config_context {
     object_type    = "policy.ConfigContext"
-    control_action = "No_op" # Options: No_op, ConfigChange, Deploy, Unbind
+    control_action = "No-op" # Options: No_op, ConfigChange, Deploy, Unbind
     error_state    = ""      # Option: Validation-error
   }
   organization {
