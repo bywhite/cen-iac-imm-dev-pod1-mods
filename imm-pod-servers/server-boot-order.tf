@@ -67,15 +67,15 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     name            = "PXE-eth0"
     object_type     = "boot.Pxe"
     additional_properties = jsonencode({
+      Slot            = "MLOM"
       InterfaceSource = "name"
       InterfaceName   = "eth0"
       IpType          = "IPv4"
-      Slot            = "MLOM"
-      Port           = "-1"
-      MacAddress     = ""
     })
   }
 
+#       Port           = "-1"
+#      MacAddress     = ""
 
   # boot_devices {
   #   enabled     = true
