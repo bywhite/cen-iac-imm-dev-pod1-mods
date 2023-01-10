@@ -12,7 +12,7 @@ resource "intersight_chassis_profile" "chassis_9508_profile" {
   description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
-  #action          = "No-op"     # removing it did not change state updates to "Deploy"
+  action          = "No-op"     #Options: Delete,Deploy,Ready,No-op,Unassign,Validate
   #action         = "Validate"
   #iom_profiles    = {  }
   config_context {
