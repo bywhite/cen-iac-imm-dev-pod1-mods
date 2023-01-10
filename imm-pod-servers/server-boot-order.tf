@@ -47,20 +47,20 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     })
   }
 
-  # boot_devices {
-  #   enabled     = true
-  #   name        = "RAID_Boot"
-  #   object_type = "boot.LocalDisk"
-  #   additional_properties = jsonencode({
-  #     Slot       = "MRAID"
-  #     Bootloader = {
-  #       Name        = "BOOTX64.EFI"
-  #       Description = "RAID Boot"
-  #       ObjectType  = "boot.Bootloader"
-  #       Path        = "\\EFI\\BOOT\\"
-  #     }
-  #   })
-  # }
+  boot_devices {
+    enabled     = true
+    name        = "RAID_Boot"
+    object_type = "boot.LocalDisk"
+    additional_properties = jsonencode({
+      Slot       = "MRAID"
+      Bootloader = {
+        Description = "RAID Boot"
+        Name        = "BOOTX64.EFI"
+        ObjectType  = "boot.Bootloader"
+        Path        = "\\EFI\\BOOT\\"
+      }
+    })
+  }
 
   # boot_devices {
   #   enabled         = true
