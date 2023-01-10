@@ -83,8 +83,10 @@ resource "intersight_networkconfig_policy" "connectivity1" {
   description              = var.description
   enable_dynamic_dns       = false
   enable_ipv4dns_from_dhcp = false
-  enable_ipv6              = false
+  enable_ipv6              = true
   enable_ipv6dns_from_dhcp = false
+  preferred_ipv6dns_server = "::"
+  alternate_ipv6dns_server = "::"
   name                     = "${var.policy_prefix}-dns-connectivity-policy"
   organization {
     moid        = var.organization
