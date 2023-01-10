@@ -1,17 +1,17 @@
 # =============================================================================
 #  Server Access Related  Policies
-#  - Access Policy
+#  - IMC Access Policy (IP Settings)
 #  - Serial Over LAN
 #  - IPMI Over LAN
-#  - Device Connector Policy
-#  - Local User
-#  - Certificate Management
+#  - Unused - Device Connector Policy
+#  - Unused - Local User
 # -----------------------------------------------------------------------------
 
 
 
 # =============================================================================
 # IMC Access
+# Sets Inband/Outband VLAN ID and IP-Pool for IMC
 # -----------------------------------------------------------------------------
 
 resource "intersight_access_policy" "access_1" {
@@ -20,7 +20,6 @@ resource "intersight_access_policy" "access_1" {
   inband_vlan = var.imc_access_vlan
   inband_ip_pool {
     object_type  = "ippool.Pool"
-    #moid        = intersight_ippool_pool.ippool_pool1.moid
     moid         = var.imc_ip_pool_moid
   }
   organization {
@@ -105,7 +104,7 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
 # }
 
 # # =============================================================================
-# # Local User Policies   - Now defined at Pod Level - passed as variable
+# # Local User Policies   - Now defined at Pod Level - passed as moid variable
 # # -----------------------------------------------------------------------------
 
 # ## Standard Local User Policy for all local IMC users

@@ -1,5 +1,12 @@
 # =============================================================================
-# VLAN Policy
+#  VLAN Related  Policies
+#  - Eth Network Policy (VLANs for Switches)
+#  - Fabric VLAN resources for Eth Network Policy
+# -----------------------------------------------------------------------------
+
+
+# =============================================================================
+# Fabric Eth Network (VLAN) Policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
   name        = "${var.policy_prefix}-vlan-1"
@@ -28,7 +35,7 @@ resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
 }
 
 # # =============================================================================
-# # Associates VLANs with the above policy   based on uplink_vlans_6536   
+# # Associates VLANs with the above policy   extracted from uplink_vlans_6536   
 # # Example values: {}"vlan-5": 5, "vlan22": 22, "vlan23: 23, "vlan24":24 }
 # # -----------------------------------------------------------------------------
 resource "intersight_fabric_vlan" "fabric_vlans" {

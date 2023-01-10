@@ -1,4 +1,13 @@
-# Policies consumed by Chassis Profiles
+# =============================================================================
+#  Chassis Related  Policies
+#  - Chassis IP Access Policy
+#  - Chassis Power Policy
+#  - Thermal Policy
+#  - SNMP Policy (Also associated with Switch Profiles)
+#  - 
+#  Uses: local.chassis_profile_mods to associate with Chassis Profile
+# -----------------------------------------------------------------------------
+
 
 # =============================================================================
 # Chassis IP Access Policy

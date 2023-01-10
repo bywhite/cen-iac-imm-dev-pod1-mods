@@ -1,9 +1,15 @@
 # =============================================================================
-# A Switch Profiles is assigned to each VSAN Policy
-# Policy bucket limitations prevent the reverse of assignment.
+#  FC VSAN Related  Policies
+#  - FI-A FC Network Policy
+#  - FI-B FC Network Policy
+#  - VSAN-A Fabric VSAN Resource Creatioon
+#  - VSAN-B Fabric VSAN Resource Creation
+# Network Policies self-assign to Switch Profiles (policy bucket limitation)
 # -----------------------------------------------------------------------------
 
-
+# =============================================================================
+# FC Network (VSAN) Policy
+# -----------------------------------------------------------------------------
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
   name            = "${var.policy_prefix}-vsan-a"
   description     = "${var.description} FC network policy"

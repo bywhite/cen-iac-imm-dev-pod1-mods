@@ -1,6 +1,6 @@
-# Variables passed to pod-pools module to create IMM Pools for entire Pod
-#
-
+# =============================================================================
+#  Variables passed to create IMM Pools for entire Pod
+# -----------------------------------------------------------------------------
 
 variable "organization" {
   type        = string

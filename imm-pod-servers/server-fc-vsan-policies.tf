@@ -1,7 +1,8 @@
 # =============================================================================
 #  Server SAN Related  Policies
-#  - SAN Connectivity Policy
-#  - FC Network Policy (VSAN per HBA)
+#  - SAN Connectivity Policy (WWNN)
+#  - FC Network Policy now defined pod_wide and moid is passed via
+#    input variable vhba_vsan_sets to be assigned to interfaces
 # -----------------------------------------------------------------------------
 
 # =============================================================================
@@ -22,42 +23,5 @@ resource "intersight_vnic_san_connectivity_policy" "vnic_san_con_1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-#   Add all vHBA Profiles (FC Interfaces) to SAN Connectivity Policy or vice-versa
-#   profiles {
-#     moid        = var.profile
-#     object_type = "server.Profile"
-#   }
 }
 
-
-# Replaced server template specific VSAN policies with Pod-wide VSAN ID policies
-# # =============================================================================
-# # vnic FC Network Policy
-# # -----------------------------------------------------------------------------
-# resource "intersight_vnic_fc_network_policy" "v_fc_network_a1" {
-#   name                = "${var.server_policy_prefix}-fc-network-a1"
-#   description         = var.description
-#   vsan_settings {
-#     id          = 100
-#     object_type = "vnic.VsanSettings"
-#   }
-#   organization {
-#     object_type = "organization.Organization"
-#     moid        = var.organization
-#   }
-
-# }
-
-# resource "intersight_vnic_fc_network_policy" "v_fc_network_b1" {
-#   name                = "${var.server_policy_prefix}-fc-network-b1"
-#   description         = var.description
-#   vsan_settings {
-#     id          = 200
-#     object_type = "vnic.VsanSettings"
-#   }
-#   organization {
-#     object_type = "organization.Organization"
-#     moid        = var.organization
-#   }
-# }
- 

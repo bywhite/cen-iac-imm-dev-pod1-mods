@@ -1,20 +1,8 @@
-#__________________________________________________________
-#
-# QoS System Class Outputs
-#__________________________________________________________
-
-# # Fabric QoS System Class moid to be assigned to FI-A and FI-B switch profiles
-# # Due to policy bucket limitations, this module cannot create System QoS moids
-# # to be added to FI Switch Policy buckets
-#
-# output "system_qos_moid" {
-#   description = "moid of the Switch QoS policy."
-#   value = intersight_fabric_system_qos_policy.system_qos1.moid
-# }
-# output "system_qos_name" {
-#   description = "Name of the Switch Qos policy."
-#   value = intersight_fabric_system_qos_policy.system_qos1.name
-# }
+# =============================================================================
+#  QoS Related Outputs
+#  Due to Policy Bucket constraints, Switch CoS is created with Switch Policies
+#  QoS policy settings must match Switch and Network QoS/CoS settigns
+# -----------------------------------------------------------------------------
 
 # Eth QoS Policies
 output "vnic_qos_besteffort_moid" {
@@ -38,7 +26,6 @@ output "vnic_qos_gold_moid" {
 #   description = "Platinum Qos moid"
 #   value = intersight_vnic_eth_qos_policy.vnic_qos_platinum.moid
 # }
-
 
 # Fibre Channel FC QoS (CoS 3) Policy
 output "vnic_qos_fc_moid" {

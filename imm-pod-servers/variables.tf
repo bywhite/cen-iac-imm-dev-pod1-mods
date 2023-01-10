@@ -101,7 +101,7 @@ variable "vnic_vlan_sets" {
   #   }
   # }
 }
-# for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
+# Usage: for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
 
 # =============================================================================
 # Server VLANs per Nic Adapter
@@ -118,8 +118,9 @@ variable "vhba_vsan_sets" {
   }))
   description = "Map of vNic interfaces paired with their vlan range"
 }
-# for_each var.vhba_vsan_sets  each.value["vhba_name"]  each.value["vsan_moid"]  each.value["switch_id"]   
-#                              each.value["pci_order"]  each.value["wwpn_pool_moid"] each.value["qos_moid"]
+# Usage: for_each var.vhba_vsan_sets  
+#                 each.value["vhba_name"]  each.value["vsan_moid"]  each.value["switch_id"]   
+#                 each.value["pci_order"]  each.value["wwpn_pool_moid"] each.value["qos_moid"]
 
 # =============================================================================
 # IMC

@@ -1,5 +1,16 @@
-# This builds the FI port policy for 6536 FI's
-
+# =============================================================================
+#  Builds 6536 FI Port Related  Policies
+#  - FI-A Port Policy
+#  - FI-B Port Policy
+#  - Set FI Fabric Port Modes
+#  - Set Server Port Roles
+#  - Set Eth Port Channel Uplink Roles
+#  - Set FC Port Channel Uplink Roles
+#  - Set Eth Network Group Policy (VLANs) on Uplinks
+#  - Set Flow Control Policy
+#  - Set Link Aggregation Policy
+#  - Set Link Control Policy
+# -----------------------------------------------------------------------------
 
 # =============================================================================
 # 6536 Switch Port Policies

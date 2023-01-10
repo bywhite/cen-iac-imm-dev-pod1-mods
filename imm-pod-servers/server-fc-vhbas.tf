@@ -2,7 +2,7 @@
 # vNic Related Server Policies
 #  - vNic FC QoS Policy
 #  - vNic FC Adapter Policy (adapter tuning)
-#  - vNic FC Interface Policy
+#  - vNic FC Interface Policy (VSAN, WWPN, QoS, etc)
 # -----------------------------------------------------------------------------
 
 

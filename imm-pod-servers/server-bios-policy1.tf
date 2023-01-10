@@ -1,5 +1,5 @@
 # =============================================================================
-# Server BIOS Policies for FI-Attached server template
+# Optional Server BIOS Policies for FI-Attached server template
 # -----------------------------------------------------------------------------
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/bios_policy
 

@@ -1,5 +1,11 @@
-#  Chassis Profile Creation
+# =============================================================================
+#  This file creates the Chassis Profile
+#  Used by: Chassis related policies
+# -----------------------------------------------------------------------------
 
+# =============================================================================
+# Chassis Profile Creation
+# -----------------------------------------------------------------------------
 resource "intersight_chassis_profile" "chassis_9508_profile" {
   for_each       = local.chassis_index_set
   name            = "${var.policy_prefix}-chassis-${each.value}"

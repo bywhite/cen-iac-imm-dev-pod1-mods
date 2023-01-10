@@ -1,12 +1,12 @@
 # =============================================================================
 #  Server Storage Related  Policies
 #  - Storage Policy
-#  - SD Policy
+#  - 
 #  - 
 # -----------------------------------------------------------------------------
 
-# Comment-out storage policies to remove from policy & remove from server template policy bucket
-# Also set in server-boot-order.tf
+# Comment-out storage policies to remove from policy & then remove from server template policy bucket
+# Also set/remove from server-boot-order.tf
 
 resource "intersight_storage_storage_policy" "server_storage_policy1" {
   name                     = "${var.server_policy_prefix}-storage-policy-1"

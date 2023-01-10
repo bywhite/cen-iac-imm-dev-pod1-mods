@@ -1,12 +1,16 @@
-# This file creates the following policies:
-#    - fabric switch control
-#    - ntp
-#    - network connectivity (dns)
-#    - system qos (Moving to Separate Module)
-#    - multicast
-#    - syslog
+# =============================================================================
+#  FI Switch Related  Policies
+#  - Fabric Switch Control Policy
+#  - NTP Policy
+#  - Network Connectivity (DNS) Policy
+#  - Fabric System QoS Policy (CoS)
+#  - MultiCast Policy
+#  - Syslog Policy
+# -----------------------------------------------------------------------------
 
-
+# =============================================================================
+# Switch Control Policy
+# -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy1" {
   name        = "${var.policy_prefix}-switch-control-policy"
   description = var.description
@@ -68,7 +72,6 @@ resource "intersight_ntp_policy" "ntp1" {
 # =============================================================================
 # Network Connectivity (DNS)
 # -----------------------------------------------------------------------------
-
 # IPv6 is enabled because this is the only way that the provider allows the
 # IPv6 DNS servers (primary and alternate) to be set to something. If it is not
 # set to something other than null in this resource, then terraform "apply"
@@ -108,8 +111,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 # =============================================================================
 # System Qos Policy
 # -----------------------------------------------------------------------------
-
-# This will create the default System QoS policy with some generic settings
+# This will create the default System Classes for QoS policies (Tune for your environment)
 # FlexPod: https://www.cisco.com/c/en/us/td/docs/unified_computing/ucs/UCS_CVDs/flexpod_datacenter_vmware_netappaffa.html
 # Needs customization for vNics to change from best effort with MTU 1500 to MTU 9216 and higher priority
 resource "intersight_fabric_system_qos_policy" "qos1" {

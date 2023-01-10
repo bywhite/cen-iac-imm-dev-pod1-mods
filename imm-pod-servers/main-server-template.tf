@@ -1,7 +1,7 @@
 # =============================================================================
 # The purpose of this module is to create a Server Profile Template
-# Server Profiles must be created elsewhere - GUI or Ansible
-#  The template is tied to a server_resource_pool 1:1
+# Server Profiles must be derived elsewhere - GUI, Ansible, API, PowerShell
+#  This server template is tied to a server_resource_pool 1:1
 #  As profiles are created, they will consume physical servers from pool
 # -----------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ resource "intersight_server_profile_template" "server_template_1" {
   #   object_type = "iam.EndPointUserPolicy"
   # }
 
-  # No local storage used for this VMware AutoDeploy configuration
+  # No local storage used for this configuration
   # policy_bucket {
   #   moid = intersight_storage_storage_policy.server_storage_policy1.moid
   #   object_type = "storage.StoragePolicy"
@@ -103,7 +103,7 @@ resource "intersight_server_profile_template" "server_template_1" {
 
   policy_bucket {
     moid = intersight_resourcepool_pool.resource_pool.moid
-    object_type = "resourcepool.Pool"    #Not sure on object type
+    object_type = "resourcepool.Pool"
   }
 
   depends_on = [
