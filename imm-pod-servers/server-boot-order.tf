@@ -32,20 +32,20 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     })
   }
 
-  # boot_devices {
-  #   enabled     = true
-  #   name        = "M2_Boot"
-  #   object_type = "boot.LocalDisk"
-  #   additional_properties = jsonencode({
-  #     Slot    = "MSTOR-RAID"
-  #     Bootloader = {
-  #       Description = "M2 Boot"
-  #       Name        = "BOOTX64.EFI"
-  #       ObjectType  = "boot.Bootloader"
-  #       Path        = "\\EFI\\BOOT\\"
-  #     }
-  #   })
-  # }
+  boot_devices {
+    enabled     = true
+    name        = "M2_Boot"
+    object_type = "boot.LocalDisk"
+    additional_properties = jsonencode({
+      Slot    = "MSTOR-RAID"
+      Bootloader = {
+        Description = "M2 Boot"
+        Name        = "BOOTX64.EFI"
+        ObjectType  = "boot.Bootloader"
+        Path        = "\\EFI\\BOOT\\"
+      }
+    })
+  }
 
   # boot_devices {
   #   enabled     = true
