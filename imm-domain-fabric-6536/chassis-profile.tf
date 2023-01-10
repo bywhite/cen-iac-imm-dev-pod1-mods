@@ -12,11 +12,11 @@ resource "intersight_chassis_profile" "chassis_9508_profile" {
   description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
-  action          = "No-op"     #Options: Delete,Deploy,Ready,No-op,Unassign,Validate
+  action          = "Deploy"     #Options: Delete,Deploy,Ready,No-op,Unassign,Validate
   #iom_profiles    = {  }
   config_context {
     object_type    = "policy.ConfigContext"
-    control_action = "No-op" # Options: No_op, ConfigChange, Deploy, Unbind
+    control_action = "Deploy" # Options: No_op, ConfigChange, Deploy, Unbind
     error_state    = ""      # Option: Validation-error
   }
   organization {
