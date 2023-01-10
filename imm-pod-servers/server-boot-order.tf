@@ -33,33 +33,37 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   }
 
   boot_devices {
-    enabled         = true
-    name            = "PXE-eth0"
-    object_type     = "boot.Pxe"
-    additional_properties = jsonencode({
-      interfacesource = "name"
-      interfacename   = "eth0"  # use if interfacesource is "name"
-      iptype          = "IPv4"
-      slot            = "MLOM"
-      #port           = "-1"    # use if interfacesource is "port"
-      #MacAddress     = ""      # use if interfacesource is "mac"
-    })
+    enabled     = true
+    bootloader_description = "M2 Boot"
+    bootloader_name        = "BOOTX64.EFI"
+    bootloader_path        = "\\EFI\\BOOT\\"
+    object_type            = "boot.LocalDisk"
+    Slot                   = "MSTOR-RAID"
   }
 
   boot_devices {
     enabled     = true
-    name        = "M2-RAID"
-    object_type = "boot.LocalDisk"
-       additional_properties = jsonencode({
-        slot        = "MSTOR-RAID"
+    bootloader_description = "RAID Boot"
+    bootloader_name        = "BOOTX64.EFI"
+    bootloader_path        = "\\EFI\\BOOT\\"
+    object_type            = "boot.LocalDisk"
+    Slot                   = "MRAID"
+  }
+
+  boot_devices {
+    enabled         = true
+    name            = "PXE-eth0"
+    object_type     = "boot.Pxe"
+    additional_properties = jsonencode({
+      InterfaceSource = "name"
+      InterfaceName   = "eth0"  # use if interfacesource is "name"
+      IpType          = "IPv4"
+      Slot            = "MLOM"
+      Port           = "-1"    # use if interfacesource is "port"
+      MacAddress     = ""      # use if interfacesource is "mac"
     })
   }
 
-  # boot_devices {
-  #   enabled     = true
-  #   name        = "LocalDisk"
-  #   object_type = "boot.LocalDisk"
-  # }
 
   # boot_devices {
   #   enabled     = true
@@ -140,6 +144,7 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   #   })
   # }
 #
+
 #
 # boot_devices {
 #     enabled     = true
@@ -167,3 +172,13 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
   #   })
   # }
   #
+
+# Legacy M2 Boot
+    # boot_devices {
+  #   enabled     = true
+  #   name        = "M2-RAID"
+  #   object_type = "boot.LocalDisk"
+  #      additional_properties = jsonencode({
+  #       slot        = "MSTOR-RAID"
+  #   })
+  # }
