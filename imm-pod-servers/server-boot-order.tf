@@ -62,19 +62,19 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
     })
   }
 
-  # boot_devices {
-  #   enabled         = true
-  #   name            = "PXE-eth0"
-  #   object_type     = "boot.Pxe"
-  #   additional_properties = jsonencode({
-  #     InterfaceSource = "name"
-  #     InterfaceName   = "eth0"  # use if interfacesource is "name"
-  #     IpType          = "IPv4"
-  #     Slot            = "MLOM"
-  #     Port           = "-1"    # use if interfacesource is "port"
-  #     MacAddress     = ""      # use if interfacesource is "mac"
-  #   })
-  # }
+  boot_devices {
+    enabled         = true
+    name            = "PXE-eth0"
+    object_type     = "boot.Pxe"
+    additional_properties = jsonencode({
+      InterfaceSource = "name"
+      InterfaceName   = "eth0"
+      IpType          = "IPv4"
+      Slot            = "MLOM"
+      Port           = "-1"
+      MacAddress     = ""
+    })
+  }
 
 
   # boot_devices {
@@ -109,6 +109,9 @@ resource "intersight_boot_precision_policy" "boot_precision_1" {
 ### Legacy Boot options follow
 # Reference: 
 # https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/boot_precision_policy
+
+# UEFI Examples
+# https://github.com/scotttyso/terraform-intersight-easy-imm/blob/master/modules/policies/boot_order_policies.tf
 
 ## example from tf-int-imm module by Tyson >> Needs translation and legacy mode used
 # module "boot_legacy_san" {
