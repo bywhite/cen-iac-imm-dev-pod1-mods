@@ -1,5 +1,6 @@
 resource "intersight_macpool_pool" "cisco_af_1" {
   name = "cisco_af_1"
+  organization = var.organization
 
   mac_blocks {
     from = "00:25:B5:${var.pod_id}:00:01"
