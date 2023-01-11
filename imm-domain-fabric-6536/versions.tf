@@ -6,4 +6,3 @@ terraform {
     }
   }
 }
-# Need to add "<=2.0.0" to avoid issues with TF API changes
