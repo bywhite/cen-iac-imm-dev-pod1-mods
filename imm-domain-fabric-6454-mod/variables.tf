@@ -72,6 +72,7 @@ variable "fc_uplink_pc_vsan_id_b" {
 variable "fc_port_count_6454" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
+  default     = 0
 }
 
 variable "vsan_name_prefix" {
@@ -86,6 +87,7 @@ variable "fabric_a_vsan_sets" {
     switch_id    = string
   }))
   description = "Map of vSANs and FCoE VLANs for FI"
+  default        = null
 }
 variable "fabric_b_vsan_sets" {
   type       = map(object({
@@ -93,7 +95,8 @@ variable "fabric_b_vsan_sets" {
     fcoe_number  = number
     switch_id    = string
   }))
-  description = "Map of vSANs and FCoE VLANs for FI"
+  description    = "Map of vSANs and FCoE VLANs for FI"
+  default        = null
 }
 
 # =============================================================================
