@@ -225,7 +225,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
     }
   }
   depends_on = [
-    intersight_fabric_port_mode.fi6454_port_mode_a-35, intersight_fabric_port_mode.fi6454_port_mode_a-36
+    intersight_fabric_port_mode.fi6454_port_mode1, intersight_fabric_port_policy.fi6454_port_policy_a
   ]
 }
 
@@ -249,8 +249,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
     }
   }
   depends_on = [
-    intersight_fabric_port_mode.fi6454_port_mode_b-35, intersight_fabric_port_mode.fi6454_port_mode_b-36
-  ]
+    intersight_fabric_port_mode.fi6454_port_mode1, intersight_fabric_port_policy.fi6454_port_policy_b
 }
 
 resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {

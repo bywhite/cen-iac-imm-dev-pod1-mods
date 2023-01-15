@@ -6,17 +6,17 @@
 
 output "fi6454_cluster_domain_name" {
   description = "name of domain cluster profile created"
-  value       = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.name
+  value       = intersight_fabric_switch_cluster_profile.fi6454_cluster_profile.name
 }
 
 output "fi6454_cluster_profile_name" {
   description = "name of domain cluster profile created"
-  value       = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.name
+  value       = intersight_fabric_switch_cluster_profile.fi6454_cluster_profile.name
 }
 
 output "fi6454_cluster_profile_moid" {
   description = "moid of domain cluster profile created"
-  value       = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
+  value       = intersight_fabric_switch_cluster_profile.fi6454_cluster_profile.moid
 }
 
 output "chassis_9508_profile_moids" {

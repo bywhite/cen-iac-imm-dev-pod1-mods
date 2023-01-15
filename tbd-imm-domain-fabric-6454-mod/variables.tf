@@ -42,6 +42,7 @@ variable "port_channel_6454" {
   type        = set(string)
   description = "list of ethernet port numbers to be assigned to uplink port channel"
 }
+
 variable "switch_vlans_6454" {
   type        = string
   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
@@ -64,10 +65,12 @@ variable "fc_port_count_6454" {
   type        = number
   description = "number of ports to assign to FC starting at port 35"
 }
+
 variable "vsan_name_prefix" {
   type        = string
   default     = "vsan-"
 }
+
 
 variable "fabric_a_vsan_sets" {
   type       = map(object({
@@ -128,7 +131,6 @@ variable "dns_alternate" {
   description = "IP address of secondary (alternate) DNS server"
   default     = ""
 }
-
 variable "snmp_password" {
   type        = string
   default     = "Cisco123"
@@ -137,5 +139,3 @@ variable "snmp_ip"  {
   type        = string
   default     = "127.0.0.1"
 }
-
-

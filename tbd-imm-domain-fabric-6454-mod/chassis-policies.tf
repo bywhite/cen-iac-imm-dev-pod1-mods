@@ -149,11 +149,11 @@ resource "intersight_snmp_policy" "snmp1" {
     }
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_a.moid
     object_type = "fabric.SwitchProfile"
   }
   profiles {
-    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+    moid        = intersight_fabric_switch_profile.fi6454_switch_profile_b.moid
     object_type = "fabric.SwitchProfile"
   }
   organization {

@@ -14,7 +14,7 @@ locals {
   # Create a list of Chassis Profile moids
   chassis_profile_names = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].name]
  
-  # var.switch_vlans_6536      # Example: "2-100,105,110,115 >> {"vlan-2": 2, "vlan-3": 3, etc}"
+  # var.switch_vlans_6454      # Example: "2-100,105,110,115 >> {"vlan-2": 2, "vlan-3": 3, etc}"
   vlan_split = length(regexall("-", var.switch_vlans_6454)) > 0 ? tolist(
     split(",", var.switch_vlans_6454)
   ) : tolist(var.switch_vlans_6454)
