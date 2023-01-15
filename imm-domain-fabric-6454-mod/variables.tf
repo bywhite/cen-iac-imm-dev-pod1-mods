@@ -56,6 +56,11 @@ variable "vlan_prefix" {
 # =============================================================================
 # Fabric Interconnect 6454 SAN ports and VSANs
 # -----------------------------------------------------------------------------
+variable "fc_port_count_6454" {
+  type        = number
+  description = "number of ports to assign to FC starting at port 35"
+  default     = 0
+}
 
 variable "fc_port_channel_6454" {
   type        = list (map(number))
@@ -68,11 +73,6 @@ variable "fc_uplink_pc_vsan_id_a" {
 variable "fc_uplink_pc_vsan_id_b" {
   type        = number
   default     = 1
-}
-variable "fc_port_count_6454" {
-  type        = number
-  description = "number of ports to assign to FC starting at port 35"
-  default     = 0
 }
 
 variable "vsan_name_prefix" {
