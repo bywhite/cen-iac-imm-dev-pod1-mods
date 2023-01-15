@@ -60,6 +60,7 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
 
 
 resource "intersight_fabric_vsan" "fabric_vsan_a" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
   for_each = var.fabric_a_vsan_sets
   name                  = "${var.policy_prefix}-fi-a-vsan-${each.value["vsan_number"]}"
   default_zoning        = "Disabled"
@@ -69,7 +70,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
   vsan_id               = each.value["vsan_number"]
   fcoe_vlan             = each.value["fcoe_number"]
   fc_network_policy {
-    moid = try (intersight_fabric_fc_network_policy.fabric_fc_network_policy_a.id)
+    moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_a.id
   }
   depends_on = [
     intersight_fabric_fc_network_policy.fabric_fc_network_policy_a
@@ -77,6 +78,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
 }
 
 resource "intersight_fabric_vsan" "fabric_vsan_b" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
   for_each = var.fabric_b_vsan_sets
   name                  = "${var.policy_prefix}-fi-b-vsan-${each.value["vsan_number"]}"
   default_zoning        = "Disabled"
@@ -86,7 +88,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_b" {
   vsan_id               = each.value["vsan_number"]
   fcoe_vlan             = each.value["fcoe_number"]
   fc_network_policy {
-    moid = try(intersight_fabric_fc_network_policy.fabric_fc_network_policy_b.id)
+    moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_b.id
   }
   depends_on = [
     intersight_fabric_fc_network_policy.fabric_fc_network_policy_b
