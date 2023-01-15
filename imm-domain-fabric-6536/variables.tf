@@ -91,11 +91,11 @@ variable "vsan_name_prefix" {
 }
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
-  default     = 100
+  default     = null
 }
 variable "fc_uplink_pc_vsan_id_b" {
   type        = number
-  default     = 200
+  default     = null
 }
 
 variable "fabric_a_vsan_sets" {

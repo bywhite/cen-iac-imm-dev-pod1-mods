@@ -63,11 +63,11 @@ variable "fc_port_channel_6454" {
 }
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
-  default     = 100
+  default     = null
 }
 variable "fc_uplink_pc_vsan_id_b" {
   type        = number
-  default     = 200
+  default     = null
 }
 variable "fc_port_count_6454" {
   type        = number
@@ -78,7 +78,6 @@ variable "vsan_name_prefix" {
   type        = string
   default     = "vsan-"
 }
-
 
 variable "fabric_a_vsan_sets" {
   type       = map(object({
