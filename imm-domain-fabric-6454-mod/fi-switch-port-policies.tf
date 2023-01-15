@@ -227,6 +227,7 @@ resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_b" {
 
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
 # 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
 # admin_speed   = "16Gbps"
   admin_speed   = "32Gbps"
@@ -253,6 +254,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
 
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
 # 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
 # admin_speed   = "16Gbps"
   admin_speed   = "32Gbps"

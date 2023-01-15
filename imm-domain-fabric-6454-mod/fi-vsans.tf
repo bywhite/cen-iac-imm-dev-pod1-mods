@@ -11,6 +11,7 @@
 # FC Network (VSAN) Policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
   name            = "${var.policy_prefix}-vsan-a"
   description     = "${var.description} FC network policy"
   enable_trunking = true
@@ -33,6 +34,8 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
 }
 
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
+
   name            = "${var.policy_prefix}-vsan-b"
   description     = "${var.description} FC network policy"
   enable_trunking = true
