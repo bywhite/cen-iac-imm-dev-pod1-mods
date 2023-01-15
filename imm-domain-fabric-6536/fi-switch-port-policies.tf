@@ -363,8 +363,8 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
-  vsan_id      = 100
-  pc_id = 35
+  vsan_id       = var.fc_uplink_pc_vsan_id_a
+  pc_id         = 35
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
@@ -387,8 +387,8 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
-  vsan_id      = 200
-  pc_id = 36
+  vsan_id       = var.fc_uplink_pc_vsan_id_b
+  pc_id         = 36
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
   }

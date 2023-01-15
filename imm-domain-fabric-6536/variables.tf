@@ -85,12 +85,18 @@ variable "fc_port_channel_6536" {
   type        = list (map(number))
   default     = []
 }
-
 variable "vsan_name_prefix" {
   type        = string
   default     = "vsan-"
 }
-
+variable "fc_uplink_pc_vsan_id_a" {
+  type        = number
+  default     = 100
+}
+variable "fc_uplink_pc_vsan_id_b" {
+  type        = number
+  default     = 200
+}
 
 variable "fabric_a_vsan_sets" {
   type       = map(object({
