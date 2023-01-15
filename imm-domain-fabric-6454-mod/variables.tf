@@ -76,7 +76,7 @@ variable "fc_port_count_6454" {
 
 variable "vsan_name_prefix" {
   type        = string
-  default     = "vsan-"
+  default     = "vsan"
 }
 
 variable "fabric_a_vsan_sets" {
