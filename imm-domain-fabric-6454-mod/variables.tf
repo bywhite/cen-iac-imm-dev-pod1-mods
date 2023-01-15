@@ -63,11 +63,11 @@ variable "fc_port_channel_6454" {
 }
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
-  default     = null
+  default     = 1
 }
 variable "fc_uplink_pc_vsan_id_b" {
   type        = number
-  default     = null
+  default     = 1
 }
 variable "fc_port_count_6454" {
   type        = number
@@ -87,7 +87,7 @@ variable "fabric_a_vsan_sets" {
     switch_id    = string
   }))
   description = "Map of vSANs and FCoE VLANs for FI"
-  default        = null
+  default        = {}
 }
 variable "fabric_b_vsan_sets" {
   type       = map(object({
@@ -96,7 +96,7 @@ variable "fabric_b_vsan_sets" {
     switch_id    = string
   }))
   description    = "Map of vSANs and FCoE VLANs for FI"
-  default        = null
+  default        = {}
 }
 
 # =============================================================================
