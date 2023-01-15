@@ -1,54 +1,33 @@
-#  Chassis Profile Creation
+# =============================================================================
+#  This file creates the Chassis Profile
+#  Used by: Chassis related policies
+# -----------------------------------------------------------------------------
 
-resource "intersight_chassis_profile" "chassis_9508_profile1" {
-  name            = "${var.policy_prefix}-chassis-9508-profile-1"
+# =============================================================================
+# Chassis Profile Creation
+# -----------------------------------------------------------------------------
+resource "intersight_chassis_profile" "chassis_9508_profile" {
+  for_each       = local.chassis_index_set
+  name            = "${var.policy_prefix}-chassis-${each.value}"
   description     = "9508 chassis profile"
   type            = "instance"
   target_platform = "FIAttached"
-  action          = "Validate"
+  action          = "No-op"     #Options: Delete,Deploy,Ready,No-op,Unassign,Validate
+  #iom_profiles    = {  }
   config_context {
     object_type    = "policy.ConfigContext"
-    control_action = "deploy"
-    error_state    = "Validation-error"
+    control_action = "No-op" # Options: No-op, ConfigChange, Deploy, Unbind
+    error_state    = ""      # Option: Validation-error
   }
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-
-# IMC Access Policy Required:  In-Band VLAN-ID, IP-Pool
-# Chassis Power Policy recommended: 
-#        Power Save Mode, Dynamic Power Rebalancing, Extended Power, Power Allocation:0
-# SNMP Policy optional
-# Thermal Policy optional:  Fan Control Mode: Balanced
-
-
-#  Policy Bucket EXAMPLE from Rest API from Chassis/Profiles "GET /api/v1/chassis/Profiles"
-#      "PolicyBucket": [
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5b836275722d306a23e3",
-        #   "ObjectType": "access.Policy",
-        #   "link": "https://www.intersight.com/api/v1/access/Policies/638f5b836275722d306a23e3"
-        # },
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5c646275722d306a3c01",
-        #   "ObjectType": "power.Policy",
-        #   "link": "https://www.intersight.com/api/v1/power/Policies/638f5c646275722d306a3c01"
-        # },
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5de36275722d306a6177",
-        #   "ObjectType": "thermal.Policy",
-        #   "link": "https://www.intersight.com/api/v1/thermal/Policies/638f5de36275722d306a6177"
-        # },
-        # {
-        #   "ClassId": "mo.MoRef",
-        #   "Moid": "638f5f366275722d306a8b4d",
-        #   "ObjectType": "snmp.Policy",
-        #   "link": "https://www.intersight.com/api/v1/snmp/Policies/638f5f366275722d306a8b4d"
-        # }
-
-
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
 }
