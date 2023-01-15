@@ -65,7 +65,7 @@ resource "intersight_fabric_port_policy" "fi6454_port_policy_b" {
 }
 
 # set the first X ports to be FC on FI-A and FI-B
-resource "intersight_fabric_port_mode" "fi6454_port_mode1" {
+resource "intersight_fabric_port_mode" "fi6454_port_mode_a" {
   count = (var.fc_port_count_6454 > 0) ? 1 : 0
 
   custom_mode   = "FibreChannel"
@@ -75,6 +75,25 @@ resource "intersight_fabric_port_mode" "fi6454_port_mode1" {
   port_policy {
     moid = intersight_fabric_port_policy.fi6454_port_policy_a.moid
   }
+
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
+  }
+}
+
+# set the first X ports to be FC on FI-A and FI-B
+resource "intersight_fabric_port_mode" "fi6454_port_mode_b" {
+  count = (var.fc_port_count_6454 > 0) ? 1 : 0
+
+  custom_mode   = "FibreChannel"
+  port_id_end   = var.fc_port_count_6454
+  port_id_start = 1
+  slot_id       = 1
+
   port_policy {
     moid = intersight_fabric_port_policy.fi6454_port_policy_b.moid
   }
@@ -87,6 +106,7 @@ resource "intersight_fabric_port_mode" "fi6454_port_mode1" {
     }
   }
 }
+
 
 # assign server role to designated ports on FI-A  port_policy
 resource "intersight_fabric_server_role" "fi6454_server_role_a" {
@@ -225,7 +245,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
     }
   }
   depends_on = [
-    intersight_fabric_port_mode.fi6454_port_mode1, intersight_fabric_port_policy.fi6454_port_policy_a
+    intersight_fabric_port_mode.fi6454_port_mode_a, intersight_fabric_port_policy.fi6454_port_policy_a
   ]
 }
 
@@ -249,7 +269,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
     }
   }
   depends_on = [
-    intersight_fabric_port_mode.fi6454_port_mode1, intersight_fabric_port_policy.fi6454_port_policy_b
+    intersight_fabric_port_mode.fi6454_port_mode_b, intersight_fabric_port_policy.fi6454_port_policy_b
   ]
 }
 
