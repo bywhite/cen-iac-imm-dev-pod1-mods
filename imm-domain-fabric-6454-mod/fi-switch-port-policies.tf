@@ -227,11 +227,13 @@ resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_b" {
 
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
+# 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
 # admin_speed   = "16Gbps"
   admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
   vsan_id      = 100
+  #vsan_id = var.fc_uplink_pc_vsan_id_a
   pc_id = 8
   port_policy {
     moid = intersight_fabric_port_policy.fi6454_port_policy_a.moid
@@ -239,7 +241,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   dynamic "ports" {
     for_each = var.fc_port_channel_6454
     content {
-      aggregate_port_id = ports.value.aggport
+      aggregate_port_id = 0
       port_id           = ports.value.port
       slot_id           = 1
     }
@@ -251,11 +253,13 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
 
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
+# 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
 # admin_speed   = "16Gbps"
   admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
   vsan_id      = 200
+  #vsan_id = var.fc_uplink_pc_vsan_id_b
   pc_id = 8
   port_policy {
     moid = intersight_fabric_port_policy.fi6454_port_policy_b.moid
@@ -263,7 +267,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   dynamic "ports" {
     for_each = var.fc_port_channel_6454
     content {
-      aggregate_port_id = ports.value.aggport
+      aggregate_port_id = 0
       port_id           = ports.value.port
       slot_id           = 1
     }
