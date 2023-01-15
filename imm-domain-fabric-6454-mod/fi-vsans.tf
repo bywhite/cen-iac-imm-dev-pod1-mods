@@ -69,6 +69,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
   vsan_id               = each.value["vsan_number"]
   fcoe_vlan             = each.value["fcoe_number"]
   fc_network_policy {
+    count = (var.fc_port_count_6454 > 0) ? 1 : 0
     moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_a.id
   }
   depends_on = [
@@ -86,6 +87,7 @@ resource "intersight_fabric_vsan" "fabric_vsan_b" {
   vsan_id               = each.value["vsan_number"]
   fcoe_vlan             = each.value["fcoe_number"]
   fc_network_policy {
+    count = (var.fc_port_count_6454 > 0) ? 1 : 0
     moid = intersight_fabric_fc_network_policy.fabric_fc_network_policy_b.id
   }
   depends_on = [
