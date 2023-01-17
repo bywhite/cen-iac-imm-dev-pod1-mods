@@ -87,10 +87,7 @@ variable "fc_port_channel_6536" {
   type        = list (map(number))
   default     = []
 }
-# variable "vsan_name_prefix" {
-#   type        = string
-#   default     = "vsan-"
-# }
+
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
   default     = null
