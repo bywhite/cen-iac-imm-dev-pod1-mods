@@ -75,11 +75,6 @@ variable "fc_uplink_pc_vsan_id_b" {
   default     = 1
 }
 
-# variable "vsan_name_prefix" {
-#   type        = string
-#   default     = "vsan"
-# }
-
 variable "fabric_a_vsan_sets" {
   type       = map(object({
     vsan_number  = number
