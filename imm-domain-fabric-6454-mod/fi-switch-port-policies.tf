@@ -146,7 +146,7 @@ resource "intersight_fabric_server_role" "fi6454_server_role_b" {
   }
 }
 
-# assign ports for Eth uplink port channel on both 6454 FI  port_policy
+# assign ports for Eth uplink port channel on 6454 FI-A  port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_a" {
   pc_id = 49
   dynamic "ports" {
@@ -185,7 +185,7 @@ resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_a" {
   }
 }
 
-# assign ports for Eth uplink port channel on both 6454 FI port_policy
+# assign ports for Eth uplink port channel on 6454 FI-B port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_b" {
   pc_id = 34
   #Port Channel ID is not seen by connected network switch
@@ -233,7 +233,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
-  vsan_id      = 100
+  vsan_id      = var.fc_uplink_pc_vsan_id_a
   #vsan_id = var.fc_uplink_pc_vsan_id_a
   pc_id = 8
   port_policy {
@@ -252,7 +252,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   ]
 }
 
-# Configure FC uplink Port Channel for FI-A
+# Configure FC uplink Port Channel for FI-B
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   count = (var.fc_port_count_6454 > 0) ? 1 : 0
 # 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
@@ -260,7 +260,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   admin_speed   = "32Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
-  vsan_id      = 200
+  vsan_id      = var.fc_uplink_pc_vsan_id_b
   #vsan_id = var.fc_uplink_pc_vsan_id_b
   pc_id = 8
   port_policy {
