@@ -62,11 +62,6 @@ variable "eth_aggr_server_ports" {
   default = null
 }
 
-variable "fc_port_count_6536" {
-  type        = number
-  description = "number of ports to assign to FC starting at port 35"
-}
-
 variable "switch_vlans_6536" {
   type        = string
   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
@@ -81,14 +76,21 @@ variable "vlan_prefix" {
 # Fabric Interconnect 6536 SAN ports and VSANs
 # -----------------------------------------------------------------------------
 
+# FC Port Count is not currently used - FC config defined by module
+variable "fc_port_count_6536" {
+  type        = number
+  description = "number of ports to assign to FC starting at port 35"
+  default     = 2
+}
+
 variable "fc_port_channel_6536" {
   type        = list (map(number))
   default     = []
 }
-variable "vsan_name_prefix" {
-  type        = string
-  default     = "vsan-"
-}
+# variable "vsan_name_prefix" {
+#   type        = string
+#   default     = "vsan-"
+# }
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
   default     = null
