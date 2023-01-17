@@ -91,6 +91,6 @@ resource "intersight_fabric_vsan" "fabric_vsan_b" {
   }
   depends_on = [
     intersight_fabric_fc_network_policy.fabric_fc_network_policy_b,
-    intersight_fabric_switch_profile.fi6454_switch_profile_a
+    intersight_fabric_switch_profile.fi6454_switch_profile_b
   ]
 }
