@@ -31,6 +31,9 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
       value = tags.value.value
     }
   }
+  depends_on = [
+      intersight_fabric_switch_profile.fi6454_switch_profile_a
+  ]
 }
 
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
@@ -55,7 +58,9 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
       value = tags.value.value
     }
   }
-
+  depends_on = [
+      intersight_fabric_switch_profile.fi6454_switch_profile_b
+  ]
 }
 
 
