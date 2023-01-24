@@ -8,12 +8,19 @@ locals {
   # Convert the list of numbers to a set of strings
   chassis_index_set     = toset([for v in local.chassis_index_numbers : tostring(v)])
 
+
   # Create a list of Chassis Profile moids
-  chassis_profile_moids = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].id]
-  # chassis_profile_moids = intersight_chassis_profile.chassis_9508_profile[2].id
+  chassis_profile_moids = values(intersight_chassis_profile.chassis_9508_profile)[*].id
 
   # Create a list of Chassis Profile names
-  chassis_profile_names = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].name]
+  chassis_profile_names = values(intersight_chassis_profile.chassis_9508_profile)[*].name
+
+  # # Create a list of Chassis Profile moids
+  # chassis_profile_moids = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].id]
+  # # chassis_profile_moids = intersight_chassis_profile.chassis_9508_profile[2].id
+
+  # # Create a list of Chassis Profile names
+  # chassis_profile_names = [for n in local.chassis_index_numbers : intersight_chassis_profile.chassis_9508_profile[n].name]
  
   # var.switch_vlans_6536      # Example: "2-100,105,110,115 >> {"vlan-2": 2, "vlan-3": 3, etc}"
   vlan_split = length(regexall("-", var.switch_vlans_6536)) > 0 ? tolist(
