@@ -104,7 +104,20 @@ variable "fabric_a_vsan_sets" {
     switch_id    = string
   }))
   description = "Map of vSANs and FCoE VLANs for FI"
+  default     = {
+    "vsan100" = {
+      vsan_number   = 100
+      fcoe_number   = 1000
+      switch_id      = "A"
+    }
+    "vsan101"  = {
+      vsan_number   = 101
+      fcoe_number   = 1001
+      switch_id      = "A"
+    }
+  }
 }
+
 variable "fabric_b_vsan_sets" {
   type       = map(object({
     vsan_number  = number
