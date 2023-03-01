@@ -37,10 +37,13 @@ variable "tags" {
 variable "server_ports_6536" {
   type        = set(string)
   description = "list of port numbers to be assigned to server ports"
+  default     = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+  
 }
 variable "port_channel_6536" {
   type        = set(string)
   description = "list of ethernet port numbers to be assigned to uplink port channel"
+  default     = [31, 32, 33, 34]
 }
 
 variable "eth_breakout_count" {
@@ -65,6 +68,7 @@ variable "eth_aggr_server_ports" {
 variable "switch_vlans_6536" {
   type        = string
   description = "comma separated vlans and/or vlan ranges Ex: 5,6,7,8,100-130,998-1011"
+  default     = "100,101,102,313,314,997-999"
 }
 variable "vlan_prefix" {
   type        = string
@@ -85,16 +89,26 @@ variable "fc_port_count_6536" {
 
 variable "fc_port_channel_6536" {
   type        = list (map(number))
-  default     = []
+  default     = [
+    { "aggport" : 35, "port" : 1 },
+    { "aggport" : 35, "port" : 2 },
+    { "aggport" : 35, "port" : 3 },
+    { "aggport" : 35, "port" : 4 },
+    { "aggport" : 36, "port" : 1 },
+    { "aggport" : 36, "port" : 2 },
+    { "aggport" : 36, "port" : 3 },
+    { "aggport" : 36, "port" : 4 }
+  ]
+
 }
 
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
-  default     = null
+  default     = 100
 }
 variable "fc_uplink_pc_vsan_id_b" {
   type        = number
-  default     = null
+  default     = 200
 }
 
 variable "fabric_a_vsan_sets" {
@@ -152,6 +166,7 @@ variable "chassis_9508_count" {
 variable "chassis_imc_access_vlan" {
   type        = number
   description = "ID of VLAN for chassis in-band IMC access"
+  default     = 999
 }
 variable "chassis_imc_ip_pool_moid" {
   type = string
