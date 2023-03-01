@@ -112,7 +112,18 @@ variable "fabric_b_vsan_sets" {
     switch_id    = string
   }))
   description = "Map of vSANs and FCoE VLANs for FI"
-}
+  default     = {
+    "vsan200" = {
+      vsan_number   = 200
+      fcoe_number   = 2000
+      switch_id      = "B"
+    }
+    "vsan201"  = {
+      vsan_number   = 201
+      fcoe_number   = 2001
+      switch_id      = "B"
+    }
+  }
 
 # =============================================================================
 # Chassis
@@ -121,7 +132,7 @@ variable "fabric_b_vsan_sets" {
 variable "chassis_9508_count" {
   type        = number
   description = "count of 9508 X-Series chassis to add to domain"
-  default     = 1
+  default     = 5
 }
 
 variable "chassis_imc_access_vlan" {
@@ -151,11 +162,12 @@ variable "ntp_timezone" {
 variable "dns_preferred" {
   type        = string
   description = "IP address of primary (preferred) DNS server"
+  default     = "8.8.8.8"
 }
 variable "dns_alternate" {
   type        = string
   description = "IP address of secondary (alternate) DNS server"
-  default     = ""
+  default     = "8.8.4.4"
 }
 variable "snmp_password" {
   type        = string
@@ -163,5 +175,5 @@ variable "snmp_password" {
 }
 variable "snmp_ip"  {
   type        = string
-  default     = "127.0.0.1"
+  default     = "10.10.10.10"
 }
