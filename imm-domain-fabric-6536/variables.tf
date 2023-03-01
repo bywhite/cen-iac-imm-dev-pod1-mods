@@ -141,6 +141,7 @@ variable "chassis_imc_ip_pool_moid" {
 variable "ntp_servers" {
   type        = list(string)
   description = "list of NTP servers"
+  default     = ["ca.pool.ntp.org"]
 }
 variable "ntp_timezone" {
   type        = string
