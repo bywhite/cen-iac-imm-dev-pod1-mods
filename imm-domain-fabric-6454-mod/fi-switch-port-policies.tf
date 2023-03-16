@@ -164,6 +164,7 @@ resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_a" {
     moid        = intersight_fabric_port_policy.fi6454_port_policy_a.moid
     object_type = "fabric.PortPolicy"
   }
+
   # Only used for Disjoint L2 on uplinks
   #eth_network_group_policy {
   #  moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_a.moid 
@@ -282,47 +283,47 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   ]
 }
 
-resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
-  name        = "${var.policy_prefix}-fi-a-eth_network_group-1"
-  description = "VLAN Group listing allowed on Uplinks"
-  vlan_settings {
-    native_vlan   = 1
-    allowed_vlans = var.switch_vlans_6454
-    object_type   = "fabric.VlanSettings"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
+# resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
+#   name        = "${var.policy_prefix}-fi-a-eth_network_group-1"
+#   description = "VLAN Group listing allowed on Uplinks"
+#   vlan_settings {
+#     native_vlan   = 1
+#     allowed_vlans = var.switch_vlans_6454
+#     object_type   = "fabric.VlanSettings"
+#   }
+#   organization {
+#     object_type = "organization.Organization"
+#     moid        = var.organization
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
 
-resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
-  name        = "${var.policy_prefix}-fi-b-eth_network_group-1"
-  description = "VLAN Group listing allowed on Uplinks"
-  vlan_settings {
-    native_vlan   = 1
-    allowed_vlans = var.switch_vlans_6454
-    object_type   = "fabric.VlanSettings"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
+# resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
+#   name        = "${var.policy_prefix}-fi-b-eth_network_group-1"
+#   description = "VLAN Group listing allowed on Uplinks"
+#   vlan_settings {
+#     native_vlan   = 1
+#     allowed_vlans = var.switch_vlans_6454
+#     object_type   = "fabric.VlanSettings"
+#   }
+#   organization {
+#     object_type = "organization.Organization"
+#     moid        = var.organization
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
 
 resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
   name        = "${var.policy_prefix}-fo-flow-control-1"
