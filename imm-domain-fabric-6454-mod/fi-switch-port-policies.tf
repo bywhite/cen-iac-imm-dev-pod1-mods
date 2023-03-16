@@ -234,7 +234,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   count = (var.fc_port_count_6454 > 0) ? 1 : 0
 # 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
 # admin_speed   = "16Gbps"
-  admin_speed   = "32Gbps"
+  admin_speed   = "8Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
   vsan_id      = var.fc_uplink_pc_vsan_id_a
@@ -261,7 +261,7 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   count = (var.fc_port_count_6454 > 0) ? 1 : 0
 # 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
 # admin_speed   = "16Gbps"
-  admin_speed   = "32Gbps"
+  admin_speed   = "8Gbps"
   fill_pattern  = "Idle"
   #fill_pattern = "Arbff"
   vsan_id      = var.fc_uplink_pc_vsan_id_b
