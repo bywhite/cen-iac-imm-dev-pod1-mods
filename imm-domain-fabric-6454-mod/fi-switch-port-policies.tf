@@ -211,9 +211,10 @@ resource "intersight_fabric_uplink_pc_role" "fi6454_uplink_pc_role_b" {
       value = tags.value.value
     }
   }
-  eth_network_group_policy {
-    moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_b.moid
-  }
+  # uplink network groups are only used for Disjoint L2
+  # eth_network_group_policy {
+  #   moid = intersight_fabric_eth_network_group_policy.fabric_eth_network_group_policy_b.moid
+  # }
   flow_control_policy {
     moid =  intersight_fabric_flow_control_policy.fabric_flow_control_policy.moid
   }
