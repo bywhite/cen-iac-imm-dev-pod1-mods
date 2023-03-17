@@ -255,6 +255,29 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
     intersight_fabric_port_mode.fi6454_port_mode_a, intersight_fabric_port_policy.fi6454_port_policy_a
   ]
 }
+# Optionally: If no FC uplink Port Channel above, then set as FC Port Uplink
+resource "intersight_fabric_fc_uplink_role" "fabric_fc_uplink_role_a" {
+  count = var.create_fc_portchannel ? 0 : var.fc_port_count_6454
+# 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
+# admin_speed   = "16Gbps" 
+  admin_speed   = "8Gbps"
+  aggregate_port_id = 0
+  fill_pattern  = "Idle"
+  #fill_pattern = "Arbff"
+  port_id           = count.index + 1
+  slot_id           = 1
+  vsan_id      = var.fc_uplink_pc_vsan_id_a
+  #vsan_id = var.fc_uplink_pc_vsan_id_a
+
+  port_policy {
+    moid = intersight_fabric_port_policy.fi6454_port_policy_a.moid
+  }
+
+  depends_on = [
+    intersight_fabric_port_mode.fi6454_port_mode_a, intersight_fabric_port_policy.fi6454_port_policy_a
+  ]
+}
+
 
 # Configure FC uplink Port Channel for FI-B
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
@@ -278,6 +301,28 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
       slot_id           = 1
     }
   }
+  depends_on = [
+    intersight_fabric_port_mode.fi6454_port_mode_b, intersight_fabric_port_policy.fi6454_port_policy_b
+  ]
+}
+# Optionally: If no FC uplink Port Channel above, then set as FC Port Uplink
+resource "intersight_fabric_fc_uplink_role" "fabric_fc_uplink_role_b" {
+  count = var.create_fc_portchannel ? 0 : var.fc_port_count_6454
+# 6454 does not use FC breakouts, all ag_port are 0 instead of ports.value.aggport
+# admin_speed   = "16Gbps" 
+  admin_speed   = "8Gbps"
+  aggregate_port_id = 0
+  fill_pattern  = "Idle"
+  #fill_pattern = "Arbff"
+  port_id           = count.index + 1
+  slot_id           = 1
+  vsan_id      = var.fc_uplink_pc_vsan_id_b
+  #vsan_id = var.fc_uplink_pc_vsan_id_a
+
+  port_policy {
+    moid = intersight_fabric_port_policy.fi6454_port_policy_b.moid
+  }
+
   depends_on = [
     intersight_fabric_port_mode.fi6454_port_mode_b, intersight_fabric_port_policy.fi6454_port_policy_b
   ]
