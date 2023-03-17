@@ -158,12 +158,12 @@ variable "snmp_password" {
 }
 variable "snmp_ip"  {
   type        = string
-  default     = "127.0.0.1"
+  default     = "10.10.10.10"
 }
 
 variable "syslog_remote_ip"  {
   type        = string
-  default     = "127.0.0.1"
+  default     = "10.10.10.10"
 }
 
 # variable "ntp_servers" {
