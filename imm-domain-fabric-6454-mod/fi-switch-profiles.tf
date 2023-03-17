@@ -43,6 +43,9 @@ resource "intersight_fabric_switch_profile" "fi6454_switch_profile_b" {
       value = tags.value.value
     }
   }
+    depends_on = [
+      intersight_fabric_switch_profile.fi6454_switch_profile_a
+  ]
 }
 
 
