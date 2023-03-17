@@ -62,6 +62,11 @@ variable "fc_port_count_6454" {
   default     = 0
 }
 
+variable "create_fc_portchannel" {
+  type        = bool
+  description = "Add all FC uplinks into FC Port Channel"
+  default     = true
+}
 
 variable "fc_uplink_pc_vsan_id_a" {
   type        = number
