@@ -133,7 +133,7 @@ variable "imc_access_vlan" {
 variable "server_imc_admin_password" {
   type        = string
   description = "password for the local user policy for IMC"
-  default     = "Cisco123"
+  default     = "C1sc0123!"
 }
 
 variable "user_policy_moid" {
@@ -147,7 +147,7 @@ variable "user_policy_moid" {
 
 variable "snmp_password" {
   type        = string
-  default     = "Cisco123"
+  default     = "C1sc0123!"
 }
 variable "snmp_ip"  {
   type        = string
