@@ -28,6 +28,13 @@ variable "tags" {
   default     = []
 }
 
+
+variable "is_x_series_profile " {
+  type        = bool
+  description = "Is an X-Series Chassis"
+  default     = true 
+} 
+
 # =============================================================================
 # Pod Pools used by server template
 # -----------------------------------------------------------------------------
