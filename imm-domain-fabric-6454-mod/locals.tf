@@ -2,7 +2,7 @@
 locals {
 
   # Create a list of chassis indexes Example of five chassis: [0,1,2,3,4]
-  chassis_index_numbers  = range(var.chassis_9508_count)
+  chassis_index_numbers  = range(1,var.chassis_9508_count)
 
   # Convert the list of numbers to a set of strings
   chassis_index_set     = toset([for v in local.chassis_index_numbers : tostring(v)])
