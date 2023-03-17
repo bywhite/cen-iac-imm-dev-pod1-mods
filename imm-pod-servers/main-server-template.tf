@@ -52,7 +52,7 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
   policy_bucket {
     # moid = intersight_power_policy.server_power_x.moid
-    moid = var.server_power_moid == var.is_x_series_profile == true ? intersight_power_policy.server_power_x.moid : intersight_power_policy.server_power_b.moid
+    moid        = var.is_x_series_profile == true ? intersight_power_policy.server_power_x.moid : intersight_power_policy.server_power_b.moid
     object_type = "power.Policy"
   }
   policy_bucket {
