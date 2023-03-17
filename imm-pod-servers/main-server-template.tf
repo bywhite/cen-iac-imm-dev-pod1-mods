@@ -52,8 +52,8 @@ resource "intersight_server_profile_template" "server_template_1" {
   }
   policy_bucket {
     # moid = intersight_power_policy.server_power_x.moid
-    moid        = var.is_x_series_profile == true ? intersight_power_policy.server_power_x.moid : []
-    object_type = var.is_x_series_profile == true ? "power.Policy" : []
+    moid        = var.is_x_series_profile == true ? intersight_power_policy.server_power_x.moid : ""
+    object_type = var.is_x_series_profile == true ? "power.Policy" : ""
   }
   policy_bucket {
     moid = intersight_access_policy.access_1.moid
