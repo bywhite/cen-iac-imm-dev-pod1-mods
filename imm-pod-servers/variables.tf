@@ -29,7 +29,7 @@ variable "tags" {
 }
 
 
-variable "is_x_series_profile " {
+variable "is_x_series_profile" {
   type        = bool
   description = "Is an X-Series Chassis"
   default     = true 
