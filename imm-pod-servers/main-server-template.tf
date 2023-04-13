@@ -10,7 +10,7 @@
 
 resource "intersight_server_profile_template" "server_template_1" {
   description     = var.description
-  name            = "${var.server_policy_prefix}-t1"
+  name            = "${var.server_policy_prefix}"
   action          = "No-op"
   target_platform = "FIAttached"
 
