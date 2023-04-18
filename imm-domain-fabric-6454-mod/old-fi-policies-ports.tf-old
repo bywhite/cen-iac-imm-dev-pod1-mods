@@ -1,4 +1,4 @@
-# This builds the FI port policy for 6432 FIs
+# This builds the FI port policy for 6454 FIs
 #  Basic Example without SAN FC Configurations
 # The port policy is the parent for port mode and role
 

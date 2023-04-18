@@ -1,5 +1,5 @@
 # =============================================================================
-# This module creates a 6536 Cluster Domain with Chassis Profiles
+# This module creates a 6536 Domain with Chassis Profiles
 # All supporting policies and profiles are created by this module
 # The IMC IP Pool moid for the chassis is provided as a variable
 # Profiles created on this page:
@@ -10,6 +10,7 @@
 
 # =============================================================================
 # Main 6536 Domain Cluster Profile
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_switch_cluster_profile
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
   name        = "${var.policy_prefix}-imm-domain"
@@ -28,6 +29,7 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
     }
   }
 }
+# -----------------------------------------------------------------------------
 
 
 # =============================================================================
@@ -50,6 +52,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
     }
   }
 }
+# -----------------------------------------------------------------------------
 
 # =============================================================================
 # FI-B Switch Profile
@@ -71,8 +74,9 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
     }
   }
 }
-
-
-# =============================================================================
-# END of 6536 FI Cluster (Domain) and Switch Profiles Configuration
 # -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# END of 6536 FI Cluster (Domain) and Switch Profiles Configuration
+# =============================================================================
+# =============================================================================
