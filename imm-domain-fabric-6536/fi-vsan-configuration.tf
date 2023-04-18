@@ -8,7 +8,8 @@
 # -----------------------------------------------------------------------------
 
 # =============================================================================
-# FC Network (VSAN) Policy
+# FI-A FC Network (VSAN) Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_fc_network_policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
   name            = "${var.policy_prefix}-vsan-a"
@@ -32,6 +33,10 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_a" {
   }
 }
 
+# =============================================================================
+# FI-B FC Network (VSAN) Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_fc_network_policy
+# -----------------------------------------------------------------------------
 resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
   name            = "${var.policy_prefix}-vsan-b"
   description     = "${var.description} FC network policy"
@@ -55,7 +60,10 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy_b" {
 
 }
 
-
+# =============================================================================
+# FI-A FC VSAN Sets
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_vsan
+# -----------------------------------------------------------------------------
 resource "intersight_fabric_vsan" "fabric_vsan_a" {
   for_each = var.fabric_a_vsan_sets
   name                  = "${var.policy_prefix}-fi-a-vsan-${each.value["vsan_number"]}"
@@ -73,6 +81,10 @@ resource "intersight_fabric_vsan" "fabric_vsan_a" {
   ]
 }
 
+# =============================================================================
+# FI-B FC VSAN Sets
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_vsan
+# -----------------------------------------------------------------------------
 resource "intersight_fabric_vsan" "fabric_vsan_b" {
   for_each = var.fabric_b_vsan_sets
   name                  = "${var.policy_prefix}-fi-b-vsan-${each.value["vsan_number"]}"

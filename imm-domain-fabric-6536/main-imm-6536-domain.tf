@@ -1,7 +1,11 @@
 # =============================================================================
-# This module creates a 6536 Cluster Domain with Chassis
-# All necessary policies and profiles are created by this module
-# The chassis profile uses an externally created IMC IP Pool
+# This module creates a 6536 Cluster Domain with Chassis Profiles
+# All supporting policies and profiles are created by this module
+# The IMC IP Pool moid for the chassis is provided as a variable
+# Profiles created on this page:
+#  - Domain Cluster Profile
+#  - FI-A Switch Profile
+#  - FI-B Switch Profile
 # -----------------------------------------------------------------------------
 
 # =============================================================================
@@ -27,10 +31,9 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
 
 
 # =============================================================================
-# 6536 Switch Profiles
+# FI-A Switch Profile
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_switch_profile
 # -----------------------------------------------------------------------------
-
-### 6536 Switch Profile A ####
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   action      = "No-op"
   description = var.description
@@ -48,7 +51,10 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   }
 }
 
-### 6536 Switch Profile B ####
+# =============================================================================
+# FI-B Switch Profile
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_switch_profile
+# -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   action      = "No-op"
   description = var.description
