@@ -1,23 +1,22 @@
 # =============================================================================
-#  Builds 6536 FI Port Related  Policies
-#  - FI-A Port Policy
-#  - FI-B Port Policy
-#  - Set FI Fabric Port Modes
-#  - Set Server Port Roles
-#  - Set Eth Port Channel Uplink Roles
-#  - Set FC Port Channel Uplink Roles
-#  - Set Eth Network Group Policy (VLANs) on Uplinks
-#  - Set Flow Control Policy
-#  - Set Link Aggregation Policy
-#  - Set Link Control Policy
+#  Builds 6536 FI Port Related Policies
+#  - FI-A Port Policy (Acts as bucket for all port configs)
+#  - FI-B Port Policy (Acts as bucket for all port configs)
+#  - FI Fabric Port Modes
+#  - Server Port Roles
+#  - Eth Port Channel Uplink Roles
+#  - FC Port Channel Uplink Roles
+#  - Eth Network Group Policy (VLANs) on Uplinks
+#  - Flow Control Policy
+#  - Link Aggregation Policy
+#  - Link Control Policy
 # -----------------------------------------------------------------------------
 
 # =============================================================================
-# 6536 Switch Port Policies
+# FI-A port_policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_policy
 # -----------------------------------------------------------------------------
-
-### 6536 FI-A port_policy ####
-# Associated with 6 other policies
+# Associate port policy containing port configs with switch profile
 resource "intersight_fabric_port_policy" "fi6536_port_policy_a" {
   name         = "${var.policy_prefix}-fi-a-ports"
   description  = var.description
@@ -40,8 +39,11 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy_a" {
   }
 }
 
-### 6536 FI-B port_policy ####
-# Associated with 6 other policies
+# =============================================================================
+# FI-B port_policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_policy
+# -----------------------------------------------------------------------------
+# Associate port policy containing port configs with switch profile
 resource "intersight_fabric_port_policy" "fi6536_port_policy_b" {
   name         = "${var.policy_prefix}-fi-b-ports"
   description  = var.description
@@ -64,13 +66,16 @@ resource "intersight_fabric_port_policy" "fi6536_port_policy_b" {
   }
 }
 
-
-# set the last two ports to be FC on 6536 FI-A
+# =============================================================================
+# FI-A Port 35 FC Breakout Port Mode Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_mode
+# -----------------------------------------------------------------------------
+# Ports 33-36 Universal Ports can be FC breakout on 6536
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode    = "BreakoutFibreChannel32G"
   port_id_end    = 35
-  port_id_start = 35
+  port_id_start  = 35
   slot_id        = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
@@ -87,11 +92,16 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-35" {
   ]
 }
 
+# =============================================================================
+# FI-A Port 36 FC Breakout Port Mode Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_mode
+# -----------------------------------------------------------------------------
+# Ports 33-36 Universal Ports can be FC breakout on 6536
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode    = "BreakoutFibreChannel32G"
   port_id_end    = 36
-  port_id_start = 36
+  port_id_start  = 36
   slot_id        = 1
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
@@ -105,7 +115,11 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-36" {
   }
 }
 
-# set the last two ports to be FC on 6536 FI-B
+# =============================================================================
+# FI-B Port 35 FC Breakout Port Mode Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_mode
+# -----------------------------------------------------------------------------
+# Ports 33-36 Universal Ports can be FC breakout on 6536
 resource "intersight_fabric_port_mode" "fi6536_port_mode_b-35" {
  #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode   = "BreakoutFibreChannel32G"
@@ -127,6 +141,11 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-35" {
   ]
 }
 
+# =============================================================================
+# FI-B Port 36 FC Breakout Port Mode Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_mode
+# -----------------------------------------------------------------------------
+# Ports 33-36 Universal Ports can be FC breakout on 6536
 resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
   #custom_mode   = "BreakoutFibreChannel16G"
   custom_mode   = "BreakoutFibreChannel32G"
@@ -145,7 +164,11 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_b-36" {
   }
 }
  
- # FI 6536 can use any port range as 4x ethernet breakout ports
+# =============================================================================
+# FI-A Eth Port Breakout Mode
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_mode
+# -----------------------------------------------------------------------------
+# FI 6536 can use any port range as 4x ethernet breakout ports
 resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
   #count = (var.eth_breakout_count > 0) ? 1 : 0
   count = var.eth_breakout_count
@@ -169,6 +192,10 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
   ]
 }
 
+# =============================================================================
+# FI-B Eth Port Breakout Mode
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_port_mode
+# -----------------------------------------------------------------------------
 # FI 6536 can use any port range as 4x ethernet breakout ports
  resource "intersight_fabric_port_mode" "fi6536_port_mode_b-1" {
   count = var.eth_breakout_count
@@ -192,6 +219,10 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
  ]
 }
 
+# =============================================================================
+# FI-A Fabric Server-Port Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_server_role
+# -----------------------------------------------------------------------------
 # assign server role to designated ports on FI-A Aggregate ports
 resource "intersight_fabric_server_role" "server_role_aggr_a" {
   for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
@@ -215,6 +246,10 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
   ]
 }
 
+# =============================================================================
+# FI-B Fabric Server-Port Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_server_role
+# -----------------------------------------------------------------------------
 # assign server role to designated ports on FI-B Aggregate ports
 resource "intersight_fabric_server_role" "server_role_aggr_b" {
   for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
@@ -239,8 +274,11 @@ resource "intersight_fabric_server_role" "server_role_aggr_b" {
 }
 
 
- 
-# assign server role to designated ports on FI-A  port_policy
+# =============================================================================
+# FI-A Fabric Server-Port Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_server_role
+# -----------------------------------------------------------------------------
+# assign server role to designated ports on FI-A port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   for_each = var.server_ports_6536
 
@@ -259,6 +297,10 @@ resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   }
 }
 
+# =============================================================================
+# FI-B Fabric Server-Port Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_server_role
+# -----------------------------------------------------------------------------
 # assign server role to designated ports on FI-B port_policy
 resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   for_each = var.server_ports_6536
@@ -278,7 +320,12 @@ resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   }
 }
 
-# assign ports for Eth uplink port channel on both 6536 FI  port_policy
+
+# =============================================================================
+# FI-A Fabric Uplink PC Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_uplink_pc_role
+# -----------------------------------------------------------------------------
+# assign ports for Eth uplink port channel on both 6536 FI port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
   pc_id = 33
   dynamic "ports" {
@@ -317,6 +364,11 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_a" {
   }
 }
 
+
+# =============================================================================
+# FI-B Fabric Uplink PC Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_uplink_pc_role
+# -----------------------------------------------------------------------------
 # assign ports for Eth uplink port channel on both 6536 FI port_policy
 resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_b" {
   pc_id = 34
@@ -357,6 +409,10 @@ resource "intersight_fabric_uplink_pc_role" "fi6536_uplink_pc_role_b" {
   }
 }
 
+# =============================================================================
+# FI-A FC Fabric Uplink PC Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_fc_uplink_pc_role
+# -----------------------------------------------------------------------------
 # Configure FC uplink Port Channel for FI-A
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
 # admin_speed   = "16Gbps"
@@ -381,7 +437,11 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_a" {
   ]
 }
 
-# Configure FC uplink Port Channel for FI-A
+# =============================================================================
+# FI-B FC Fabric Uplink PC Role
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_fc_uplink_pc_role
+# -----------------------------------------------------------------------------
+# Configure FC uplink Port Channel for FI-B
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
 # admin_speed   = "16Gbps"
   admin_speed   = "32Gbps"
@@ -405,48 +465,63 @@ resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role_b" {
   ]
 }
 
-resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
-  name        = "${var.policy_prefix}-fi-a-eth_network_group-1"
-  description = "VLAN Group listing allowed on Uplinks"
-  vlan_settings {
-    native_vlan   = 1
-    allowed_vlans = var.switch_vlans_6536
-    object_type   = "fabric.VlanSettings"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
+# # =============================================================================
+# # FI-A Eth Network Group Policy (Disjoint L2 Uplinks Only)
+# # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_eth_network_group_policy
+# # -----------------------------------------------------------------------------
+# # Configure VLAN Group for Uplink - Only used for Disjoint L2
+# resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_a" {
+#   name        = "${var.policy_prefix}-fi-a-eth_network_group-1"
+#   description = "VLAN Group listing allowed on Uplinks"
+#   vlan_settings {
+#     native_vlan   = 1
+#     allowed_vlans = var.switch_vlans_6536
+#     object_type   = "fabric.VlanSettings"
+#   }
+#   organization {
+#     object_type = "organization.Organization"
+#     moid        = var.organization
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
 
-resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
-  name        = "${var.policy_prefix}-fi-b-eth_network_group-1"
-  description = "VLAN Group listing allowed on Uplinks"
-  vlan_settings {
-    native_vlan   = 1
-    allowed_vlans = var.switch_vlans_6536
-    object_type   = "fabric.VlanSettings"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = var.organization
-  }
-  dynamic "tags" {
-    for_each = var.tags
-    content {
-      key   = tags.value.key
-      value = tags.value.value
-    }
-  }
-}
+# # =============================================================================
+# # FI-B Eth Network Group Policy (Disjoint L2 Uplinks Only)
+# # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_eth_network_group_policy
+# # -----------------------------------------------------------------------------
+# # Configure VLAN Group for Uplink - Only used for Disjoint L2
+# resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy_b" {
+#   name        = "${var.policy_prefix}-fi-b-eth_network_group-1"
+#   description = "VLAN Group listing allowed on Uplinks"
+#   vlan_settings {
+#     native_vlan   = 1
+#     allowed_vlans = var.switch_vlans_6536
+#     object_type   = "fabric.VlanSettings"
+#   }
+#   organization {
+#     object_type = "organization.Organization"
+#     moid        = var.organization
+#   }
+#   dynamic "tags" {
+#     for_each = var.tags
+#     content {
+#       key   = tags.value.key
+#       value = tags.value.value
+#     }
+#   }
+# }
 
+# =============================================================================
+# Fabric Flow Control Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_flow_control_policy
+# -----------------------------------------------------------------------------
+# Create flow control policy for Port Channel Uplinks
 resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
   name        = "${var.policy_prefix}-fo-flow-control-1"
   description = "Port Flow control for Eth Port Channel Uplink Ports"
@@ -466,6 +541,11 @@ resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
   }
 }
 
+# =============================================================================
+# Fabric Link Aggregation Polict
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_link_aggregation_policy
+# -----------------------------------------------------------------------------
+# Create link aggregation policy for Port Channel Uplinks
 resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
   name        = "${var.policy_prefix}-fi-link-agg-1"
   description = "Link Aggregation Settings for Eth Port Channel Uplink Ports"
@@ -484,6 +564,11 @@ resource "intersight_fabric_link_aggregation_policy" "fabric_link_agg_policy" {
   }
 }
 
+# =============================================================================
+# Fabric Link Control Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_link_control_policy
+# -----------------------------------------------------------------------------
+# Create link control policy for Port Channel Uplinks
 resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
   name        = "${var.policy_prefix}-fi-link-control-1"
   description = "Link Control Settings for Eth Port Channel Uplink Ports"
@@ -503,6 +588,7 @@ resource "intersight_fabric_link_control_policy" "fabric_link_control_policy" {
     }
   }
 }
+
 # -----------------------------------------------------------------------------
 # END OF   6536 Switch Port Policies
 # =============================================================================

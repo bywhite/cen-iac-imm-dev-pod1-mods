@@ -5,6 +5,7 @@
 
 # =============================================================================
 # Chassis Profile Creation
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/chassis_profile
 # -----------------------------------------------------------------------------
 resource "intersight_chassis_profile" "chassis_9508_profile" {
   for_each       = local.chassis_index_set

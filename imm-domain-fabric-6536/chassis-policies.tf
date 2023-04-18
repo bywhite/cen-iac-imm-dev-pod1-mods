@@ -2,7 +2,7 @@
 #  Chassis Related  Policies
 #  - Chassis IP Access Policy
 #  - Chassis Power Policy
-#  - Thermal Policy
+#  - Chassis Thermal Policy
 #  - SNMP Policy (Also associated with Switch Profiles)
 #  - 
 #  Uses: local.chassis_profile_mods to associate with Chassis Profile
@@ -11,6 +11,7 @@
 
 # =============================================================================
 # Chassis IP Access Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/access_policy
 # -----------------------------------------------------------------------------
 resource "intersight_access_policy" "chassis_9508_access" {
   name        = "${var.policy_prefix}-chassis-access-1"
@@ -45,6 +46,7 @@ resource "intersight_access_policy" "chassis_9508_access" {
 
 # =============================================================================
 # Chassis Power Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/power_policy
 # -----------------------------------------------------------------------------
 resource "intersight_power_policy" "chassis_9508_power" {
   name        = "${var.policy_prefix}-chassis-power-1"
@@ -78,7 +80,8 @@ resource "intersight_power_policy" "chassis_9508_power" {
 }
 
 # =============================================================================
-# Thermal Policy
+# Chassis Thermal Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/thermal_policy
 # -----------------------------------------------------------------------------
 resource "intersight_thermal_policy" "chassis_9508_thermal" {
   name        = "${var.policy_prefix}-chassis-thermal-1"
@@ -110,8 +113,9 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
 
 # =============================================================================
 # SNMP Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/snmp_policy
 # -----------------------------------------------------------------------------
-
+# Used by Chassis and FI's
 resource "intersight_snmp_policy" "snmp1" {
   name        = "${var.policy_prefix}-chassis-snmp-policy"
   description              = var.description

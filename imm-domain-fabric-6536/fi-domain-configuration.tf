@@ -2,7 +2,7 @@
 #  FI Switch Related  Policies
 #  - Fabric Switch Control Policy
 #  - NTP Policy
-#  - Network Connectivity (DNS) Policy
+#  - Network Config (DNS) Policy
 #  - Fabric System QoS Policy (CoS)
 #  - MultiCast Policy
 #  - Syslog Policy
@@ -10,6 +10,7 @@
 
 # =============================================================================
 # Switch Control Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/fabric_switch_control_policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy1" {
   name        = "${var.policy_prefix}-switch-control-policy"
@@ -39,6 +40,7 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
 
 # =============================================================================
 # NTP Policy
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/ntp_policy
 # -----------------------------------------------------------------------------
 resource "intersight_ntp_policy" "ntp1" {
   description = var.description
@@ -70,7 +72,8 @@ resource "intersight_ntp_policy" "ntp1" {
 
 
 # =============================================================================
-# Network Connectivity (DNS)
+# Network Config Policy (DNS)
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/networkconfig_policy
 # -----------------------------------------------------------------------------
 # IPv6 is enabled because this is the only way that the provider allows the
 # IPv6 DNS servers (primary and alternate) to be set to something. If it is not
@@ -112,6 +115,7 @@ resource "intersight_networkconfig_policy" "connectivity1" {
 
 # =============================================================================
 # System Qos Policy
+# https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_system_qos_policy
 # -----------------------------------------------------------------------------
 # This will create the default System Classes for QoS policies (Tune for your environment)
 # FlexPod: https://www.cisco.com/c/en/us/td/docs/unified_computing/ucs/UCS_CVDs/flexpod_datacenter_vmware_netappaffa.html
@@ -219,6 +223,7 @@ resource "intersight_fabric_system_qos_policy" "qos1" {
 
 # =============================================================================
 # Multicast
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_multicast_policy
 # -----------------------------------------------------------------------------
 
 resource "intersight_fabric_multicast_policy" "fabric_multicast_policy" {
@@ -243,6 +248,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy" {
 
 # =============================================================================
 # Syslog
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/syslog_policy
 # -----------------------------------------------------------------------------
 
 resource "intersight_syslog_policy" "syslog_policy" {
