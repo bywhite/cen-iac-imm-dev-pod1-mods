@@ -4,8 +4,6 @@
 #  - Chassis Power Policy
 #  - Chassis Thermal Policy
 #  - SNMP Policy (Also associated with Switch Profiles)
-#  - 
-#  Uses: local.chassis_profile_mods to associate with Chassis Profile
 # -----------------------------------------------------------------------------
 
 
