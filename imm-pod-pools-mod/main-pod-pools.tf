@@ -1,9 +1,4 @@
-# This file creates the following pools:
-#    - IP pool for IMC Access
-#    - MAC pool for vNICs
-#    - WWNN, WWPN-A and WWPN-B FC pools
-# =============================================================================
-#  Pod Related Pools
+# This module creates the following pod pools:
 #  - IP Pool for Server IMC
 #  - IP Pool for Chassis IMC
 #  - MAC Pool

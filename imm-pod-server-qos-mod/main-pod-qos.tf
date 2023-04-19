@@ -1,5 +1,5 @@
 # =============================================================================
-#  Server QoS Related  Policies
+#  This Module Creates Server QoS Related  Policies
 #  - BestEffort QoS Policy
 #  - Bronze QoS Policy
 #  - Silver QoS Policy
