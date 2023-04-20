@@ -10,7 +10,7 @@
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_eth_network_policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
-  name        = "${var.policy_prefix}-vlan-1"
+  name        = "${var.policy_prefix}-domain-network-policy"
   description = var.description
   organization {
     moid = var.organization
