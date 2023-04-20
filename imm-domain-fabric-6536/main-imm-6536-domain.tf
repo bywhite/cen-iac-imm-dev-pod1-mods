@@ -44,6 +44,12 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
+
+  policy_bucket {
+    moid        = intersight_fabric_eth_network_policy.fabric_eth_network_policy.moid
+    object_type = "fabric.EthNetworkPolicy"
+  }
+  
   dynamic "tags" {
     for_each = var.tags
     content {
@@ -66,6 +72,12 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   switch_cluster_profile {
     moid = intersight_fabric_switch_cluster_profile.fi6536_cluster_profile.moid
   }
+
+  policy_bucket {
+    moid        = intersight_fabric_eth_network_policy.fabric_eth_network_policy.moid
+    object_type = "fabric.EthNetworkPolicy"
+  }
+
   dynamic "tags" {
     for_each = var.tags
     content {
