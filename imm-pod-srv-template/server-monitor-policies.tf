@@ -37,19 +37,10 @@ resource "intersight_snmp_policy" "server_snmp" {
     nr_version  = "V3"
     object_type = "snmp.Trap"
   }
-
-#   profiles {
-#     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
-#     object_type = "fabric.SwitchProfile"
-#   }
-
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-#   depends_on = [
-#     
-#   ]
 }
 
 
@@ -73,10 +64,6 @@ resource "intersight_syslog_policy" "syslog_policy" {
     min_severity = "warning"
     object_type  = "syslog.RemoteLoggingClient"
   }
-#   profiles {
-#     moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
-#     object_type = "fabric.SwitchProfile"
-#   }
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
