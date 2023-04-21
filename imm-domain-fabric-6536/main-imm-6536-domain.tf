@@ -77,6 +77,13 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
       value = tags.value.value
     }
   }
+
+  # This dependency helps ensure the FI-A profile is associated first with the cluster
+  # and becomes the official "FI-A" in the GUI
+  depends_on = [
+    intersight_fabric_switch_profile.fi6536_switch_profile_a
+  ]
+
 }
 # -----------------------------------------------------------------------------
 
