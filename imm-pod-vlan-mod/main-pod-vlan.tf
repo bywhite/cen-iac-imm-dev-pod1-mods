@@ -1,3 +1,4 @@
+
 # =============================================================================
 #  VLAN Related  Policies
 #  - Eth Network Policy (VLANs for Switches)
@@ -10,21 +11,21 @@
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_eth_network_policy
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_eth_network_policy" "fabric_eth_network_policy" {
-  name        = "${var.policy_prefix}-domain-network-policy"
+  name        = "${var.pod_policy_prefix}-domain-network-policy"
   description = var.description
   organization {
     moid = var.organization
   }
   # assign this policy to the domain profile being created
 
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
-    object_type = "fabric.SwitchProfile"
-  }
-  profiles {
-    moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
-    object_type = "fabric.SwitchProfile"
-  }
+  # profiles {
+  #   moid        = intersight_fabric_switch_profile.fi6536_switch_profile_a.moid
+  #   object_type = "fabric.SwitchProfile"
+  # }
+  # profiles {
+  #   moid        = intersight_fabric_switch_profile.fi6536_switch_profile_b.moid
+  #   object_type = "fabric.SwitchProfile"
+  # }
 
   dynamic "tags" {
     for_each = var.tags
