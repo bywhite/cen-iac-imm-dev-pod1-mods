@@ -160,7 +160,7 @@ variable "fabric_b_vsan_sets" {
 variable "chassis_9508_count" {
   type        = number
   description = "count of 9508 X-Series chassis to add to domain"
-  default     = 5
+  default     = 15
 }
 
 variable "chassis_imc_access_vlan" {
