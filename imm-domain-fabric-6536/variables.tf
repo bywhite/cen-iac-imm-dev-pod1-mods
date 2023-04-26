@@ -43,7 +43,7 @@ variable "server_ports_6536" {
 variable "port_channel_6536" {
   type        = set(string)
   description = "list of ethernet port numbers to be assigned to uplink port channel"
-  default     = [31, 32, 33, 34]
+  default     = [31, 32]
 }
 
 variable "eth_breakout_count" {
