@@ -10,7 +10,7 @@
 
 # =============================================================================
 # Main 6536 Domain Cluster Profile
-# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_switch_cluster_profile
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/fabric_switch_cluster_profile
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
   name        = "${var.policy_prefix}-imm-domain"
@@ -34,7 +34,7 @@ resource "intersight_fabric_switch_cluster_profile" "fi6536_cluster_profile" {
 
 # =============================================================================
 # FI-A Switch Profile
-# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_switch_profile
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/fabric_switch_profile
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
   action      = "No-op"
@@ -58,7 +58,7 @@ resource "intersight_fabric_switch_profile" "fi6536_switch_profile_a" {
 
 # =============================================================================
 # FI-B Switch Profile
-# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_switch_profile
+# Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/fabric_switch_profile
 # -----------------------------------------------------------------------------
 resource "intersight_fabric_switch_profile" "fi6536_switch_profile_b" {
   action      = "No-op"
