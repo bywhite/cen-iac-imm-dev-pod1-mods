@@ -47,6 +47,30 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
     })
   }
 
+    boot_devices {
+    enabled     = true
+    name        = "fc2"
+    object_type = "boot.San"
+    additional_properties = jsonencode({
+      Slot          = "MLOM"
+      InterfaceName = "fc2"
+      Lun           = 0
+      Wwpn          = "50:0A:09:82:89:0B:9B:0C"
+    })
+  }
+
+  boot_devices {
+    enabled     = true
+    name        = "fc3"
+    object_type = "boot.San"
+    additional_properties = jsonencode({
+      Slot          = "MLOM"
+      InterfaceName = "fc3"
+      Lun           = 0
+      Wwpn          = "50:0A:09:82:89:0B:9B:0D"
+    })
+  }
+
   # boot_devices {
   #   enabled     = true
   #   name        = "IMC_DVD"
