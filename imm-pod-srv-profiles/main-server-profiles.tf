@@ -13,7 +13,7 @@ resource "intersight_server_profile" "server_profiles" {
   # Usage: for_each var.server_set  each.value["server_name"]  each.value["boot_moid"]
   description     = var.description
   #name            = "${var.server_policy_prefix}"
-  name            = "${each.value["server_name"]}"
+  name            = each.value["server_name"]
   action          = "No-op"
   target_platform = "FIAttached"
 
