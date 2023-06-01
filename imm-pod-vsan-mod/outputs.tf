@@ -32,3 +32,7 @@ output "fc_vsan_202_moid" {
   value       = intersight_vnic_fc_network_policy.fc_vsan_202.moid
 }
 
+output "boot_policy_list" {
+  description = "Boot Policy Name:Moid Pairs"
+  value       = { for v in sort(keys(intersight_boot_precision_policy.san_boot_policies)) : v => intersight_boot_precision_policy.san_boot_policies[v].moid }
+}
