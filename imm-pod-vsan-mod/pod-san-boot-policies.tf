@@ -36,7 +36,7 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
 
   boot_devices {
     enabled     = true
-    name        = each.value["int_name_1"] 
+    name        = each.value["device_name_1"] 
     object_type = "boot.San"
     additional_properties = jsonencode({
       Slot          = "MLOM"
@@ -48,7 +48,7 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
 
   boot_devices {
     enabled     = true
-    name        = each.value["int_name_2"] 
+    name        = each.value["device_name_2"] 
     object_type = "boot.San"
     additional_properties = jsonencode({
       Slot          = "MLOM"
@@ -60,7 +60,7 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
 
   boot_devices {
     enabled     = true
-    name        = each.value["int_name_3"] 
+    name        = each.value["device_name_3"] 
     object_type = "boot.San"
     additional_properties = jsonencode({
       Slot          = "MLOM"
@@ -72,7 +72,7 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
 
   boot_devices {
     enabled     = true
-    name        = each.value["int_name_4"] 
+    name        = each.value["device_name_4"] 
     object_type = "boot.San"
     additional_properties = jsonencode({
       Slot          = "MLOM"
