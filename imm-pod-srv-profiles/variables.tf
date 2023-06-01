@@ -40,7 +40,16 @@ variable "server_sets" {
     boot_moid    = string
   }))
   description = "Map of vNic interfaces paired with their vlan range"
-  default = {}
+  default = {
+    "ofldevlnx01"  = {
+      server_name  = "ofldevlnx01"
+      boot_moid = "6478c211627572300181b270"
+    }
+    "ofldevlnx02"  = {
+      server_name  = "ofldevlnx02"
+      boot_moid = "6478c211627572300181b270"
+    }
+  }
 }
 
 # =============================================================================
