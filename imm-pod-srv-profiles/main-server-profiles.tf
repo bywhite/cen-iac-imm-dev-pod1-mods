@@ -9,8 +9,11 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_server_profile" "server_profiles" {
+  for_each = var.server_set
+  # Usage: for_each var.server_set  each.value["server_name"]  each.value["boot_moid"]
   description     = var.description
-  name            = "${var.server_policy_prefix}"
+  #name            = "${var.server_policy_prefix}"
+  name            = "${each.value["server_name"]}"
   action          = "No-op"
   target_platform = "FIAttached"
 
@@ -35,9 +38,13 @@ resource "intersight_server_profile" "server_profiles" {
   # the following policy_bucket statements map various policies to this
   # template -- the object_type shows the policy type
   policy_bucket {
-    moid        = intersight_boot_precision_policy.boot_precision_1.moid
+    moid        = each.value["boot_moid"]
     object_type = "boot.PrecisionPolicy"
   }
+  # policy_bucket {
+  #   moid        = intersight_boot_precision_policy.boot_precision_1.moid
+  #   object_type = "boot.PrecisionPolicy"
+  # }
  policy_bucket {
    moid = intersight_ipmioverlan_policy.ipmi1.moid
    object_type = "ipmioverlan.Policy"
