@@ -31,32 +31,32 @@ variable "san_boot_targets" {
   description = "Map of vNic interfaces paired with their vlan range"
   default = {
     "boot-01" = {
-      int_name_1 = "fc0"
-      boot_lun_1       = 0
-      target_wwpn_1    = "00:00:00:00:00:00:00:01"
-      int_name_2 = "fc1"
-      boot_lun_2       = 0
-      target_wwpn_2    = "00:00:00:00:00:00:00:01"
-      int_name_3 = "fc2"
-      boot_lun_3       = 0
-      target_wwpn_3    = "00:00:00:00:00:00:00:01"
-      int_name_4 = "fc3"
-      boot_lun_4       = 0
-      target_wwpn_4    = "00:00:00:00:00:00:00:01"
+      int_name_1    = "fc0"
+      boot_lun_1    = 0
+      target_wwpn_1 = "00:00:00:00:00:00:00:01"
+      int_name_2    = "fc1"
+      boot_lun_2    = 0
+      target_wwpn_2 = "00:00:00:00:00:00:00:01"
+      int_name_3    = "fc2"
+      boot_lun_3    = 0
+      target_wwpn_3 = "00:00:00:00:00:00:00:01"
+      int_name_4    = "fc3"
+      boot_lun_4    = 0
+      target_wwpn_4 = "00:00:00:00:00:00:00:01"
     }
     "boot-02" = {
-      int_name_1 = "fc0"
-      boot_lun_1       = 0
-      target_wwpn_1    = "00:00:00:00:00:00:00:02"
-      int_name_2 = "fc1"
-      boot_lun_2       = 0
-      target_wwpn_2    = "00:00:00:00:00:00:00:02"
-      int_name_3 = "fc2"
-      boot_lun_3       = 0
-      target_wwpn_3    = "00:00:00:00:00:00:00:02"
-      int_name_4 = "fc3"
-      boot_lun_4       = 0
-      target_wwpn_4    = "00:00:00:00:00:00:00:02"
+      int_name_1    = "fc0"
+      boot_lun_1    = 0
+      target_wwpn_1 = "00:00:00:00:00:00:00:02"
+      int_name_2    = "fc1"
+      boot_lun_2    = 0
+      target_wwpn_2 = "00:00:00:00:00:00:00:02"
+      int_name_3    = "fc2"
+      boot_lun_3    = 0
+      target_wwpn_3 = "00:00:00:00:00:00:00:02"
+      int_name_4    = "fc3"
+      boot_lun_4    = 0
+      target_wwpn_4 = "00:00:00:00:00:00:00:02"
     }
   }
 }

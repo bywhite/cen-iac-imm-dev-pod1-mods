@@ -6,7 +6,7 @@
 
 
 resource "intersight_boot_precision_policy" "san_boot_policies" {
-  for_each = var.vsan_boot_targets
+  for_each = var.san_boot_targets
   # Usage: for_each var.vsan_boot_targets  each.value["int_name_1"]  each.value["boot_lun_1"]  each.value["target_wwpn_1"]
   name                     = "${var.pod_policy_prefix}-san-${each.key}"
   description              = "${var.pod_policy_prefix} SAN Boot Policies"
