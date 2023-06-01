@@ -28,7 +28,7 @@ variable "san_boot_targets" {
     boot_lun_4    = number
     target_wwpn_4 = string
   }))
-  description = "Map of vNic interfaces paired with their vlan range"
+  description = "Map of boot policies each with their 4 boot targets
   default = {
     "boot-01" = {
       int_name_1    = "fc0"
