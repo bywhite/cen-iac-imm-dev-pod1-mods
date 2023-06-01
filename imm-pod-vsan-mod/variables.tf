@@ -15,9 +15,18 @@ variable "description" {
 
 variable "san_boot_targets" {
   type       = map(object({
-    interface_name = string
-    boot_lun       = number
-    target_wwpn    = string
+    int_name_1    = string
+    boot_lun_1    = number
+    target_wwpn_1 = string
+    int_name_2    = string
+    boot_lun_2    = number
+    target_wwpn_2 = string
+    int_name_3    = string
+    boot_lun_3    = number
+    target_wwpn_3 = string
+    int_name_4    = string
+    boot_lun_4    = number
+    target_wwpn_4 = string
   }))
   description = "Map of vNic interfaces paired with their vlan range"
   default = {
