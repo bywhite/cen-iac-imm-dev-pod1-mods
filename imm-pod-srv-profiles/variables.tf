@@ -34,7 +34,8 @@ variable "is_x_series_profile" {
   default     = true 
 } 
 
-variable "server_sets" {
+# Usage: for_each var.server_set  each.value["server_name"]  each.value["boot_moid"]
+variable "server_set" {
   type       = map(object({
     server_name  = string
     boot_moid    = string
