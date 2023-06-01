@@ -6,8 +6,8 @@
 
 
 resource "intersight_boot_precision_policy" "san_boot_policies" {
-  for_each = var.san_boot_targets
-  # Usage: for_each var.vsan_boot_targets  each.value["int_name_1"]  each.value["boot_lun_1"]  each.value["target_wwpn_1"]
+  for_each = var.san_boot_policies
+  # Usage: for_each var.san_boot_policies  each.value["int_name_1"]  each.value["boot_lun_1"]  each.value["target_wwpn_1"]
   name                     = "${var.pod_policy_prefix}-san-${each.key}"
   description              = "${var.pod_policy_prefix} SAN Boot Policies"
   configured_boot_mode     = "Uefi"
@@ -15,6 +15,14 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
+  }
+
+  dynamic "tags" {
+    for_each = var.tags
+    content {
+      key   = tags.value.key
+      value = tags.value.value
+    }
   }
 
   boot_devices {

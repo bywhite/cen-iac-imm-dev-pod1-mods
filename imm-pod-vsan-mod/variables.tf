@@ -12,8 +12,13 @@ variable "description" {
   default     = "Pod IMC Default Policy"
 }
 
+variable "tags" {
+  type        = list(map(string))
+  description = "user tags to be applied to all policies"
+  default     = []
+}
 
-variable "san_boot_targets" {
+variable "san_boot_policies" {
   type       = map(object({
     int_name_1    = string
     boot_lun_1    = number
@@ -60,4 +65,4 @@ variable "san_boot_targets" {
     }
   }
 }
-# Usage: for_each var.vsan_boot_targets  each.value["interface_name"]  each.value["boot_lun"]  each.value["target_wwpn"]
+# Usage: for_each var.san_boot_policies  each.value["interface_name"]  each.value["boot_lun"]  each.value["target_wwpn"]
