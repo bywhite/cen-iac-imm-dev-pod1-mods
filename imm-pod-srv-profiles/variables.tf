@@ -36,22 +36,12 @@ variable "is_x_series_profile" {
 
 variable "server_sets" {
   type       = map(object({
-    server_name = string
-    boot_moid   = string
+    server_name  = string
+    boot_moid    = string
   }))
   description = "Map of vNic interfaces paired with their vlan range"
-  # default = {
-    "ofldevlnx01"  = {
-      server_name  = "ofldevlnx01"
-      boot_moid = "6478c211627572300181b270"
-    }
-    "ofldevlnx02"  = {
-      server_name  = "ofldevlnx02"
-      boot_moid = "6478c211627572300181b27e"
-    }
-  }
+  default = {}
 }
-
 
 # =============================================================================
 # Pod Pools used by server template
