@@ -35,6 +35,18 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
   }
 
   boot_devices {
+    enabled         = true
+    name            = "PXE"
+    object_type     = "boot.Pxe"
+    additional_properties = jsonencode({
+      Slot            = "MLOM"
+      InterfaceSource = "name"
+      InterfaceName   = "eth0"
+      IpType          = "IPv4"
+    })
+  }
+  
+  boot_devices {
     enabled     = true
     name        = each.value["device_name_1"] 
     object_type = "boot.San"
@@ -122,15 +134,5 @@ resource "intersight_boot_precision_policy" "san_boot_policies" {
   #   })
   # }
 
-  # boot_devices {
-  #   enabled         = true
-  #   name            = "PXE"
-  #   object_type     = "boot.Pxe"
-  #   additional_properties = jsonencode({
-  #     Slot            = "MLOM"
-  #     InterfaceSource = "name"
-  #     InterfaceName   = "eth0"
-  #     IpType          = "IPv4"
-  #   })
-  
+
   }
