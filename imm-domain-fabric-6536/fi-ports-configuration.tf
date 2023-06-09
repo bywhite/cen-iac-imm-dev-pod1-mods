@@ -285,7 +285,7 @@ resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   aggregate_port_id     = 0
   port_id               = each.value
   slot_id               = 1
-  preferred_device_id   = each.value
+  preferred_device_id   = each.key
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
@@ -314,7 +314,7 @@ resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   aggregate_port_id     = 0
   port_id               = each.value
   slot_id               = 1
-  preferred_device_id   = each.value
+  preferred_device_id   = each.key
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
