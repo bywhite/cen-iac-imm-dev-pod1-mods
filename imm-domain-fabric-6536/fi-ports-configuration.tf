@@ -230,7 +230,7 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
   aggregate_port_id     = each.value.aggregate_port_id
   port_id               = each.value.port_id
   slot_id               = 1
-  preferred_device_id   = var.eth_aggr_server_ports
+  preferred_device_id   = each.value.port_id
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
