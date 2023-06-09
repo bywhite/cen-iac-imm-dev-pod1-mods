@@ -227,10 +227,10 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
 resource "intersight_fabric_server_role" "server_role_aggr_a" {
   for_each = var.eth_breakout_count != 0 ? var.eth_aggr_server_ports : {}
 
-  aggregate_port_id = each.value.aggregate_port_id
-  port_id           = each.value.port_id
-  slot_id           = 1
-  preferred_device_id = var.eth_aggr_server_ports
+  aggregate_port_id     = each.value.aggregate_port_id
+  port_id               = each.value.port_id
+  slot_id               = 1
+  preferred_device_id   = var.eth_aggr_server_ports
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
