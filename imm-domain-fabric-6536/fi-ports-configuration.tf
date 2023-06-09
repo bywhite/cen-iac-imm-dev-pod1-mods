@@ -220,7 +220,7 @@ resource "intersight_fabric_port_mode" "fi6536_port_mode_a-1" {
 }
 
 # =============================================================================
-# FI-A Fabric Server-Port Role
+# FI-A Fabric Server-Port Role for Breakout Ports (if any exist)
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_server_role
 # -----------------------------------------------------------------------------
 # assign server role to designated ports on FI-A Aggregate ports
@@ -230,12 +230,6 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
   aggregate_port_id     = each.value.aggregate_port_id
   port_id               = each.value.port_id
   slot_id               = 1
-  preferred_device_id   = each.value.port_id
-  preferred_device_type = "Chassis"
-
-# From fabric/ServerRoles API Browser
-#      "PreferredDeviceId": 9,
-#      "PreferredDeviceType": "Chassis",
 
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
@@ -253,7 +247,7 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
 }
 
 # =============================================================================
-# FI-B Fabric Server-Port Role
+# FI-B Fabric Server-Port Role for Breakout Ports (if any exist)
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_server_role
 # -----------------------------------------------------------------------------
 # assign server role to designated ports on FI-B Aggregate ports
@@ -288,9 +282,15 @@ resource "intersight_fabric_server_role" "server_role_aggr_b" {
 resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   for_each = var.server_ports_6536
 
-  aggregate_port_id = 0
-  port_id           = each.value
-  slot_id           = 1
+  aggregate_port_id     = 0
+  port_id               = each.value
+  slot_id               = 1
+  preferred_device_id   = each.value
+  preferred_device_type = "Chassis"
+
+# From fabric/ServerRoles API Browser
+#      "PreferredDeviceId": 9,
+#      "PreferredDeviceType": "Chassis",
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
@@ -311,9 +311,15 @@ resource "intersight_fabric_server_role" "fi6536_server_role_a" {
 resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   for_each = var.server_ports_6536
 
-  aggregate_port_id = 0
-  port_id           = each.value
-  slot_id           = 1
+  aggregate_port_id     = 0
+  port_id               = each.value
+  slot_id               = 1
+  preferred_device_id   = each.value
+  preferred_device_type = "Chassis"
+
+# From fabric/ServerRoles API Browser
+#      "PreferredDeviceId": 9,
+#      "PreferredDeviceType": "Chassis",
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
   }
