@@ -230,6 +230,12 @@ resource "intersight_fabric_server_role" "server_role_aggr_a" {
   aggregate_port_id = each.value.aggregate_port_id
   port_id           = each.value.port_id
   slot_id           = 1
+  PreferredDeviceId = var.eth_aggr_server_ports
+  PreferredDeviceType = "Chassis"
+
+# From fabric/ServerRoles API Browser
+#      "PreferredDeviceId": 9,
+#      "PreferredDeviceType": "Chassis",
 
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
