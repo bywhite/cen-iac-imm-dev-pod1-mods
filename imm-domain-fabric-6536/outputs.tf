@@ -43,3 +43,8 @@ output "fabric_vlan_list_moid" {
   description = "Fabric VLAN moid for fabric Name:IP pairs"
   value       = { for v in sort(keys(intersight_fabric_vlan.fabric_vlans)) : v => intersight_fabric_vlan.fabric_vlans[v].moid }
 }
+
+output "server_ports_6536" {
+  description = "map of server ports to chassis ID"
+  value = var.server_ports_6536
+}
