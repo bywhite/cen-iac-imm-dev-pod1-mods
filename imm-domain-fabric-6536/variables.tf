@@ -34,6 +34,7 @@ variable "tags" {
 # Fabric Interconnect 6536 ports and VLANs
 # -----------------------------------------------------------------------------
 
+/*
 variable "server_ports_6536" {
   type        = "map"
   description = "map of port numbers to chassis numbers"
@@ -50,8 +51,9 @@ variable "server_ports_6536" {
     "10" = 5
   }
 }
+*/
 
-/*
+
 variable "server_ports_6536" {
   type        = "map"
   description = "map of port numbers to chassis numbers"
@@ -89,7 +91,7 @@ variable "server_ports_6536" {
   }
 }
 
-
+/*
 
 variable "server_ports_6536" {
   type        = set(string)
