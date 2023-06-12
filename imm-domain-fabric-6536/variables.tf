@@ -55,7 +55,7 @@ variable "server_ports_6536" {
 
 
 variable "server_ports_6536" {
-  type        = "map"
+  type        = map(string)
   description = "map of port numbers to chassis numbers"
   default     = {
     "1"  = "1"
