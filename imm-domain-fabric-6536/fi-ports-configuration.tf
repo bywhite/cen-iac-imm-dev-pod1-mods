@@ -283,9 +283,9 @@ resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   for_each = var.server_ports_6536
 
   aggregate_port_id     = 0
-  port_id               = each.key
+  port_id               = tonumber(each.key)
   slot_id               = 1
-  preferred_device_id   = each.value
+  preferred_device_id   = tonumber(each.value)
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
@@ -312,9 +312,9 @@ resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   for_each = var.server_ports_6536
 
   aggregate_port_id     = 0
-  port_id               = each.key
+  port_id               = tonumber(each.key)
   slot_id               = 1
-  preferred_device_id   = each.value
+  preferred_device_id   = tonumber(each.value)
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
