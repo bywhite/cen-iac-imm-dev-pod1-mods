@@ -234,7 +234,11 @@ variable "chassis_imc_ip_pool_moid" {
   type = string
   description = "moid of chassis ip_pool to be assigned to IMC access policy"
 }
-
+variable "chassis_ifm_uplink_count" {
+  type        = number
+  description = "Number of upllinks per IFM (aka per side)"
+  default     = 2
+}
 
 # =============================================================================
 # NTP, DNS and SNMP Settings
