@@ -314,7 +314,9 @@ resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   aggregate_port_id     = 0
   port_id               = tonumber(each.key)
   slot_id               = 1
-  preferred_device_id   = tonumber(each.value)
+  #preferred_device_id   = tonumber(each.value)
+  # example using chassis_ifm_uplink_count used to determine chassis preferred_device_id
+  preferred_device_id  = ${ceil(tonumber(each.key)/var.chassis_ifm_uplink_count)}
   preferred_device_type = "Chassis"
 
 # From fabric/ServerRoles API Browser
