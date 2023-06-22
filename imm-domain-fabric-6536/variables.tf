@@ -279,6 +279,7 @@ variable "fan_control_mode" {
 # NTP, DNS and SNMP Settings
 # -----------------------------------------------------------------------------
 
+# NTP Policy Settings
 variable "ntp_servers" {
   type        = list(string)
   description = "list of NTP servers"
@@ -289,6 +290,7 @@ variable "ntp_timezone" {
   description = "valid timezone as documented at https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/ntp_policy"
   default     = "America/Chicago"
 }
+# DNS Network Configuration Policy Settings
 variable "dns_preferred" {
   type        = string
   description = "IP address of primary (preferred) DNS server"
@@ -299,8 +301,28 @@ variable "dns_alternate" {
   description = "IP address of secondary (alternate) DNS server"
   default     = "8.8.4.4"
 }
+variable "enable_dynamic_dns" {
+  type        = string
+  description = "false by default"
+  default     = "false"
+}
+variable "enable_ipv4dns_from_dhcp" {
+  type        = string
+  description = "false by default"
+  default     = "false"
+}
+variable "enable_ipv6" {
+  type        = string
+  description = "false by default"
+  default     = "false"
+}
+variable "enable_ipv6dns_from_dhcp" {
+  type        = string
+  description = "false by default"
+  default     = "false"
+}
 
-#SNMP Policy Settings
+# SNMP Policy Settings
 variable "snmp_enabled" {
   type        = string
   description = "true by default"
@@ -362,7 +384,6 @@ variable "auth_type" {
   default     = "SHA"
 }
 # SNMP Trap Destinations
-# Need to swap snmp_ip for "trap_destination"
 variable "trap_destination"  {
   type        = string
   default     = "10.10.10.10"
