@@ -362,8 +362,8 @@ variable "auth_type" {
   default     = "SHA"
 }
 # SNMP Trap Destinations
-# Need to swap for "trap_destination"
-variable "snmp_ip"  {
+# Need to swap snmp_ip for "trap_destination"
+variable "trap_destination"  {
   type        = string
   default     = "10.10.10.10"
 }

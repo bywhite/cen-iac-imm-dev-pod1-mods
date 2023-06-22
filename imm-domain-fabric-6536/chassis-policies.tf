@@ -135,7 +135,7 @@ resource "intersight_snmp_policy" "snmp1" {
     object_type      = "snmp.User"
   }
   snmp_traps {
-    destination = var.snmp_ip
+    destination = var.trap_destination
     enabled     = var.trap_enabled
     port        = var.trap_port
     type        = var.trap_type

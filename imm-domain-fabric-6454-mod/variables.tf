@@ -143,7 +143,7 @@ variable "dns_alternate" {
   default     = ""
 }
 
-variable "snmp_ip"  {
+variable "trap_destination"  {
   type        = string
   default     = "127.0.0.1"
 }
