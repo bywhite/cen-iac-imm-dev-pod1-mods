@@ -288,9 +288,6 @@ resource "intersight_fabric_server_role" "fi6536_server_role_a" {
   preferred_device_id   = tonumber(each.value)
   preferred_device_type = "Chassis"
 
-# From fabric/ServerRoles API Browser
-#      "PreferredDeviceId": 9,
-#      "PreferredDeviceType": "Chassis",
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_a.moid
   }
@@ -319,9 +316,6 @@ resource "intersight_fabric_server_role" "fi6536_server_role_b" {
   preferred_device_id  = ceil(tonumber(each.key)/var.chassis_ifm_uplink_count)
   preferred_device_type = "Chassis"
 
-# From fabric/ServerRoles API Browser
-#      "PreferredDeviceId": 9,
-#      "PreferredDeviceType": "Chassis",
   port_policy {
     moid = intersight_fabric_port_policy.fi6536_port_policy_b.moid
   }
