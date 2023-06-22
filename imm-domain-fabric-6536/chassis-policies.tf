@@ -3,7 +3,7 @@
 #  - Chassis IP Access Policy
 #  - Chassis Power Policy
 #  - Chassis Thermal Policy
-#  - SNMP Policy (Also associated with Switch Profiles)
+#  - SNMP Policy (Optional)
 # -----------------------------------------------------------------------------
 
 
@@ -47,13 +47,13 @@ resource "intersight_access_policy" "chassis_9508_access" {
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/power_policy
 # -----------------------------------------------------------------------------
 resource "intersight_power_policy" "chassis_9508_power" {
-  name        = "${var.policy_prefix}-chassis-power-1"
-  description              = var.description
-  power_save_mode = "Enabled"
-  dynamic_rebalancing = "Enabled"
-  extended_power_capacity = "Enabled"
-  allocated_budget = 0
-  redundancy_mode = "Grid"
+  name                    = "${var.policy_prefix}-chassis-power-1"
+  description             = var.description
+  power_save_mode         = var.power_save_mode
+  dynamic_rebalancing     = var.dynamic_rebalancing
+  extended_power_capacity = var.extended_power_capacity
+  allocated_budget        = var.allocated_budget
+  redundancy_mode         = var.redundancy_mode
   organization {
     moid        = var.organization
     object_type = "organization.Organization"

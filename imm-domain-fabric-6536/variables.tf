@@ -224,20 +224,48 @@ variable "chassis_9508_count" {
   description = "count of 9508 X-Series chassis to add to domain"
   default     = 15
 }
+variable "chassis_ifm_uplink_count" {
+  type        = number
+  description = "Number of upllinks per IFM (aka per side)"
+  default     = 2
+}
 
+# Chassis IMC IP Access Policy
 variable "chassis_imc_access_vlan" {
   type        = number
-  description = "ID of VLAN for chassis in-band IMC access"
+  description = "VLAN ID for chassis in-band IMC access"
   default     = 999
 }
 variable "chassis_imc_ip_pool_moid" {
   type = string
   description = "moid of chassis ip_pool to be assigned to IMC access policy"
 }
-variable "chassis_ifm_uplink_count" {
+
+# Chassis Power Policy
+variable "power_save_mode" {
+  type        = string
+  description = "Enabled by default"
+  default     = "Enabled"
+}
+variable "dynamic_rebalancing" {
+  type        = string
+  description = "Enabled by default"
+  default     = "Enabled"
+}
+variable "extended_power_capacity" {
+  type        = string
+  description = "Enabled by default"
+  default     = "Enabled"
+}
+variable "allocated_budget" {
   type        = number
-  description = "Number of upllinks per IFM (aka per side)"
-  default     = 2
+  description = "0 by default"
+  default     = 0
+}
+variable "redundancy_mode" {
+  type        = string
+  description = "Grid by default"
+  default     = "Grid"
 }
 
 # =============================================================================
