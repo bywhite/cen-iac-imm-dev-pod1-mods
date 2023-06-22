@@ -268,6 +268,13 @@ variable "redundancy_mode" {
   default     = "Grid"
 }
 
+# Chassis Thermal Policy
+variable "fan_control_mode" {
+  type        = string
+  description = "Balanced by default"
+  default     = "Balanced"
+}
+
 # =============================================================================
 # NTP, DNS and SNMP Settings
 # -----------------------------------------------------------------------------

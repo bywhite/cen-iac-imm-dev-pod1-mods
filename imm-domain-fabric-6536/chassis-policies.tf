@@ -84,7 +84,7 @@ resource "intersight_power_policy" "chassis_9508_power" {
 resource "intersight_thermal_policy" "chassis_9508_thermal" {
   name        = "${var.policy_prefix}-chassis-thermal-1"
   description              = var.description
-  fan_control_mode = "Balanced"
+  fan_control_mode = var.fan_control_mode
   organization {
     moid        = var.organization
     object_type = "organization.Organization"
