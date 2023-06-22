@@ -172,6 +172,36 @@ variable "fc_uplink_pc_vsan_id_b" {
   type        = number
   default     = 200
 }
+variable "fc_uplink_pc_a_admin_speed" {
+  type        = string
+  description = "32GBps by default. Options: 16GBps or 32GBps"
+  default     = "32Gbps"
+}
+variable "fc_uplink_pc_b_admin_speed" {
+  type        = string
+  description = "32GBps by default. Options: 16GBps or 32GBps"
+  default     = "32Gbps"
+}
+variable "fc_uplink_pc_a_fill_pattern" {
+  type        = string
+  description = "Idle by default. Options: Arbff or Idle"
+  default     = "Idle"
+}
+variable "fc_uplink_pc_b_fill_pattern" {
+  type        = string
+  description = "Idle by default. Options: Arbff or Idle"
+  default     = "Idle"
+}
+variable "fc_uplink_pc_a_pc_id" {
+  type        = string
+  description = "35 by default"
+  default     = 35
+}
+variable "fc_uplink_pc_b_pc_id" {
+  type        = string
+  description = "35 by default"
+  default     = 36
+}
 
 variable "fabric_a_vsan_sets" {
   type       = map(object({
