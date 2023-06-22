@@ -299,11 +299,96 @@ variable "dns_alternate" {
   description = "IP address of secondary (alternate) DNS server"
   default     = "8.8.4.4"
 }
+
+#SNMP Policy Settings
+variable "snmp_enabled" {
+  type        = string
+  description = "true by default"
+  default     = "true"
+}
+variable "snmp_port" {
+  type        = number
+  description = "161 by default"
+  default     = 161
+}
+variable "access_community_string" {
+  type        = string
+  default     = "anythingbutpublic"
+}
+variable "community_access" {
+  type        = string
+  description = "Disabled by default"
+  default     = "Disabled"
+}
+variable "trap_community" {
+  type        = string
+  default     = "TrapCommunity"
+}
+variable "sys_contact" {
+  type        = string
+  default     = "The SysAdmin"
+}
+variable "sys_location" {
+  type        = string
+  default     = "The Data Center"
+}
+variable "engine_id" {
+  type        = string
+  description = "vvb by default"
+  default     = "vvb"
+}
+# SNMP User Variables
+variable "snmp_user_name" {
+  type        = string
+  default     = "snmpuser"
+}
+variable "privacy_type" {
+  type        = string
+  description = "AES by default"
+  default     = "AES"
+}
 variable "snmp_password" {
   type        = string
   default     = "Cisco123"
 }
+variable "security_level" {
+  type        = string
+  description = "AuthPriv by default"
+  default     = "AuthPriv"
+}
+variable "auth_type" {
+  type        = string
+  description = "SHA by default"
+  default     = "SHA"
+}
+# SNMP Trap Destinations
+# Need to swap for "trap_destination"
 variable "snmp_ip"  {
   type        = string
   default     = "10.10.10.10"
+}
+variable "trap_enabled"  {
+  type        = string
+  description = "false by default"
+  default     = "false"
+}
+variable "trap_port"  {
+  type        = number
+  description = "660 by default"
+  default     = 660
+}
+variable "trap_type"  {
+  type        = string
+  description = "Trap by default"
+  default     = "Trap"
+}
+variable "trap_user"  {
+  type        = string
+  description = "Trap by default"
+  default     = "snmpuser"
+}
+variable "trap_nr_version"  {
+  type        = string
+  description = "V3 by default"
+  default     = "V3"
 }

@@ -115,32 +115,32 @@ resource "intersight_thermal_policy" "chassis_9508_thermal" {
 # -----------------------------------------------------------------------------
 # Used by Chassis and FI's
 resource "intersight_snmp_policy" "snmp1" {
-  name        = "${var.policy_prefix}-chassis-snmp-policy"
-  description              = var.description
-  enabled                 = true
-  snmp_port               = 161
-  access_community_string = "anythingbutpublic"
-  community_access        = "Disabled"
-  trap_community          = "TrapCommunity"
-  sys_contact             = "The SysAdmin"
-  sys_location            = "The Data Center"
-  engine_id               = "vvb"
+  name                    = "${var.policy_prefix}-chassis-snmp-policy"
+  description             = var.description
+  enabled                 = var.snmp_enabled
+  snmp_port               = var.snmp_port
+  access_community_string = var.access_community_string
+  community_access        = var.community_access
+  trap_community          = var.trap_community
+  sys_contact             = var.sys_contact
+  sys_location            = var.sys_location
+  engine_id               = var.engine_id
   snmp_users {
-    name         = "snmpuser"
-    privacy_type = "AES"
+    name             = var.snmp_user_name
+    privacy_type     = var.privacy_type
     auth_password    = var.snmp_password
     privacy_password = var.snmp_password
-    security_level = "AuthPriv"
-    auth_type      = "SHA"
-    object_type    = "snmp.User"
+    security_level   = var.security_level
+    auth_type        = var.auth_type
+    object_type      = "snmp.User"
   }
   snmp_traps {
     destination = var.snmp_ip
-    enabled     = false
-    port        = 660
-    type        = "Trap"
-    user        = "snmpuser"
-    nr_version  = "V3"
+    enabled     = var.trap_enabled
+    port        = var.trap_port
+    type        = var.trap_type
+    user        = var.trap_user
+    nr_version  = var.trap_nr_version
     object_type = "snmp.Trap"
   }
   dynamic "profiles" {
