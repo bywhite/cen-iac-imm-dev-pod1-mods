@@ -548,7 +548,7 @@ resource "intersight_fabric_flow_control_policy" "fabric_flow_control_policy" {
 }
 
 # =============================================================================
-# Fabric Link Aggregation Polict
+# Fabric Link Aggregation Policy
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/fabric_link_aggregation_policy
 # -----------------------------------------------------------------------------
 # Create link aggregation policy for Port Channel Uplinks
