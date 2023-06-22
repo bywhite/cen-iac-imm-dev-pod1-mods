@@ -7,7 +7,6 @@ variable "organization" {
   description = "moid for organization in which to create the policies"
 }
 
-
 # =============================================================================
 # Naming and tagging
 # -----------------------------------------------------------------------------
@@ -17,7 +16,6 @@ variable "policy_prefix" {
   description = "prefix for all policies created"
   default     = "tf"
 }
-
 variable "description" {
   type        = string
   description = "description field for all policies"
@@ -28,7 +26,6 @@ variable "tags" {
   description = "user tags to be applied to all policies"
   default     = []
 }
-
 
 # =============================================================================
 # Fabric Interconnect 6536 ports and VLANs
@@ -52,7 +49,6 @@ variable "server_ports_6536" {
   }
 }
 */
-
 
 variable "server_ports_6536" {
   type        = map(string)
