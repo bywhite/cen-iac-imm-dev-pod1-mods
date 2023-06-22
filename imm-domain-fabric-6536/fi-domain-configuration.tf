@@ -255,15 +255,15 @@ resource "intersight_syslog_policy" "syslog_policy" {
   name               = "${var.policy_prefix}-syslog-fi-policy"
   description        = var.description
   local_clients {
-    min_severity = "warning"
+    min_severity = var.syslog_local_min_severity
     object_type = "syslog.LocalFileLoggingClient"
   }
   remote_clients {
-    enabled      = true
-    hostname     = "10.22.22.22"
-    port         = 514
-    protocol     = "udp"
-    min_severity = "warning"
+    enabled      = var.syslog_remote_enabled
+    hostname     = var.syslog_remote_hostname
+    port         = var.syslog_remote_port
+    protocol     = var.syslog_remote_protocol
+    min_severity = var.syslog_remote_min_severity
     object_type  = "syslog.RemoteLoggingClient"
   }
   profiles {

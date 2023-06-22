@@ -276,7 +276,7 @@ variable "fan_control_mode" {
 }
 
 # =============================================================================
-# NTP, DNS and SNMP Settings
+# NTP, DNS and SNMP Syslog Settings
 # -----------------------------------------------------------------------------
 
 # NTP Policy Settings
@@ -290,6 +290,7 @@ variable "ntp_timezone" {
   description = "valid timezone as documented at https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/ntp_policy"
   default     = "America/Chicago"
 }
+
 # DNS Network Configuration Policy Settings
 variable "dns_preferred" {
   type        = string
@@ -412,4 +413,35 @@ variable "trap_nr_version"  {
   type        = string
   description = "V3 by default"
   default     = "V3"
+}
+
+# Syslog 
+variable "syslog_local_min_severity"  {
+  type        = string
+  description = "warning by default"
+  default     = "warning"
+}
+variable "syslog_remote_enabled"  {
+  type        = string
+  description = "true by default"
+  default     = "true"
+}
+variable "syslog_remote_hostname"  {
+  type        = string
+  default     = "10.22.22.22"
+}
+variable "syslog_remote_port"  {
+  type        = number
+  description = "514 by default"
+  default     = 514
+}
+variable "syslog_remote_protocol"  {
+  type        = string
+  description = "udp by default"
+  default     = "udp"
+}
+variable "syslog_remote_min_severity"  {
+  type        = string
+  description = "warning by default"
+  default     = "warning"
 }
