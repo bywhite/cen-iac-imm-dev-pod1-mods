@@ -129,7 +129,7 @@ variable "vnic_vlan_sets" {
 # Usage: for_each var.vnic_vlan_sets  each.value["vnic_name"]  each.value["native_vlan"]  each.value["flan_range"]
 
 # =============================================================================
-# Server VLANs per Nic Adapter
+# Server VSANs per vHBA Adapter
 # -----------------------------------------------------------------------------
 
 variable "vhba_vsan_sets" {

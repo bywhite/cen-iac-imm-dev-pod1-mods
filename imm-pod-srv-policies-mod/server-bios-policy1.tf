@@ -4,7 +4,7 @@
 # Reference: https://registry.terraform.io/providers/CiscoDevNet/Intersight/latest/docs/resources/bios_policy
 
 resource "intersight_bios_policy" "bios_policy1" {
-  name        = "${var.server_policy_prefix}-bios-policy1"
+  name        = "${var.policy_prefix}-bios-policy1"
   description = var.description
   organization {
     object_type = "organization.Organization"
