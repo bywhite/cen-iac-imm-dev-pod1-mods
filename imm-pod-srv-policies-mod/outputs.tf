@@ -2,15 +2,21 @@
 # Server Module Outputs
 # -----------------------------------------------------------------------------
 
-  output "access_policy_list" {
+  output "access_policy_map" {
     description = "List of precision boot policies" 
-    value = [intersight_access_policy.access_1]
+    value = {
+      "vm-01" = intersight_access_policy.access_1 
+    }
   }
 
-output "boot_precision_policy_list" {
+output "boot_precision_policy_map" {
     description = "List of precision boot policies" 
-    value       = [intersight_boot_precision_policy.boot_precision_san_legacy_1,intersight_boot_precision_policy.boot_precision_1]
+    value = {
+      "vm-01" = intersight_boot_precision_policy.boot_precision_san_legacy_1
+      "vm-02" = intersight_boot_precision_policy.boot_precision_1
+    }
   }
+
 #  output "ipmioverlan_policy_list" {
 #     description = "List of precision boot policies" 
 #     value = intersight_ipmioverlan_policy.ipmi1
