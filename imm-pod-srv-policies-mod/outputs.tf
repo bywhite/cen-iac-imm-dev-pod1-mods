@@ -5,15 +5,15 @@
   output "access_policy_map" {
     description = "List of precision boot policies" 
     value = {
-      "vm-01" = intersight_access_policy.access_1 
+      "vm-01" = intersight_access_policy.access_1.id
     }
   }
 
 output "boot_precision_policy_map" {
     description = "List of precision boot policies" 
     value = {
-      "vm-01" = intersight_boot_precision_policy.boot_precision_san_legacy_1
-      "vm-02" = intersight_boot_precision_policy.boot_precision_1
+      "vm-01" = intersight_boot_precision_policy.boot_precision_san_legacy_1.id
+      "vm-02" = intersight_boot_precision_policy.boot_precision_1.id
     }
   }
 
