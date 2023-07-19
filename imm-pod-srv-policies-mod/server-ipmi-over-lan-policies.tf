@@ -9,7 +9,7 @@
 resource "intersight_ipmioverlan_policy" "ipmi1" {
  description = var.description
  enabled     = false
- name        = "${var.policy_prefix}-ipmi-disabled"
+ name        = "${var.policy_prefix}-ipmi-disabled-01"
  organization {
    moid        = var.organization
    object_type = "organization.Organization"

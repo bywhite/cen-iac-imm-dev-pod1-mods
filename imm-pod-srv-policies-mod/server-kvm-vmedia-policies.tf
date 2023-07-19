@@ -8,7 +8,7 @@
 # KVM Policy
 # -----------------------------------------------------------------------------
 resource "intersight_kvm_policy" "kvmpolicy_1" {
-  name                      = "${var.policy_prefix}-kvm-enabled"
+  name                      = "${var.policy_prefix}-kvm-01"
   description               = var.description
   enable_local_server_video = true
   enable_video_encryption   = true
@@ -33,7 +33,7 @@ resource "intersight_kvm_policy" "kvmpolicy_1" {
 # Virtual Media Policy
 # -----------------------------------------------------------------------------
 resource "intersight_vmedia_policy" "vmedia_1" {
-  name          = "${var.policy_prefix}-vmedia-enabled"
+  name          = "${var.policy_prefix}-vmedia-01"
   description   = var.description
   enabled       = true
   encryption    = true
@@ -63,7 +63,7 @@ resource "intersight_vmedia_policy" "vmedia_1" {
 
 /**
 resource "intersight_vmedia_policy" "vmedia1" {
-  name          = "${var.policy_prefix}-vmedia-ubuntu-policy-1"
+  name          = "${var.policy_prefix}-vmedia-ubuntu-01"
   description   = var.description
   enabled       = true
   encryption    = false

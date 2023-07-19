@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_sol_policy" "sol1" {
- name        = "${var.server_policy_prefix}-sol-off-policy-1"
+ name        = "${var.server_policy_prefix}-sol-01"
  description = var.description
  enabled     = false
  baud_rate   = 9600

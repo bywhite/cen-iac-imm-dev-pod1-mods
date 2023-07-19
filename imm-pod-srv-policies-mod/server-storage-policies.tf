@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_storage_storage_policy" "server_storage_policy1" {
-  name                     = "${var.policy_prefix}-storage-policy-1"
+  name                     = "${var.policy_prefix}-storage-01"
   description              = var.description
   m2_virtual_drive {
     enable      = true

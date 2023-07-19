@@ -17,7 +17,7 @@
 ## These values need updating based on Storage Platform, OS & workload
 # -------------------------------------------------------------------------------
 resource "intersight_vnic_fc_adapter_policy" "fc_adapter" {
-  name                = "${var.policy_prefix}-fc-adapter-1"
+  name                = "${var.policy_prefix}-fc-adapter-01"
   description         = var.description
   error_detection_timeout     = 2000
   io_throttle_count           = 256

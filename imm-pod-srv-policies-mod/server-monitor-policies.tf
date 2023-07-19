@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 
 resource "intersight_snmp_policy" "server_snmp" {
-  name        = "${var.policy_prefix}-srv-snmp-policy"
+  name        = "${var.policy_prefix}-srv-snmp-01"
   description              = var.description
   enabled                 = true
   snmp_port               = 161
@@ -50,7 +50,7 @@ resource "intersight_snmp_policy" "server_snmp" {
 # -----------------------------------------------------------------------------
 
 resource "intersight_syslog_policy" "syslog_policy" {
-  name               = "${var.policy_prefix}-syslog-server-policy"
+  name               = "${var.policy_prefix}-syslog-server-01"
   description        = var.description
   local_clients {
     min_severity = "warning"
