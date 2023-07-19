@@ -86,7 +86,7 @@ variable "snmp_ip"  {
 # Syslog (intersight_syslog_policy)
 # -----------------------------------------------------------------------------
 
-variable "syslog_remote_ip"  {
+variable "syslog_remote_host"  {
   type        = string
   default     = "10.10.10.10"
 }

@@ -15,7 +15,7 @@ resource "intersight_syslog_policy" "syslog_policy" {
   }
   remote_clients {
     enabled      = false
-    hostname     = "${var.syslog_remote_ip}"
+    hostname     = "${var.syslog_remote_host}"
     port         = 514
     protocol     = "udp"
     min_severity = "warning"
