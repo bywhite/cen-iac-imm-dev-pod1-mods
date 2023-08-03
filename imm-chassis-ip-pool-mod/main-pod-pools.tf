@@ -10,7 +10,7 @@
 
 resource "intersight_ippool_pool" "ippool_pool_chassis" {
   # moid read by: = intersight_ippool_pool.ippool_pool.moid
-  name = "${var.policy_prefix}-pool-ip-chassis-imc-1"
+  name = "${var.policy_prefix}-pool-ip-chassis-1"
   description = var.description
   assignment_order = "sequential"
 
