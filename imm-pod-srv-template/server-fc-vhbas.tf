@@ -87,7 +87,7 @@ resource "intersight_vnic_fc_if" "fc_if" {
   name            = each.value["vhba_name"]
   order           = each.value["pci_order"]   # PCI Link order must be unique across all vNic's and vHBA's
   placement {
-    id            = "1"
+    id            = "MLOM"
     auto_slot_id  = false
     pci_link      = 0
     auto_pci_link = false
