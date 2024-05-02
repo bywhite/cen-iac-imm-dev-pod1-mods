@@ -44,12 +44,12 @@ resource "intersight_fabric_vlan" "fabric_vlans" {
   is_native             = false
   
   name = length(regexall("^[0-9]{4}$", each.value)) > 0 ? join(
-    "-", [var.vlan_prefix, each.value]) : length(
+    "_", [var.vlan_prefix, each.value]) : length(
     regexall("^[0-9]{3}$", each.value)) > 0 ? join(
-    "-", [var.vlan_prefix, each.value]) : length(
+    "_", [var.vlan_prefix, each.value]) : length(
     regexall("^[0-9]{2}$", each.value)) > 0 ? join(
-    "-", [var.vlan_prefix, each.value]) : join(
-  "-", [var.vlan_prefix, each.value])
+    "_", [var.vlan_prefix, each.value]) : join(
+  "_", [var.vlan_prefix, each.value])
   
   vlan_id = each.value
   eth_network_policy {
